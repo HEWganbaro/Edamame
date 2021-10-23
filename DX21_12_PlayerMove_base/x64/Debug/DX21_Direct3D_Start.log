@@ -1,3 +1,0 @@
-﻿  game.cpp
-c:\users\naoki\documents\github\edamame\dx21_12_playermove_base\game.cpp(115): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
-  DX21_Direct3D_Start.vcxproj -> C:\Users\naoki\Documents\GitHub\Edamame\DX21_12_PlayerMove_base\x64\Debug\DX21_Move.exe
