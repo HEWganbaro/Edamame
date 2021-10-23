@@ -35,7 +35,7 @@ struct VERTEX_POSTEX {
 
 
 // ドラゴンの発生数
-#define MAX_OBJECT   4
+#define MAX_OBJECT   2
 
 //*****************************************************************************
 // グローバル変数
@@ -47,10 +47,6 @@ ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
 GameObject* gpPlayer = gObjects + 1;
-
-//テクスチャ達
-Sprite* texter;
-Sprite* texter1;
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -87,26 +83,26 @@ BOOL Game_Initialize()
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
 	
-	// 配列０番に背景スプライトをセットする
-	ObjectGenerator_SetBG(&gObjects[0]);
+	//// 配列０番に背景スプライトをセットする
+	//ObjectGenerator_SetBG(&gObjects[0]);
 
-	// プレイヤー（配列１番）に勇者スプライトをセットする
-	ObjectGenerator_Character32x32(gpPlayer, 0);
-	gpPlayer->posX = -0.3f;
-	gpPlayer->posY = -0.5f;
+	//// プレイヤー（配列１番）に勇者スプライトをセットする
+	//ObjectGenerator_Character32x32(gpPlayer, 0);
+	//gpPlayer->posX = -0.3f;
+	//gpPlayer->posY = -0.5f;
 
 	// 配列２番にゴーストスプライトをセットする
-	ObjectGenerator_Character32x32(&gObjects[2], 1);
-	gObjects[2].posX =  0.3f;
-	gObjects[2].posY = -0.5f;
+	//ObjectGenerator_Character32x32(&gObjects[2], 1);
+	//gObjects[2].posX =  0.3f;
+	//gObjects[2].posY = -0.5f;
 
-	texter = new Sprite("assets/dora01.png", 3, 4);
-	texter->SetSize(1, 1);
-	texter->SetPart(1, 1);
+	gObjects[0].textuer = new Sprite("assets/dora01.png", 3, 4);
+	gObjects[0].textuer->SetSize(2, 2);
+	gObjects[0].textuer->SetPart(1, 1);
 
-	texter1 = new Sprite("assets/char02.png", 3, 4);
-	texter1->SetSize(1, 1);
-	texter1->SetPart(1, 1);
+	gObjects[1].textuer = new Sprite("assets/char02.png", 3, 4);
+	gObjects[1].textuer->SetSize(1, 1);
+	gObjects[1].textuer->SetPart(1, 1);
 	return TRUE;
 }
 
@@ -114,34 +110,9 @@ BOOL Game_Initialize()
 // ゲームループ中に実行したい、ゲームの処理を書く関数
 void Game_Update()
 {
-	Input_Update();  // このゲームで使うキーの押下状態を調べて保存
+	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
-	CharController* pPlayerCtrl = &gpPlayer->charController;
-
-	if (Input_GetKeyPress(VK_LEFT)) {  // 左
-		CharController_Accelerate(pPlayerCtrl, ACCEL_LEFT);
-		pPlayerCtrl->direction = DIR_LEFT;
-	}
-	if (Input_GetKeyPress(VK_RIGHT)) {  // 右
-		CharController_Accelerate(pPlayerCtrl, ACCEL_RIGHT);
-		pPlayerCtrl->direction = DIR_RIGHT;
-	}
-
-	gpPlayer->animator.speed = fabsf(pPlayerCtrl->moveSpeedX / pPlayerCtrl->maxMoveSpeedX * 20.0f);
-
-	CharController* pEnemyCtrl = &gObjects[2].charController;
-
-	if (Input_GetKeyPress('A')) {  // 左
-		CharController_Accelerate(pEnemyCtrl, ACCEL_LEFT);
-		pEnemyCtrl->direction = DIR_LEFT;
-	}
-	if (Input_GetKeyPress('D')) {  // 右
-		CharController_Accelerate(pEnemyCtrl, ACCEL_RIGHT);
-		pEnemyCtrl->direction = DIR_RIGHT;
-	}
-
-	// 動いていればAnimatorのspeedにプラスの値を入れる、動いてなければ０を入れる
-	gObjects[2].animator.speed = 1;
+	gObjects[0].posX -= 0.01;
 
 	// ポリゴンの頂点を定義
 	// 頂点を結んでポリゴンを形成するときの法則
@@ -152,6 +123,7 @@ void Game_Update()
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		
+		GameObject_DrowUpdate(&gObjects[i]);
 		GameObject_Update(&gObjects[i]);
 		// XY計算
 		FRECT xy = GameObject_GetXY( &gObjects[i] );
@@ -200,8 +172,10 @@ void Game_Draw()
 	// これまでの設定で実際に描画する
 	Direct3D_GetContext()->Draw(MAX_SPRITE*VERTEX_PER_SPRITE, 0);
 
-	texter->Draw();
-	texter1->Draw();
+	//ゲームオブジェクトを全部描画する
+	for (int i = 0; i < MAX_OBJECT; i++)
+		gObjects[i].textuer->Draw();
+
 	// ↑　自前の描画処理をここに書く *******
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令

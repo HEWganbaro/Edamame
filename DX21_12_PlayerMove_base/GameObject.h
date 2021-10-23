@@ -5,6 +5,7 @@
 #include "animator.h"
 #include "CharController.h"
 #include "UvInfo.h"
+#include "Sprite.h"
 
 // GameObjectクラス
 
@@ -21,6 +22,7 @@ struct GameObject {
 
 	UvInfo uvinfo; // テクスチャの情報
 
+	Sprite* textuer;	//画像データ
 };
 
 
@@ -31,11 +33,11 @@ struct FRECT {
 	float right;
 	float top;
 	float bottom;
-
 };
 
 
 // ↓↓　メンバー関数のプロトタイプ宣言
+void GameObject_DrowUpdate(GameObject*);
 
 // スプライトの４隅のXY座標を計算して返す関数
 FRECT GameObject_GetXY(GameObject* pThis);

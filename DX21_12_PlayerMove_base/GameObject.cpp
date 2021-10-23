@@ -2,6 +2,13 @@
 #include "GameTimer.h"
 
 
+void GameObject_DrowUpdate(GameObject* obj)
+{
+	obj->textuer->SetPos(obj->posX, obj->posY);
+	obj->textuer->SetPos(obj->posX, obj->posY);
+
+}
+
 FRECT GameObject_GetXY(GameObject * pThis)
 {
 	// ポインタ　→　ある変数の存在してる場所を表す数字（番地/アドレス）を入れるための箱（変数）
@@ -37,4 +44,3 @@ void GameObject_Update(GameObject * pThis)
 	// キャラコントローラを使っての移動
 	CharController_Update(&pThis->charController, &pThis->posX, &pThis->posY);
 }
-
