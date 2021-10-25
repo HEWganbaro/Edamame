@@ -39,7 +39,9 @@ public:
 	void Draw();
 
 	void SetPos(float x, float y);
+	//引数（横ピクセル、縦ピクセル）
 	void SetSize(float width, float height);
+	//引数 左上から数えて（横に何個目、縦に何個目）０から始まる
 	void SetPart(int x, int y);
 
 private:

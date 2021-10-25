@@ -1,6 +1,6 @@
-#pragma once
-
-#include "GameObject.h"
+//#pragma once
+//
+//#include "GameObject.h"
 
 // ObjectGeneratorƒNƒ‰ƒX
 

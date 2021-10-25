@@ -1,5 +1,8 @@
 ﻿#include "Sprite.h"
 
+#define	SCREEN_WIDTH	(1280)
+#define	SCREEN_HEIGHT	(720)		
+
 // game.cppのVERTEX_POSTEXと完全に一致させる必要がある。
 struct VERTEX_POSTEX {
 	float x, y, z;  // 頂点の位置
@@ -91,8 +94,8 @@ void Sprite::SetPos(float x, float y) {
 }
 
 void Sprite::SetSize(float width, float height) {
-	mWidth = width;
-	mHeight = height;
+	mWidth = width / SCREEN_WIDTH;
+	mHeight = height / SCREEN_HEIGHT;
 }
 
 void Sprite::SetPart(int x, int y) {

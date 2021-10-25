@@ -46,7 +46,8 @@ ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
-GameObject* gpPlayer = gObjects + 1;
+GameObject* gpPlayer = gObjects;
+GameObject* gpEnemy = gObjects + 1;
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -82,26 +83,13 @@ BOOL Game_Initialize()
 
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
-	
-	//// 配列０番に背景スプライトをセットする
-	//ObjectGenerator_SetBG(&gObjects[0]);
 
-	//// プレイヤー（配列１番）に勇者スプライトをセットする
-	//ObjectGenerator_Character32x32(gpPlayer, 0);
-	//gpPlayer->posX = -0.3f;
-	//gpPlayer->posY = -0.5f;
-
-	// 配列２番にゴーストスプライトをセットする
-	//ObjectGenerator_Character32x32(&gObjects[2], 1);
-	//gObjects[2].posX =  0.3f;
-	//gObjects[2].posY = -0.5f;
-
-	gObjects[0].textuer = new Sprite("assets/dora01.png", 3, 4);
-	gObjects[0].textuer->SetSize(2, 2);
-	gObjects[0].textuer->SetPart(1, 1);
+	gpPlayer->textuer = new Sprite("assets/dora01.png", 3, 4);
+	gpPlayer->textuer->SetSize(200, 200);
+	gpPlayer->textuer->SetPart(0, 0);
 
 	gObjects[1].textuer = new Sprite("assets/char02.png", 3, 4);
-	gObjects[1].textuer->SetSize(1, 1);
+	gObjects[1].textuer->SetSize(100, 100);
 	gObjects[1].textuer->SetPart(1, 1);
 	return TRUE;
 }
@@ -122,9 +110,9 @@ void Game_Update()
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	for (int i = 0; i < MAX_OBJECT; i++) {
-		
+		//GameObjectと画像の座標を合わせる
 		GameObject_DrowUpdate(&gObjects[i]);
-		GameObject_Update(&gObjects[i]);
+		//GameObject_Update(&gObjects[i]);
 		// XY計算
 		FRECT xy = GameObject_GetXY( &gObjects[i] );
 		// UV計算

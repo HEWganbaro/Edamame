@@ -13,18 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\DirectXcpp">
+      <UniqueIdentifier>{79e2a33f-bf0d-4d1a-bf5a-744c8efeb368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\DirectXh">
+      <UniqueIdentifier>{d74ace11-d40a-4721-90ef-9ee65e62bc43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="direct3d.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ps.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="vs.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameTimer.h">
@@ -51,18 +48,18 @@
     <ClInclude Include="Sprite.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="direct3d.h">
+      <Filter>ヘッダー ファイル\DirectXh</Filter>
+    </ClInclude>
+    <ClInclude Include="ps.h">
+      <Filter>ヘッダー ファイル\DirectXh</Filter>
+    </ClInclude>
+    <ClInclude Include="vs.h">
+      <Filter>ヘッダー ファイル\DirectXh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="direct3d.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="game.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="GameTimer.cpp">
@@ -85,6 +82,15 @@
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
+      <Filter>ソース ファイル\DirectXcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="direct3d.cpp">
+      <Filter>ソース ファイル\DirectXcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\DirectXcpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
