@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -151,11 +151,11 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="input.h" />
-    <ClInclude Include="ObjectGenerator.h" />
     <ClInclude Include="ps.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="UvInfo.h" />
     <ClInclude Include="vs.h" />
+    <ClInclude Include="XAudio2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animator.cpp" />
@@ -167,8 +167,8 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ObjectGenerator.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="XAudio2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ps.hlsl">

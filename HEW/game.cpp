@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "ObjectGenerator.h"
 #include "Sprite.h"
+#include "XAudio2.h"
 #include <math.h>
 
 //*****************************************************************************
