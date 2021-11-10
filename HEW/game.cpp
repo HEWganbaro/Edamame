@@ -29,14 +29,20 @@ struct VERTEX_POSTEX {
 // マクロ定義
 //*****************************************************************************
 
-#define MAX_SPRITE  64
+#define MAX_SPRITE  256
 // ポリゴン２つで１つの四角形（スプライト）。ポリゴンは３頂点なので、１スプライトは６頂点。
 #define VERTEX_PER_SPRITE  (3*2)
 #define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 
 // ドラゴンの発生数
-#define MAX_OBJECT   2
+#define MAX_OBJECT   256
+
+//箱の大きさ
+#define BOX_HEIGHT 200
+#define BOX_WIDTH 112.5
+//マップの列数
+#define EDGE 15
 
 //*****************************************************************************
 // グローバル変数
@@ -47,8 +53,6 @@ ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
-GameObject* gpPlayer = gObjects;
-GameObject* gpEnemy = gObjects + 1;
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -68,7 +72,6 @@ BOOL Game_Initialize()
 	bufferDesc.StructureByteStride = 0;
 
 	hr = Direct3D_GetDevice()->CreateBuffer(&bufferDesc, NULL, &gpVertexBuffer);
-
 	if (FAILED(hr))
 		return FALSE;
 	// ↑　頂点バッファ作成　ここまで
@@ -77,28 +80,45 @@ BOOL Game_Initialize()
 	// 第一引数：画像ファイル名。もしフォルダに入っているならフォルダ名も一緒に書く。
 	// 第二引数：読み込んだテクスチャが入る変数を指定
 	//hr = Direct3D_LoadTexture("assets/texture.png", &gpTexture);
-
 	//if (FAILED(hr)) {
 	//	return FALSE;
 	//}
 
+	//オーディオの初期化
 	hr = XA_Initialize();
-
 	if (FAILED(hr))
 		return FALSE;
 
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
 	
-	gpPlayer->textuer = new Sprite("assets/dora01.png", 3, 4);
-	gpPlayer->textuer->SetSize(200, 200);
-	gpPlayer->textuer->SetPart(0, 0);
+	for (int i = 0; i < MAX_OBJECT; i++) {
+		gObjects[i].textuer = new Sprite("assets/testTile.png", 4, 1);
+		gObjects[i].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
+		gObjects[i].textuer->SetPart(0, 0);
+	}
 
-	gObjects[1].textuer = new Sprite("assets/char02.png", 3, 4);
-	gObjects[1].textuer->SetSize(100, 100);
-	gObjects[1].textuer->SetPart(1, 1);
+	//gObjects[1].textuer = new Sprite("assets/char02.png", 3, 4);
+	//gObjects[1].textuer->SetSize(100, 100);
+	//gObjects[1].textuer->SetPart(1, 1);
 
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+
+	double height = 2.0f / (BOX_HEIGHT / 4.0f);
+	double width = 2.0f / (BOX_WIDTH / 4.0f);
+
+	for (int j = 0; j < EDGE; j++) {
+		for (int i = 0; i < EDGE; i++) {
+			gObjects[i + j * EDGE + 1].posX = width * i;
+			gObjects[i + j * EDGE + 1].posY = height * i;
+
+			gObjects[i + j * EDGE + 1].posX -= width * (j + 1);
+			gObjects[i + j * EDGE + 1].posY += height * (j + 1);
+
+		}
+	}
+	for (int i = EDGE * EDGE + 1; i < MAX_OBJECT; i++)
+		gObjects[i].posX = 2;
 
 	return TRUE;
 }
@@ -109,7 +129,6 @@ void Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
-	gObjects[0].posX -= 0.01;
 
 	// ポリゴンの頂点を定義
 	// 頂点を結んでポリゴンを形成するときの法則
@@ -170,7 +189,7 @@ void Game_Draw()
 	Direct3D_GetContext()->Draw(MAX_SPRITE*VERTEX_PER_SPRITE, 0);
 
 	//ゲームオブジェクトを全部描画する
-	for (int i = 0; i < MAX_OBJECT; i++)
+	for (int i = MAX_OBJECT - 1; i > 0; i--)
 		gObjects[i].textuer->Draw();
 
 	// ↑　自前の描画処理をここに書く *******
@@ -181,7 +200,7 @@ void Game_Draw()
 
 void Game_Relese()
 {
-	XA_Release();
+	XA_Release();	//オーディオのリリース
 
 	COM_SAFE_RELEASE(gpTexture);  // テクスチャを読み込んだら、忘れずリリースすること
 	COM_SAFE_RELEASE(gpVertexBuffer); // 頂点バッファを作成したら、忘れずにリリースすること

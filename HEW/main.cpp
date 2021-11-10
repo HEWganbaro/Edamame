@@ -65,7 +65,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	HWND hWnd = CreateWindowEx(0,						// 拡張ウィンドウスタイル
 		CLASS_NAME,				// ウィンドウクラスの名前
 		WINDOW_NAME,			// ウィンドウの名前
-		WS_OVERLAPPEDWINDOW,	// ウィンドウスタイル
+		WS_OVERLAPPEDWINDOW ^ WS_MAXIMIZEBOX ^ WS_THICKFRAME | WS_VISIBLE,	// ウィンドウスタイル
 		CW_USEDEFAULT,			// ウィンドウの左上Ｘ座標
 		CW_USEDEFAULT,			// ウィンドウの左上Ｙ座標 
 		SCREEN_WIDTH,			// ウィンドウの幅
