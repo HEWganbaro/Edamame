@@ -15,16 +15,7 @@ typedef struct
 
 PARAM g_param[SOUND_LABEL_MAX] =
 {
-	{"assets/BGM/sample000.wav", true},	// サンプルBGM（ループさせるのでtrue設定）
-	{"assets/BGM/sample001.wav", true},	// サンプルBGM
-	{"assets/SE/jump.wav", false},  		// サンプルSE（ループしないのでfalse設定）
-	{"assets/SE/defend0.wav", false},		// サンプルSE
-	{"assets/SE/defend1.wav", false},		// サンプルSE
-	{"assets/SE/hit0.wav", false},			// サンプルSE
-	{"assets/SE/laser0.wav", false},		// サンプルSE
-	{"assets/SE/lockon0.wav", false},		// サンプルSE
-	{"assets/SE/shot0.wav", false},		// サンプルSE
-	{"assets/SE/shot1.wav", false},		// サンプルSE
+	{"assets/BGM/Casino.wav", true},
 };
 
 #ifdef _XBOX //Big-Endian

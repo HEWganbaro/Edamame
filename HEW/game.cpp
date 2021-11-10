@@ -76,15 +76,20 @@ BOOL Game_Initialize()
 	// ここで使用したい画像ファイルをテクスチャとして読み込む
 	// 第一引数：画像ファイル名。もしフォルダに入っているならフォルダ名も一緒に書く。
 	// 第二引数：読み込んだテクスチャが入る変数を指定
-	hr = Direct3D_LoadTexture("assets/texture.png", &gpTexture);
+	//hr = Direct3D_LoadTexture("assets/texture.png", &gpTexture);
 
-	if (FAILED(hr)) {
+	//if (FAILED(hr)) {
+	//	return FALSE;
+	//}
+
+	hr = XA_Initialize();
+
+	if (FAILED(hr))
 		return FALSE;
-	}
 
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
-
+	
 	gpPlayer->textuer = new Sprite("assets/dora01.png", 3, 4);
 	gpPlayer->textuer->SetSize(200, 200);
 	gpPlayer->textuer->SetPart(0, 0);
@@ -92,6 +97,9 @@ BOOL Game_Initialize()
 	gObjects[1].textuer = new Sprite("assets/char02.png", 3, 4);
 	gObjects[1].textuer->SetSize(100, 100);
 	gObjects[1].textuer->SetPart(1, 1);
+
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+
 	return TRUE;
 }
 
@@ -173,6 +181,8 @@ void Game_Draw()
 
 void Game_Relese()
 {
+	XA_Release();
+
 	COM_SAFE_RELEASE(gpTexture);  // テクスチャを読み込んだら、忘れずリリースすること
 	COM_SAFE_RELEASE(gpVertexBuffer); // 頂点バッファを作成したら、忘れずにリリースすること
 }
