@@ -7,6 +7,12 @@
 #include "UvInfo.h"
 #include "Sprite.h"
 
+#include <fstream>
+#include <vector>
+#include <string>
+#include <iostream>
+#include <sstream>
+using namespace std;
 // GameObjectクラス
 
 // GameObjectクラスで必要になる変数セットを構造体として定義
@@ -48,4 +54,4 @@ FRECT GameObject_GetUV(GameObject* pThis);
 // 毎フレームの更新処理
 void GameObject_Update(GameObject* pThis);
 
-
+vector<string> split(string& input, char delimiter);

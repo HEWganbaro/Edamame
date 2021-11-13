@@ -1,6 +1,6 @@
 //*****************************************************************************
 // DX21　サンプルソース
-// ゲームのメインとなる処理を書いていくソースファイル  転スラ
+// ゲームのメインとなる処理を書いていくソースファイル
 //*****************************************************************************
 
 #include "game.h"
@@ -11,7 +11,6 @@
 #include "ObjectGenerator.h"
 #include "Sprite.h"
 #include "XAudio2.h"
-#include <math.h>
 
 //*****************************************************************************
 // 構造体定義
@@ -42,7 +41,8 @@ struct VERTEX_POSTEX {
 #define BOX_HEIGHT 200
 #define BOX_WIDTH 112.5
 //マップの列数
-#define EDGE 15
+#define EDGE 10
+#define STAGEMAP 2
 
 //*****************************************************************************
 // グローバル変数
@@ -53,6 +53,8 @@ ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
+int MapChip[STAGEMAP][EDGE][EDGE][EDGE];			//ステージ数
+ifstream ifs[STAGEMAP];
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -92,32 +94,59 @@ BOOL Game_Initialize()
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
 	
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+
+	ifstream ifs("assets/data.csv");
+
+	for (int l = 0; l < STAGEMAP; l++) {
+		string line;
+		int j = 0;
+		int k = 0;
+		bool end = false;
+		while (getline(ifs, line)) {
+
+			vector<string> strvec = split(line, ',');
+
+			for (int i = 0; i < strvec.size(); i++) {
+				if (-999 == stoi(strvec.at(i))) {
+					end = true;
+					break;
+				}
+				MapChip[l][k][j][i] = stoi(strvec.at(i));
+			}
+			j++;
+			if (end == true) {
+				k++;
+				j = 0;
+				end = false;
+			}
+		}
+	}
+
+	//CSVの順番通りになる良いにして
+	int j = -1, k = 0, l = 0;
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		gObjects[i].textuer = new Sprite("assets/testTile.png", 4, 1);
 		gObjects[i].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
-		gObjects[i].textuer->SetPart(0, 0);
+		gObjects[i].textuer->SetPart(MapChip[l][k][j][i], 0);
+		if (i % 10 == 0)
+			j++;
 	}
 
-	//gObjects[1].textuer = new Sprite("assets/char02.png", 3, 4);
-	//gObjects[1].textuer->SetSize(100, 100);
-	//gObjects[1].textuer->SetPart(1, 1);
-
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
-
+	// マップ生成
 	double height = 2.0f / (BOX_HEIGHT / 4.0f);
 	double width = 2.0f / (BOX_WIDTH / 4.0f);
 
 	for (int j = 0; j < EDGE; j++) {
 		for (int i = 0; i < EDGE; i++) {
-			gObjects[i + j * EDGE + 1].posX = width * i;
-			gObjects[i + j * EDGE + 1].posY = height * i;
+			gObjects[i + j * EDGE].posX += width * (i + 1 - j);
+			gObjects[i + j * EDGE].posY -= height * (i + 1 + j);
 
-			gObjects[i + j * EDGE + 1].posX -= width * (j + 1);
-			gObjects[i + j * EDGE + 1].posY += height * (j + 1);
-
+			gObjects[i + j * EDGE].posY += 0.5f;
+			gObjects[i + j * EDGE].posX -= width;
 		}
 	}
-	for (int i = EDGE * EDGE + 1; i < MAX_OBJECT; i++)
+	for (int i = EDGE * EDGE; i < MAX_OBJECT; i++)
 		gObjects[i].posX = 2;
 
 	return TRUE;
@@ -129,6 +158,7 @@ void Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
+	
 
 	// ポリゴンの頂点を定義
 	// 頂点を結んでポリゴンを形成するときの法則
@@ -189,7 +219,7 @@ void Game_Draw()
 	Direct3D_GetContext()->Draw(MAX_SPRITE*VERTEX_PER_SPRITE, 0);
 
 	//ゲームオブジェクトを全部描画する
-	for (int i = MAX_OBJECT - 1; i > 0; i--)
+	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].textuer->Draw();
 
 	// ↑　自前の描画処理をここに書く *******

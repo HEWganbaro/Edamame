@@ -44,3 +44,15 @@ void GameObject_Update(GameObject * pThis)
 	// キャラコントローラを使っての移動
 	CharController_Update(&pThis->charController, &pThis->posX, &pThis->posY);
 }
+
+vector<string> split(string& input, char delimiter)
+{
+	istringstream stream(input);
+	string field;
+	vector<string> result;
+	while (getline(stream, field, delimiter))
+	{
+		result.push_back(field);
+	}
+	return result;
+}
