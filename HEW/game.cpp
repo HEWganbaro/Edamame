@@ -35,7 +35,7 @@ struct VERTEX_POSTEX {
 
 
 // ƒhƒ‰ƒSƒ“‚Ì”­¶”
-#define MAX_OBJECT   256
+#define MAX_OBJECT   100
 
 //” ‚Ì‘å‚«‚³
 #define BOX_HEIGHT 200
@@ -96,8 +96,8 @@ BOOL Game_Initialize()
 	
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
 
+	//CSVî•ñ‚ğ“Ç‚İ‚Ş
 	ifstream ifs("assets/data.csv");
-
 	for (int l = 0; l < STAGEMAP; l++) {
 		string line;
 		int j = 0;
@@ -123,13 +123,12 @@ BOOL Game_Initialize()
 		}
 	}
 
-	//CSV‚Ì‡”Ô’Ê‚è‚É‚È‚é—Ç‚¢‚É‚µ‚Ä
-	int j = -1, k = 0, l = 0;
-	for (int i = 0; i < MAX_OBJECT; i++) {
+	int j = 0, k = 0, l = 0;
+	for (int i = 0; i < EDGE*EDGE; i++) {
 		gObjects[i].textuer = new Sprite("assets/testTile.png", 4, 1);
 		gObjects[i].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
 		gObjects[i].textuer->SetPart(MapChip[l][k][j][i], 0);
-		if (i % 10 == 0)
+		if (i % 10 == 0 && i != 0)
 			j++;
 	}
 
@@ -146,8 +145,8 @@ BOOL Game_Initialize()
 			gObjects[i + j * EDGE].posX -= width;
 		}
 	}
-	for (int i = EDGE * EDGE; i < MAX_OBJECT; i++)
-		gObjects[i].posX = 2;
+	//for (int i = EDGE * EDGE; i < MAX_OBJECT; i++)
+	//	gObjects[i].posX = 2;
 
 	return TRUE;
 }
