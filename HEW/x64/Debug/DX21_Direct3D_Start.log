@@ -1,2 +1,6 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  DX21_Direct3D_Start.vcxproj -> C:\Users\namen\OneDrive\ドキュメント\GitHub\Edamame\HEW\x64\Debug\HEW.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+  game.cpp
+c:\users\naoki\documents\github\edamame\hew\game.cpp(141): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(142): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(145): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  DX21_Direct3D_Start.vcxproj -> C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\HEW.exe
