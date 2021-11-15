@@ -124,14 +124,15 @@ BOOL Game_Initialize()
 	}
 
 	//CSVÇÃèáî‘í ÇËÇ…Ç»ÇÈó«Ç¢Ç…ÇµÇƒ
-	int j = 0, k = 0, l = 0;
-	for (int i = 0; i < EDGE*EDGE; i++) {
-		gObjects[i].textuer = new Sprite("assets/testTile.png", 4, 1);
-		gObjects[i].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
-		gObjects[i].textuer->SetPart(MapChip[l][k][j][i], 0);
-		if (i % 10 == 0 && i != 0)
-			j++;
+	int k = 0, l = 0;
+	for (int j = 0; j < EDGE; j++) {
+		for (int i = 0; i < EDGE; i++) {
+			gObjects[i + 10 * j].textuer = new Sprite("assets/testTile.png", 4, 1);
+			gObjects[i + 10 * j].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
+			gObjects[i + 10 * j].textuer->SetPart(MapChip[l][k][j][i], 0);
+		}
 	}
+
 
 	// É}ÉbÉvê∂ê¨
 	double height = 2.0f / (BOX_HEIGHT / 4.0f);
