@@ -133,7 +133,6 @@ BOOL Game_Initialize()
 		}
 	}
 
-
 	// É}ÉbÉvê∂ê¨
 	double height = 2.0f / (BOX_HEIGHT / 4.0f);
 	double width = 2.0f / (BOX_WIDTH / 4.0f);
