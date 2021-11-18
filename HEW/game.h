@@ -12,3 +12,10 @@ BOOL Game_Initialize();
 void Game_Update();
 void Game_Draw();
 void Game_Relese();
+
+enum SCENE
+{
+	START,
+	SLECT,
+	GAME,
+};

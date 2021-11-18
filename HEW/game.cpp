@@ -23,26 +23,26 @@ struct VERTEX_POSTEX {
 	float u, v;  // テクスチャのUV座標
 };
 
-
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
 
-#define MAX_SPRITE  256
+#define MAX_SPRITE  2560
 // ポリゴン２つで１つの四角形（スプライト）。ポリゴンは３頂点なので、１スプライトは６頂点。
 #define VERTEX_PER_SPRITE  (3*2)
 #define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 
 // ドラゴンの発生数
-#define MAX_OBJECT   100
+#define MAX_OBJECT   500
 
 //箱の大きさ
 #define BOX_HEIGHT 200
 #define BOX_WIDTH 112.5
 //マップの列数
-#define EDGE 10
-#define STAGEMAP 2
+#define MAP_EDGE 10
+#define MAP_HEIGHT 5
+#define MAP_STAGE 2
 
 //*****************************************************************************
 // グローバル変数
@@ -53,8 +53,12 @@ ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
-int MapChip[STAGEMAP][EDGE][EDGE][EDGE];			//ステージ数
-ifstream ifs[STAGEMAP];
+int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]; //ステージ数[ステージ][高さ][左下][右下]
+ifstream ifs[MAP_STAGE];
+
+SCENE gScene = START;
+
+int gStarg = 0;
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -98,17 +102,23 @@ BOOL Game_Initialize()
 
 	ifstream ifs("assets/data.csv");
 
-	for (int l = 0; l < STAGEMAP; l++) {
+	// CSVを配列に格納
+	for (int l = 0; l < MAP_STAGE; l++) {
 		string line;
 		int j = 0;
 		int k = 0;
-		bool end = false;
+		bool end = false; //高さのフラグ （CSVでは-9）
+		bool stage = false;	//ステージのフラグ (CSVでは-99)
 		while (getline(ifs, line)) {
 
 			vector<string> strvec = split(line, ',');
 
 			for (int i = 0; i < strvec.size(); i++) {
-				if (-999 == stoi(strvec.at(i))) {
+				if (-9 == stoi(strvec.at(i))) {
+					end = true;
+					break;
+				}
+				if (-99 == stoi(strvec.at(i))) {
 					end = true;
 					break;
 				}
@@ -120,34 +130,14 @@ BOOL Game_Initialize()
 				j = 0;
 				end = false;
 			}
+			if (stage == true) {
+				l++;
+				j = 0;
+				k = 0;
+				stage = false;
+			}
 		}
 	}
-
-	//CSVの順番通りになる良いにして
-	int k = 0, l = 0;
-	for (int j = 0; j < EDGE; j++) {
-		for (int i = 0; i < EDGE; i++) {
-			gObjects[i + 10 * j].textuer = new Sprite("assets/testTile.png", 4, 1);
-			gObjects[i + 10 * j].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
-			gObjects[i + 10 * j].textuer->SetPart(MapChip[l][k][j][i], 0);
-		}
-	}
-
-	// マップ生成
-	double height = 2.0f / (BOX_HEIGHT / 4.0f);
-	double width = 2.0f / (BOX_WIDTH / 4.0f);
-
-	for (int j = 0; j < EDGE; j++) {
-		for (int i = 0; i < EDGE; i++) {
-			gObjects[i + j * EDGE].posX += width * (i + 1 - j);
-			gObjects[i + j * EDGE].posY -= height * (i + 1 + j);
-
-			gObjects[i + j * EDGE].posY += 0.5f;
-			gObjects[i + j * EDGE].posX -= width;
-		}
-	}
-	//for (int i = EDGE * EDGE; i < MAX_OBJECT; i++)
-	//	gObjects[i].posX = 2;
 
 	return TRUE;
 }
@@ -158,7 +148,55 @@ void Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
-	
+	//CSVの順番通りになる良いにして
+	if (Input_GetKeyTrigger(VK_DOWN) && gStarg > 0) {
+		gStarg--;
+	}
+	if (Input_GetKeyTrigger(VK_UP) && gStarg < MAP_STAGE - 1) {
+		gStarg++;
+	}
+	for (int k = 0; k < MAP_HEIGHT; k++) {
+		for (int j = 0; j < MAP_EDGE; j++) {
+			for (int i = 0; i < MAP_EDGE; i++) {
+				gObjects[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/testTile.png", 4, 1);
+				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
+				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
+			}
+		}
+	}
+
+	if(Input_GetKeyTrigger(VK_RIGHT)) {
+		// マップ生成
+		double height = 2.0f / (BOX_HEIGHT / 4.0f);
+		double width = 2.0f / (BOX_WIDTH / 4.0f);
+
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					gObjects[i + j * MAP_EDGE + 100 * k].posX += width * (i + 1 - j);
+					gObjects[i + j * MAP_EDGE + 100 * k].posY -= height * (i + 1 + j);
+
+					gObjects[i + j * MAP_EDGE + 100 * k].posY += 0.5f + k * height*1.7f;
+					gObjects[i + j * MAP_EDGE + 100 * k].posX -= width;
+				}
+			}
+		}
+	}
+
+
+
+	// ゲームシーン別
+	switch (gScene)
+	{
+	case START:
+		break;
+	case SLECT:
+		break;
+	case GAME:
+		break;
+	default:
+		break;
+	}
 
 	// ポリゴンの頂点を定義
 	// 頂点を結んでポリゴンを形成するときの法則
