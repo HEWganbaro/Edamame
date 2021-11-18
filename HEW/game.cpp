@@ -139,6 +139,15 @@ BOOL Game_Initialize()
 		}
 	}
 
+	for (int k = 0; k < MAP_HEIGHT; k++) {
+		for (int j = 0; j < MAP_EDGE; j++) {
+			for (int i = 0; i < MAP_EDGE; i++) {
+				gObjects[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/testTile.png", 4, 1);
+				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
+			}
+		}
+	}
+
 	return TRUE;
 }
 
@@ -158,8 +167,6 @@ void Game_Update()
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				gObjects[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/testTile.png", 4, 1);
-				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
 				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
 			}
 		}
