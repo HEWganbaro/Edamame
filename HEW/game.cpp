@@ -33,16 +33,19 @@ struct VERTEX_POSTEX {
 #define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 
-// ドラゴンの発生数
-#define MAX_OBJECT   500
+// オブジェクトの発生数
+#define MAX_OBJECT   301
 
 //箱の大きさ
 #define BOX_HEIGHT 200
-#define BOX_WIDTH 112.5
+#define BOX_WIDTH 200
 //マップの列数
 #define MAP_EDGE 10
-#define MAP_HEIGHT 5
+#define MAP_HEIGHT 3
 #define MAP_STAGE 2
+
+//移動スピード
+#define PLAYER_SPEED 25  //大きい方が遅い
 
 //*****************************************************************************
 // グローバル変数
@@ -54,11 +57,15 @@ ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
 int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]; //ステージ数[ステージ][高さ][左下][右下]
-ifstream ifs[MAP_STAGE];
+GameObject* gPlayer = gObjects + 300;
 
 SCENE gScene = START;
 
 int gStarg = 0;
+int frg = -1;
+int Xtmp ,cut;
+double height = 2.0f / (BOX_HEIGHT / 8.0f);
+double width = 2.0f / (BOX_WIDTH / 8.0f);
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -100,9 +107,8 @@ BOOL Game_Initialize()
 	
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
 
-	ifstream ifs("assets/data.csv");
-
 	// CSVを配列に格納
+	ifstream ifs("assets/data.csv");
 	for (int l = 0; l < MAP_STAGE; l++) {
 		string line;
 		int j = 0;
@@ -138,7 +144,6 @@ BOOL Game_Initialize()
 			}
 		}
 	}
-
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
@@ -147,6 +152,24 @@ BOOL Game_Initialize()
 			}
 		}
 	}
+	// マップ生成
+
+	for (int k = 0; k < MAP_HEIGHT; k++) {
+		for (int j = 0; j < MAP_EDGE; j++) {
+			for (int i = 0; i < MAP_EDGE; i++) {
+				gObjects[i + j * MAP_EDGE + 100 * k].posX += width * (i + 1 - j);
+				gObjects[i + j * MAP_EDGE + 100 * k].posY -= height * (i + 1 + j);
+
+				gObjects[i + j * MAP_EDGE + 100 * k].posY += 0.7f + k * height*1.5f;
+				gObjects[i + j * MAP_EDGE + 100 * k].posX -= width * 2;
+			}
+		}
+	}
+
+	gPlayer->textuer = new Sprite("assets/Player.png", 1, 1);
+	gPlayer->textuer->SetSize(80, 80);
+	gPlayer->posX = gObjects[0].posX+height/2;
+	gPlayer->posY = gObjects[0].posY;
 
 	return TRUE;
 }
@@ -171,27 +194,74 @@ void Game_Update()
 			}
 		}
 	}
-
-	if(Input_GetKeyTrigger(VK_RIGHT)) {
-		// マップ生成
-		double height = 2.0f / (BOX_HEIGHT / 4.0f);
-		double width = 2.0f / (BOX_WIDTH / 4.0f);
-
-		for (int k = 0; k < MAP_HEIGHT; k++) {
-			for (int j = 0; j < MAP_EDGE; j++) {
-				for (int i = 0; i < MAP_EDGE; i++) {
-					gObjects[i + j * MAP_EDGE + 100 * k].posX += width * (i + 1 - j);
-					gObjects[i + j * MAP_EDGE + 100 * k].posY -= height * (i + 1 + j);
-
-					gObjects[i + j * MAP_EDGE + 100 * k].posY += 0.5f + k * height*1.7f;
-					gObjects[i + j * MAP_EDGE + 100 * k].posX -= width;
-				}
-			}
+	//ステージマップによって分岐させる
+	if (frg == -1) {
+		if (Input_GetKeyTrigger('Q')) {
+			frg = 0;
+			Xtmp = gPlayer->posX;
+		}
+		if (Input_GetKeyTrigger('A')) {
+			frg = 1;
+			Xtmp = gPlayer->posX;
+		}
+		if (Input_GetKeyTrigger('E')) {
+			frg = 2;
+			Xtmp = gPlayer->posX;
+		}
+		if (Input_GetKeyTrigger('D')) {
+			frg = 3;
+			Xtmp = gPlayer->posX;
 		}
 	}
-
-
-
+	switch (frg)
+	{
+	case -1:
+		break;
+	case 0:
+		if (cut != PLAYER_SPEED) {
+			gPlayer->posX -= width / PLAYER_SPEED;
+			gPlayer->posY += height / PLAYER_SPEED;
+			cut++;
+		}
+		else {
+			frg = -1;
+			cut = 0;
+		}
+		break;
+	case 1:
+		if (cut != PLAYER_SPEED) {
+			gPlayer->posX -= width / PLAYER_SPEED;
+			gPlayer->posY -= height / PLAYER_SPEED;
+			cut++;
+		}
+		else {
+			frg = -1;
+			cut = 0;
+		}
+		break;
+	case 2:
+		if (cut != PLAYER_SPEED) {
+			gPlayer->posX += width / PLAYER_SPEED;
+			gPlayer->posY += height / PLAYER_SPEED;
+			cut++;
+		}
+		else {
+			frg = -1;
+			cut = 0;
+		}
+		break;
+	case 3:
+		if (cut != PLAYER_SPEED) {
+			gPlayer->posX += width / PLAYER_SPEED;
+			gPlayer->posY -= height / PLAYER_SPEED;
+			cut++;
+		}
+		else {
+			frg = -1;
+			cut = 0;
+		}
+		break;
+	}
 	// ゲームシーン別
 	switch (gScene)
 	{
@@ -266,6 +336,7 @@ void Game_Draw()
 	//ゲームオブジェクトを全部描画する
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].textuer->Draw();
+	gPlayer->textuer->Draw();
 
 	// ↑　自前の描画処理をここに書く *******
 

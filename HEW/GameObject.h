@@ -6,12 +6,12 @@
 #include "CharController.h"
 #include "UvInfo.h"
 #include "Sprite.h"
-
 #include <fstream>
 #include <vector>
 #include <string>
 #include <iostream>
 #include <sstream>
+
 using namespace std;
 // GameObjectƒNƒ‰ƒX
 

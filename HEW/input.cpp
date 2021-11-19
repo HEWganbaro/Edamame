@@ -20,6 +20,8 @@ void Input_Update()
 	gKeys[VK_LBUTTON] = GetAsyncKeyState(VK_LBUTTON);
 	gKeys['A'] = GetAsyncKeyState('A');
 	gKeys['D'] = GetAsyncKeyState('D');
+	gKeys['Q'] = GetAsyncKeyState('Q');
+	gKeys['E'] = GetAsyncKeyState('E');
 }
 
 bool Input_GetKeyPress(int vkey)
