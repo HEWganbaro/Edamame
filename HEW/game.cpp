@@ -147,7 +147,7 @@ BOOL Game_Initialize()
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				gObjects[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/testTile.png", 4, 1);
+				gObjects[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/TestTile.png", 4, 1);
 				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
 			}
 		}
@@ -180,7 +180,7 @@ void Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
-	//CSVの順番通りになる良いにして
+	//CSVの順番通りになる
 	if (Input_GetKeyTrigger(VK_DOWN) && gStarg > 0) {
 		gStarg--;
 	}
