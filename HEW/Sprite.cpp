@@ -47,6 +47,7 @@ Sprite::~Sprite() {
 }
 
 void Sprite::Draw() {
+
 	// 描画で使うテクスチャをセット。
 	Direct3D_GetContext()->PSSetShaderResources(0, 1, &mpTexture);
 

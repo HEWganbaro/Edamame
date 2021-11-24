@@ -34,7 +34,7 @@ struct VERTEX_POSTEX {
 
 
 // オブジェクトの発生数
-#define MAX_OBJECT   301
+#define MAX_OBJECT   302
 
 //箱の大きさ
 #define BOX_HEIGHT 200
@@ -58,6 +58,7 @@ ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
 int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]; //ステージ数[ステージ][高さ][左下][右下]
 GameObject* gPlayer = gObjects + 300;
+GameObject* No = gObjects + 301;
 
 SCENE gScene = START;
 
@@ -171,6 +172,9 @@ BOOL Game_Initialize()
 	gPlayer->posX = gObjects[0].posX+height/2;
 	gPlayer->posY = gObjects[0].posY;
 
+	No->textuer = new Sprite("assets/No.png", 13, 7);
+	No->textuer->SetSize(80, 80);
+
 	return TRUE;
 }
 
@@ -179,6 +183,10 @@ BOOL Game_Initialize()
 void Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
+
+	No->textuer->SetPart(6, 0);
+	No->posX = 0.5f;
+	No->posY = 0.5f;
 
 	//CSVの順番通りになる
 	if (Input_GetKeyTrigger(VK_DOWN) && gStarg > 0) {
@@ -337,6 +345,7 @@ void Game_Draw()
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].textuer->Draw();
 	gPlayer->textuer->Draw();
+	No->textuer->Draw();
 
 	// ↑　自前の描画処理をここに書く *******
 
