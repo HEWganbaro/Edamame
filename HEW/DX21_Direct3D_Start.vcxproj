@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="animator.h" />
     <ClInclude Include="CharController.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="direct3d.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="game.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="XAudio2.cpp" />
   </ItemGroup>

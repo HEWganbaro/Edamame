@@ -67,7 +67,10 @@
       <Filter>ヘッダー ファイル\Engineh</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Gameh</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ヘッダー ファイル\Gameh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,9 +89,6 @@
     <ClCompile Include="CharController.cpp">
       <Filter>ソース ファイル\Enginecpp</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>ソース ファイル\Enginecpp</Filter>
     </ClCompile>
@@ -103,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="XAudio2.cpp">
       <Filter>ソース ファイル\Enginecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>ソース ファイル\Gamecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Gamecpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

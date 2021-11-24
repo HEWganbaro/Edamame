@@ -1,20 +1,21 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
   game.cpp
-c:\users\naoki\documents\github\edamame\hew\game.cpp(161): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(162): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(164): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(165): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(172): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(209): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(213): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(217): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(221): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(230): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(231): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(241): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(242): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(252): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(253): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(263): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(264): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(163): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(164): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(166): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(167): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(212): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(216): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(220): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(224): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(233): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(234): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(244): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(245): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(255): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(256): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(266): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(267): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Player.cpp
+  コードを生成中...
   DX21_Direct3D_Start.vcxproj -> C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\HEW.exe

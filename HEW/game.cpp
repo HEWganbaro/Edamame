@@ -12,6 +12,8 @@
 #include "Sprite.h"
 #include "XAudio2.h"
 
+#include "Player.h"
+
 //*****************************************************************************
 // \‘¢‘Ì’è‹`
 //*****************************************************************************
@@ -167,10 +169,11 @@ BOOL Game_Initialize()
 		}
 	}
 
-	gPlayer->textuer = new Sprite("assets/Player.png", 1, 1);
-	gPlayer->textuer->SetSize(80, 80);
-	gPlayer->posX = gObjects[0].posX+height/2;
-	gPlayer->posY = gObjects[0].posY;
+	Player_Initialize(gPlayer);
+	//gPlayer->textuer = new Sprite("assets/Player.png", 1, 1);
+	//gPlayer->textuer->SetSize(80, 80);
+	//gPlayer->posX = gObjects[0].posX+height/2;
+	//gPlayer->posY = gObjects[0].posY;
 
 	No->textuer = new Sprite("assets/No.png", 13, 7);
 	No->textuer->SetSize(80, 80);
