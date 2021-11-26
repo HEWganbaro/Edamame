@@ -142,10 +142,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <FxCompile>
+      <EntryPointName>main</EntryPointName>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="animator.h" />
     <ClInclude Include="CharController.h" />
+    <ClInclude Include="MapGeneration.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="direct3d.h" />
     <ClInclude Include="GameObject.h" />
@@ -168,6 +172,7 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapGeneration.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="XAudio2.cpp" />

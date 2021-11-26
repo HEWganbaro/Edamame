@@ -31,6 +31,12 @@
     <Filter Include="ヘッダー ファイル\Gameh">
       <UniqueIdentifier>{a2d04edc-317b-4942-b40c-37aaf18817d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Gamecpp\Object">
+      <UniqueIdentifier>{e2642171-68fa-4bc4-912c-fdb16de709ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Gameh\Object">
+      <UniqueIdentifier>{55d75048-8528-4909-8501-a8b4be5a1e85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="direct3d.h">
@@ -70,7 +76,10 @@
       <Filter>ヘッダー ファイル\Gameh</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\Gameh</Filter>
+      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MapGeneration.h">
+      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,11 +113,14 @@
     <ClCompile Include="XAudio2.cpp">
       <Filter>ソース ファイル\Enginecpp</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+    </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>ソース ファイル\Gamecpp</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Gamecpp</Filter>
+    <ClCompile Include="MapGeneration.cpp">
+      <Filter>ソース ファイル\Gamecpp\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,17 @@
 
 #include <Windows.h>
 
+#include "direct3d.h"
+#include "GameTimer.h"
+#include "input.h"
+#include "GameObject.h"
+#include "ObjectGenerator.h"
+#include "Sprite.h"
+#include "XAudio2.h"
+
+#include "Player.h"
+#include "MapGeneration.h"
+
 BOOL Game_Initialize();
 void Game_Update();
 void Game_Draw();
@@ -15,7 +26,7 @@ void Game_Relese();
 
 enum SCENE
 {
-	START,
-	SLECT,
-	GAME,
+	SCENE_START,
+	SCENE_SLECT,
+	SCENE_GAME,
 };

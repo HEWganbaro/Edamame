@@ -4,15 +4,6 @@
 //*****************************************************************************
 
 #include "game.h"
-#include "direct3d.h"
-#include "GameTimer.h"
-#include "input.h"
-#include "GameObject.h"
-#include "ObjectGenerator.h"
-#include "Sprite.h"
-#include "XAudio2.h"
-
-#include "Player.h"
 
 //*****************************************************************************
 // 構造体定義
@@ -35,40 +26,26 @@ struct VERTEX_POSTEX {
 #define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 
-// オブジェクトの発生数
-#define MAX_OBJECT   302
-
-//箱の大きさ
-#define BOX_HEIGHT 200
-#define BOX_WIDTH 200
-//マップの列数
-#define MAP_EDGE 10
-#define MAP_HEIGHT 3
-#define MAP_STAGE 2
-
-//移動スピード
-#define PLAYER_SPEED 25  //大きい方が遅い
+// オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
+#define MAX_OBJECT   305
 
 //*****************************************************************************
 // グローバル変数
 //*****************************************************************************
 
 ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
-
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
 int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]; //ステージ数[ステージ][高さ][左下][右下]
 GameObject* gPlayer = gObjects + 300;
-GameObject* No = gObjects + 301;
+GameObject* NoHeight = gObjects + 301;
+GameObject* NoLeftDown = gObjects + 302;
+GameObject* NoRightDown = gObjects + 303;
+GameObject* tile = gObjects + 304;
 
-SCENE gScene = START;
-
-int gStarg = 0;
-int frg = -1;
-int Xtmp ,cut;
-double height = 2.0f / (BOX_HEIGHT / 8.0f);
-double width = 2.0f / (BOX_WIDTH / 8.0f);
+// ゲームシーン
+SCENE gScene = SCENE_START;
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -147,36 +124,25 @@ BOOL Game_Initialize()
 			}
 		}
 	}
-	for (int k = 0; k < MAP_HEIGHT; k++) {
-		for (int j = 0; j < MAP_EDGE; j++) {
-			for (int i = 0; i < MAP_EDGE; i++) {
-				gObjects[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/TestTile.png", 4, 1);
-				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
-			}
-		}
-	}
+
 	// マップ生成
+	Map_Initialize(gObjects);
 
-	for (int k = 0; k < MAP_HEIGHT; k++) {
-		for (int j = 0; j < MAP_EDGE; j++) {
-			for (int i = 0; i < MAP_EDGE; i++) {
-				gObjects[i + j * MAP_EDGE + 100 * k].posX += width * (i + 1 - j);
-				gObjects[i + j * MAP_EDGE + 100 * k].posY -= height * (i + 1 + j);
-
-				gObjects[i + j * MAP_EDGE + 100 * k].posY += 0.7f + k * height*1.5f;
-				gObjects[i + j * MAP_EDGE + 100 * k].posX -= width * 2;
-			}
-		}
-	}
-
+	//プレイヤー初期化
 	Player_Initialize(gPlayer);
-	//gPlayer->textuer = new Sprite("assets/Player.png", 1, 1);
-	//gPlayer->textuer->SetSize(80, 80);
-	//gPlayer->posX = gObjects[0].posX+height/2;
-	//gPlayer->posY = gObjects[0].posY;
 
-	No->textuer = new Sprite("assets/No.png", 13, 7);
-	No->textuer->SetSize(80, 80);
+	//プレイヤー場所指定
+	Player_SetLocation(gPlayer, gObjects, 0, 5, 5);
+
+	//デバック用
+	NoHeight->textuer = new Sprite("assets/No.png", 13, 7);
+	NoHeight->textuer->SetSize(80, 80);
+	NoLeftDown->textuer = new Sprite("assets/No.png", 13, 7);
+	NoLeftDown->textuer->SetSize(80, 80);
+	NoRightDown->textuer = new Sprite("assets/No.png", 13, 7);
+	NoRightDown->textuer->SetSize(80, 80);
+	tile->textuer = new Sprite("assets/testTile.png", 4, 1);
+	tile->textuer->SetSize(200, 200);
 
 	return TRUE;
 }
@@ -187,100 +153,32 @@ void Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
-	No->textuer->SetPart(6, 0);
-	No->posX = 0.5f;
-	No->posY = 0.5f;
+	//デバック用
+	NoHeight->textuer->SetPart(gPlayer->mappos.Height, 0);
+	NoHeight->posX = 0.5f;
+	NoHeight->posY = 0.5f;
+	NoLeftDown->textuer->SetPart(gPlayer->mappos.LeftDown, 0);
+	NoLeftDown->posX = 0.6f;
+	NoLeftDown->posY = 0.5f;
+	NoRightDown->textuer->SetPart(gPlayer->mappos.RightDown, 0);
+	NoRightDown->posX = 0.7f;
+	NoRightDown->posY = 0.5f;
+	tile->textuer->SetPart(Map_GetPlayerTile(gPlayer, MapChip), 0);
+	tile->posX = 0.3;
+	tile->posY = 0.6;
 
-	//CSVの順番通りになる
-	if (Input_GetKeyTrigger(VK_DOWN) && gStarg > 0) {
-		gStarg--;
-	}
-	if (Input_GetKeyTrigger(VK_UP) && gStarg < MAP_STAGE - 1) {
-		gStarg++;
-	}
-	for (int k = 0; k < MAP_HEIGHT; k++) {
-		for (int j = 0; j < MAP_EDGE; j++) {
-			for (int i = 0; i < MAP_EDGE; i++) {
-				gObjects[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
-			}
-		}
-	}
-	//ステージマップによって分岐させる
-	if (frg == -1) {
-		if (Input_GetKeyTrigger('Q')) {
-			frg = 0;
-			Xtmp = gPlayer->posX;
-		}
-		if (Input_GetKeyTrigger('A')) {
-			frg = 1;
-			Xtmp = gPlayer->posX;
-		}
-		if (Input_GetKeyTrigger('E')) {
-			frg = 2;
-			Xtmp = gPlayer->posX;
-		}
-		if (Input_GetKeyTrigger('D')) {
-			frg = 3;
-			Xtmp = gPlayer->posX;
-		}
-	}
-	switch (frg)
-	{
-	case -1:
-		break;
-	case 0:
-		if (cut != PLAYER_SPEED) {
-			gPlayer->posX -= width / PLAYER_SPEED;
-			gPlayer->posY += height / PLAYER_SPEED;
-			cut++;
-		}
-		else {
-			frg = -1;
-			cut = 0;
-		}
-		break;
-	case 1:
-		if (cut != PLAYER_SPEED) {
-			gPlayer->posX -= width / PLAYER_SPEED;
-			gPlayer->posY -= height / PLAYER_SPEED;
-			cut++;
-		}
-		else {
-			frg = -1;
-			cut = 0;
-		}
-		break;
-	case 2:
-		if (cut != PLAYER_SPEED) {
-			gPlayer->posX += width / PLAYER_SPEED;
-			gPlayer->posY += height / PLAYER_SPEED;
-			cut++;
-		}
-		else {
-			frg = -1;
-			cut = 0;
-		}
-		break;
-	case 3:
-		if (cut != PLAYER_SPEED) {
-			gPlayer->posX += width / PLAYER_SPEED;
-			gPlayer->posY -= height / PLAYER_SPEED;
-			cut++;
-		}
-		else {
-			frg = -1;
-			cut = 0;
-		}
-		break;
-	}
+	Map_Update(gObjects, MapChip);	//マップ変更↑↓
+
+	Player_Input(gPlayer);			//プレイヤー移動
+
 	// ゲームシーン別
 	switch (gScene)
 	{
-	case START:
+	case SCENE_START:
 		break;
-	case SLECT:
+	case SCENE_SLECT:
 		break;
-	case GAME:
+	case SCENE_GAME:
 		break;
 	default:
 		break;
@@ -347,8 +245,8 @@ void Game_Draw()
 	//ゲームオブジェクトを全部描画する
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].textuer->Draw();
-	gPlayer->textuer->Draw();
-	No->textuer->Draw();
+	//gPlayer->textuer->Draw();
+	//No->textuer->Draw();
 
 	// ↑　自前の描画処理をここに書く *******
 
