@@ -16,6 +16,15 @@
 
 using namespace std;
 
+enum Direction
+{
+	NULL_WAY,
+	RIGHT_DOWN,
+	LEFT_DOWN,
+	LEFT_UP,
+	RIGHT_UP,
+};
+
 struct MapPos
 {
 	int Height;

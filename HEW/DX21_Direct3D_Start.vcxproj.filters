@@ -81,6 +81,9 @@
     <ClInclude Include="MapGeneration.h">
       <Filter>ヘッダー ファイル\Gameh\Object</Filter>
     </ClInclude>
+    <ClInclude Include="SnowBall.h">
+      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
@@ -116,11 +119,14 @@
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Gamecpp\Object</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>ソース ファイル\Gamecpp</Filter>
-    </ClCompile>
     <ClCompile Include="MapGeneration.cpp">
       <Filter>ソース ファイル\Gamecpp\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SnowBall.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

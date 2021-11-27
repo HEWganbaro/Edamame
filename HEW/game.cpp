@@ -27,7 +27,7 @@ struct VERTEX_POSTEX {
 
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   305
+#define MAX_OBJECT   306
 
 //*****************************************************************************
 // グローバル変数
@@ -44,6 +44,7 @@ GameObject* NoHeight = gObjects + 301;
 GameObject* NoLeftDown = gObjects + 302;
 GameObject* NoRightDown = gObjects + 303;
 GameObject* tile = gObjects + 304;
+GameObject* SnowBall = gObjects + 305;
 
 // ゲームシーン
 SCENE gScene = SCENE_START;
@@ -135,6 +136,11 @@ BOOL Game_Initialize()
 	//プレイヤー場所指定
 	Player_SetLocation(gPlayer, gObjects, 0, 5, 5);
 
+	//雪玉場所指定
+	SnowBall_Initialize(SnowBall);
+
+	SnowBall_SetLocation(SnowBall, gObjects, 0, 3, 3);
+
 	//デバック用
 	NoHeight->textuer = new Sprite("assets/No.png", 13, 7);
 	NoHeight->textuer->SetSize(80, 80);
@@ -171,6 +177,8 @@ void Game_Update()
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
 	Player_Input(gPlayer);			//プレイヤー移動
+
+	SnowBall_Hit(gPlayer, SnowBall);
 
 	// ゲームシーン別
 	switch (gScene)

@@ -18,6 +18,7 @@
 
 #include "Player.h"
 #include "MapGeneration.h"
+#include "SnowBall.h"
 
 BOOL Game_Initialize();
 void Game_Update();

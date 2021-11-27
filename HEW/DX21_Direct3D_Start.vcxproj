@@ -157,6 +157,7 @@
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="ps.h" />
+    <ClInclude Include="SnowBall.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="UvInfo.h" />
     <ClInclude Include="vs.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGeneration.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SnowBall.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="XAudio2.cpp" />
   </ItemGroup>
