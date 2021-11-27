@@ -37,6 +37,7 @@ ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
+vector<GameObject>gObjectS;		  //Vector配列 未実装
 int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]; //ステージ数[ステージ][高さ][左下][右下]
 GameObject* gPlayer = gObjects + 300;
 GameObject* NoHeight = gObjects + 301;
