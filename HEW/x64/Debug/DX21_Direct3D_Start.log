@@ -1,3 +1,8 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  SnowBall.cpp
+  Enemy.cpp
+  game.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame\hew\game.cpp(182): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame\hew\game.cpp(183): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  main.cpp
+  コードを生成中...
   DX21_Direct3D_Start.vcxproj -> C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame\HEW\x64\Debug\HEW.exe

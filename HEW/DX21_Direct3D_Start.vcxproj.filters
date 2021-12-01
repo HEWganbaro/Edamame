@@ -84,6 +84,9 @@
     <ClInclude Include="SnowBall.h">
       <Filter>ヘッダー ファイル\Gameh\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
@@ -126,6 +129,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
