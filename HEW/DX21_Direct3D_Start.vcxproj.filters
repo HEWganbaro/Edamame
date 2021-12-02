@@ -125,14 +125,14 @@
     <ClCompile Include="MapGeneration.cpp">
       <Filter>ソース ファイル\Gamecpp\Object</Filter>
     </ClCompile>
-    <ClCompile Include="SnowBall.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SnowBall.cpp">
+      <Filter>ソース ファイル\Gamecpp\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

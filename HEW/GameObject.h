@@ -4,7 +4,6 @@
 
 #include "animator.h"
 #include "CharController.h"
-#include "UvInfo.h"
 #include "Sprite.h"
 #include <fstream>
 #include <vector>
@@ -49,7 +48,7 @@ struct GameObject {
 
 	Animator animator;  // アニメーションのクラス変数
 
-	UvInfo uvinfo; // テクスチャの情報
+	//UvInfo uvinfo; // テクスチャの情報
 
 	Sprite* textuer;	//画像データ
 };
