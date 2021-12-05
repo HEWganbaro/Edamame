@@ -8,8 +8,8 @@ void Map_Initialize(GameObject * Map)
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				Map[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/TestTile.png", 4, 1);
-				Map[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
+				Map[i + MAP_EDGE * j + 100 * k].texture = new Sprite("assets/blockseat.png", 4, 1);
+				Map[i + MAP_EDGE * j + 100 * k].texture->SetSize(BOX_HEIGHT, BOX_WIDTH);
 			}
 		}
 	}
@@ -45,7 +45,7 @@ void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][M
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				Map[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
+				Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[gStarg][k][j][i], 0);
 			}
 		}
 	}

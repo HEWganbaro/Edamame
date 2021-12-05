@@ -6,8 +6,8 @@ int SnowBall_cut = 0;
 
 void SnowBall_Initialize(GameObject * SnowBall)
 {
-	SnowBall->textuer = new Sprite("assets/snowBall.png", 1, 1);
-	SnowBall->textuer->SetSize(100, 100);
+	SnowBall->texture = new Sprite("assets/snowBall.png", 1, 1);
+	SnowBall->texture->SetSize(100, 100);
 	SnowBall->posY = 0.5f;
 	SnowBall->mappos.Height = 0;
 	SnowBall->mappos.LeftDown = 0;

@@ -15,7 +15,7 @@ typedef struct
 
 PARAM g_param[SOUND_LABEL_MAX] =
 {
-	{"assets/BGM/Casino.wav", true},
+	{"assets/BGM/GameBgm.wav", true},
 };
 
 #ifdef _XBOX //Big-Endian
