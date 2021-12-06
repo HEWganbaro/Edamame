@@ -4,8 +4,8 @@
 
 void GameObject_DrowUpdate(GameObject* obj)
 {
-	obj->texture->SetPos(obj->posX, obj->posY);
-	obj->texture->SetPos(obj->posX, obj->posY);
+	obj->textuer->SetPos(obj->posX, obj->posY);
+	obj->textuer->SetPos(obj->posX, obj->posY);
 
 }
 

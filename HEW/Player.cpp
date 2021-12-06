@@ -4,8 +4,8 @@
 int Player_cut;
 
 void Player_Initialize(GameObject* Player) {
-	Player->texture = new Sprite("assets/Player.png", 1, 1);
-	Player->texture->SetSize(80, 80);
+	Player->textuer = new Sprite("assets/Player.png", 1, 1);
+	Player->textuer->SetSize(80, 80);
 	Player->posY = 0.5f;
 	Player->mappos.Height = 0;
 	Player->mappos.LeftDown = 0;

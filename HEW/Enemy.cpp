@@ -7,8 +7,8 @@ int Enemy_cut;
 
 void Enemy_Initialize(GameObject * Enemy)
 {
-	Enemy->texture = new Sprite("assets/player.png", 1, 1);
-	Enemy->texture->SetSize(80, 80);
+	Enemy->textuer = new Sprite("assets/player.png", 1, 1);
+	Enemy->textuer->SetSize(80, 80);
 	Enemy->posY = 0.5f;
 	Enemy->mappos.Height = 0;
 	Enemy->mappos.LeftDown = 0;

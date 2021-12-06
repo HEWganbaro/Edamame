@@ -50,7 +50,7 @@ struct GameObject {
 
 	//UvInfo uvinfo; // テクスチャの情報
 
-	Sprite* texture;	//画像データ
+	Sprite* textuer;	//画像データ
 };
 
 
