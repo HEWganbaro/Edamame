@@ -87,6 +87,9 @@
     <ClInclude Include="Enemy.h">
       <Filter>ヘッダー ファイル\Gameh\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>ヘッダー ファイル\Engineh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">

@@ -10,6 +10,7 @@
 #include "game.h"
 #include "GameTimer.h"
 #include "input.h"
+#include"Controller.h"
 
 //*****************************************************************************
 // É}ÉNÉçíËã`
