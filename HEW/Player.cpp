@@ -23,21 +23,23 @@ void Player_SetLocation(GameObject* Player, GameObject* Location,
 
 void Player_Input(GameObject * Player ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
+	XINPUT_STATE state;
+	XInputGetState(0, &state);
 	//ステージマップによって分岐させる
 	if (Player->direction == NULL_WAY) {
-		if (Input_GetKeyTrigger('Q')) {
+		if (Input_GetKeyTrigger('Q') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			Player->direction = LEFT_UP;
 			Player->mappos.RightDown--;
 		}
-		if (Input_GetKeyTrigger('A')) {
+		if (Input_GetKeyTrigger('A')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			Player->direction = LEFT_DOWN;
 			Player->mappos.LeftDown++;
 		}
-		if (Input_GetKeyTrigger('E')) {
+		if (Input_GetKeyTrigger('E')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			Player->direction = RIGHT_UP;
 			Player->mappos.LeftDown--;
 		}
-		if (Input_GetKeyTrigger('D')) {
+		if (Input_GetKeyTrigger('D')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			Player->direction = RIGHT_DOWN;
 			Player->mappos.RightDown++;
 		}

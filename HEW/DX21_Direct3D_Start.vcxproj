@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="animator.h" />
     <ClInclude Include="CharController.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="MapGeneration.h" />
     <ClInclude Include="Player.h" />
