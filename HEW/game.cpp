@@ -156,7 +156,7 @@ BOOL Game_Initialize()
 	NoLeftDown->textuer->SetSize(80, 80);
 	NoRightDown->textuer = new Sprite("assets/No.png", 13, 7);
 	NoRightDown->textuer->SetSize(80, 80);
-	tile->textuer = new Sprite("assets/blockseat.png", 4, 1);
+	tile->textuer = new Sprite("assets/MapSeat.png", 6, 1);
 	tile->textuer->SetSize(200, 200);
 
 	return TRUE;
@@ -184,7 +184,7 @@ void Game_Update()
 
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
-	Player_Input(gPlayer);			//プレイヤー移動
+	Player_Input(gPlayer,MapChip);			//プレイヤー移動
 
 	SnowBall_Hit(gPlayer, SnowBall);
 

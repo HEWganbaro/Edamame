@@ -11,7 +11,8 @@
 #include <iostream>
 #include <sstream>
 
-#define MAP_LENGTH 0.08f // 一つのマスに対しての移動量(DX座標)
+#define MAP_LENGTH 0.075f // 一つのマスに対しての横移動量(DX座標)
+#define MAP_LENGTH_HEIGHT 0.1f // 一つのマスに対しての縦移動量(DX座標)
 
 using namespace std;
 
@@ -38,11 +39,11 @@ struct GameObject {
 	float posX, posY;  // 中心点の座標
 	float sizeX, sizeY; // 大きさ
 
-	MapPos mappos;
+	MapPos mappos;	//マップ単位でいる場所
 
-	MapPos tmp;
+	MapPos tmp;	//一時保存場所
 
-	Direction direction;
+	Direction direction;	//進む方向
 
 	CharController charController;  // キャラ移動のクラス変数
 

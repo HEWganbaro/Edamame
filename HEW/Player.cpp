@@ -1,7 +1,4 @@
 #include "Player.h"
-#include "input.h"
-
-int Player_cut;
 
 void Player_Initialize(GameObject* Player) {
 	Player->textuer = new Sprite("assets/Player.png", 1, 1);
@@ -24,7 +21,7 @@ void Player_SetLocation(GameObject* Player, GameObject* Location,
 	
 }
 
-void Player_Input(GameObject * Player)
+void Player_Input(GameObject * Player ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
 	//ステージマップによって分岐させる
 	if (Player->direction == NULL_WAY) {
@@ -45,58 +42,59 @@ void Player_Input(GameObject * Player)
 			Player->mappos.RightDown++;
 		}
 	}
-	else {
-		switch (Player->direction)
-		{
-		case RIGHT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
-			}
-			else {
-				Player->direction = NULL_WAY;
-				Player_cut = 0;
-			}
-			break;
+	Player_MapMove(Player, MapChip);
+	//else {
+	//	switch (Player->direction)
+	//	{
+	//	case RIGHT_DOWN:
+	//		if (Player_cut != PLAYER_SPEED) {
+	//			Player->posX += MAP_LENGTH / PLAYER_SPEED;
+	//			Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+	//			Player_cut++;
+	//		}
+	//		else {
+	//			Player->direction = NULL_WAY;
+	//			Player_cut = 0;
+	//		}
+	//		break;
 
-		case LEFT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
-			}
-			else {
-				Player->direction = NULL_WAY;
-				Player_cut = 0;
-			}
-			break;
+	//	case LEFT_DOWN:
+	//		if (Player_cut != PLAYER_SPEED) {
+	//			Player->posX -= MAP_LENGTH / PLAYER_SPEED;
+	//			Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+	//			Player_cut++;
+	//		}
+	//		else {
+	//			Player->direction = NULL_WAY;
+	//			Player_cut = 0;
+	//		}
+	//		break;
 
-		case LEFT_UP:
-			if (Player_cut != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
-			}
-			else {
-				Player->direction = NULL_WAY;
-				Player_cut = 0;
-			}
-			break;
+	//	case LEFT_UP:
+	//		if (Player_cut != PLAYER_SPEED) {
+	//			Player->posX -= MAP_LENGTH / PLAYER_SPEED;
+	//			Player->posY += MAP_LENGTH / PLAYER_SPEED;
+	//			Player_cut++;
+	//		}
+	//		else {
+	//			Player->direction = NULL_WAY;
+	//			Player_cut = 0;
+	//		}
+	//		break;
 
-		case RIGHT_UP:
-			if (Player_cut != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
-			}
-			else {
-				Player->direction = NULL_WAY;
-				Player_cut = 0;
-			}
-			break;
-		}
-	}
+	//	case RIGHT_UP:
+	//		if (Player_cut != PLAYER_SPEED) {
+	//			Player->posX += MAP_LENGTH / PLAYER_SPEED;
+	//			Player->posY += MAP_LENGTH / PLAYER_SPEED;
+	//			Player_cut++;
+	//		}
+	//		else {
+	//			Player->direction = NULL_WAY;
+	//			Player_cut = 0;
+	//		}
+	//		break;
+	//	}
+	//}
 }
 
 MapPos Player_GetMapPos(GameObject * Player)

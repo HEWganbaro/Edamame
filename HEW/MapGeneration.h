@@ -14,6 +14,21 @@
 #define MAP_HEIGH_FRG -9
 #define MAP_STAGE_FRG -99
 
+//移動スピード
+#define PLAYER_SPEED 25  //大きい方が遅い
+
+enum Mapchip
+{
+	SNOW_GROUND,
+	NORMAL_GROUND,
+	ICE_GROUND,
+	SOIL_GROUND,
+	RIGHTUP_SLOPE,
+	LEFTUP_SLOPE,
+};
+
 void Map_Initialize(GameObject* Map);
 int Map_GetPlayerTile(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
 void Map_Update(GameObject* Map ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+
+void Player_MapMove(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
