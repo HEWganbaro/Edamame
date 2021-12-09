@@ -188,12 +188,15 @@ void Game_Update()
 
 	SnowBall_Hit(gPlayer, SnowBall);
 
-	Enemy_Hit(gEnemy, gPlayer);
+	Enemy_Hit(gEnemy, SnowBall);
 
 	if (gEnemy->direction == NULL_WAY)
 	{
-		Enemy_Move_Circle(gEnemy);
+		Enemy_Move_Circle(gEnemy, SnowBall);
 	}
+
+	Enemy_Move_Chase(gEnemy, SnowBall);
+
 
 	// ƒQ[ƒ€ƒV[ƒ“•Ê
 	switch (gScene)

@@ -15,6 +15,6 @@ void Enemy_Update(GameObject* Enemy);
 //“G‚Ì“–‚½‚è”»’è
 void Enemy_Hit(GameObject* Enemy, GameObject* Player);
 //“G‚ªƒvƒŒƒCƒ„[‚ğ’Ç‚¢‚©‚¯‚é
-void Enemy_Move_Chase(GameObject* Enemy, GameObject* Player);
+void Enemy_Move_Chase(GameObject* Enemy, GameObject* SnowBall);
 //“G‚Ì„‰ñ
-void Enemy_Move_Circle(GameObject* Enemy);
+void Enemy_Move_Circle(GameObject* Enemy, GameObject* SnowBall);
