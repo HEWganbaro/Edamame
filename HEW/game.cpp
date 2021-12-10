@@ -37,6 +37,7 @@ ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
+GameObject gBackGround;
 int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]; //ステージ数[ステージ][高さ][左下][右下]
 
 GameObject* gPlayer = gObjects + 300;
@@ -57,28 +58,6 @@ SCENE gScene = SCENE_START;
 BOOL Game_Initialize()
 {
 	HRESULT hr;
-
-	//// 頂点バッファ作成
-	//D3D11_BUFFER_DESC bufferDesc;
-	//bufferDesc.ByteWidth = VERTEX_BUFFER_SIZE;
-	//bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	//bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	//bufferDesc.CPUAccessFlags = 0;
-	//bufferDesc.MiscFlags = 0;
-	//bufferDesc.StructureByteStride = 0;
-
-	//hr = Direct3D_GetDevice()->CreateBuffer(&bufferDesc, NULL, &gpVertexBuffer);
-	//if (FAILED(hr))
-	//	return FALSE;
-	// ↑　頂点バッファ作成　ここまで
-
-	// ここで使用したい画像ファイルをテクスチャとして読み込む
-	// 第一引数：画像ファイル名。もしフォルダに入っているならフォルダ名も一緒に書く。
-	// 第二引数：読み込んだテクスチャが入る変数を指定
-	//hr = Direct3D_LoadTexture("assets/texture.png", &gpTexture);
-	//if (FAILED(hr)) {
-	//	return FALSE;
-	//}
 
 	//オーディオの初期化
 	hr = XA_Initialize();
@@ -158,6 +137,8 @@ BOOL Game_Initialize()
 	NoRightDown->textuer->SetSize(80, 80);
 	tile->textuer = new Sprite("assets/MapSeat.png", 6, 1);
 	tile->textuer->SetSize(200, 200);
+	gBackGround.textuer = new Sprite("assets/BackGround.png", 1, 1);
+	gBackGround.textuer->SetSize(1280*2, 720*2);
 
 	return TRUE;
 }
@@ -181,10 +162,12 @@ void Game_Update()
 	tile->textuer->SetPart(Map_GetPlayerTile(gPlayer, MapChip), 0);
 	tile->posX = 0.3;
 	tile->posY = 0.6;
+	gBackGround.posX = -1;
+	gBackGround.posY = 1;
 
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
-	Player_Input(gPlayer,MapChip);			//プレイヤー移動
+	Player_Input(gPlayer,MapChip);	//プレイヤー移動
 
 	SnowBall_Hit(gPlayer, SnowBall);
 
@@ -196,7 +179,6 @@ void Game_Update()
 	}
 
 	Enemy_Move_Chase(gEnemy, SnowBall);
-
 
 	// ゲームシーン別
 	switch (gScene)
@@ -211,39 +193,12 @@ void Game_Update()
 		break;
 	}
 
-	// ポリゴンの頂点を定義
-	// 頂点を結んでポリゴンを形成するときの法則
-	// ・頂点は、配列の番号の若い順番に使用される
-	// ・頂点を結んでポリゴンが形成されたとき、その結び順が時計回りになる場合だけポリゴンが表示される
-	//VERTEX_POSTEX vx[MAX_SPRITE*VERTEX_PER_SPRITE];
-
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		//GameObjectと画像の座標を合わせる
 		GameObject_DrowUpdate(&gObjects[i]);
-		//GameObject_Update(&gObjects[i]);
-		// XY計算
-		//FRECT xy = GameObject_GetXY( &gObjects[i] );
-		//// UV計算
-		//FRECT uv = GameObject_GetUV( gObjects+i );
-		//// 頂点配列への適用
-		//vx[0 + i * 6 + 0] = { xy.left, xy.top, 0, uv.left, uv.top },  // １つめの頂点   ①左上
-		//vx[0 + i * 6 + 1] = { xy.right, xy.top, 0, uv.right, uv.top },  // ２つめの頂点　②右上
-		//vx[0 + i * 6 + 2] = { xy.right,  xy.bottom, 0, uv.right, uv.bottom },  // ３つめの頂点　③右下
-
-		//vx[0 + i * 6 + 3] = { xy.right,  xy.bottom, 0, uv.right, uv.bottom },  // ４つめの頂点　③右下
-		//vx[0 + i * 6 + 4] = { xy.left,  xy.bottom, 0, uv.left, uv.bottom },  // ５つめの頂点　④左下
-		//vx[0 + i * 6 + 5] = { xy.left,  xy.top, 0, uv.left, uv.top };  // ６つめの頂点　　  ①左上　　  ①左上
 	}
-
-	//// 頂点バッファのデータをvx配列のデータで更新する
-	//Direct3D_GetContext()->UpdateSubresource(
-	//	gpVertexBuffer,		// 更新対象のバッファ
-	//	0,				// インデックス(0)
-	//	NULL,				// 更新範囲(nullptr)
-	//	vx,		// 反映データ
-	//	0,				// データの1行のサイズ(0)
-	//	0);				// 1深度スライスのサイズ(0)
+	GameObject_DrowUpdate(&gBackGround);
 }
 
 
@@ -252,30 +207,12 @@ void Game_Draw()
 	// 画面クリア（指定色で塗りつぶし）
 	// 塗りつぶし色の指定（小数：0.0f～1.0f）
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; //red,green,blue,alpha
-
 	Direct3D_GetContext()->ClearRenderTargetView(Direct3D_GetRenderTargetView(), clearColor);
 
-	// ↓　自前の描画処理をここに書く *******
-
-	// 描画で使用するテクスチャを指定する関数呼び出し
-	// ここで指定されたテクスチャが、ピクセルシェーダーのグローバル変数にセットされる
-	//Direct3D_GetContext()->PSSetShaderResources(0, 1, &gpTexture);
-
-	// 描画に使う頂点バッファを指定する
-	//UINT strides = sizeof(VERTEX_POSTEX);
-	//UINT offsets = 0;
-	//Direct3D_GetContext()->IASetVertexBuffers(0, 1, &gpVertexBuffer, &strides, &offsets);   // gpVertexBufferが頂点バッファ
-
-	// これまでの設定で実際に描画する
-	//Direct3D_GetContext()->Draw(MAX_SPRITE*VERTEX_PER_SPRITE, 0);
-
 	//ゲームオブジェクトを全部描画する
+	gBackGround.textuer->Draw();
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].textuer->Draw();
-	//gPlayer->textuer->Draw();
-	//No->textuer->Draw();
-
-	// ↑　自前の描画処理をここに書く *******
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);

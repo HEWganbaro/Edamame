@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Player.h"
+#include "MapGeneration.h"
 
 //á‹Ê‚ğ‰Šú‰»‚·‚éŠÖ” 
 void SnowBall_Initialize(GameObject* SnowBall);

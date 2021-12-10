@@ -52,8 +52,12 @@ void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][M
 	}
 }
 
+//////////////////////////////////////////////////////////
 //マップにあるオブジェクトは全てこれを使って動かしてほしい
-void Player_MapMove(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]) {
+//引数 (動かしたいゲームオブジェクト、MapChip)
+//戻り値 無し
+//////////////////////////////////////////////////////////
+void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]) {
 	// マップ外にはいかない
 	if (Player->mappos.LeftDown == -1) {
 		Player->mappos.LeftDown++;

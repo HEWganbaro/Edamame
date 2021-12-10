@@ -1,23 +1,10 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  compilation header save succeeded; see C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame3\HEW\ps.h
-  animator.cpp
-  CharController.cpp
-  direct3d.cpp
-  WICTextureLoader.cpp
-  Enemy.cpp
-  GameObject.cpp
-  game.cpp
-c:\users\yudai\onedrive\デスクトップ\hew\edamame3\hew\game.cpp(182): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-c:\users\yudai\onedrive\デスクトップ\hew\edamame3\hew\game.cpp(183): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-  GameTimer.cpp
-  input.cpp
-  main.cpp
   MapGeneration.cpp
   Player.cpp
   SnowBall.cpp
-  Sprite.cpp
-c:\users\yudai\onedrive\デスクトップ\hew\edamame3\hew\sprite.cpp(61): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\yudai\onedrive\デスクトップ\hew\edamame3\hew\sprite.cpp(62): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-  XAudio2.cpp
+  game.cpp
+c:\users\naoki\documents\github\edamame\hew\game.cpp(163): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+c:\users\naoki\documents\github\edamame\hew\game.cpp(164): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  main.cpp
   コードを生成中...
-  DX21_Direct3D_Start.vcxproj -> C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame3\HEW\x64\Debug\HEW.exe
+  DX21_Direct3D_Start.vcxproj -> C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\HEW.exe

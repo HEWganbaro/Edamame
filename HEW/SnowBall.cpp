@@ -57,61 +57,61 @@ void SnowBall_Hit(GameObject * Player, GameObject * SnowBall)
 		SnowBall_way = RIGHT_DOWN;
 	}
 
-	if (Player->mappos.LeftDown == SnowBall->mappos.LeftDown && Player->mappos.RightDown == SnowBall->mappos.RightDown)
-	{
-		switch (SnowBall_way)
-		{
-		case RIGHT_DOWN:
-			if (SnowBall_cut != PLAYER_SPEED) {
-				SnowBall->posX += MAP_LENGTH / PLAYER_SPEED;
-				SnowBall->posY -= MAP_LENGTH / PLAYER_SPEED;
-				SnowBall_cut++;
-			}
-			else {
-				SnowBall->mappos.RightDown++;
-				SnowBall_way = NULL_WAY;
-				SnowBall_cut = 0;
-			}
-			break;
+	//if (Player->mappos.LeftDown == SnowBall->mappos.LeftDown && Player->mappos.RightDown == SnowBall->mappos.RightDown)
+	//{
+	//	switch (SnowBall_way)
+	//	{
+	//	case RIGHT_DOWN:
+	//		if (SnowBall_cut != PLAYER_SPEED) {
+	//			SnowBall->posX += MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall->posY -= MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall_cut++;
+	//		}
+	//		else {
+	//			SnowBall->mappos.RightDown++;
+	//			SnowBall_way = NULL_WAY;
+	//			SnowBall_cut = 0;
+	//		}
+	//		break;
 
-		case LEFT_DOWN:
-			if (SnowBall_cut != PLAYER_SPEED) {
-				SnowBall->posX -= MAP_LENGTH / PLAYER_SPEED;
-				SnowBall->posY -= MAP_LENGTH / PLAYER_SPEED;
-				SnowBall_cut++;
-			}
-			else {
-				SnowBall->mappos.LeftDown++;
-				SnowBall_way = NULL_WAY;
-				SnowBall_cut = 0;
-			}
-			break;
+	//	case LEFT_DOWN:
+	//		if (SnowBall_cut != PLAYER_SPEED) {
+	//			SnowBall->posX -= MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall->posY -= MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall_cut++;
+	//		}
+	//		else {
+	//			SnowBall->mappos.LeftDown++;
+	//			SnowBall_way = NULL_WAY;
+	//			SnowBall_cut = 0;
+	//		}
+	//		break;
 
-		case LEFT_UP:
-			if (SnowBall_cut != PLAYER_SPEED) {
-				SnowBall->posX -= MAP_LENGTH / PLAYER_SPEED;
-				SnowBall->posY += MAP_LENGTH / PLAYER_SPEED;
-				SnowBall_cut++;
-			}
-			else {
-				SnowBall->mappos.RightDown--;
-				SnowBall_way = NULL_WAY;
-				SnowBall_cut = 0;
-			}
-			break;
+	//	case LEFT_UP:
+	//		if (SnowBall_cut != PLAYER_SPEED) {
+	//			SnowBall->posX -= MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall->posY += MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall_cut++;
+	//		}
+	//		else {
+	//			SnowBall->mappos.RightDown--;
+	//			SnowBall_way = NULL_WAY;
+	//			SnowBall_cut = 0;
+	//		}
+	//		break;
 
-		case RIGHT_UP:
-			if (SnowBall_cut != PLAYER_SPEED) {
-				SnowBall->posX += MAP_LENGTH / PLAYER_SPEED;
-				SnowBall->posY += MAP_LENGTH / PLAYER_SPEED;
-				SnowBall_cut++;
-			}
-			else {
-				SnowBall->mappos.LeftDown--;
-				SnowBall_way = NULL_WAY;
-				SnowBall_cut = 0;
-			}
-			break;
-		}
-	}
+	//	case RIGHT_UP:
+	//		if (SnowBall_cut != PLAYER_SPEED) {
+	//			SnowBall->posX += MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall->posY += MAP_LENGTH / PLAYER_SPEED;
+	//			SnowBall_cut++;
+	//		}
+	//		else {
+	//			SnowBall->mappos.LeftDown--;
+	//			SnowBall_way = NULL_WAY;
+	//			SnowBall_cut = 0;
+	//		}
+	//		break;
+	//	}
+	//}
 }

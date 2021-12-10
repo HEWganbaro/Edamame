@@ -6,7 +6,6 @@ void GameObject_DrowUpdate(GameObject* obj)
 {
 	obj->textuer->SetPos(obj->posX, obj->posY);
 	obj->textuer->SetPos(obj->posX, obj->posY);
-
 }
 
 //FRECT GameObject_GetXY(GameObject * pThis)

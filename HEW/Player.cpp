@@ -43,60 +43,8 @@ void Player_Input(GameObject * Player ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_ED
 			Player->direction = RIGHT_DOWN;
 			Player->mappos.RightDown++;
 		}
-	}
-	Player_MapMove(Player, MapChip);
-	//else {
-	//	switch (Player->direction)
-	//	{
-	//	case RIGHT_DOWN:
-	//		if (Player_cut != PLAYER_SPEED) {
-	//			Player->posX += MAP_LENGTH / PLAYER_SPEED;
-	//			Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-	//			Player_cut++;
-	//		}
-	//		else {
-	//			Player->direction = NULL_WAY;
-	//			Player_cut = 0;
-	//		}
-	//		break;
-
-	//	case LEFT_DOWN:
-	//		if (Player_cut != PLAYER_SPEED) {
-	//			Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-	//			Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-	//			Player_cut++;
-	//		}
-	//		else {
-	//			Player->direction = NULL_WAY;
-	//			Player_cut = 0;
-	//		}
-	//		break;
-
-	//	case LEFT_UP:
-	//		if (Player_cut != PLAYER_SPEED) {
-	//			Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-	//			Player->posY += MAP_LENGTH / PLAYER_SPEED;
-	//			Player_cut++;
-	//		}
-	//		else {
-	//			Player->direction = NULL_WAY;
-	//			Player_cut = 0;
-	//		}
-	//		break;
-
-	//	case RIGHT_UP:
-	//		if (Player_cut != PLAYER_SPEED) {
-	//			Player->posX += MAP_LENGTH / PLAYER_SPEED;
-	//			Player->posY += MAP_LENGTH / PLAYER_SPEED;
-	//			Player_cut++;
-	//		}
-	//		else {
-	//			Player->direction = NULL_WAY;
-	//			Player_cut = 0;
-	//		}
-	//		break;
-	//	}
-	//}
+	}// ƒvƒŒƒCƒ„[“®‚­ŠÖ”
+	MapMove_Update(Player, MapChip);
 }
 
 MapPos Player_GetMapPos(GameObject * Player)
