@@ -10,6 +10,6 @@ void SnowBall_SetLocation(GameObject* SnowBall, GameObject* Location, int Height
 //雪玉マップ座標取得
 MapPos SnowBall_GetMapPos(GameObject* SnowBall);
 //アップデート関数
-void SnowBall_Update(GameObject* SnowBall);
+void SnowBall_Update(GameObject* SnowBall, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
 //雪玉の当たり判定
 void SnowBall_Hit(GameObject* SnowBall, GameObject* Player);

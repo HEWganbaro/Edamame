@@ -28,9 +28,9 @@ MapPos SnowBall_GetMapPos(GameObject * SnowBall)
 	return MapPos();
 }
 
-void SnowBall_Update(GameObject * SnowBall)
+void SnowBall_Update(GameObject * SnowBall, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
-	
+	MapMove_Update(SnowBall, MapChip);
 }
 
 void SnowBall_Hit(GameObject * Player, GameObject * SnowBall)
@@ -56,6 +56,32 @@ void SnowBall_Hit(GameObject * Player, GameObject * SnowBall)
 	{
 		SnowBall_way = RIGHT_DOWN;
 	}
+
+	if (Player->mappos.LeftDown == SnowBall->mappos.LeftDown && Player->mappos.RightDown == SnowBall->mappos.RightDown) {
+		switch (SnowBall_way)
+		{
+		case RIGHT_UP:
+			SnowBall->direction = RIGHT_UP;
+			SnowBall->mappos.LeftDown--;
+			break;
+
+		case LEFT_DOWN:
+			SnowBall->direction = LEFT_DOWN;
+			SnowBall->mappos.LeftDown++;
+			break;
+
+		case LEFT_UP:
+			SnowBall->direction = LEFT_UP;
+			SnowBall->mappos.RightDown--;
+			break;
+
+		case RIGHT_DOWN:
+			SnowBall->direction = RIGHT_DOWN;
+			SnowBall->mappos.RightDown++;
+			break;
+		}
+	}
+
 
 	//if (Player->mappos.LeftDown == SnowBall->mappos.LeftDown && Player->mappos.RightDown == SnowBall->mappos.RightDown)
 	//{

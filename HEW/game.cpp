@@ -36,10 +36,10 @@ struct VERTEX_POSTEX {
 ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
-GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
-GameObject gBackGround;
-int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]; //ステージ数[ステージ][高さ][左下][右下]
+	//ステージ数[ステージ][高さ][左下][右下]
+int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE];
 
+GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
 GameObject* gPlayer = gObjects + 300;
 GameObject* NoHeight = gObjects + 301;
 GameObject* NoLeftDown = gObjects + 302;
@@ -47,6 +47,8 @@ GameObject* NoRightDown = gObjects + 303;
 GameObject* tile = gObjects + 304;
 GameObject* SnowBall = gObjects + 305;
 GameObject* gEnemy = gObjects + 306;
+
+GameObject gBackGround;				//背景
 
 // ゲームシーン
 SCENE gScene = SCENE_START;
@@ -120,7 +122,7 @@ BOOL Game_Initialize()
 	SnowBall_Initialize(SnowBall);
 
 	//雪玉の場所指定
-	SnowBall_SetLocation(SnowBall, gObjects, 0, 3, 3);
+	SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 6);
 
 	//敵の初期化
 	Enemy_Initialize(gEnemy);
@@ -169,9 +171,11 @@ void Game_Update()
 
 	Player_Input(gPlayer,MapChip);	//プレイヤー移動
 
-	SnowBall_Hit(gPlayer, SnowBall);
+	SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
+	SnowBall_Update(SnowBall, MapChip);
 
-	Enemy_Hit(gEnemy, SnowBall);
+
+	Enemy_Hit(gEnemy, SnowBall);	
 
 	if (gEnemy->direction == NULL_WAY)
 	{

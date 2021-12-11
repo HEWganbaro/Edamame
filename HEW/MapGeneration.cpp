@@ -2,7 +2,6 @@
 #include "input.h"
 
 int gStarg = 0;
-int Player_cut = 0;
 
 void Map_Initialize(GameObject * Map)
 {
@@ -84,29 +83,29 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 	if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == -1) {
 		//‰Eãâ‚Ì
 		if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == RIGHTUP_SLOPE) {
-			if (Player_cut != PLAYER_SPEED * 2) {
+			if (Player->animator.count != PLAYER_SPEED * 2) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += (MAP_LENGTH / PLAYER_SPEED) * 2;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->mappos.Height++;
 				Player->mappos.LeftDown--;
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 		} //¶ãâ‚Ì
 		else if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == LEFTUP_SLOPE) {
-			if (Player_cut != PLAYER_SPEED * 2) {
+			if (Player->animator.count != PLAYER_SPEED * 2) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += (MAP_LENGTH / PLAYER_SPEED) * 2;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->mappos.Height++;
 				Player->mappos.RightDown--;
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 		}
 		else {	//ˆÚ“®‚¹‚¸I‚í‚é
@@ -132,50 +131,50 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case RIGHT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 		}
@@ -184,50 +183,50 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case RIGHT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 		}
@@ -236,50 +235,50 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case RIGHT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 		}
@@ -288,66 +287,66 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_DOWN:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case LEFT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 
 		case RIGHT_UP:
-			if (Player_cut != PLAYER_SPEED) {
+			if (Player->animator.count != PLAYER_SPEED) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY += MAP_LENGTH / PLAYER_SPEED;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 			break;
 		}
 	} //‰Eãâ‚Ì
 	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == RIGHTUP_SLOPE) {
 		if (Player->direction == LEFT_DOWN) {
-			if (Player_cut != PLAYER_SPEED * 2) {
+			if (Player->animator.count != PLAYER_SPEED * 2) {
 				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED * 2;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
 				Player->mappos.LeftDown++;
 				Player->mappos.Height--;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 		}
 		else {
@@ -355,28 +354,28 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			case RIGHT_DOWN:
 				Player->mappos.RightDown--;
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 				return;
 			case LEFT_UP:
 				Player->mappos.RightDown++;
 				Player->direction = NULL_WAY;
-				Player_cut = 0;
+				Player->animator.count = 0;
 				return;
 			}
 		}
 	} //¶ãâ‚Ì
 	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == LEFTUP_SLOPE) {
 		if (Player->direction == RIGHT_DOWN) {
-			if (Player_cut != PLAYER_SPEED * 2) {
+			if (Player->animator.count != PLAYER_SPEED * 2) {
 				Player->posX += MAP_LENGTH / PLAYER_SPEED;
 				Player->posY -= MAP_LENGTH / PLAYER_SPEED * 2;
-				Player_cut++;
+				Player->animator.count++;
 			}
 			else {
 				Player->direction = NULL_WAY;
 				Player->mappos.RightDown++;
 				Player->mappos.Height--;
-				Player_cut = 0;
+				Player->animator.count = 0;
 			}
 		}
 		else {
@@ -385,12 +384,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 				case RIGHT_UP:
 					Player->mappos.LeftDown++;
 					Player->direction = NULL_WAY;
-					Player_cut = 0;
+					Player->animator.count = 0;
 					return;
 				case LEFT_DOWN:
 					Player->mappos.LeftDown--;
 					Player->direction = NULL_WAY;
-					Player_cut = 0;
+					Player->animator.count = 0;
 					return;
 			}
 		}
