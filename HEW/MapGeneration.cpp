@@ -38,14 +38,21 @@ void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][M
 	//CSV‚Ì‡”Ô’Ê‚è‚É‚È‚é
 	if (Input_GetKeyTrigger(VK_DOWN) && gStarg > 0) {
 		gStarg--;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
+				}
+			}
+		}
 	}
 	if (Input_GetKeyTrigger(VK_UP) && gStarg < MAP_STAGE - 1) {
 		gStarg++;
-	}
-	for (int k = 0; k < MAP_HEIGHT; k++) {
-		for (int j = 0; j < MAP_EDGE; j++) {
-			for (int i = 0; i < MAP_EDGE; i++) {
-				Map[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
+				}
 			}
 		}
 	}

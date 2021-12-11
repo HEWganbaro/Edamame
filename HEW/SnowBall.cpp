@@ -28,10 +28,14 @@ MapPos SnowBall_GetMapPos(GameObject * SnowBall)
 	return MapPos();
 }
 
-void SnowBall_Update(GameObject * SnowBall, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+void SnowBall_Update(GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
 	MapMove_Update(SnowBall, MapChip);
-}
+	if (Map_GetPlayerTile(SnowBall, MapChip) == SNOW_GROUND) {
+		Map[SnowBall->mappos.Height * 100 + SnowBall->mappos.LeftDown * 10 + SnowBall->mappos.RightDown].textuer->SetPart(1, 0);
+	}
+
+}	
 
 void SnowBall_Hit(GameObject * Player, GameObject * SnowBall)
 {

@@ -172,7 +172,7 @@ void Game_Update()
 	Player_Input(gPlayer,MapChip);	//ƒvƒŒƒCƒ„[ˆÚ“®
 
 	SnowBall_Hit(gPlayer, SnowBall); //á‹Ê“–‚½‚è”»’è
-	SnowBall_Update(SnowBall, MapChip);
+	SnowBall_Update(SnowBall,gObjects , MapChip);
 
 
 	Enemy_Hit(gEnemy, SnowBall);	
