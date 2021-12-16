@@ -90,6 +90,9 @@
     <ClInclude Include="Controller.h">
       <Filter>ヘッダー ファイル\Engineh</Filter>
     </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>ヘッダー ファイル\Engineh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="game.cpp">
       <Filter>ソース ファイル\Gamecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>ソース ファイル\Enginecpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

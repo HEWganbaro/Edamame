@@ -3,10 +3,6 @@
 #include "input.h"
 #include "MapGeneration.h"
 
-//移動スピード
-#define PLAYER_SPEED 25  //大きい方が遅い
-
-
 //プレイヤーを初期化する関数 
 void Player_Initialize(GameObject* Player);
 //プレイヤーの場所をセットする(プレイヤーオブジェクト, 高さ, 左下, 右下) 0から始まる

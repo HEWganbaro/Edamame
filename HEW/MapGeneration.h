@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Easing.h"
 
 //箱の大きさ
 #define BOX_HEIGHT 200	// 縦
@@ -15,7 +16,7 @@
 #define MAP_STAGE_FRG -99
 
 //移動スピード
-#define PLAYER_SPEED 25  //大きい方が遅い
+#define PLAYER_SPEED 30  //大きい方が遅い
 
 enum Mapchip
 {
@@ -29,5 +30,9 @@ enum Mapchip
 
 void Map_Initialize(GameObject* Map);
 int Map_GetPlayerTile(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+int Map_GetPlayerTile_LeftUp(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+int Map_GetPlayerTile_RightDown(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+int Map_GetPlayerTile_LeftDown(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+int Map_GetPlayerTile_RightUp(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
 void Map_Update(GameObject* Map ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
 void MapMove_Update(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);

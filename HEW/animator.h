@@ -9,7 +9,8 @@
 
 // 必要な変数を変数セットとして構造体にする
 struct Animator {
-	int count;
+	int count;	//移動するときのカウント
+	bool ice;	//氷ですべるフラグ
 
 	int frame;  // 現在のアニメのフレーム番号を持つ
 	float time;  // デルタタイムを加算した時間を持つ変数

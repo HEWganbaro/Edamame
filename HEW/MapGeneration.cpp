@@ -28,9 +28,26 @@ void Map_Initialize(GameObject * Map)
 	}
 }
 
+//プレイヤーのタイルを返す関数
 int Map_GetPlayerTile(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
 	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown];
+}
+int Map_GetPlayerTile_LeftUp(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+{
+	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown - 1];
+}
+int Map_GetPlayerTile_RightDown(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+{
+	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown + 1];
+}
+int Map_GetPlayerTile_LeftDown(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+{
+	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown + 1][Player->mappos.RightDown];
+}
+int Map_GetPlayerTile_RightUp(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+{
+	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown - 1][Player->mappos.RightDown];
 }
 
 void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
@@ -87,12 +104,17 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 	}
 	//進むマスが何か取得
 	//地面がないとき
-	if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == -1) {
+	if (Map_GetPlayerTile(Player, MapChip) == -1) {
 		//右上坂の時
-		if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == RIGHTUP_SLOPE) {
-			if (Player->animator.count != PLAYER_SPEED * 2) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += (MAP_LENGTH / PLAYER_SPEED) * 2;
+		if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == RIGHTUP_SLOPE &&
+			Player->direction == RIGHT_UP) {
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
 				Player->animator.count++;
 			}
 			else {
@@ -102,10 +124,14 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 				Player->animator.count = 0;
 			}
 		} //左上坂の時
-		else if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == LEFTUP_SLOPE) {
-			if (Player->animator.count != PLAYER_SPEED * 2) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += (MAP_LENGTH / PLAYER_SPEED) * 2;
+		else if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == LEFTUP_SLOPE && Player->direction == LEFT_UP) {
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
 				Player->animator.count++;
 			}
 			else {
@@ -134,13 +160,17 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			return;
 		}
 	}//雪の上の時
-	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == SNOW_GROUND) {
+	else if (Map_GetPlayerTile(Player, MapChip) == SNOW_GROUND) {
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -151,8 +181,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case LEFT_DOWN:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -163,8 +197,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case LEFT_UP:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -175,8 +213,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case RIGHT_UP:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -186,13 +228,17 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			break;
 		}
 	} //普通の地面
-	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == NORMAL_GROUND) {
+	else if (Map_GetPlayerTile(Player, MapChip) == NORMAL_GROUND) {
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -203,8 +249,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case LEFT_DOWN:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -215,8 +265,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case LEFT_UP:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -227,8 +281,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case RIGHT_UP:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -238,65 +296,148 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			break;
 		}
 	} //氷の時
-	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == ICE_GROUND) {
+	else if (Map_GetPlayerTile(Player, MapChip) == ICE_GROUND) {
 		switch (Player->direction)
 		{
-		case RIGHT_DOWN:
-			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+		case RIGHT_DOWN:	//イージング加速>最大速度で滑らす>イージング減速
+			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
+				if (Player->animator.count == PLAYER_SPEED) {	//止める
+					Player->direction = NULL_WAY;
+					Player->animator.count = 0;
+					Player->animator.ice = false;
+					Player->mappos.RightDown++;
+				}
 			}
 			else {
-				Player->direction = NULL_WAY;
-				Player->animator.count = 0;
+				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
+					Player->animator.ice = true;
+					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
+					if (Map_GetPlayerTile_RightDown(Player, MapChip) == ICE_GROUND) {
+						Player->animator.ice = false;
+						Player->animator.count = PLAYER_SPEED / 2;
+						Player->mappos.RightDown++;
+					}
+				}//イージングの一番速い速度で滑らせる
+				Player->posX += (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->posY -= (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->animator.count++;
 			}
 			break;
-
 		case LEFT_DOWN:
-			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
+				if (Player->animator.count == PLAYER_SPEED) {	//止める
+					Player->direction = NULL_WAY;
+					Player->animator.count = 0;
+					Player->animator.ice = false;
+					Player->mappos.LeftDown++;
+				}
 			}
 			else {
-				Player->direction = NULL_WAY;
-				Player->animator.count = 0;
+				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
+					Player->animator.ice = true;
+					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
+					if (Map_GetPlayerTile_LeftDown(Player, MapChip) == ICE_GROUND) {
+						Player->animator.ice = false;
+						Player->animator.count = PLAYER_SPEED / 2;
+						Player->mappos.LeftDown++;
+					}
+				}//イージングの一番速い速度で滑らせる
+				Player->posX -= (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->posY -= (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->animator.count++;
 			}
 			break;
 
 		case LEFT_UP:
-			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
+				if (Player->animator.count == PLAYER_SPEED) {	//止める
+					Player->direction = NULL_WAY;
+					Player->animator.count = 0;
+					Player->animator.ice = false;
+					Player->mappos.RightDown--;
+				}
 			}
 			else {
-				Player->direction = NULL_WAY;
-				Player->animator.count = 0;
+				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
+					Player->animator.ice = true;
+					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
+					if (Map_GetPlayerTile_LeftUp(Player, MapChip) == ICE_GROUND) {
+						Player->animator.ice = false;
+						Player->animator.count = PLAYER_SPEED / 2;
+						Player->mappos.RightDown--;
+					}
+				}//イージングの一番速い速度で滑らせる
+				Player->posX -= (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->posY += (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->animator.count++;
 			}
 			break;
 
 		case RIGHT_UP:
-			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
+				if (Player->animator.count == PLAYER_SPEED) {	//止める
+					Player->direction = NULL_WAY;
+					Player->animator.count = 0;
+					Player->animator.ice = false;
+					Player->mappos.LeftDown--;
+				}
 			}
 			else {
-				Player->direction = NULL_WAY;
-				Player->animator.count = 0;
+				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
+					Player->animator.ice = true;
+					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
+					if (Map_GetPlayerTile_LeftDown(Player, MapChip) == ICE_GROUND) {
+						Player->animator.ice = false;
+						Player->animator.count = PLAYER_SPEED / 2;
+						Player->mappos.LeftDown--;
+					}
+				}//イージングの一番速い速度で滑らせる
+				Player->posX += (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->posY += (Ice_Easing((double)(PLAYER_SPEED / 2) / (double)PLAYER_SPEED) - Ice_Easing((double)((PLAYER_SPEED / 2) - 1) / (double)PLAYER_SPEED))*MAP_LENGTH;
+				Player->animator.count++;
 			}
 			break;
 		}
 	} //土の時
-	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == SOIL_GROUND) {
+	else if (Map_GetPlayerTile(Player, MapChip) == SOIL_GROUND) {
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -307,8 +448,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case LEFT_DOWN:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -319,8 +464,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case LEFT_UP:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -331,8 +480,12 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 
 		case RIGHT_UP:
 			if (Player->animator.count != PLAYER_SPEED) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY += MAP_LENGTH / PLAYER_SPEED;
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 			}
 			else {
@@ -342,11 +495,15 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			break;
 		}
 	} //右上坂の時
-	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == RIGHTUP_SLOPE) {
+	else if (Map_GetPlayerTile(Player, MapChip) == RIGHTUP_SLOPE) {
 		if (Player->direction == LEFT_DOWN) {
-			if (Player->animator.count != PLAYER_SPEED * 2) {
-				Player->posX -= MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED * 2;
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
 				Player->animator.count++;
 			}
 			else {
@@ -371,11 +528,15 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			}
 		}
 	} //左上坂の時
-	else if (MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown] == LEFTUP_SLOPE) {
+	else if (Map_GetPlayerTile(Player, MapChip) == LEFTUP_SLOPE) {
 		if (Player->direction == RIGHT_DOWN) {
-			if (Player->animator.count != PLAYER_SPEED * 2) {
-				Player->posX += MAP_LENGTH / PLAYER_SPEED;
-				Player->posY -= MAP_LENGTH / PLAYER_SPEED * 2;
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
 				Player->animator.count++;
 			}
 			else {
