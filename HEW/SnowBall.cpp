@@ -6,7 +6,7 @@ int SnowBall_cut = 0;
 
 void SnowBall_Initialize(GameObject * SnowBall)
 {
-	SnowBall->textuer = new Sprite("assets/snowBall.png", 1, 1);
+	SnowBall->textuer = new Sprite("assets/snowBall.png", 2, 1);
 	SnowBall->textuer->SetSize(100, 100);
 	SnowBall->posY = 0.5f;
 	SnowBall->mappos.Height = 0;
@@ -33,8 +33,11 @@ void SnowBall_Update(GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STA
 	MapMove_Update(SnowBall, MapChip);
 	if (Map_GetPlayerTile(SnowBall, MapChip) == SNOW_GROUND) {
 		Map[SnowBall->mappos.Height * 100 + SnowBall->mappos.LeftDown * 10 + SnowBall->mappos.RightDown].textuer->SetPart(1, 0);
+		SnowBall->textuer->SetPart(0, 0);
 	}
-
+	else if (Map_GetPlayerTile(SnowBall, MapChip) == SOIL_GROUND) {
+		SnowBall->textuer->SetPart(1, 0);
+	}
 }	
 
 void SnowBall_Hit(GameObject * Player, GameObject * SnowBall)
