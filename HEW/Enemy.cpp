@@ -14,6 +14,7 @@ void Enemy_Initialize(GameObject * Enemy)
 	Enemy->mappos.LeftDown = 0;
 	Enemy->mappos.RightDown = 0;
 	Enemy->direction = NULL_WAY;
+	Enemy->enemyeye = ENEMYEYE_OUT;
 }
 
 void Enemy_SetLocation(GameObject * Enemy, GameObject * Location, int Height, int LeftDown, int RightDown)
@@ -80,7 +81,7 @@ void Enemy_Hit(GameObject * Enemy, GameObject * Player)
 			Enemy->mappos.RightDown++;
 		}
 	}*/
-	
+
 	switch (Enemy->direction)
 	{
 	case RIGHT_DOWN:
@@ -143,54 +144,84 @@ void Enemy_Move_Circle(GameObject * Enemy, GameObject* SnowBall)
 {
 	if (SnowBall->mappos.LeftDown != Enemy->mappos.LeftDown && SnowBall->mappos.RightDown != Enemy->mappos.RightDown)
 	{
-		if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-		{
-			Enemy->direction = RIGHT_DOWN;
-			return;
-		}
 
-		if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown))
+		if (SnowBall->direction != NULL_WAY)
 		{
-			Enemy->direction = LEFT_DOWN;
-			return;
-		}
-		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-		{
-			Enemy->direction = LEFT_UP;
-			return;
-		}
-		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown))
-		{
-			Enemy->direction = RIGHT_UP;
-			return;
+
+			if (Enemy->enemyeye == ENEMYEYE_OUT)
+			{
+				if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
+					(Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
+				{
+					Enemy->direction = RIGHT_DOWN;
+					return;
+				}
+
+				if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
+					(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown))
+				{
+					Enemy->direction = LEFT_DOWN;
+					return;
+				}
+				if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
+					(Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
+				{
+					Enemy->direction = LEFT_UP;
+					return;
+				}
+				if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
+					(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown))
+				{
+					Enemy->direction = RIGHT_UP;
+					return;
+				}
+			}
 		}
 	}
 }
 
+
+//“G‚Ìá‹Ê‚Ö‚ÌÚ‹ß
 void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 {
+
 	if (SnowBall->mappos.LeftDown - 1 == Enemy->mappos.LeftDown &&
 		SnowBall->mappos.RightDown == Enemy->mappos.RightDown)
 	{
-		Enemy->direction = LEFT_DOWN;
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = LEFT_DOWN;
+		}
 	}
 	if (SnowBall->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
 		SnowBall->mappos.RightDown == Enemy->mappos.RightDown)
 	{
-		Enemy->direction = RIGHT_UP;
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = RIGHT_UP;
+		}
 	}
+
 	if (SnowBall->mappos.RightDown - 1 == Enemy->mappos.RightDown &&
 		SnowBall->mappos.LeftDown == Enemy->mappos.LeftDown)
 	{
-		Enemy->direction = RIGHT_DOWN;
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = RIGHT_DOWN;;
+		}
 	}
+
 	if (SnowBall->mappos.RightDown + 1 == Enemy->mappos.RightDown &&
 		SnowBall->mappos.LeftDown == Enemy->mappos.LeftDown)
 	{
-		Enemy->direction = LEFT_UP;
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = LEFT_UP;
+		}
 	}
+
 }
