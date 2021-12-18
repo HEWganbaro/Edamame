@@ -27,7 +27,7 @@ struct VERTEX_POSTEX {
 
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   307
+#define MAX_OBJECT   308
 
 //*****************************************************************************
 // グローバル変数
@@ -47,6 +47,8 @@ GameObject* NoRightDown = gObjects + 303;
 GameObject* tile = gObjects + 304;
 GameObject* SnowBall = gObjects + 305;
 GameObject* gEnemy = gObjects + 306;
+GameObject* gShield = gObjects + 307;
+
 
 GameObject gBackGround;				//背景
 
@@ -130,6 +132,12 @@ BOOL Game_Initialize()
 	//敵の場所指定
 	Enemy_SetLocation(gEnemy, gObjects, 0, 4, 4);
 
+	//遮蔽の初期化
+	Shield_Initialize(gShield);
+
+	//遮蔽の場所指定
+	Shield_SetLocation(gShield, gObjects, 0, 3, 6);
+
 	//デバック用
 	NoHeight->textuer = new Sprite("assets/No.png", 13, 7);
 	NoHeight->textuer->SetSize(80, 80);
@@ -169,20 +177,31 @@ void Game_Update()
 
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
-	Player_Input(gPlayer,MapChip);	//プレイヤー移動
+	Player_Input(gPlayer, MapChip);	//プレイヤー移動
 
 	SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
-	SnowBall_Update(SnowBall,gObjects , MapChip);
 
+	SnowBall_Update(SnowBall, gObjects, MapChip);
 
-	Enemy_Hit(gEnemy, SnowBall);	
+	Enemy_Hit(gEnemy, SnowBall);
 
 	if (gEnemy->direction == NULL_WAY)
 	{
+		//敵の巡回
 		Enemy_Move_Circle(gEnemy, SnowBall);
 	}
 
+	if (gEnemy->enemyeye == ENEMYEYE_IN)
+	{
+		//遮蔽でのヘイトそらし
+		Shield_Cancel(gShield, SnowBall, gEnemy);
+
+	}
+
+	//敵の接近
 	Enemy_Move_Chase(gEnemy, SnowBall);
+
+	//Shield_Hit(gShield, gPlayer);
 
 	// ゲームシーン別
 	switch (gScene)

@@ -25,6 +25,14 @@ enum Direction
 	RIGHT_UP,
 };
 
+//敵の視線
+enum Enemyeye
+{
+	ENEMYEYE_IN,
+	ENEMYEYE_OUT,
+};
+
+
 struct MapPos
 {
 	int Height;
@@ -44,6 +52,8 @@ struct GameObject {
 	MapPos tmp;	//一時保存場所
 
 	Direction direction;	//進む方向
+
+	Enemyeye enemyeye;//敵の視線
 
 	CharController charController;  // キャラ移動のクラス変数
 

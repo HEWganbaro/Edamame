@@ -20,6 +20,7 @@
 #include "MapGeneration.h"
 #include "SnowBall.h"
 #include "Enemy.h"
+#include "Shielding.h"
 
 
 BOOL Game_Initialize();
