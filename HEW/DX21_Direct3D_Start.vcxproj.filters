@@ -96,6 +96,9 @@
     <ClInclude Include="Shielding.h">
       <Filter>ヘッダー ファイル\Gameh\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Goal.h">
+      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
@@ -147,6 +150,9 @@
       <Filter>ソース ファイル\Enginecpp</Filter>
     </ClCompile>
     <ClCompile Include="Shielding.cpp">
+      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Goal.cpp">
       <Filter>ソース ファイル\Gamecpp\Object</Filter>
     </ClCompile>
   </ItemGroup>

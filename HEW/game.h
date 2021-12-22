@@ -21,7 +21,7 @@
 #include "SnowBall.h"
 #include "Enemy.h"
 #include "Shielding.h"
-
+#include "Goal.h"
 
 BOOL Game_Initialize();
 void Game_Update();

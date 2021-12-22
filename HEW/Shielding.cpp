@@ -28,6 +28,7 @@ MapPos Shield_GetMapPos(GameObject * Shield)
 
 void Shield_Update(GameObject * Shield)
 {
+
 }
 
 //ŽÕ•Á‚Å‚Ì“G‚ÌƒwƒCƒg‚»‚ç‚µ
