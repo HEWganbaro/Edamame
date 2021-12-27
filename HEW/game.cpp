@@ -10,21 +10,20 @@
 //*****************************************************************************
 
 // 頂点１つあたりを表す構造体
-struct VERTEX_POSTEX {
-	float x, y, z;  // 頂点の位置
-
-	float u, v;  // テクスチャのUV座標
-};
+//struct VERTEX_POSTEX {
+//	float x, y, z;  // 頂点の位置
+//
+//	float u, v;  // テクスチャのUV座標
+//};
 
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
 
-#define MAX_SPRITE  2560
-// ポリゴン２つで１つの四角形（スプライト）。ポリゴンは３頂点なので、１スプライトは６頂点。
-#define VERTEX_PER_SPRITE  (3*2)
-#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
-
+//#define MAX_SPRITE  2560 //(結構適当)
+//// ポリゴン２つで１つの四角形（スプライト）。ポリゴンは３頂点なので、１スプライトは６頂点。
+//#define VERTEX_PER_SPRITE  (3*2)
+//#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
 #define MAX_OBJECT   308
@@ -33,8 +32,8 @@ struct VERTEX_POSTEX {
 // グローバル変数
 //*****************************************************************************
 
-ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
-ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
+//ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
+//ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 	//ステージ数[ステージ][高さ][左下][右下]
 int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE];
@@ -49,11 +48,8 @@ GameObject* SnowBall = gObjects + 305;
 GameObject* gEnemy = gObjects + 306;
 GameObject* gShield = gObjects + 307;
 
-
 GameObject gBackGround;				//背景
-
-// ゲームシーン
-SCENE gScene = SCENE_START;
+//GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
@@ -61,16 +57,10 @@ SCENE gScene = SCENE_START;
 
 BOOL Game_Initialize()
 {
-	HRESULT hr;
-
-	//オーディオの初期化
-	hr = XA_Initialize();
-	if (FAILED(hr))
-		return FALSE;
-
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
 	
+	//BGM再生
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
 
 	// CSVを配列に格納
@@ -155,7 +145,7 @@ BOOL Game_Initialize()
 
 
 // ゲームループ中に実行したい、ゲームの処理を書く関数
-void Game_Update()
+BOOL Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
@@ -195,7 +185,6 @@ void Game_Update()
 	{
 		//遮蔽でのヘイトそらし
 		Shield_Cancel(gShield, SnowBall, gEnemy);
-
 	}
 
 	//敵の接近
@@ -203,27 +192,18 @@ void Game_Update()
 
 	//Shield_Hit(gShield, gPlayer);
 
-	// ゲームシーン別
-	switch (gScene)
-	{
-	case SCENE_START:
-		break;
-	case SCENE_SLECT:
-		break;
-	case SCENE_GAME:
-		break;
-	default:
-		break;
-	}
-
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		//GameObjectと画像の座標を合わせる
 		GameObject_DrowUpdate(&gObjects[i]);
 	}
 	GameObject_DrowUpdate(&gBackGround);
-}
 
+	if (Input_GetKeyTrigger(VK_SPACE))
+		return FALSE;
+
+	return TRUE;
+}
 
 void Game_Draw()
 {
@@ -241,11 +221,15 @@ void Game_Draw()
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
 
+//作ったGameObjectはちゃんとdeleteしよう！
 void Game_Relese()
 {
-	XA_Release();	//オーディオのリリース
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
 
-	COM_SAFE_RELEASE(gpTexture);  // テクスチャを読み込んだら、忘れずリリースすること
-	COM_SAFE_RELEASE(gpVertexBuffer); // 頂点バッファを作成したら、忘れずにリリースすること
+	delete gBackGround.textuer;
+	for (int i = 0; i < MAX_OBJECT; i++) {
+		delete gObjects[i].textuer;
+		gObjects[i].posX = 0;
+		gObjects[i].posY = 0;
+	}
 }
-

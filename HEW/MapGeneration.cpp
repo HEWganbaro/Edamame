@@ -14,7 +14,6 @@ void Map_Initialize(GameObject * Map)
 		}
 	}
 	// É}ÉbÉvê∂ê¨
-
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {

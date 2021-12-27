@@ -21,6 +21,7 @@ void Input_Update()
 	gKeys[VK_DOWN] = GetAsyncKeyState(VK_DOWN);
 	gKeys[VK_LEFT] = GetAsyncKeyState(VK_LEFT);
 	gKeys[VK_RIGHT] = GetAsyncKeyState(VK_RIGHT);
+	gKeys[VK_SPACE] = GetAsyncKeyState(VK_SPACE);
 	gKeys[VK_LBUTTON] = GetAsyncKeyState(VK_LBUTTON);
 	gKeys['A'] = GetAsyncKeyState('A');
 	gKeys['D'] = GetAsyncKeyState('D');

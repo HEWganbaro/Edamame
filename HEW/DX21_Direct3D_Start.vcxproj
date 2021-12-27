@@ -160,12 +160,11 @@
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="ps.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shielding.h" />
     <ClInclude Include="SnowBall.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="UvInfo.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Title.h" />
     <ClInclude Include="vs.h" />
     <ClInclude Include="XAudio2.h" />
   </ItemGroup>
@@ -183,9 +182,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGeneration.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shielding.cpp" />
     <ClCompile Include="SnowBall.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="XAudio2.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ c:\users\naoki\documents\github\edamame\hew\x64\debug\vc141.idb
 c:\users\naoki\documents\github\edamame\hew\x64\debug\xaudio2.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\sprite.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\snowball.obj
+c:\users\naoki\documents\github\edamame\hew\x64\debug\shielding.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\player.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\mapgeneration.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\main.obj
@@ -16,7 +17,10 @@ c:\users\naoki\documents\github\edamame\hew\x64\debug\wictextureloader.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\direct3d.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\charcontroller.obj
 c:\users\naoki\documents\github\edamame\hew\x64\debug\animator.obj
+c:\users\naoki\documents\github\edamame\hew\x64\debug\title.obj
 c:\users\naoki\documents\github\edamame\hew\ps.h
+c:\users\naoki\documents\github\edamame\hew\x64\debug\hew.ilk
+c:\users\naoki\documents\github\edamame\hew\x64\debug\hew.exe
 c:\users\naoki\documents\github\edamame\hew\x64\debug\hew.pdb
 c:\users\naoki\documents\github\edamame\hew\x64\debug\hew.tlog\cl.command.1.tlog
 c:\users\naoki\documents\github\edamame\hew\x64\debug\hew.tlog\cl.read.1.tlog

@@ -24,13 +24,6 @@
 
 
 BOOL Game_Initialize();
-void Game_Update();
+BOOL Game_Update();
 void Game_Draw();
 void Game_Relese();
-
-enum SCENE
-{
-	SCENE_START,
-	SCENE_SLECT,
-	SCENE_GAME,
-};

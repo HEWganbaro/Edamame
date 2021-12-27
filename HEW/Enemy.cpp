@@ -180,7 +180,6 @@ void Enemy_Move_Circle(GameObject * Enemy, GameObject* SnowBall)
 	}
 }
 
-
 //“G‚Ìá‹Ê‚Ö‚ÌÚ‹ß
 void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 {

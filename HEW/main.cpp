@@ -7,7 +7,7 @@
 
 #include <windows.h>
 #include "direct3d.h"
-#include "game.h"
+#include "Scene.h"
 #include "GameTimer.h"
 #include "input.h"
 #include"Controller.h"
@@ -32,6 +32,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 // グローバル変数
 //*****************************************************************************
 
+Scene gScene;
 
 //=============================================================================
 // メイン関数
@@ -95,9 +96,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ShowWindow(hWnd, nCmdShow);	// 指定されたウィンドウの表示状態を設定(ウィンドウを表示)
 	UpdateWindow(hWnd);			// ウィンドウの状態を直ちに反映(ウィンドウのクライアント領域を更新)
 
+		//オーディオの初期化
+	hr = XA_Initialize();
+	if (FAILED(hr))
+		goto INIT_ERROR;
+
 	BOOL isSucceed;
 	// ゲームの初期化処理を呼び出し
-	isSucceed = Game_Initialize();
+	isSucceed = Title_Initialize();
 
 	if (isSucceed == FALSE) {
 		MessageBoxA(hWnd, "Gameの初期化に失敗", "エラー", MB_OK | MB_ICONERROR);
@@ -128,9 +134,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			// 60FPSなら約16ミリ秒に１回、if文が成立する
 			if (GameTimer_ReachedNextFrame() == TRUE) {
-			//	Input_Update();
-				Game_Update();
-				Game_Draw();
+				switch (gScene.scene)
+				{
+				case TITLE:
+					gScene.Title();
+					break;
+				case GAME:
+					gScene.Game();
+					break;
+				default:
+					MessageBoxA(hWnd, "初期化に失敗", "エラー", MB_OK | MB_ICONERROR);
+					goto INIT_ERROR;
+				}
+
 			}
 			// ↑　ゲームに関するプログラムを書く場所
 		}
@@ -141,6 +157,7 @@ INIT_ERROR:
 
 	// Direct3Dの開放処理を呼び出し
 	Direct3D_Release();
+	XA_Release();	//オーディオのリリース
 
 	// ウィンドウクラスの登録を解除
 	//  第１引数：ウインドウクラス名
