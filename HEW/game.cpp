@@ -26,7 +26,7 @@
 //#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   308
+#define MAX_OBJECT   309
 
 //*****************************************************************************
 // グローバル変数
@@ -47,6 +47,8 @@ GameObject* tile = gObjects + 304;
 GameObject* SnowBall = gObjects + 305;
 GameObject* gEnemy = gObjects + 306;
 GameObject* gShield = gObjects + 307;
+GameObject* gGoal = gObjects + 308;
+
 
 GameObject gBackGround;				//背景
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -127,6 +129,12 @@ BOOL Game_Initialize()
 
 	//遮蔽の場所指定
 	Shield_SetLocation(gShield, gObjects, 0, 3, 6);
+
+	//遮蔽の初期化
+	Goal_Initialize(gGoal);
+
+	//遮蔽の場所指定
+	Goal_SetLocation(gGoal, gObjects, 0, 4, 5);
 
 	//デバック用
 	NoHeight->textuer = new Sprite("assets/No.png", 13, 7);
