@@ -186,7 +186,7 @@ BOOL Game_Update()
 	if (gEnemy->direction == NULL_WAY)
 	{
 		//“G‚Ì„‰ñ
-		Enemy_Move_Circle(gEnemy, SnowBall);
+		Enemy_Move_Circle(gEnemy, gPlayer, SnowBall);
 	}
 
 	if (gEnemy->enemyeye == ENEMYEYE_IN)
@@ -197,6 +197,9 @@ BOOL Game_Update()
 
 	//“G‚ÌÚ‹ß
 	Enemy_Move_Chase(gEnemy, SnowBall);
+
+	//“G‚ÌƒXƒ^ƒ“
+	Enemy_Stun(gEnemy, SnowBall, MapChip);
 
 	//Shield_Hit(gShield, gPlayer);
 

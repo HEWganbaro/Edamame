@@ -140,12 +140,12 @@ void Enemy_Hit(GameObject * Enemy, GameObject * Player)
 }
 
 //“G‚Ì„‰ñ
-void Enemy_Move_Circle(GameObject * Enemy, GameObject* SnowBall)
+void Enemy_Move_Circle(GameObject * Enemy, GameObject* Player, GameObject* SnowBall)
 {
 	if (SnowBall->mappos.LeftDown != Enemy->mappos.LeftDown && SnowBall->mappos.RightDown != Enemy->mappos.RightDown)
 	{
 
-		if (SnowBall->direction != NULL_WAY)
+		if (Player->direction != NULL_WAY)
 		{
 
 			if (Enemy->enemyeye == ENEMYEYE_OUT)
@@ -221,6 +221,40 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 		{
 			Enemy->direction = LEFT_UP;
 		}
+	}
+
+}
+
+
+//“G‚ÌƒXƒ^ƒ“
+void Enemy_Stun(GameObject * Enemy, GameObject * SnowBall, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+{
+	if (Map_GetPlayerTile(SnowBall, MapChip) &&
+		SnowBall->mappos.LeftDown >= Enemy->mappos.LeftDown - 1 && SnowBall->mappos.RightDown == Enemy->mappos.RightDown &&
+		SnowBall->mappos.Height > Enemy->mappos.Height)
+	{
+		Enemy->direction = LEFT_DOWN;
+		Enemy->enemyeye = ENEMYEYE_OUT;
+		Enemy->enemymove = ENEMY_STOP;
+		Player_cut = 0;
+	}
+	if (Player_cut == 5)
+	{
+		Enemy->enemymove = ENEMY_MOVE;
+	}
+
+	if (Map_GetPlayerTile(SnowBall, MapChip) &&
+		SnowBall->mappos.RightDown >= Enemy->mappos.RightDown - 1 && SnowBall->mappos.LeftDown == Enemy->mappos.LeftDown &&
+		SnowBall->mappos.Height > Enemy->mappos.Height)
+	{
+		Enemy->direction = RIGHT_DOWN;
+		Enemy->enemyeye = ENEMYEYE_OUT;
+		Enemy->enemymove = ENEMY_STOP;
+		Player_cut = 0;
+	}
+	if (Player_cut == 5)
+	{
+		Enemy->enemymove = ENEMY_MOVE;
 	}
 
 }

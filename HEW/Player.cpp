@@ -1,5 +1,7 @@
 #include "Player.h"
 
+int Player_cut = 0;
+
 void Player_Initialize(GameObject* Player) {
 	Player->textuer = new Sprite("assets/Player.png", 1, 1);
 	Player->textuer->SetSize(80, 80);
@@ -30,18 +32,22 @@ void Player_Input(GameObject * Player ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_ED
 		if (Input_GetKeyTrigger('Q') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			Player->direction = LEFT_UP;
 			Player->mappos.RightDown--;
+			Player_cut++;
 		}
 		if (Input_GetKeyTrigger('A')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			Player->direction = LEFT_DOWN;
 			Player->mappos.LeftDown++;
+			Player_cut++;
 		}
 		if (Input_GetKeyTrigger('E')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			Player->direction = RIGHT_UP;
 			Player->mappos.LeftDown--;
+			Player_cut++;
 		}
 		if (Input_GetKeyTrigger('D')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			Player->direction = RIGHT_DOWN;
 			Player->mappos.RightDown++;
+			Player_cut++;
 		}
 	}// ƒvƒŒƒCƒ„[“®‚­ŠÖ”
 	MapMove_Update(Player, MapChip);

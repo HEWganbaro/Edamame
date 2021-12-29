@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "MapGeneration.h"
 
 //移動スピード
 #define ENEMY_SPEED 25  //大きい方が遅い
@@ -17,4 +18,6 @@ void Enemy_Hit(GameObject* Enemy, GameObject* Player);
 //敵がプレイヤーを追いかける
 void Enemy_Move_Chase(GameObject* Enemy, GameObject* SnowBall);
 //敵の巡回
-void Enemy_Move_Circle(GameObject* Enemy, GameObject* SnowBall);
+void Enemy_Move_Circle(GameObject* Enemy, GameObject* Player, GameObject* SnowBall);
+//敵のスタン
+void Enemy_Stun(GameObject* Enemy, GameObject* SnowBall, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
