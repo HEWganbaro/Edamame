@@ -142,42 +142,40 @@ void Enemy_Hit(GameObject * Enemy, GameObject * Player)
 //“G‚Ì„‰ñ
 void Enemy_Move_Circle(GameObject * Enemy, GameObject* Player, GameObject* SnowBall)
 {
-	if (SnowBall->mappos.LeftDown != Enemy->mappos.LeftDown && SnowBall->mappos.RightDown != Enemy->mappos.RightDown)
+
+	if (Player->direction != NULL_WAY)
 	{
 
-		if (Player->direction != NULL_WAY)
+		if (Enemy->enemyeye == ENEMYEYE_OUT)
 		{
-
-			if (Enemy->enemyeye == ENEMYEYE_OUT)
+			if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
+				(Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
 			{
-				if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-					(Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-				{
-					Enemy->direction = RIGHT_DOWN;
-					return;
-				}
+				Enemy->direction = RIGHT_DOWN;
+				return;
+			}
 
-				if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-					(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown))
-				{
-					Enemy->direction = LEFT_DOWN;
-					return;
-				}
-				if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-					(Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-				{
-					Enemy->direction = LEFT_UP;
-					return;
-				}
-				if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-					(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown))
-				{
-					Enemy->direction = RIGHT_UP;
-					return;
-				}
+			if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
+				(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown))
+			{
+				Enemy->direction = LEFT_DOWN;
+				return;
+			}
+			if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
+				(Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
+			{
+				Enemy->direction = LEFT_UP;
+				return;
+			}
+			if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
+				(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown))
+			{
+				Enemy->direction = RIGHT_UP;
+				return;
 			}
 		}
 	}
+
 }
 
 //“G‚Ìá‹Ê‚Ö‚ÌÚ‹ß
