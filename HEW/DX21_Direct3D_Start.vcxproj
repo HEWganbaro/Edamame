@@ -160,10 +160,12 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="Player2.h" />
     <ClInclude Include="ps.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shielding.h" />
     <ClInclude Include="SnowBall.h" />
+    <ClInclude Include="SnowBall2.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="vs.h" />
@@ -184,9 +186,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGeneration.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shielding.cpp" />
     <ClCompile Include="SnowBall.cpp" />
+    <ClCompile Include="SnowBall2.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="XAudio2.cpp" />

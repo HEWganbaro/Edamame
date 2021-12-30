@@ -26,7 +26,7 @@
 //#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   309
+#define MAX_OBJECT   311
 
 //*****************************************************************************
 // グローバル変数
@@ -48,7 +48,8 @@ GameObject* SnowBall = gObjects + 305;
 GameObject* gEnemy = gObjects + 306;
 GameObject* gShield = gObjects + 307;
 GameObject* gGoal = gObjects + 308;
-
+GameObject* SnowBall2 = gObjects + 309;
+GameObject* gPlayer2 = gObjects + 310;
 
 GameObject gBackGround;				//背景
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -112,11 +113,23 @@ BOOL Game_Initialize()
 	//プレイヤー場所指定
 	Player_SetLocation(gPlayer, gObjects, 0, 5, 5);
 
+	//プレイヤー2初期化
+	Player2_Initialize(gPlayer2);
+
+	//プレイヤー2場所指定
+	Player2_SetLocation(gPlayer2, gObjects, 0, 2, 2);
+
 	//雪玉の初期化
 	SnowBall_Initialize(SnowBall);
 
 	//雪玉の場所指定
 	SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 6);
+
+	//雪玉2の初期化
+	SnowBall2_Initialize(SnowBall2);
+
+	//雪玉2の場所指定
+	SnowBall2_SetLocation(SnowBall2, gObjects, 0, 3, 3);
 
 	//敵の初期化
 	Enemy_Initialize(gEnemy);

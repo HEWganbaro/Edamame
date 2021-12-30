@@ -102,6 +102,12 @@
     <ClInclude Include="Goal.h">
       <Filter>ヘッダー ファイル\Gameh\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Player2.h">
+      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SnowBall2.h">
+      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
@@ -162,6 +168,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Goal.cpp">
+      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SnowBall2.cpp">
+      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2.cpp">
       <Filter>ソース ファイル\Gamecpp\Object</Filter>
     </ClCompile>
   </ItemGroup>
