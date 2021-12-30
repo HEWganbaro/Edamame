@@ -27,7 +27,7 @@ MapPos SnowBall_GetMapPos(GameObject * SnowBall)
 {
 	return MapPos();
 }
-
+/*地面の変更をいじるとしたらここ(テクスチャだけの変更じゃなくて、性質ごと変化させる。)*/
 void SnowBall_Update(GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
 	MapMove_Update(SnowBall, MapChip);
