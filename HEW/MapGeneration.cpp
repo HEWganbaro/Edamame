@@ -27,27 +27,38 @@ void Map_Initialize(GameObject * Map)
 	}
 }
 
+int Map_GetPlayerTile(GameObject * Player, GameObject * Map)
+{
+	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].textuer->GetPart();
+}
+
+int Map_GetPlayerTile_LeftUp(GameObject * Player, GameObject * Map)
+{
+	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown - 1].textuer->GetPart();
+}
+
+int Map_GetPlayerTile_RightDown(GameObject * Player, GameObject * Map)
+{
+	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown + 1].textuer->GetPart();
+}
+
+int Map_GetPlayerTile_LeftDown(GameObject * Player, GameObject * Map)
+{
+	return Map[Player->mappos.Height * 100 + (Player->mappos.LeftDown + 1) * 10 + Player->mappos.RightDown].textuer->GetPart();
+}
+
+int Map_GetPlayerTile_RightUp(GameObject * Player, GameObject * Map)
+{
+	return Map[Player->mappos.Height * 100 + (Player->mappos.LeftDown - 1) * 10 + Player->mappos.RightDown].textuer->GetPart();
+}
+
+int Map_GetPlayerTile_Top(GameObject * Player, GameObject * Map)
+{
+	return Map[(Player->mappos.Height + 1) * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].textuer->GetPart();
+}
+
 //プレイヤーのタイルを返す関数
-int Map_GetPlayerTile(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
-{
-	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown];
-}
-int Map_GetPlayerTile_LeftUp(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
-{
-	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown - 1];
-}
-int Map_GetPlayerTile_RightDown(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
-{
-	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown][Player->mappos.RightDown + 1];
-}
-int Map_GetPlayerTile_LeftDown(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
-{
-	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown + 1][Player->mappos.RightDown];
-}
-int Map_GetPlayerTile_RightUp(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
-{
-	return MapChip[gStarg][Player->mappos.Height][Player->mappos.LeftDown - 1][Player->mappos.RightDown];
-}
+
 
 void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
@@ -79,7 +90,7 @@ void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][M
 //引数 (動かしたいゲームオブジェクト、MapChip)
 //戻り値 無し
 //////////////////////////////////////////////////////////
-void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]) {
+void MapMove_Update(GameObject * Player, GameObject* Map) {
 	// マップ外にはいかない
 	if (Player->mappos.LeftDown == -1) {
 		Player->mappos.LeftDown++;
@@ -103,9 +114,9 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 	}
 	//進むマスが何か取得
 	//地面がないとき
-	if (Map_GetPlayerTile(Player, MapChip) == -1) {
+	if (Map_GetPlayerTile(Player, Map) == -1) {
 		//右上坂の時
-		if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == RIGHTUP_SLOPE &&
+		if (Map_GetPlayerTile_Top(Player, Map) == RIGHTUP_SLOPE &&
 			Player->direction == RIGHT_UP) {
 			if (Player->animator.count != PLAYER_SPEED) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
@@ -123,7 +134,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 				Player->animator.count = 0;
 			}
 		} //左上坂の時
-		else if (MapChip[gStarg][Player->mappos.Height + 1][Player->mappos.LeftDown][Player->mappos.RightDown] == LEFTUP_SLOPE && Player->direction == LEFT_UP) {
+		else if (Map_GetPlayerTile_Top(Player, Map) == LEFTUP_SLOPE && Player->direction == LEFT_UP) {
 			if (Player->animator.count != PLAYER_SPEED) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
 				double tmp1 = 0;
@@ -159,7 +170,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			return;
 		}
 	}//雪の上の時
-	else if (Map_GetPlayerTile(Player, MapChip) == SNOW_GROUND) {
+	else if (Map_GetPlayerTile(Player, Map) == SNOW_GROUND) {
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
@@ -227,7 +238,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			break;
 		}
 	} //普通の地面
-	else if (Map_GetPlayerTile(Player, MapChip) == NORMAL_GROUND) {
+	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
@@ -295,7 +306,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			break;
 		}
 	} //氷の時
-	else if (Map_GetPlayerTile(Player, MapChip) == ICE_GROUND) {
+	else if (Map_GetPlayerTile(Player, Map) == ICE_GROUND) {
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:	//イージング加速>最大速度で滑らす>イージング減速
@@ -318,7 +329,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
 					Player->animator.ice = true;
 					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
-					if (Map_GetPlayerTile_RightDown(Player, MapChip) == ICE_GROUND) {
+					if (Map_GetPlayerTile_RightDown(Player, Map) == ICE_GROUND) {
 						Player->animator.ice = false;
 						Player->animator.count = PLAYER_SPEED / 2;
 						Player->mappos.RightDown++;
@@ -349,7 +360,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
 					Player->animator.ice = true;
 					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
-					if (Map_GetPlayerTile_LeftDown(Player, MapChip) == ICE_GROUND) {
+					if (Map_GetPlayerTile_LeftDown(Player, Map) == ICE_GROUND) {
 						Player->animator.ice = false;
 						Player->animator.count = PLAYER_SPEED / 2;
 						Player->mappos.LeftDown++;
@@ -381,7 +392,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
 					Player->animator.ice = true;
 					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
-					if (Map_GetPlayerTile_LeftUp(Player, MapChip) == ICE_GROUND) {
+					if (Map_GetPlayerTile_LeftUp(Player, Map) == ICE_GROUND) {
 						Player->animator.ice = false;
 						Player->animator.count = PLAYER_SPEED / 2;
 						Player->mappos.RightDown--;
@@ -413,7 +424,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 				if (Player->animator.count == PLAYER_SPEED + EASING_OFFSET) {//減速のイージング
 					Player->animator.ice = true;
 					Player->animator.count = PLAYER_SPEED / 2;	//続けて氷なら滑らす
-					if (Map_GetPlayerTile_LeftDown(Player, MapChip) == ICE_GROUND) {
+					if (Map_GetPlayerTile_LeftDown(Player, Map) == ICE_GROUND) {
 						Player->animator.ice = false;
 						Player->animator.count = PLAYER_SPEED / 2;
 						Player->mappos.LeftDown--;
@@ -426,7 +437,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			break;
 		}
 	} //土の時
-	else if (Map_GetPlayerTile(Player, MapChip) == SOIL_GROUND) {
+	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
@@ -494,7 +505,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			break;
 		}
 	} //右上坂の時
-	else if (Map_GetPlayerTile(Player, MapChip) == RIGHTUP_SLOPE) {
+	else if (Map_GetPlayerTile(Player, Map) == RIGHTUP_SLOPE) {
 		if (Player->direction == LEFT_DOWN) {
 			if (Player->animator.count != PLAYER_SPEED) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
@@ -527,7 +538,7 @@ void MapMove_Update(GameObject * Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			}
 		}
 	} //左上坂の時
-	else if (Map_GetPlayerTile(Player, MapChip) == LEFTUP_SLOPE) {
+	else if (Map_GetPlayerTile(Player, Map) == LEFTUP_SLOPE) {
 		if (Player->direction == RIGHT_DOWN) {
 			if (Player->animator.count != PLAYER_SPEED) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;

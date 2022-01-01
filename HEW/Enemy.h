@@ -20,4 +20,4 @@ void Enemy_Move_Chase(GameObject* Enemy, GameObject* SnowBall);
 //ìGÇÃèÑâÒ
 void Enemy_Move_Circle(GameObject* Enemy, GameObject* Player, GameObject* SnowBall);
 //ìGÇÃÉXÉ^Éì
-void Enemy_Stun(GameObject* Enemy, GameObject* SnowBall, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+void Enemy_Stun(GameObject* Enemy, GameObject* SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);

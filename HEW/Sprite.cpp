@@ -103,3 +103,8 @@ void Sprite::SetPart(int x, int y) {
 	mPartX = x;
 	mPartY = y;
 }
+
+int Sprite::GetPart(void)
+{
+	return mPartX;
+}

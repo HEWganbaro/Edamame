@@ -13,168 +13,180 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\DirectXcpp">
+    <Filter Include="ソース ファイル\DirectX">
       <UniqueIdentifier>{79e2a33f-bf0d-4d1a-bf5a-744c8efeb368}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\DirectXh">
-      <UniqueIdentifier>{d74ace11-d40a-4721-90ef-9ee65e62bc43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Enginecpp">
+    <Filter Include="ソース ファイル\Engine">
       <UniqueIdentifier>{bfc70417-59ce-47bc-863e-03bee3799fc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Gamecpp">
+    <Filter Include="ソース ファイル\Game">
       <UniqueIdentifier>{ff26936f-46a6-4773-bdc9-4f061cf5cdef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Engineh">
+    <Filter Include="ヘッダー ファイル\DirectX">
+      <UniqueIdentifier>{d74ace11-d40a-4721-90ef-9ee65e62bc43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Engine">
       <UniqueIdentifier>{4e2dc663-3c2d-45f9-a198-dab79dd56615}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Gameh">
+    <Filter Include="ヘッダー ファイル\Game">
       <UniqueIdentifier>{a2d04edc-317b-4942-b40c-37aaf18817d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Gamecpp\Object">
+    <Filter Include="ソース ファイル\Game\Game">
+      <UniqueIdentifier>{2fd6ad4f-f653-4ee9-8d3b-35fbb1422ba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\Game\Object">
       <UniqueIdentifier>{e2642171-68fa-4bc4-912c-fdb16de709ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Gameh\Object">
+    <Filter Include="ソース ファイル\Game\Title">
+      <UniqueIdentifier>{32a44e34-f89a-4d59-8fab-beaa78ece832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\Title">
+      <UniqueIdentifier>{68592236-cd91-40d2-b90c-d5e86fc22511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\Game">
+      <UniqueIdentifier>{e2387bf0-bfcd-4766-94a9-6a5261dc74a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Game\Game\Object">
       <UniqueIdentifier>{55d75048-8528-4909-8501-a8b4be5a1e85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="direct3d.h">
-      <Filter>ヘッダー ファイル\DirectXh</Filter>
+      <Filter>ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="ps.h">
-      <Filter>ヘッダー ファイル\DirectXh</Filter>
+      <Filter>ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="vs.h">
-      <Filter>ヘッダー ファイル\DirectXh</Filter>
+      <Filter>ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="animator.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="CharController.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameTimer.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="XAudio2.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>ヘッダー ファイル\Gameh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="MapGeneration.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="SnowBall.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Easing.h">
-      <Filter>ヘッダー ファイル\Engineh</Filter>
+      <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Shielding.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>ヘッダー ファイル\Gameh</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Goal.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Player2.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="SnowBall2.h">
-      <Filter>ヘッダー ファイル\Gameh\Object</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー ファイル\Game\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>ヘッダー ファイル\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>ヘッダー ファイル\Game\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
-      <Filter>ソース ファイル\DirectXcpp</Filter>
+      <Filter>ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="direct3d.cpp">
-      <Filter>ソース ファイル\DirectXcpp</Filter>
+      <Filter>ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル\DirectXcpp</Filter>
+      <Filter>ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="animator.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="CharController.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameTimer.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="XAudio2.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="MapGeneration.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="SnowBall.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>ソース ファイル\Gamecpp</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Easing.cpp">
-      <Filter>ソース ファイル\Enginecpp</Filter>
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Shielding.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Goal.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="SnowBall2.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Player2.cpp">
-      <Filter>ソース ファイル\Gamecpp\Object</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソース ファイル\Game\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>ソース ファイル\Game\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>ソース ファイル\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -180,7 +180,7 @@ BOOL Game_Update()
 	NoRightDown->textuer->SetPart(gPlayer->mappos.RightDown, 0);
 	NoRightDown->posX = 0.7f;
 	NoRightDown->posY = 0.5f;
-	tile->textuer->SetPart(Map_GetPlayerTile(gPlayer, MapChip), 0);
+	tile->textuer->SetPart(Map_GetPlayerTile(gPlayer, gObjects), 0);
 	tile->posX = 0.3;
 	tile->posY = 0.6;
 	gBackGround.posX = -1;
@@ -188,7 +188,7 @@ BOOL Game_Update()
 
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
-	Player_Input(gPlayer, MapChip);	//プレイヤー移動
+	Player_Input(gPlayer, gObjects);	//プレイヤー移動
 
 	SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
 
@@ -212,7 +212,7 @@ BOOL Game_Update()
 	Enemy_Move_Chase(gEnemy, SnowBall);
 
 	//敵のスタン
-	Enemy_Stun(gEnemy, SnowBall, MapChip);
+	Enemy_Stun(gEnemy, SnowBall, gObjects, MapChip);
 
 	//Shield_Hit(gShield, gPlayer);
 

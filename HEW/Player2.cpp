@@ -23,8 +23,7 @@ void Player2_SetLocation(GameObject* Player2, GameObject* Location,
 	
 }
 
-void Player2_Input(GameObject * Player2 ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
-{
+void Player2_Input(GameObject * Player2 , GameObject* Map){
 	XINPUT_STATE state;
 	XInputGetState(0, &state);
 	//ステージマップによって分岐させる
@@ -50,7 +49,7 @@ void Player2_Input(GameObject * Player2 ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_
 			Player2_cut++;
 		}
 	}// プレイヤー動く関数
-	MapMove_Update(Player2, MapChip);
+	MapMove_Update(Player2, Map);
 }
 
 MapPos Player2_GetMapPos(GameObject * Player2)

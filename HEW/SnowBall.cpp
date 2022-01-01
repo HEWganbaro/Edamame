@@ -30,12 +30,12 @@ MapPos SnowBall_GetMapPos(GameObject * SnowBall)
 /*地面の変更をいじるとしたらここ(テクスチャだけの変更じゃなくて、性質ごと変化させる。)*/
 void SnowBall_Update(GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
-	MapMove_Update(SnowBall, MapChip);
-	if (Map_GetPlayerTile(SnowBall, MapChip) == SNOW_GROUND) {
+	MapMove_Update(SnowBall, Map);
+	if (Map_GetPlayerTile(SnowBall, Map) == SNOW_GROUND) {
 		Map[SnowBall->mappos.Height * 100 + SnowBall->mappos.LeftDown * 10 + SnowBall->mappos.RightDown].textuer->SetPart(1, 0);
 		SnowBall->textuer->SetPart(0, 0);
 	}
-	else if (Map_GetPlayerTile(SnowBall, MapChip) == SOIL_GROUND) {
+	else if (Map_GetPlayerTile(SnowBall, Map) == SOIL_GROUND) {
 		SnowBall->textuer->SetPart(1, 0);
 	}
 }	

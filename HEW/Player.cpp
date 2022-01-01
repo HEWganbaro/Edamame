@@ -23,7 +23,7 @@ void Player_SetLocation(GameObject* Player, GameObject* Location,
 	
 }
 
-void Player_Input(GameObject * Player ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+void Player_Input(GameObject * Player , GameObject* Map)
 {
 	XINPUT_STATE state;
 	XInputGetState(0, &state);
@@ -50,7 +50,7 @@ void Player_Input(GameObject * Player ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_ED
 			Player_cut++;
 		}
 	}// ÉvÉåÉCÉÑÅ[ìÆÇ≠ä÷êî
-	MapMove_Update(Player, MapChip);
+	MapMove_Update(Player, Map);
 }
 
 MapPos Player_GetMapPos(GameObject * Player)

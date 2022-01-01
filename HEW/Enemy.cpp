@@ -225,9 +225,9 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 
 
 //“G‚ÌƒXƒ^ƒ“
-void Enemy_Stun(GameObject * Enemy, GameObject * SnowBall, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+void Enemy_Stun(GameObject * Enemy, GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
-	if (Map_GetPlayerTile(SnowBall, MapChip) &&
+	if (Map_GetPlayerTile(SnowBall, Map) &&
 		SnowBall->mappos.LeftDown >= Enemy->mappos.LeftDown - 1 && SnowBall->mappos.RightDown == Enemy->mappos.RightDown &&
 		SnowBall->mappos.Height > Enemy->mappos.Height)
 	{
@@ -241,7 +241,7 @@ void Enemy_Stun(GameObject * Enemy, GameObject * SnowBall, int MapChip[MAP_STAGE
 		Enemy->enemymove = ENEMY_MOVE;
 	}
 
-	if (Map_GetPlayerTile(SnowBall, MapChip) &&
+	if (Map_GetPlayerTile(SnowBall, Map) &&
 		SnowBall->mappos.RightDown >= Enemy->mappos.RightDown - 1 && SnowBall->mappos.LeftDown == Enemy->mappos.LeftDown &&
 		SnowBall->mappos.Height > Enemy->mappos.Height)
 	{

@@ -44,6 +44,8 @@ public:
 	//引数 左上から数えて（横に何個目、縦に何個目）０から始まる
 	void SetPart(int x, int y);
 
+	int GetPart(void);
+
 private:
 	int mHorizontalPartNum;
 	int mVerticalPartNum;

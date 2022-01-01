@@ -30,12 +30,12 @@ MapPos SnowBall2_GetMapPos(GameObject * SnowBall2)
 
 void SnowBall2_Update(GameObject * SnowBall2, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
-	MapMove_Update(SnowBall2, MapChip);
-	if (Map_GetPlayerTile(SnowBall2, MapChip) == SNOW_GROUND) {
+	MapMove_Update(SnowBall2, Map);
+	if (Map_GetPlayerTile(SnowBall2, Map) == SNOW_GROUND) {
 		Map[SnowBall2->mappos.Height * 100 + SnowBall2->mappos.LeftDown * 10 + SnowBall2->mappos.RightDown].textuer->SetPart(1, 0);
 		SnowBall2->textuer->SetPart(0, 0);
 	}
-	else if (Map_GetPlayerTile(SnowBall2, MapChip) == SOIL_GROUND) {
+	else if (Map_GetPlayerTile(SnowBall2, Map) == SOIL_GROUND) {
 		SnowBall2->textuer->SetPart(1, 0);
 	}
 }	

@@ -29,10 +29,11 @@ enum Mapchip
 };
 
 void Map_Initialize(GameObject* Map);
-int Map_GetPlayerTile(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
-int Map_GetPlayerTile_LeftUp(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
-int Map_GetPlayerTile_RightDown(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
-int Map_GetPlayerTile_LeftDown(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
-int Map_GetPlayerTile_RightUp(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+int Map_GetPlayerTile(GameObject* Player, GameObject* Map);
+int Map_GetPlayerTile_LeftUp(GameObject* Player, GameObject* Map);
+int Map_GetPlayerTile_RightDown(GameObject* Player, GameObject* Map);
+int Map_GetPlayerTile_LeftDown(GameObject* Player, GameObject* Map);
+int Map_GetPlayerTile_RightUp(GameObject* Player, GameObject* Map);
+int Map_GetPlayerTile_Top(GameObject* Player, GameObject* Map);
 void Map_Update(GameObject* Map ,int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
-void MapMove_Update(GameObject* Player, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+void MapMove_Update(GameObject* Player, GameObject* Map);
