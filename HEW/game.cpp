@@ -213,12 +213,11 @@ BOOL Game_Update()
 
 	//敵のスタン
 	Enemy_Stun(gEnemy, SnowBall, gObjects, MapChip);
-
 	//Shield_Hit(gShield, gPlayer);
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
+	//GameObjectと画像の座標を合わせる
 	for (int i = 0; i < MAX_OBJECT; i++) {
-		//GameObjectと画像の座標を合わせる
 		GameObject_DrowUpdate(&gObjects[i]);
 	}
 	GameObject_DrowUpdate(&gBackGround);
