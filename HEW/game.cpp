@@ -108,28 +108,16 @@ BOOL Game_Initialize()
 	Map_Initialize(gObjects);
 
 	//プレイヤー初期化
-	Player_Initialize(gPlayer);
+	Player_Initialize(gPlayer, gPlayer2);
 
 	//プレイヤー場所指定
-	Player_SetLocation(gPlayer, gObjects, 0, 5, 5);
-
-	//プレイヤー2初期化
-	Player2_Initialize(gPlayer2);
-
-	//プレイヤー2場所指定
-	Player2_SetLocation(gPlayer2, gObjects, 0, 2, 2);
+	Player_SetLocation(gPlayer, gObjects, 0, 5, 5, gPlayer2, gObjects, 0, 2, 2);
 
 	//雪玉の初期化
-	SnowBall_Initialize(SnowBall);
+	SnowBall_Initialize(SnowBall, SnowBall2);
 
 	//雪玉の場所指定
-	SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 6);
-
-	//雪玉2の初期化
-	SnowBall2_Initialize(SnowBall2);
-
-	//雪玉2の場所指定
-	SnowBall2_SetLocation(SnowBall2, gObjects, 0, 3, 3);
+	SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 6, SnowBall2, gObjects, 0, 3, 3);
 
 	//敵の初期化
 	Enemy_Initialize(gEnemy);
@@ -188,11 +176,11 @@ BOOL Game_Update()
 
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
-	Player_Input(gPlayer, gObjects);	//プレイヤー移動
+	Player_Input(gPlayer, gObjects, gPlayer2, gObjects);	//プレイヤー移動
 
-	SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
+	SnowBall_Hit(gPlayer, SnowBall, gPlayer2, gObjects); //雪玉当たり判定
 
-	SnowBall_Update(SnowBall, gObjects, MapChip);
+	SnowBall_Update(SnowBall, gObjects, MapChip, SnowBall2, gObjects, MapChip);
 
 	Enemy_Hit(gEnemy, SnowBall);
 

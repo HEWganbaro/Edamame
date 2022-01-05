@@ -17,10 +17,8 @@
 #include "XAudio2.h"
 
 #include "Player.h"
-#include "Player2.h"
 #include "MapGeneration.h"
 #include "SnowBall.h"
-#include "SnowBall2.h"
 #include "Enemy.h"
 #include "Shielding.h"
 #include "Goal.h"
