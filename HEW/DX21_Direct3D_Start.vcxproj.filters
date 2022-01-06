@@ -173,12 +173,6 @@
     <ClCompile Include="Goal.cpp">
       <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="SnowBall2.cpp">
-      <Filter>ソース ファイル\Game\Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Player2.cpp">
-      <Filter>ソース ファイル\Game\Game\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>ソース ファイル\Game\Title</Filter>
     </ClCompile>

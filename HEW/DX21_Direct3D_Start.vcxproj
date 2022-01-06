@@ -186,11 +186,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGeneration.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Player2.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shielding.cpp" />
     <ClCompile Include="SnowBall.cpp" />
-    <ClCompile Include="SnowBall2.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="XAudio2.cpp" />

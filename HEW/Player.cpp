@@ -17,7 +17,7 @@ void Player_Initialize(GameObject* Player , GameObject* Player2) {
 	Player->mappos.RightDown = 0;
 	Player->direction = NULL_WAY;
 	//ƒvƒŒƒCƒ„[2
-	Player2->textuer = new Sprite("assets/Player.png", 1, 1);
+	Player2->textuer = new Sprite("assets/Player2.png", 1, 1);
 	Player2->textuer->SetSize(80, 80);
 	Player2->posY = 0.5f;
 	Player2->mappos.Height = 0;
@@ -88,12 +88,12 @@ void Player_Input(GameObject * Player , GameObject* Map
 			Player2->mappos.RightDown--;
 			Player2_cut++;
 		}
-		if (Input_GetKeyTrigger('O') || (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
+		if (Input_GetKeyTrigger('J') || (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			Player2->direction = LEFT_DOWN;
 			Player2->mappos.LeftDown++;
 			Player2_cut++;
 		}
-		if (Input_GetKeyTrigger('J') || (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
+		if (Input_GetKeyTrigger('O') || (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state2.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			Player2->direction = RIGHT_UP;
 			Player2->mappos.LeftDown--;
 			Player2_cut++;

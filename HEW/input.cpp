@@ -27,6 +27,10 @@ void Input_Update()
 	gKeys['D'] = GetAsyncKeyState('D');
 	gKeys['Q'] = GetAsyncKeyState('Q');
 	gKeys['E'] = GetAsyncKeyState('E');
+	gKeys['U'] = GetAsyncKeyState('U');
+	gKeys['O'] = GetAsyncKeyState('O');
+	gKeys['J'] = GetAsyncKeyState('J');
+	gKeys['L'] = GetAsyncKeyState('L');
 	////////////////////////////////////////////////
 /*1129コントローラー入力芳山*/
 //ゲームパッドの状態を取得

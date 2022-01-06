@@ -17,4 +17,4 @@ MapPos SnowBall_GetMapPos(GameObject* SnowBall, GameObject* SnowBall2);
 void SnowBall_Update(GameObject* SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]
 				   , GameObject* SnowBall2, GameObject* Map2, int MapChip2[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
 //ê·ã ÇÃìñÇΩÇËîªíË
-void SnowBall_Hit(GameObject * Player, GameObject * SnowBall, GameObject * Player2, GameObject * SnowBall2);
+void SnowBall_Hit(GameObject * Player, GameObject * SnowBall);

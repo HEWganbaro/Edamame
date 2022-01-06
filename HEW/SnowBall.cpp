@@ -70,11 +70,11 @@ void SnowBall_Update(GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STA
 
 }	
 
-void SnowBall_Hit(GameObject * Player, GameObject * SnowBall, GameObject * Player2, GameObject * SnowBall2)
+void SnowBall_Hit(GameObject * Player, GameObject * SnowBall)
 {
 	//á‹Ê1
-	if (Player->mappos.LeftDown - 1 == SnowBall->mappos.LeftDown && 
-		Player->mappos.RightDown == SnowBall->mappos.RightDown )
+	if (Player->mappos.LeftDown - 1 == SnowBall->mappos.LeftDown &&
+		Player->mappos.RightDown == SnowBall->mappos.RightDown)
 	{
 		SnowBall_way = RIGHT_UP;
 	}
@@ -117,52 +117,53 @@ void SnowBall_Hit(GameObject * Player, GameObject * SnowBall, GameObject * Playe
 			SnowBall->mappos.RightDown++;
 			break;
 		}
-		//á‹Ê2
-		if (Player2->mappos.LeftDown - 1 == SnowBall2->mappos.LeftDown &&
-			Player2->mappos.RightDown == SnowBall2->mappos.RightDown)
-		{
-			SnowBall2_way = RIGHT_UP;
-		}
-		if (Player2->mappos.LeftDown + 1 == SnowBall2->mappos.LeftDown &&
-			Player2->mappos.RightDown == SnowBall2->mappos.RightDown)
-		{
-			SnowBall2_way = LEFT_DOWN;
-		}
-		if (Player2->mappos.RightDown - 1 == SnowBall2->mappos.RightDown &&
-			Player2->mappos.LeftDown == SnowBall2->mappos.LeftDown)
-		{
-			SnowBall2_way = LEFT_UP;
-		}
-		if (Player2->mappos.RightDown + 1 == SnowBall2->mappos.RightDown &&
-			Player2->mappos.LeftDown == SnowBall2->mappos.LeftDown)
-		{
-			SnowBall2_way = RIGHT_DOWN;
-		}
-		if (Player2->mappos.LeftDown == SnowBall2->mappos.LeftDown && Player2->mappos.RightDown == SnowBall2->mappos.RightDown) {
-			switch (SnowBall2_way)
-			{
-			case RIGHT_UP:
-				SnowBall2->direction = RIGHT_UP;
-				SnowBall2->mappos.LeftDown--;
-				break;
-
-			case LEFT_DOWN:
-				SnowBall2->direction = LEFT_DOWN;
-				SnowBall2->mappos.LeftDown++;
-				break;
-
-			case LEFT_UP:
-				SnowBall2->direction = LEFT_UP;
-				SnowBall2->mappos.RightDown--;
-				break;
-
-			case RIGHT_DOWN:
-				SnowBall2->direction = RIGHT_DOWN;
-				SnowBall2->mappos.RightDown++;
-				break;
-			}
-		}
 	}
+	//	//á‹Ê2
+	//	if (Player2->mappos.LeftDown - 1 == SnowBall2->mappos.LeftDown &&
+	//		Player2->mappos.RightDown == SnowBall2->mappos.RightDown)
+	//	{
+	//		SnowBall2_way = RIGHT_UP;
+	//	}
+	//	if (Player2->mappos.LeftDown + 1 == SnowBall2->mappos.LeftDown &&
+	//		Player2->mappos.RightDown == SnowBall2->mappos.RightDown)
+	//	{
+	//		SnowBall2_way = LEFT_DOWN;
+	//	}
+	//	if (Player2->mappos.RightDown - 1 == SnowBall2->mappos.RightDown &&
+	//		Player2->mappos.LeftDown == SnowBall2->mappos.LeftDown)
+	//	{
+	//		SnowBall2_way = LEFT_UP;
+	//	}
+	//	if (Player2->mappos.RightDown + 1 == SnowBall2->mappos.RightDown &&
+	//		Player2->mappos.LeftDown == SnowBall2->mappos.LeftDown)
+	//	{
+	//		SnowBall2_way = RIGHT_DOWN;
+	//	}
+	//	if (Player2->mappos.LeftDown == SnowBall2->mappos.LeftDown && Player2->mappos.RightDown == SnowBall2->mappos.RightDown) {
+	//		switch (SnowBall2_way)
+	//		{
+	//		case RIGHT_UP:
+	//			SnowBall2->direction = RIGHT_UP;
+	//			SnowBall2->mappos.LeftDown--;
+	//			break;
+
+	//		case LEFT_DOWN:
+	//			SnowBall2->direction = LEFT_DOWN;
+	//			SnowBall2->mappos.LeftDown++;
+	//			break;
+
+	//		case LEFT_UP:
+	//			SnowBall2->direction = LEFT_UP;
+	//			SnowBall2->mappos.RightDown--;
+	//			break;
+
+	//		case RIGHT_DOWN:
+	//			SnowBall2->direction = RIGHT_DOWN;
+	//			SnowBall2->mappos.RightDown++;
+	//			break;
+	//		}
+	//	}
+	//}
 	//if (Player->mappos.LeftDown == SnowBall->mappos.LeftDown && Player->mappos.RightDown == SnowBall->mappos.RightDown)
 	//{
 	//	switch (SnowBall_way)
