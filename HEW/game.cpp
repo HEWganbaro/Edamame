@@ -149,7 +149,7 @@ BOOL Game_Initialize()
 	Goal_Initialize(gGoal);
 
 	//遮蔽の場所指定
-	Goal_SetLocation(gGoal, gObjects, 0, 4, 5);
+	Goal_SetLocation(gGoal, gObjects, 0, 6, 1);
 
 	//デバック用
 	NoHeight->textuer = new Sprite("assets/No.png", 13, 7);

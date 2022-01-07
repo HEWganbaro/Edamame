@@ -58,21 +58,25 @@ void Player_Input(GameObject * Player , GameObject* Map
 			Player->direction = LEFT_UP;
 			Player->mappos.RightDown--;
 			Player_cut++;
+			Enemy_flg = 1;
 		}
 		if (Input_GetKeyTrigger('A')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			Player->direction = LEFT_DOWN;
 			Player->mappos.LeftDown++;
 			Player_cut++;
+			Enemy_flg = 1;
 		}
 		if (Input_GetKeyTrigger('E')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			Player->direction = RIGHT_UP;
 			Player->mappos.LeftDown--;
 			Player_cut++;
+			Enemy_flg = 1;
 		}
 		if (Input_GetKeyTrigger('D')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			Player->direction = RIGHT_DOWN;
 			Player->mappos.RightDown++;
 			Player_cut++;
+			Enemy_flg = 1;
 		}
 	}// ƒvƒŒƒCƒ„[“®‚­ŠÖ”
 	MapMove_Update(Player, Map);

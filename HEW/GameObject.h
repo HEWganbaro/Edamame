@@ -17,6 +17,7 @@
 using namespace std;
 
 extern int Player_cut;
+extern int Enemy_flg;
 
 enum Direction
 {

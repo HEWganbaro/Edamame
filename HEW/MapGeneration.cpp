@@ -8,7 +8,7 @@ void Map_Initialize(GameObject * Map)
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				Map[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/MapSeat.png", 6, 1);
+				Map[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/Mapseat_v2.png", 7, 1);
 				Map[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
 			}
 		}
@@ -595,5 +595,23 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					return;
 			}
 		}
+	}
+	else if (Map_GetPlayerTile(Player, Map) == STONE)
+	{
+	switch (Player->direction) {
+	case RIGHT_DOWN:
+		Player->mappos.RightDown--;
+		break;
+	case LEFT_DOWN:
+		Player->mappos.LeftDown--;
+		break;
+	case LEFT_UP:
+		Player->mappos.RightDown++;
+		break;
+	case RIGHT_UP:
+		Player->mappos.LeftDown++;
+		break;
+	}
+	Player->direction = NULL_WAY;
 	}
 }

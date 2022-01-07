@@ -17,6 +17,8 @@
 
 //移動スピード
 #define PLAYER_SPEED 30  //大きい方が遅い
+#define ENEMY_SPEED 30
+
 
 enum Mapchip
 {
@@ -26,6 +28,7 @@ enum Mapchip
 	SOIL_GROUND,
 	RIGHTUP_SLOPE,
 	LEFTUP_SLOPE,
+	STONE,
 };
 
 void Map_Initialize(GameObject* Map);
