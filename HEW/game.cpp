@@ -152,16 +152,16 @@ BOOL Game_Initialize()
 	Goal_SetLocation(gGoal, gObjects, 0, 6, 1);
 
 	//デバック用
-	NoHeight->textuer = new Sprite("assets/No.png", 13, 7);
-	NoHeight->textuer->SetSize(80, 80);
-	NoLeftDown->textuer = new Sprite("assets/No.png", 13, 7);
-	NoLeftDown->textuer->SetSize(80, 80);
-	NoRightDown->textuer = new Sprite("assets/No.png", 13, 7);
-	NoRightDown->textuer->SetSize(80, 80);
-	tile->textuer = new Sprite("assets/MapSeat.png", 6, 1);
-	tile->textuer->SetSize(200, 200);
-	gBackGround.textuer = new Sprite("assets/BackGround.png", 1, 1);
-	gBackGround.textuer->SetSize(1280*2, 720*2);
+	NoHeight->texture = new Sprite("assets/No.png", 13, 7);
+	NoHeight->texture->SetSize(80, 80);
+	NoLeftDown->texture = new Sprite("assets/No.png", 13, 7);
+	NoLeftDown->texture->SetSize(80, 80);
+	NoRightDown->texture = new Sprite("assets/No.png", 13, 7);
+	NoRightDown->texture->SetSize(80, 80);
+	tile->texture = new Sprite("assets/MapSeat.png", 6, 1);
+	tile->texture->SetSize(200, 200);
+	gBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
+	gBackGround.texture->SetSize(1280*2, 720*2);
 
 	return TRUE;
 }
@@ -173,16 +173,16 @@ BOOL Game_Update()
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
 	//デバック用
-	NoHeight->textuer->SetPart(gPlayer->mappos.Height, 0);
+	NoHeight->texture->SetPart(gPlayer->mappos.Height, 0);
 	NoHeight->posX = 0.5f;
 	NoHeight->posY = 0.5f;
-	NoLeftDown->textuer->SetPart(gPlayer->mappos.LeftDown, 0);
+	NoLeftDown->texture->SetPart(gPlayer->mappos.LeftDown, 0);
 	NoLeftDown->posX = 0.6f;
 	NoLeftDown->posY = 0.5f;
-	NoRightDown->textuer->SetPart(gPlayer->mappos.RightDown, 0);
+	NoRightDown->texture->SetPart(gPlayer->mappos.RightDown, 0);
 	NoRightDown->posX = 0.7f;
 	NoRightDown->posY = 0.5f;
-	tile->textuer->SetPart(Map_GetPlayerTile(gPlayer, gObjects), 0);
+	tile->texture->SetPart(Map_GetPlayerTile(gPlayer, gObjects), 0);
 	tile->posX = 0.3;
 	tile->posY = 0.6;
 	gBackGround.posX = -1;
@@ -242,9 +242,9 @@ void Game_Draw()
 	Direct3D_GetContext()->ClearRenderTargetView(Direct3D_GetRenderTargetView(), clearColor);
 
 	//ゲームオブジェクトを全部描画する
-	gBackGround.textuer->Draw();
+	gBackGround.texture->Draw();
 	for (int i = 0; i < MAX_OBJECT; i++)
-		gObjects[i].textuer->Draw();
+		gObjects[i].texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -255,9 +255,9 @@ void Game_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
 
-	delete gBackGround.textuer;
+	delete gBackGround.texture;
 	for (int i = 0; i < MAX_OBJECT; i++) {
-		delete gObjects[i].textuer;
+		delete gObjects[i].texture;
 		gObjects[i].posX = 0;
 		gObjects[i].posY = 0;
 	}

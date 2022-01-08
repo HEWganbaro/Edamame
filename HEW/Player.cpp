@@ -9,16 +9,16 @@ int Player2_cut = 0;
 
 void Player_Initialize(GameObject* Player , GameObject* Player2) {
 	//プレイヤー1
-	Player->textuer = new Sprite("assets/Player.png", 1, 1);
-	Player->textuer->SetSize(80, 80);
+	Player->texture = new Sprite("assets/Player.png", 1, 1);
+	Player->texture->SetSize(80, 80);
 	Player->posY = 0.5f;
 	Player->mappos.Height = 0;
 	Player->mappos.LeftDown = 0;
 	Player->mappos.RightDown = 0;
 	Player->direction = NULL_WAY;
 	//プレイヤー2
-	Player2->textuer = new Sprite("assets/Player2.png", 1, 1);
-	Player2->textuer->SetSize(80, 80);
+	Player2->texture = new Sprite("assets/Player2.png", 1, 1);
+	Player2->texture->SetSize(80, 80);
 	Player2->posY = 0.5f;
 	Player2->mappos.Height = 0;
 	Player2->mappos.LeftDown = 0;

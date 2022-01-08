@@ -9,15 +9,15 @@ int SnowBall2_cut = 0;
 void SnowBall_Initialize(GameObject * SnowBall, GameObject * SnowBall2)
 {
 	// á‹Ê1
-	SnowBall->textuer = new Sprite("assets/snowBall.png", 2, 1);
-	SnowBall->textuer->SetSize(100, 100);
+	SnowBall->texture = new Sprite("assets/snowBall.png", 2, 1);
+	SnowBall->texture->SetSize(100, 100);
 	SnowBall->posY = 0.5f;
 	SnowBall->mappos.Height = 0;
 	SnowBall->mappos.LeftDown = 0;
 	SnowBall->mappos.RightDown = 0;
 	// á‹Ê2
-	SnowBall2->textuer = new Sprite("assets/snowBall.png", 2, 1);
-	SnowBall2->textuer->SetSize(100, 100);
+	SnowBall2->texture = new Sprite("assets/snowBall.png", 2, 1);
+	SnowBall2->texture->SetSize(100, 100);
 	SnowBall2->posY = 0.5f;
 	SnowBall2->mappos.Height = 0;
 	SnowBall2->mappos.LeftDown = 0;
@@ -52,20 +52,24 @@ void SnowBall_Update(GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STA
 	// á‹Ê1
 	MapMove_Update(SnowBall, Map);
 	if (Map_GetPlayerTile(SnowBall, Map) == SNOW_GROUND) {
-		Map[SnowBall->mappos.Height * 100 + SnowBall->mappos.LeftDown * 10 + SnowBall->mappos.RightDown].textuer->SetPart(1, 0);
-		SnowBall->textuer->SetPart(0, 0);
+		Map[SnowBall->mappos.Height * 100 + SnowBall->mappos.LeftDown * 10 + SnowBall->mappos.RightDown].texture->SetPart(1, 0);
+		SnowBall->texture->SetPart(0, 0);
+	}
+	else if (Map_GetPlayerTile(SnowBall, Map) == NORMAL_GROUND) {
+		Map[SnowBall->mappos.Height * 100 + SnowBall->mappos.LeftDown * 10 + SnowBall->mappos.RightDown].changeFlag = true;
+		SnowBall->texture->SetPart(0, 0);
 	}
 	else if (Map_GetPlayerTile(SnowBall, Map) == SOIL_GROUND) {
-		SnowBall->textuer->SetPart(1, 0);
+		SnowBall->texture->SetPart(1, 0);
 	}
 	// á‹Ê2
 	MapMove_Update(SnowBall2, Map2);
 	if (Map_GetPlayerTile(SnowBall2, Map2) == SNOW_GROUND) {
-		Map2[SnowBall2->mappos.Height * 100 + SnowBall2->mappos.LeftDown * 10 + SnowBall2->mappos.RightDown].textuer->SetPart(1, 0);
-		SnowBall2->textuer->SetPart(0, 0);
+		Map2[SnowBall2->mappos.Height * 100 + SnowBall2->mappos.LeftDown * 10 + SnowBall2->mappos.RightDown].texture->SetPart(1, 0);
+		SnowBall2->texture->SetPart(0, 0);
 	}
 	else if (Map_GetPlayerTile(SnowBall2, Map) == SOIL_GROUND) {
-		SnowBall2->textuer->SetPart(1, 0);
+		SnowBall2->texture->SetPart(1, 0);
 	}
 
 }	
@@ -221,4 +225,10 @@ void SnowBall_Hit(GameObject * Player, GameObject * SnowBall)
 	//		break;
 	//	}
 	//}
+}
+void toIce(GameObject* Map) {
+	for (int i = 0; i < 300; i++)
+		if (Map[i].changeFlag == true) {
+			Map[i].texture->SetPart(2, 0);
+		}
 }

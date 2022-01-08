@@ -18,3 +18,5 @@ void SnowBall_Update(GameObject* SnowBall, GameObject* Map, int MapChip[MAP_STAG
 				   , GameObject* SnowBall2, GameObject* Map2, int MapChip2[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
 //á‹Ê‚Ì“–‚½‚è”»’è
 void SnowBall_Hit(GameObject * Player, GameObject * SnowBall);
+//ŠÔ·‚Å•X‚É•Ï‚¦‚é‚½‚ß‚ÌŠÖ”
+void toIce(GameObject* Map);

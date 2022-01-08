@@ -2,8 +2,8 @@
 
 void Shield_Initialize(GameObject * Shield)
 {
-	Shield->textuer = new Sprite("assets/iwa.png", 1, 1);
-	Shield->textuer->SetSize(120, 120);
+	Shield->texture = new Sprite("assets/iwa.png", 1, 1);
+	Shield->texture->SetSize(120, 120);
 	Shield->posY = 0.5f;
 	Shield->mappos.Height = 0;
 	Shield->mappos.LeftDown = 0;

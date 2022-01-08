@@ -55,6 +55,7 @@ struct GameObject {
 	// 変数書いていく
 	float posX, posY;  // 中心点の座標
 	float sizeX, sizeY; // 大きさ
+	bool changeFlag = false;//状態遷移などに使いたいとき用のフラグ
 
 	MapPos mappos;	//マップ単位でいる場所
 
@@ -72,7 +73,7 @@ struct GameObject {
 
 	//UvInfo uvinfo; // テクスチャの情報
 
-	Sprite* textuer;	//画像データ
+	Sprite* texture;	//画像データ
 };
 
 

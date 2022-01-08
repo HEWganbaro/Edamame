@@ -46,8 +46,8 @@ BOOL Title_Initialize()
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
 
 	//背景
-	tBackGround.textuer = new Sprite("assets/BackGround.png", 1, 1);
-	tBackGround.textuer->SetSize(1280 * 2, 720 * 2);
+	tBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
+	tBackGround.texture->SetSize(1280 * 2, 720 * 2);
 	tBackGround.posX = -1;
 	tBackGround.posY = 1;
 
@@ -77,7 +77,7 @@ void Title_Draw()
 	Direct3D_GetContext()->ClearRenderTargetView(Direct3D_GetRenderTargetView(), clearColor);
 
 	//ゲームオブジェクトを全部描画する
-	tBackGround.textuer->Draw();
+	tBackGround.texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -87,5 +87,5 @@ void Title_Draw()
 void Title_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
-	delete tBackGround.textuer;
+	delete tBackGround.texture;
 }

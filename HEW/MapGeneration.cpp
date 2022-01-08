@@ -8,8 +8,8 @@ void Map_Initialize(GameObject * Map)
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				Map[i + MAP_EDGE * j + 100 * k].textuer = new Sprite("assets/Mapseat_v2.png", 7, 1);
-				Map[i + MAP_EDGE * j + 100 * k].textuer->SetSize(BOX_HEIGHT, BOX_WIDTH);
+				Map[i + MAP_EDGE * j + 100 * k].texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
+				Map[i + MAP_EDGE * j + 100 * k].texture->SetSize(BOX_HEIGHT, BOX_WIDTH);
 			}
 		}
 	}
@@ -29,32 +29,32 @@ void Map_Initialize(GameObject * Map)
 
 int Map_GetPlayerTile(GameObject * Player, GameObject * Map)
 {
-	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].textuer->GetPart();
+	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->GetPart();
 }
 
 int Map_GetPlayerTile_LeftUp(GameObject * Player, GameObject * Map)
 {
-	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown - 1].textuer->GetPart();
+	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown - 1].texture->GetPart();
 }
 
 int Map_GetPlayerTile_RightDown(GameObject * Player, GameObject * Map)
 {
-	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown + 1].textuer->GetPart();
+	return Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown + 1].texture->GetPart();
 }
 
 int Map_GetPlayerTile_LeftDown(GameObject * Player, GameObject * Map)
 {
-	return Map[Player->mappos.Height * 100 + (Player->mappos.LeftDown + 1) * 10 + Player->mappos.RightDown].textuer->GetPart();
+	return Map[Player->mappos.Height * 100 + (Player->mappos.LeftDown + 1) * 10 + Player->mappos.RightDown].texture->GetPart();
 }
 
 int Map_GetPlayerTile_RightUp(GameObject * Player, GameObject * Map)
 {
-	return Map[Player->mappos.Height * 100 + (Player->mappos.LeftDown - 1) * 10 + Player->mappos.RightDown].textuer->GetPart();
+	return Map[Player->mappos.Height * 100 + (Player->mappos.LeftDown - 1) * 10 + Player->mappos.RightDown].texture->GetPart();
 }
 
 int Map_GetPlayerTile_Top(GameObject * Player, GameObject * Map)
 {
-	return Map[(Player->mappos.Height + 1) * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].textuer->GetPart();
+	return Map[(Player->mappos.Height + 1) * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->GetPart();
 }
 
 //プレイヤーのタイルを返す関数
@@ -66,7 +66,7 @@ void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][M
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
-					Map[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[gStarg][k][j][i], 0);
 				}
 			}
 		}
@@ -76,7 +76,7 @@ void Map_Update(GameObject * Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][M
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
-					Map[i + MAP_EDGE * j + 100 * k].textuer->SetPart(MapChip[gStarg][k][j][i], 0);
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[gStarg][k][j][i], 0);
 				}
 			}
 		}

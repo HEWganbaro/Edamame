@@ -2,8 +2,8 @@
 
 void Goal_Initialize(GameObject * Goal)
 {
-	Goal->textuer = new Sprite("assets/goal.png", 1, 1);
-	Goal->textuer->SetSize(120, 120);
+	Goal->texture = new Sprite("assets/goal.png", 1, 1);
+	Goal->texture->SetSize(120, 120);
 	Goal->posY = 0.5f;
 	Goal->mappos.Height = 0;
 	Goal->mappos.LeftDown = 0;
