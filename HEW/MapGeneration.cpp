@@ -130,6 +130,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->mappos.LeftDown--;
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 		} //左上坂の時
 		else if (Map_GetPlayerTile_Top(Player, Map) == LEFTUP_SLOPE && Player->direction == LEFT_UP) {
@@ -147,6 +148,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->mappos.RightDown--;
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 		}
 		else {	//移動せず終わる
@@ -184,6 +186,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -200,6 +203,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -216,6 +220,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -232,6 +237,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 		}
@@ -252,6 +258,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -268,6 +275,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -284,6 +292,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -300,6 +309,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 		}
@@ -325,6 +335,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->direction = NULL_WAY;
 					Player->animator.count = 0;
 					Player->animator.ice = false;
+					turn = ENEMY_TURN;
 					if (Player->mappos.RightDown + 1 != MAP_EDGE &&
 						Map_GetPlayerTile_RightDown(Player, Map) != -1 &&//マップ外の時は動かさない
 					    /*Map_GetPlayerTile_RightDown(Player, Map) != LEFTUP_SLOPE &&*/ Map_GetPlayerTile_RightDown(Player, Map) != RIGHTUP_SLOPE)
@@ -364,6 +375,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->direction = NULL_WAY;
 					Player->animator.count = 0;
 					Player->animator.ice = false;
+					turn = ENEMY_TURN;
 					if (Player->mappos.LeftDown + 1 != MAP_EDGE &&
 						Map_GetPlayerTile_LeftDown(Player, Map) != -1 &&
 						/*Map_GetPlayerTile_LeftDown(Player, Map) != RIGHTUP_SLOPE &&*/ Map_GetPlayerTile_LeftDown(Player, Map) != LEFTUP_SLOPE)
@@ -401,6 +413,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					Player->direction = NULL_WAY;
 					Player->animator.count = 0;
 					Player->animator.ice = false;
+					turn = ENEMY_TURN;
 					if (Player->mappos.RightDown - 1 != -1) {
 						if (Map_GetPlayerTile_LeftUp(Player, Map) != -1)
 							Player->mappos.RightDown--;
@@ -438,6 +451,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					Player->direction = NULL_WAY;
 					Player->animator.count = 0;
 					Player->animator.ice = false;
+					turn = ENEMY_TURN;
 					if (Player->mappos.LeftDown - 1 != -1) {
 						if (Map_GetPlayerTile_RightUp(Player, Map) != -1)
 							Player->mappos.LeftDown--;
@@ -477,6 +491,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -493,6 +508,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -509,6 +525,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 
@@ -525,6 +542,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 			break;
 		}
@@ -545,6 +563,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->mappos.LeftDown++;
 				Player->mappos.Height--;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 		}
 		else {
@@ -578,6 +597,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->mappos.RightDown++;
 				Player->mappos.Height--;
 				Player->animator.count = 0;
+				turn = ENEMY_TURN;
 			}
 		}
 		else {

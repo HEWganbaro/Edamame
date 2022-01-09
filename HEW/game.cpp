@@ -190,9 +190,6 @@ BOOL Game_Update()
 
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
-	Player_Input(gPlayer, gObjects, gPlayer2, gObjects);	//プレイヤー移動
-	//Player2_Input(gPlayer2, gObjects);
-
 	SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
 	SnowBall_Hit(gPlayer, SnowBall2);
 	SnowBall_Hit(gPlayer2, SnowBall);
@@ -200,13 +197,34 @@ BOOL Game_Update()
 
 	SnowBall_Update(SnowBall, gObjects, MapChip, SnowBall2, gObjects, MapChip);
 
-	Enemy_Hit(gEnemy, SnowBall);
-
-	if (gEnemy->direction == NULL_WAY)
+	switch (turn)
 	{
-		//敵の巡回
-		Enemy_Move_Circle(gEnemy, gPlayer, SnowBall);
+	case PLAYER_TURN:
+
+		Player_Input(gPlayer, gObjects, gPlayer2, gObjects);	//プレイヤー移動
+
+		//Player2_Input(gPlayer2, gObjects);
+
+		break;
+
+	case ENEMY_TURN:
+
+		if (gEnemy->direction == NULL_WAY)
+		{
+			//敵の巡回
+			Enemy_Move_Circle(gEnemy, gPlayer, SnowBall);
+			//敵の接近
+			Enemy_Move_Chase(gEnemy, SnowBall);
+		}
+
+		Enemy_Hit(gEnemy, SnowBall);
+		//敵のスタン
+		Enemy_Stun(gEnemy, SnowBall, gObjects, MapChip);
+
+		break;
 	}
+
+	
 
 	if (gEnemy->enemyeye == ENEMYEYE_IN)
 	{
@@ -214,11 +232,7 @@ BOOL Game_Update()
 		Shield_Cancel(gShield, SnowBall, gEnemy);
 	}
 
-	//敵の接近
-	Enemy_Move_Chase(gEnemy, SnowBall);
-
-	//敵のスタン
-	Enemy_Stun(gEnemy, SnowBall, gObjects, MapChip);
+	
 	//Shield_Hit(gShield, gPlayer);
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理

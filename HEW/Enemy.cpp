@@ -5,7 +5,7 @@
 
 int Enemy_cut;
 int Enemy_flg = 0;
-
+int turn = PLAYER_TURN;
 
 void Enemy_Initialize(GameObject * Enemy)
 {
@@ -145,43 +145,42 @@ void Enemy_Hit(GameObject * Enemy, GameObject * Player)
 void Enemy_Move_Circle(GameObject * Enemy, GameObject* Player, GameObject* SnowBall)
 {
 
-	if (Player->direction != NULL_WAY)
+	if (Enemy->enemyeye == ENEMYEYE_OUT && Enemy_flg == 1)
 	{
-
-		if (Enemy->enemyeye == ENEMYEYE_OUT && Enemy_flg == 1)
+		if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
+			(Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
 		{
-			if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-				(Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-			{
-				Enemy->direction = RIGHT_DOWN;
-				Enemy_flg = 0;
-				return;
-			}
+			Enemy->direction = RIGHT_DOWN;
+			Enemy_flg = 0;
+			turn = PLAYER_TURN;
+			return;
+		}
 
-			if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-				(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown))
-			{
-				Enemy->direction = LEFT_DOWN;
-				Enemy_flg = 0;
-				return;
-			}
-			if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-				(Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-			{
-				Enemy->direction = LEFT_UP;
-				Enemy_flg = 0;
-				return;
-			}
-			if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-				(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown))
-			{
-				Enemy->direction = RIGHT_UP;
-				Enemy_flg = 0;
-				return;
-			}
+		if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
+			(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown))
+		{
+			Enemy->direction = LEFT_DOWN;
+			Enemy_flg = 0;
+			turn = PLAYER_TURN;
+			return;
+		}
+		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
+			(Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
+		{
+			Enemy->direction = LEFT_UP;
+			Enemy_flg = 0;
+			turn = PLAYER_TURN;
+			return;
+		}
+		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
+			(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown))
+		{
+			Enemy->direction = RIGHT_UP;
+			Enemy_flg = 0;
+			turn = PLAYER_TURN;
+			return;
 		}
 	}
-
 }
 
 //“G‚Ìá‹Ê‚Ö‚ÌÚ‹ß

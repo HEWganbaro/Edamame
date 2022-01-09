@@ -18,6 +18,8 @@ using namespace std;
 
 extern int Player_cut;
 extern int Enemy_flg;
+extern int turn;
+
 
 enum Direction
 {
@@ -40,6 +42,12 @@ enum EnemyMove
 {
 	ENEMY_MOVE,
 	ENEMY_STOP,
+};
+
+enum Turn
+{
+	PLAYER_TURN,
+	ENEMY_TURN,
 };
 
 struct MapPos
@@ -66,6 +74,8 @@ struct GameObject {
 	Enemyeye enemyeye;//“G‚Ì‹ü
 
 	EnemyMove enemymove;//“G‚Ì“®‚«
+
+	Turn turn;
 
 	CharController charController;  // ƒLƒƒƒ‰ˆÚ“®‚ÌƒNƒ‰ƒX•Ï”
 
