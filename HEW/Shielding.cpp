@@ -31,120 +31,95 @@ void Shield_Update(GameObject * Shield)
 }
 
 //ŽÕ•Á‚Å‚Ì“G‚ÌƒwƒCƒg‚»‚ç‚µ
-void Shield_Cancel(GameObject * Shield, GameObject * SnowBall, GameObject * Enemy)
+void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player2, GameObject * Enemy)
 {
-
-	if (SnowBall->mappos.LeftDown - 1 == Shield->mappos.LeftDown && SnowBall->mappos.RightDown == Shield->mappos.RightDown &&
-		Enemy->mappos.LeftDown + 1 == Shield->mappos.LeftDown && SnowBall->mappos.RightDown == Shield->mappos.RightDown)
+	//Player
+	if (Player->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown &&
+		Enemy->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_UP;
+			turn = PLAYER_TURN;
 		}
 		return;
 	}
 
-	if (SnowBall->mappos.LeftDown + 1 == Shield->mappos.LeftDown && SnowBall->mappos.RightDown == Shield->mappos.RightDown &&
-		Enemy->mappos.LeftDown - 1 == Shield->mappos.LeftDown && SnowBall->mappos.RightDown == Shield->mappos.RightDown)
+	if (Player->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown &&
+		Enemy->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_DOWN;
+			turn = PLAYER_TURN;
 		}
 		return;
 	}
 
-	if (SnowBall->mappos.RightDown - 1 == Shield->mappos.RightDown && SnowBall->mappos.LeftDown == Shield->mappos.LeftDown &&
-		Enemy->mappos.RightDown + 1 == Shield->mappos.RightDown && SnowBall->mappos.LeftDown == Shield->mappos.LeftDown)
+	if (Player->mappos.RightDown - 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown &&
+		Enemy->mappos.RightDown + 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_UP;
+			turn = PLAYER_TURN;
 		}
 		return;
 	}
 
-	if (SnowBall->mappos.RightDown + 1 == Shield->mappos.RightDown && SnowBall->mappos.LeftDown == Shield->mappos.LeftDown &&
-		Enemy->mappos.RightDown - 1 == Shield->mappos.RightDown && SnowBall->mappos.LeftDown == Shield->mappos.LeftDown)
+	if (Player->mappos.RightDown + 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown &&
+		Enemy->mappos.RightDown - 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
-			Enemy->direction = RIGHT_DOWN;;
+			Enemy->direction = RIGHT_DOWN;
+			turn = PLAYER_TURN;
 		}
 		return;
 	}
 
+	//Player2
+	if (Player2->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown &&
+		Enemy->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown)
+	{
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = RIGHT_UP;
+			turn = PLAYER_TURN;
+		}
+		return;
+	}
+
+	if (Player2->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown &&
+		Enemy->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown)
+	{
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = LEFT_DOWN;
+			turn = PLAYER_TURN;
+		}
+		return;
+	}
+
+	if (Player2->mappos.RightDown - 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown &&
+		Enemy->mappos.RightDown + 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown)
+	{
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = LEFT_UP;
+			turn = PLAYER_TURN;
+		}
+		return;
+	}
+
+	if (Player2->mappos.RightDown + 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown &&
+		Enemy->mappos.RightDown - 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown)
+	{
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = RIGHT_DOWN;
+			turn = PLAYER_TURN;
+		}
+		return;
+	}
 }
-
-//ŽÕ•Á‚Æ‚Ì“–‚½‚è”»’è
-//void Shield_Hit(GameObject * Shield, GameObject * Player)
-//{
-//	//ƒvƒŒƒCƒ„[‚ÆŽÕ•Á‚Ì“–‚½‚è”»’è
-//	if (Player->direction != NULL_WAY)
-//	{
-//		if (Player->mappos.LeftDown - 1 == Shield->mappos.LeftDown &&
-//			Player->mappos.RightDown == Shield->mappos.RightDown)
-//		{
-//			Player->direction = LEFT_DOWN;
-//		}
-//		if (Player->mappos.LeftDown + 1 == Shield->mappos.LeftDown &&
-//			Player->mappos.RightDown == Shield->mappos.RightDown)
-//		{
-//			Player->direction = RIGHT_UP;
-//		}
-//		if (Player->mappos.RightDown - 1 == Shield->mappos.RightDown &&
-//			Player->mappos.LeftDown == Shield->mappos.LeftDown)
-//		{
-//			Player->direction = RIGHT_DOWN;
-//		}
-//		if (Player->mappos.RightDown + 1 == Shield->mappos.RightDown &&
-//			Player->mappos.LeftDown == Shield->mappos.LeftDown)
-//		{
-//			Player->direction = LEFT_UP;
-//		}
-//	}
-
-	//“G‚ÆŽÕ•Á‚Ì“–‚½‚è”»’è
-	//if (Enemy->mappos.LeftDown - 1 == Shield->mappos.LeftDown &&
-	//	Enemy->mappos.RightDown == Shield->mappos.RightDown)
-	//{
-
-	//}
-	//if (Enemy->mappos.LeftDown + 1 == Shield->mappos.LeftDown &&
-	//	Enemy->mappos.RightDown == Shield->mappos.RightDown)
-	//{
-
-	//}
-	//if (Enemy->mappos.RightDown - 1 == Shield->mappos.RightDown &&
-	//	Enemy->mappos.LeftDown == Shield->mappos.LeftDown)
-	//{
-
-	//}
-	//if (Enemy->mappos.RightDown + 1 == Shield->mappos.RightDown &&
-	//	Enemy->mappos.LeftDown == Shield->mappos.LeftDown)
-	//{
-
-	//}
-
-	////á‹Ê‚ÆŽÕ•Á‚Ì“–‚½‚è”»’è
-	//if (SnowBall->mappos.LeftDown - 1 == Shield->mappos.LeftDown &&
-	//	SnowBall->mappos.RightDown == Shield->mappos.RightDown)
-	//{
-
-	//}
-	//if (SnowBall->mappos.LeftDown + 1 == Shield->mappos.LeftDown &&
-	//	SnowBall->mappos.RightDown == Shield->mappos.RightDown)
-	//{
-
-	//}
-	//if (SnowBall->mappos.RightDown - 1 == Shield->mappos.RightDown &&
-	//	SnowBall->mappos.LeftDown == Shield->mappos.LeftDown)
-	//{
-
-	//}
-	//if (SnowBall->mappos.RightDown + 1 == Shield->mappos.RightDown &&
-	//	SnowBall->mappos.LeftDown == Shield->mappos.LeftDown)
-	//{
-
-	//}
-//}

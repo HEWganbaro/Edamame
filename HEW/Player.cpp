@@ -9,16 +9,16 @@ int Player2_cut = 0;
 
 void Player_Initialize(GameObject* Player , GameObject* Player2) {
 	//プレイヤー1
-	Player->texture = new Sprite("assets/Player.png", 1, 1);
-	Player->texture->SetSize(80, 80);
+	Player->texture = new Sprite("assets/snowBall.png", 2, 1);
+	Player->texture->SetSize(100, 100);
 	Player->posY = 0.5f;
 	Player->mappos.Height = 0;
 	Player->mappos.LeftDown = 0;
 	Player->mappos.RightDown = 0;
 	Player->direction = NULL_WAY;
 	//プレイヤー2
-	Player2->texture = new Sprite("assets/Player2.png", 1, 1);
-	Player2->texture->SetSize(80, 80);
+	Player2->texture = new Sprite("assets/snowBall.png", 2, 1);
+	Player2->texture->SetSize(100, 100);
 	Player2->posY = 0.5f;
 	Player2->mappos.Height = 0;
 	Player2->mappos.LeftDown = 0;
@@ -119,7 +119,36 @@ MapPos Player_GetMapPos(GameObject * Player, GameObject * Player2)
 	return mappos;
 }
 
-void Player_Update(GameObject * Player, GameObject * Player2)
+void Player_Update(GameObject * Player, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]
+	, GameObject * Player2, GameObject* Map2, int MapChip2[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
+	// 雪玉1
+	MapMove_Update(Player, Map);
+	if (Map_GetPlayerTile(Player, Map) == SNOW_GROUND) {
+		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->SetPart(1, 0);
+		Player->texture->SetPart(0, 0);
+	}
+	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
+		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].changeFlag = true;
+		Player->texture->SetPart(0, 0);
+	}
+	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
+		Player->texture->SetPart(1, 0);
+	}
+	// 雪玉2
+	MapMove_Update(Player2, Map2);
+	if (Map_GetPlayerTile(Player2, Map2) == SNOW_GROUND) {
+		Map2[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].texture->SetPart(1, 0);
+		Player2->texture->SetPart(0, 0);
+	}
+	else if (Map_GetPlayerTile(Player2, Map) == SOIL_GROUND) {
+		Player2->texture->SetPart(1, 0);
+	}
+}
 
+void toIce(GameObject* Map) {
+	for (int i = 0; i < 300; i++)
+		if (Map[i].changeFlag == true) {
+			Map[i].texture->SetPart(2, 0);
+		}
 }

@@ -18,7 +18,6 @@
 
 #include "Player.h"
 #include "MapGeneration.h"
-#include "SnowBall.h"
 #include "Enemy.h"
 #include "Shielding.h"
 #include "Goal.h"

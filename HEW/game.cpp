@@ -26,7 +26,7 @@
 //#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   311
+#define MAX_OBJECT   309
 
 //*****************************************************************************
 // グローバル変数
@@ -44,12 +44,10 @@ GameObject* NoHeight = gObjects + 301;
 GameObject* NoLeftDown = gObjects + 302;
 GameObject* NoRightDown = gObjects + 303;
 GameObject* tile = gObjects + 304;
-GameObject* SnowBall = gObjects + 305;
-GameObject* gEnemy = gObjects + 306;
-GameObject* gShield = gObjects + 307;
-GameObject* gGoal = gObjects + 308;
-GameObject* SnowBall2 = gObjects + 309;
-GameObject* gPlayer2 = gObjects + 310;
+GameObject* gEnemy = gObjects + 305;
+GameObject* gShield = gObjects + 306;
+GameObject* gGoal = gObjects + 307;
+GameObject* gPlayer2 = gObjects + 308;
 
 GameObject gBackGround;				//背景
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -114,24 +112,12 @@ BOOL Game_Initialize()
 	Player_SetLocation(gPlayer, gObjects, 0, 5, 5,
 						gPlayer2, gObjects, 0, 6, 6);
 
-	////プレイヤー2初期化
-	//Player2_Initialize(gPlayer2);
+	////雪玉の初期化
+	//SnowBall_Initialize(SnowBall, SnowBall2);
 
-	////プレイヤー2場所指定
-	//Player2_SetLocation(gPlayer2, gObjects, 0, 2, 2);
-
-	//雪玉の初期化
-	SnowBall_Initialize(SnowBall, SnowBall2);
-
-	//雪玉の場所指定
-	SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 4,
-						 SnowBall2, gObjects, 0, 4, 6);
-
-	////雪玉2の初期化
-	//SnowBall2_Initialize(SnowBall2);
-
-	////雪玉2の場所指定
-	//SnowBall2_SetLocation(SnowBall2, gObjects, 0, 3, 3);
+	////雪玉の場所指定
+	//SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 4,
+	//					 SnowBall2, gObjects, 0, 4, 6);
 
 	//敵の初期化
 	Enemy_Initialize(gEnemy);
@@ -190,20 +176,19 @@ BOOL Game_Update()
 
 	Map_Update(gObjects, MapChip);	//マップ変更↑↓
 
-	SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
-	SnowBall_Hit(gPlayer, SnowBall2);
-	SnowBall_Hit(gPlayer2, SnowBall);
-	SnowBall_Hit(gPlayer2, SnowBall2);
+	//SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
+	//SnowBall_Hit(gPlayer, SnowBall2);
+	//SnowBall_Hit(gPlayer2, SnowBall);
+	//SnowBall_Hit(gPlayer2, SnowBall2);
 
-	SnowBall_Update(SnowBall, gObjects, MapChip, SnowBall2, gObjects, MapChip);
+	//SnowBall_Update(SnowBall, gObjects, MapChip, SnowBall2, gObjects, MapChip);
 
 	switch (turn)
 	{
 	case PLAYER_TURN:
 
+		Player_Update(gPlayer, gObjects, MapChip, gPlayer, gObjects, MapChip);
 		Player_Input(gPlayer, gObjects, gPlayer2, gObjects);	//プレイヤー移動
-
-		//Player2_Input(gPlayer2, gObjects);
 
 		break;
 
@@ -212,14 +197,14 @@ BOOL Game_Update()
 		if (gEnemy->direction == NULL_WAY)
 		{
 			//敵の巡回
-			Enemy_Move_Circle(gEnemy, gPlayer, SnowBall);
+			Enemy_Move_Circle(gEnemy);
 			//敵の接近
-			Enemy_Move_Chase(gEnemy, SnowBall);
+			Enemy_Move_Chase(gEnemy, gPlayer, gPlayer2);
 		}
 
-		Enemy_Hit(gEnemy, SnowBall);
+		Enemy_Hit(gEnemy);
 		//敵のスタン
-		Enemy_Stun(gEnemy, SnowBall, gObjects, MapChip);
+		Enemy_Stun(gEnemy, gPlayer, gPlayer2, gObjects, MapChip);
 
 		break;
 	}
@@ -229,7 +214,7 @@ BOOL Game_Update()
 	if (gEnemy->enemyeye == ENEMYEYE_IN)
 	{
 		//遮蔽でのヘイトそらし
-		Shield_Cancel(gShield, SnowBall, gEnemy);
+		Shield_Cancel(gShield, gPlayer, gPlayer2, gEnemy);
 	}
 
 	

@@ -87,9 +87,6 @@
     <ClInclude Include="MapGeneration.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="SnowBall.h">
-      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
@@ -106,9 +103,6 @@
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Player2.h">
-      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="SnowBall2.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Title.h">
@@ -159,9 +153,6 @@
       <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\Game\Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="SnowBall.cpp">
       <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Easing.cpp">

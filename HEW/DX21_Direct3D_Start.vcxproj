@@ -164,8 +164,6 @@
     <ClInclude Include="ps.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shielding.h" />
-    <ClInclude Include="SnowBall.h" />
-    <ClInclude Include="SnowBall2.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="vs.h" />
@@ -188,7 +186,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shielding.cpp" />
-    <ClCompile Include="SnowBall.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="XAudio2.cpp" />

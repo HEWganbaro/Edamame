@@ -11,10 +11,10 @@ MapPos Enemy_GetMapPos(GameObject* Enemy);
 //アップデート関数
 void Enemy_Update(GameObject* Enemy);
 //敵の当たり判定
-void Enemy_Hit(GameObject* Enemy, GameObject* Player);
+void Enemy_Hit(GameObject* Enemy);
 //敵がプレイヤーを追いかける
-void Enemy_Move_Chase(GameObject* Enemy, GameObject* SnowBall);
+void Enemy_Move_Chase(GameObject* Enemy, GameObject* Player, GameObject* Player2);
 //敵の巡回
-void Enemy_Move_Circle(GameObject* Enemy, GameObject* Player, GameObject* SnowBall);
+void Enemy_Move_Circle(GameObject* Enemy);
 //敵のスタン
-void Enemy_Stun(GameObject* Enemy, GameObject* SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+void Enemy_Stun(GameObject* Enemy, GameObject* Player, GameObject * Player2, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);

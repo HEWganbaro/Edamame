@@ -40,7 +40,7 @@ void Enemy_Update(GameObject * Enemy)
 {
 }
 
-void Enemy_Hit(GameObject * Enemy, GameObject * Player)
+void Enemy_Hit(GameObject * Enemy)
 {
 	/*int r;
 	srand((unsigned int)time(NULL));
@@ -142,7 +142,7 @@ void Enemy_Hit(GameObject * Enemy, GameObject * Player)
 }
 
 //“G‚Ì„‰ñ
-void Enemy_Move_Circle(GameObject * Enemy, GameObject* Player, GameObject* SnowBall)
+void Enemy_Move_Circle(GameObject * Enemy)
 {
 
 	if (Enemy->enemyeye == ENEMYEYE_OUT && Enemy_flg == 1)
@@ -184,11 +184,11 @@ void Enemy_Move_Circle(GameObject * Enemy, GameObject* Player, GameObject* SnowB
 }
 
 //“G‚Ìá‹Ê‚Ö‚ÌÚ‹ß
-void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
+void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Player2)
 {
-
-	if (SnowBall->mappos.LeftDown - 1 == Enemy->mappos.LeftDown &&
-		SnowBall->mappos.RightDown == Enemy->mappos.RightDown)
+	//Player
+	if (Player->mappos.LeftDown - 1 == Enemy->mappos.LeftDown &&
+		Player->mappos.RightDown == Enemy->mappos.RightDown)
 	{
 		Enemy->enemyeye = ENEMYEYE_IN;
 		if (Enemy->enemyeye == ENEMYEYE_IN)
@@ -196,8 +196,8 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 			Enemy->direction = LEFT_DOWN;
 		}
 	}
-	if (SnowBall->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
-		SnowBall->mappos.RightDown == Enemy->mappos.RightDown)
+	if (Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
+		Player->mappos.RightDown == Enemy->mappos.RightDown)
 	{
 		Enemy->enemyeye = ENEMYEYE_IN;
 		if (Enemy->enemyeye == ENEMYEYE_IN)
@@ -206,8 +206,8 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 		}
 	}
 
-	if (SnowBall->mappos.RightDown - 1 == Enemy->mappos.RightDown &&
-		SnowBall->mappos.LeftDown == Enemy->mappos.LeftDown)
+	if (Player->mappos.RightDown - 1 == Enemy->mappos.RightDown &&
+		Player->mappos.LeftDown == Enemy->mappos.LeftDown)
 	{
 		Enemy->enemyeye = ENEMYEYE_IN;
 		if (Enemy->enemyeye == ENEMYEYE_IN)
@@ -216,8 +216,8 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 		}
 	}
 
-	if (SnowBall->mappos.RightDown + 1 == Enemy->mappos.RightDown &&
-		SnowBall->mappos.LeftDown == Enemy->mappos.LeftDown)
+	if (Player->mappos.RightDown + 1 == Enemy->mappos.RightDown &&
+		Player->mappos.LeftDown == Enemy->mappos.LeftDown)
 	{
 		Enemy->enemyeye = ENEMYEYE_IN;
 		if (Enemy->enemyeye == ENEMYEYE_IN)
@@ -226,15 +226,56 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * SnowBall)
 		}
 	}
 
+	//Player2
+	if (Player2->mappos.LeftDown - 1 == Enemy->mappos.LeftDown &&
+		Player2->mappos.RightDown == Enemy->mappos.RightDown)
+	{
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = LEFT_DOWN;
+		}
+	}
+	if (Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
+		Player2->mappos.RightDown == Enemy->mappos.RightDown)
+	{
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = RIGHT_UP;
+		}
+	}
+
+	if (Player2->mappos.RightDown - 1 == Enemy->mappos.RightDown &&
+		Player2->mappos.LeftDown == Enemy->mappos.LeftDown)
+	{
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = RIGHT_DOWN;
+		}
+	}
+
+	if (Player2->mappos.RightDown + 1 == Enemy->mappos.RightDown &&
+		Player2->mappos.LeftDown == Enemy->mappos.LeftDown)
+	{
+		Enemy->enemyeye = ENEMYEYE_IN;
+		if (Enemy->enemyeye == ENEMYEYE_IN)
+		{
+			Enemy->direction = LEFT_UP;
+		}
+	}
+	turn = PLAYER_TURN;
 }
 
 
 //“G‚ÌƒXƒ^ƒ“
-void Enemy_Stun(GameObject * Enemy, GameObject * SnowBall, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
-	if (Map_GetPlayerTile(SnowBall, Map) &&
-		SnowBall->mappos.LeftDown >= Enemy->mappos.LeftDown - 1 && SnowBall->mappos.RightDown == Enemy->mappos.RightDown &&
-		SnowBall->mappos.Height > Enemy->mappos.Height)
+	//Player
+	if (Map_GetPlayerTile(Player, Map) &&
+		Player->mappos.LeftDown >= Enemy->mappos.LeftDown - 1 && Player->mappos.RightDown == Enemy->mappos.RightDown &&
+		Player->mappos.Height > Enemy->mappos.Height)
 	{
 		Enemy->direction = LEFT_DOWN;
 		Enemy->enemyeye = ENEMYEYE_OUT;
@@ -246,9 +287,9 @@ void Enemy_Stun(GameObject * Enemy, GameObject * SnowBall, GameObject* Map, int 
 		Enemy->enemymove = ENEMY_MOVE;
 	}
 
-	if (Map_GetPlayerTile(SnowBall, Map) &&
-		SnowBall->mappos.RightDown >= Enemy->mappos.RightDown - 1 && SnowBall->mappos.LeftDown == Enemy->mappos.LeftDown &&
-		SnowBall->mappos.Height > Enemy->mappos.Height)
+	if (Map_GetPlayerTile(Player, Map) &&
+		Player->mappos.RightDown >= Enemy->mappos.RightDown - 1 && Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
+		Player->mappos.Height > Enemy->mappos.Height)
 	{
 		Enemy->direction = RIGHT_DOWN;
 		Enemy->enemyeye = ENEMYEYE_OUT;
@@ -260,4 +301,32 @@ void Enemy_Stun(GameObject * Enemy, GameObject * SnowBall, GameObject* Map, int 
 		Enemy->enemymove = ENEMY_MOVE;
 	}
 
+	//Player2
+	if (Map_GetPlayerTile(Player2, Map) &&
+		Player2->mappos.LeftDown >= Enemy->mappos.LeftDown - 1 && Player2->mappos.RightDown == Enemy->mappos.RightDown &&
+		Player2->mappos.Height > Enemy->mappos.Height)
+	{
+		Enemy->direction = LEFT_DOWN;
+		Enemy->enemyeye = ENEMYEYE_OUT;
+		Enemy->enemymove = ENEMY_STOP;
+		Player_cut = 0;
+	}
+	if (Player_cut == 5)
+	{
+		Enemy->enemymove = ENEMY_MOVE;
+	}
+
+	if (Map_GetPlayerTile(Player2, Map) &&
+		Player2->mappos.RightDown >= Enemy->mappos.RightDown - 1 && Player2->mappos.LeftDown == Enemy->mappos.LeftDown &&
+		Player2->mappos.Height > Enemy->mappos.Height)
+	{
+		Enemy->direction = RIGHT_DOWN;
+		Enemy->enemyeye = ENEMYEYE_OUT;
+		Enemy->enemymove = ENEMY_STOP;
+		Player_cut = 0;
+	}
+	if (Player_cut == 5)
+	{
+		Enemy->enemymove = ENEMY_MOVE;
+	}
 }

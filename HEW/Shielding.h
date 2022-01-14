@@ -10,7 +10,5 @@ void Shield_SetLocation(GameObject* Shield, GameObject* Location, int Height, in
 MapPos Shield_GetMapPos(GameObject* Shield);
 //アップデート関数
 void Shield_Update(GameObject* Shield);
-//遮蔽の当たり判定
-//void Shield_Hit(GameObject* Shield, GameObject* Player);
 //遮蔽でのヘイトそらし
-void Shield_Cancel(GameObject* Shield, GameObject* SnowBall, GameObject* Enemy);
+void Shield_Cancel(GameObject* Shield, GameObject* Player, GameObject * Player2, GameObject* Enemy);
