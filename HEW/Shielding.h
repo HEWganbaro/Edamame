@@ -11,4 +11,4 @@ MapPos Shield_GetMapPos(GameObject* Shield);
 //アップデート関数
 void Shield_Update(GameObject* Shield);
 //遮蔽でのヘイトそらし
-void Shield_Cancel(GameObject* Shield, GameObject* Player, GameObject * Player2, GameObject* Enemy);
+void Shield_Cancel(MapPos* Shield, GameObject* Player, GameObject * Player2, GameObject* Enemy);

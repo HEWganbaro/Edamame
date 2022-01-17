@@ -26,7 +26,7 @@
 //#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   309
+#define MAX_OBJECT   308
 
 //*****************************************************************************
 // グローバル変数
@@ -37,6 +37,7 @@
 
 	//ステージ数[ステージ][高さ][左下][右下]
 int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE];
+vector<MapPos> StoneMap;
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
 GameObject* gPlayer = gObjects + 300;
@@ -45,9 +46,8 @@ GameObject* NoLeftDown = gObjects + 302;
 GameObject* NoRightDown = gObjects + 303;
 GameObject* tile = gObjects + 304;
 GameObject* gEnemy = gObjects + 305;
-GameObject* gShield = gObjects + 306;
-GameObject* gGoal = gObjects + 307;
-GameObject* gPlayer2 = gObjects + 308;
+GameObject* gGoal = gObjects + 306;
+GameObject* gPlayer2 = gObjects + 307;
 
 GameObject gBackGround;				//背景
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -114,7 +114,6 @@ BOOL Game_Initialize()
 
 	////雪玉の初期化
 	//SnowBall_Initialize(SnowBall, SnowBall2);
-
 	////雪玉の場所指定
 	//SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 4,
 	//					 SnowBall2, gObjects, 0, 4, 6);
@@ -126,16 +125,15 @@ BOOL Game_Initialize()
 	Enemy_SetLocation(gEnemy, gObjects, 0, 4, 4);
 
 	//遮蔽の初期化
-	Shield_Initialize(gShield);
-
+	//Shield_Initialize(gShield);
 	//遮蔽の場所指定
-	Shield_SetLocation(gShield, gObjects, 0, 3, 6);
+	//Shield_SetLocation(gShield, gObjects, 0, 3, 6);
 
-	//遮蔽の初期化
+	//ゴールの初期化
 	Goal_Initialize(gGoal);
 
-	//遮蔽の場所指定
-	Goal_SetLocation(gGoal, gObjects, 0, 6, 1);
+	//ゴールの場所指定
+	Goal_SetLocation(gGoal, gObjects, 0, 6, 7);
 
 	//デバック用
 	NoHeight->texture = new Sprite("assets/No.png", 13, 7);
@@ -174,13 +172,12 @@ BOOL Game_Update()
 	gBackGround.posX = -1;
 	gBackGround.posY = 1;
 
-	Map_Update(gObjects, MapChip);	//マップ変更↑↓
+	Map_Update(gObjects, &StoneMap, MapChip);	//マップ変更↑↓
 
 	//SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
 	//SnowBall_Hit(gPlayer, SnowBall2);
 	//SnowBall_Hit(gPlayer2, SnowBall);
 	//SnowBall_Hit(gPlayer2, SnowBall2);
-
 	//SnowBall_Update(SnowBall, gObjects, MapChip, SnowBall2, gObjects, MapChip);
 
 	switch (turn)
@@ -209,15 +206,13 @@ BOOL Game_Update()
 		break;
 	}
 
-	
-
 	if (gEnemy->enemyeye == ENEMYEYE_IN)
 	{
 		//遮蔽でのヘイトそらし
-		Shield_Cancel(gShield, gPlayer, gPlayer2, gEnemy);
+		for (int i = 0; i < StoneMap.size(); i++) {
+			Shield_Cancel(&StoneMap[i], gPlayer, gPlayer2, gEnemy);
+		}
 	}
-
-	
 	//Shield_Hit(gShield, gPlayer);
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理

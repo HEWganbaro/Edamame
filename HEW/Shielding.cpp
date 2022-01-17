@@ -31,11 +31,11 @@ void Shield_Update(GameObject * Shield)
 }
 
 //ŽÕ•Á‚Å‚Ì“G‚ÌƒwƒCƒg‚»‚ç‚µ
-void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player2, GameObject * Enemy)
+void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, GameObject * Enemy)
 {
 	//Player
-	if (Player->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown &&
-		Enemy->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown)
+	if (Player->mappos.LeftDown - 1 == mappos->LeftDown && Player->mappos.RightDown == mappos->RightDown &&
+		Enemy->mappos.LeftDown + 1 == mappos->LeftDown && Player->mappos.RightDown == mappos->RightDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
@@ -45,8 +45,8 @@ void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player
 		return;
 	}
 
-	if (Player->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown &&
-		Enemy->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player->mappos.RightDown == Shield->mappos.RightDown)
+	if (Player->mappos.LeftDown + 1 == mappos->LeftDown && Player->mappos.RightDown == mappos->RightDown &&
+		Enemy->mappos.LeftDown - 1 == mappos->LeftDown && Player->mappos.RightDown == mappos->RightDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
@@ -56,8 +56,8 @@ void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player
 		return;
 	}
 
-	if (Player->mappos.RightDown - 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown &&
-		Enemy->mappos.RightDown + 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown)
+	if (Player->mappos.RightDown - 1 == mappos->RightDown && Player->mappos.LeftDown == mappos->LeftDown &&
+		Enemy->mappos.RightDown + 1 == mappos->RightDown && Player->mappos.LeftDown == mappos->LeftDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
@@ -67,8 +67,8 @@ void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player
 		return;
 	}
 
-	if (Player->mappos.RightDown + 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown &&
-		Enemy->mappos.RightDown - 1 == Shield->mappos.RightDown && Player->mappos.LeftDown == Shield->mappos.LeftDown)
+	if (Player->mappos.RightDown + 1 == mappos->RightDown && Player->mappos.LeftDown == mappos->LeftDown &&
+		Enemy->mappos.RightDown - 1 == mappos->RightDown && Player->mappos.LeftDown == mappos->LeftDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
@@ -79,8 +79,8 @@ void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player
 	}
 
 	//Player2
-	if (Player2->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown &&
-		Enemy->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown)
+	if (Player2->mappos.LeftDown - 1 == mappos->LeftDown && Player2->mappos.RightDown == mappos->RightDown &&
+		Enemy->mappos.LeftDown + 1 == mappos->LeftDown && Player2->mappos.RightDown == mappos->RightDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
@@ -90,8 +90,8 @@ void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player
 		return;
 	}
 
-	if (Player2->mappos.LeftDown + 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown &&
-		Enemy->mappos.LeftDown - 1 == Shield->mappos.LeftDown && Player2->mappos.RightDown == Shield->mappos.RightDown)
+	if (Player2->mappos.LeftDown + 1 == mappos->LeftDown && Player2->mappos.RightDown == mappos->RightDown &&
+		Enemy->mappos.LeftDown - 1 == mappos->LeftDown && Player2->mappos.RightDown == mappos->RightDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
@@ -101,8 +101,8 @@ void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player
 		return;
 	}
 
-	if (Player2->mappos.RightDown - 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown &&
-		Enemy->mappos.RightDown + 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown)
+	if (Player2->mappos.RightDown - 1 == mappos->RightDown && Player2->mappos.LeftDown == mappos->LeftDown &&
+		Enemy->mappos.RightDown + 1 == mappos->RightDown && Player2->mappos.LeftDown == mappos->LeftDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
@@ -112,8 +112,8 @@ void Shield_Cancel(GameObject * Shield, GameObject * Player, GameObject * Player
 		return;
 	}
 
-	if (Player2->mappos.RightDown + 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown &&
-		Enemy->mappos.RightDown - 1 == Shield->mappos.RightDown && Player2->mappos.LeftDown == Shield->mappos.LeftDown)
+	if (Player2->mappos.RightDown + 1 == mappos->RightDown && Player2->mappos.LeftDown == mappos->LeftDown &&
+		Enemy->mappos.RightDown - 1 == mappos->RightDown && Player2->mappos.LeftDown == mappos->LeftDown)
 	{
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
