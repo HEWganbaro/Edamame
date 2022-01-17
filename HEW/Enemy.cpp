@@ -265,7 +265,16 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 			Enemy->direction = LEFT_UP;
 		}
 	}
-	turn = PLAYER_TURN;
+	if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
+		Player->mappos.RightDown == Enemy->mappos.RightDown)
+	{
+		turn = PLAYER_TURN;
+	}
+	if (Player2->mappos.LeftDown == Enemy->mappos.LeftDown &&
+		Player2->mappos.RightDown == Enemy->mappos.RightDown)
+	{
+		turn = PLAYER_TURN;
+	}
 }
 
 
