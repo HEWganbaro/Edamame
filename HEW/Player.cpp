@@ -127,6 +127,7 @@ void Player_Update(GameObject * Player, GameObject* Map, int MapChip[MAP_STAGE][
 	if (Map_GetPlayerTile(Player, Map) == SNOW_GROUND) {
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->SetPart(1, 0);
 		Player->texture->SetPart(0, 0);
+
 	}
 	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].changeFlag = true;

@@ -46,6 +46,10 @@ public:
 
 	int GetPart(void);
 
+// 分割されたテクスチャのどれを描画するのか。
+	int mPartX = 0; // 0～horizontalPartNum - 1
+	int mPartY = 0; // 0～verticalPartNum - 1
+
 private:
 	int mHorizontalPartNum;
 	int mVerticalPartNum;
@@ -55,9 +59,7 @@ private:
 	float mWidth = 0;
 	float mHeight = 0;
 
-	// 分割されたテクスチャのどれを描画するのか。
-	int mPartX = 0; // 0～horizontalPartNum - 1
-	int mPartY = 0; // 0～verticalPartNum - 1
+	
 
 	ID3D11Buffer* mpVertexBuffer = nullptr;
 	ID3D11ShaderResourceView* mpTexture = nullptr;

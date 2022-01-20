@@ -21,6 +21,7 @@
 #include "Enemy.h"
 #include "Shielding.h"
 #include "Goal.h"
+#include "Effect.h"
 
 BOOL Game_Initialize();
 BOOL Game_Update();

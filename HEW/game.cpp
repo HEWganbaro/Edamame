@@ -50,6 +50,7 @@ GameObject* gGoal = gObjects + 306;
 GameObject* gPlayer2 = gObjects + 307;
 
 GameObject gBackGround;				//背景
+GameObject gEffect[4];
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
 //*****************************************************************************
@@ -60,6 +61,8 @@ BOOL Game_Initialize()
 {
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
+	/* 乱数系列の変更 */
+	srand((unsigned)time(NULL));
 	
 	//BGM再生
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
@@ -112,6 +115,10 @@ BOOL Game_Initialize()
 	Player_SetLocation(gPlayer, gObjects, 0, 5, 5,
 						gPlayer2, gObjects, 0, 6, 6);
 
+	//エフェクト生成
+	for (int i = 0; i < 4; i++) {
+		Effect_Init(&gEffect[i]);
+	}
 	////雪玉の初期化
 	//SnowBall_Initialize(SnowBall, SnowBall2);
 	////雪玉の場所指定
@@ -146,6 +153,9 @@ BOOL Game_Initialize()
 	tile->texture->SetSize(200, 200);
 	gBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
 	gBackGround.texture->SetSize(1280*2, 720*2);
+	
+	//gEffect.texture = new Sprite("assets/Effect.png", 1, 3);
+	//gEffect.texture->SetSize(1280 * 2, 720 * 2);
 
 	return TRUE;
 }
@@ -171,6 +181,11 @@ BOOL Game_Update()
 	tile->posY = 0.6;
 	gBackGround.posX = -1;
 	gBackGround.posY = 1;
+	for (int i = 0; i < 4; i++) {
+		Efffect_Move(&gEffect[i]);
+	}
+	//gEffect.posX = -1;
+	//gEffect.posY = 1;
 
 	Map_Update(gObjects, &StoneMap, MapChip);	//マップ変更↑↓
 
@@ -220,11 +235,16 @@ BOOL Game_Update()
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		GameObject_DrowUpdate(&gObjects[i]);
 	}
+
+	
 	GameObject_DrowUpdate(&gBackGround);
+	for (int i = 0; i < 4; i++) {
+		GameObject_DrowUpdate(&gEffect[i]);
+	}
 
 	if (Input_GetKeyTrigger(VK_SPACE))
 		return FALSE;
-
+		
 	return TRUE;
 }
 
@@ -237,8 +257,13 @@ void Game_Draw()
 
 	//ゲームオブジェクトを全部描画する
 	gBackGround.texture->Draw();
+	gEffect[0].texture->Draw();
+	gEffect[1].texture->Draw();
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].texture->Draw();
+
+	gEffect[2].texture->Draw();
+	gEffect[3].texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -250,6 +275,10 @@ void Game_Relese()
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
 
 	delete gBackGround.texture;
+	for (int i = 0; i < 4; i++) {
+		delete gEffect[i].texture;
+	}
+	//delete gEffect.texture;
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		delete gObjects[i].texture;
 		gObjects[i].posX = 0;

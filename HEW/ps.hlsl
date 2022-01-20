@@ -13,9 +13,10 @@ float4 ps_main( float4 inputPos : POSITION, float2 inputTex : TEXCOORD ) : SV_Ta
 	// Texture2D.Sample method gets a color from the texture by calculating using UVs.
 	float4 pixelColor = g_Tex.Sample(g_SamplerLinear, inputTex);
 
-	pixelColor.r = pixelColor.r * 1.1f + 0.10f;
-	pixelColor.g = pixelColor.g + 0.15f;
-	pixelColor.b = pixelColor.b + 0.15f;
+	pixelColor.r = pixelColor.r + 0.2f;
+	pixelColor.g = pixelColor.g + 0.2f;
+	pixelColor.b = pixelColor.b + 0.2f;
+	
 
 	return pixelColor;
 }

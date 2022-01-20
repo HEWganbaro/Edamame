@@ -151,6 +151,7 @@
     <ClInclude Include="CharController.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Easing.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="MapGeneration.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="direct3d.cpp" />
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp" />
     <ClCompile Include="Easing.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="game.cpp" />
