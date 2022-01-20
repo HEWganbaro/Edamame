@@ -152,7 +152,7 @@ void Enemy_Move_Circle(GameObject * Enemy)
 		{
 			Enemy->direction = RIGHT_DOWN;
 			Enemy_flg = 0;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 			return;
 		}
 
@@ -161,7 +161,7 @@ void Enemy_Move_Circle(GameObject * Enemy)
 		{
 			Enemy->direction = LEFT_DOWN;
 			Enemy_flg = 0;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 			return;
 		}
 		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
@@ -169,7 +169,7 @@ void Enemy_Move_Circle(GameObject * Enemy)
 		{
 			Enemy->direction = LEFT_UP;
 			Enemy_flg = 0;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 			return;
 		}
 		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
@@ -177,7 +177,7 @@ void Enemy_Move_Circle(GameObject * Enemy)
 		{
 			Enemy->direction = RIGHT_UP;
 			Enemy_flg = 0;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 			return;
 		}
 	}
@@ -268,12 +268,12 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 	if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
 		Player->mappos.RightDown == Enemy->mappos.RightDown)
 	{
-		turn = PLAYER_TURN;
+		turn = ENV_TURN;
 	}
 	if (Player2->mappos.LeftDown == Enemy->mappos.LeftDown &&
 		Player2->mappos.RightDown == Enemy->mappos.RightDown)
 	{
-		turn = PLAYER_TURN;
+		turn = ENV_TURN;
 	}
 }
 

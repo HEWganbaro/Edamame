@@ -149,7 +149,7 @@ BOOL Game_Initialize()
 	NoLeftDown->texture->SetSize(80, 80);
 	NoRightDown->texture = new Sprite("assets/No.png", 13, 7);
 	NoRightDown->texture->SetSize(80, 80);
-	tile->texture = new Sprite("assets/MapSeat.png", 6, 1);
+	tile->texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
 	tile->texture->SetSize(200, 200);
 	gBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
 	gBackGround.texture->SetSize(1280*2, 720*2);
@@ -219,6 +219,8 @@ BOOL Game_Update()
 		Enemy_Stun(gEnemy, gPlayer, gPlayer2, gObjects, MapChip);
 
 		break;
+	case ENV_TURN:
+		toIce(gObjects);
 	}
 
 	if (gEnemy->enemyeye == ENEMYEYE_IN)

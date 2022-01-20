@@ -1,7 +1,3 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  Effect.cpp
-c:\users\namen\documents\github\edamame_0119\hew\effect.cpp(5): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\namen\documents\github\edamame_0119\hew\effect.cpp(44): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\namen\documents\github\edamame_0119\hew\effect.cpp(53): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\namen\documents\github\edamame_0119\hew\effect.cpp(57): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Player.cpp
   DX21_Direct3D_Start.vcxproj -> C:\Users\namen\Documents\GitHub\Edamame_0119\HEW\x64\Debug\HEW.exe

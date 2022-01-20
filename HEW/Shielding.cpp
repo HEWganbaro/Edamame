@@ -40,7 +40,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_UP;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}
@@ -51,7 +51,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_DOWN;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}
@@ -62,7 +62,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_UP;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}
@@ -73,7 +73,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_DOWN;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}
@@ -85,7 +85,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_UP;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}
@@ -96,7 +96,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_DOWN;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}
@@ -107,7 +107,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_UP;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}
@@ -118,7 +118,7 @@ void Shield_Cancel(MapPos * mappos, GameObject * Player, GameObject * Player2, G
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_DOWN;
-			turn = PLAYER_TURN;
+			turn = ENV_TURN;
 		}
 		return;
 	}

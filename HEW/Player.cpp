@@ -126,12 +126,14 @@ void Player_Update(GameObject * Player, GameObject* Map, int MapChip[MAP_STAGE][
 	MapMove_Update(Player, Map);
 	if (Map_GetPlayerTile(Player, Map) == SNOW_GROUND) {
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->SetPart(1, 0);
+		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].yobiFlag = true;
 		Player->texture->SetPart(0, 0);
 
 	}
 	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].changeFlag = true;
 		Player->texture->SetPart(0, 0);
+
 	}
 	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
 		Player->texture->SetPart(1, 0);
@@ -140,6 +142,11 @@ void Player_Update(GameObject * Player, GameObject* Map, int MapChip[MAP_STAGE][
 	MapMove_Update(Player2, Map2);
 	if (Map_GetPlayerTile(Player2, Map2) == SNOW_GROUND) {
 		Map2[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].texture->SetPart(1, 0);
+		Map2[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].yobiFlag = true;
+		Player2->texture->SetPart(0, 0);
+	}
+	else if (Map_GetPlayerTile(Player2, Map) == NORMAL_GROUND) {
+		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].changeFlag = true;
 		Player2->texture->SetPart(0, 0);
 	}
 	else if (Map_GetPlayerTile(Player2, Map) == SOIL_GROUND) {
@@ -148,8 +155,14 @@ void Player_Update(GameObject * Player, GameObject* Map, int MapChip[MAP_STAGE][
 }
 
 void toIce(GameObject* Map) {
-	for (int i = 0; i < 300; i++)
-		if (Map[i].changeFlag == true) {
-			Map[i].texture->SetPart(2, 0);
+	for (int i = 0; i < 300; i++) {
+		if (Map[i].yobiFlag == false) {
+			if (Map[i].changeFlag == true) {
+				Map[i].texture->SetPart(2, 0);
+			}
 		}
+		else
+			Map[i].yobiFlag = false;
+	}
+	turn = PLAYER_TURN;
 }

@@ -48,6 +48,7 @@ enum Turn
 {
 	PLAYER_TURN,
 	ENEMY_TURN,
+	ENV_TURN
 };
 
 struct MapPos
@@ -63,7 +64,9 @@ struct GameObject {
 	// 変数書いていく
 	float posX, posY;  // 中心点の座標
 	float sizeX, sizeY; // 大きさ
+
 	bool changeFlag = false;//状態遷移などに使いたいとき用のフラグ
+	bool yobiFlag = false;//状態遷移に使った予備のフラグ
 
 	MapPos mappos;	//マップ単位でいる場所
 

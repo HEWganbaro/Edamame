@@ -177,7 +177,7 @@
       <Filter>ソース ファイル\Game</Filter>
     </ClCompile>
     <ClCompile Include="Effect.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
