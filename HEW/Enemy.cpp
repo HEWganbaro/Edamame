@@ -289,9 +289,9 @@ void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, G
 		Enemy->direction = LEFT_DOWN;
 		Enemy->enemyeye = ENEMYEYE_OUT;
 		Enemy->enemymove = ENEMY_STOP;
-		Player_cut = 0;
+		Player1_cut = 0;
 	}
-	if (Player_cut == 5)
+	if (Player1_cut == 5)
 	{
 		Enemy->enemymove = ENEMY_MOVE;
 	}
@@ -303,9 +303,9 @@ void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, G
 		Enemy->direction = RIGHT_DOWN;
 		Enemy->enemyeye = ENEMYEYE_OUT;
 		Enemy->enemymove = ENEMY_STOP;
-		Player_cut = 0;
+		Player1_cut = 0;
 	}
-	if (Player_cut == 5)
+	if (Player1_cut == 5)
 	{
 		Enemy->enemymove = ENEMY_MOVE;
 	}
@@ -318,9 +318,9 @@ void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, G
 		Enemy->direction = LEFT_DOWN;
 		Enemy->enemyeye = ENEMYEYE_OUT;
 		Enemy->enemymove = ENEMY_STOP;
-		Player_cut = 0;
+		Player2_cut = 0;
 	}
-	if (Player_cut == 5)
+	if (Player2_cut == 5)
 	{
 		Enemy->enemymove = ENEMY_MOVE;
 	}
@@ -332,9 +332,9 @@ void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, G
 		Enemy->direction = RIGHT_DOWN;
 		Enemy->enemyeye = ENEMYEYE_OUT;
 		Enemy->enemymove = ENEMY_STOP;
-		Player_cut = 0;
+		Player2_cut = 0;
 	}
-	if (Player_cut == 5)
+	if (Player2_cut == 5)
 	{
 		Enemy->enemymove = ENEMY_MOVE;
 	}

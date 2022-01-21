@@ -16,10 +16,10 @@
 
 using namespace std;
 
-extern int Player_cut;
+extern int Player1_cut;
+extern int Player2_cut;
 extern int Enemy_flg;
 extern int turn;
-
 
 enum Direction
 {
@@ -68,6 +68,9 @@ struct GameObject {
 	bool changeFlag = false;//状態遷移などに使いたいとき用のフラグ
 	bool yobiFlag = false;//状態遷移に使った予備のフラグ
 
+	bool Goalfrg;
+	int SnowSize;//雪玉の大きさ
+
 	MapPos mappos;	//マップ単位でいる場所
 
 	MapPos tmp;	//一時保存場所
@@ -84,13 +87,8 @@ struct GameObject {
 
 	Animator animator;  // アニメーションのクラス変数
 
-	//UvInfo uvinfo; // テクスチャの情報
-
 	Sprite* texture;	//画像データ
 };
-
-
-
 
 // 左右上下の４つの座標値を持つ構造体
 struct FRECT {

@@ -161,7 +161,6 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="input.h" />
-    <ClInclude Include="Player2.h" />
     <ClInclude Include="ps.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shielding.h" />

@@ -102,9 +102,6 @@
     <ClInclude Include="Goal.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Player2.h">
-      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>ヘッダー ファイル\Game\Title</Filter>
     </ClInclude>

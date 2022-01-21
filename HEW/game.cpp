@@ -26,7 +26,7 @@
 //#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   308
+#define MAX_OBJECT   304
 
 //*****************************************************************************
 // グローバル変数
@@ -40,17 +40,19 @@ int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE];
 vector<MapPos> StoneMap;
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
-GameObject* gPlayer = gObjects + 300;
-GameObject* NoHeight = gObjects + 301;
-GameObject* NoLeftDown = gObjects + 302;
-GameObject* NoRightDown = gObjects + 303;
-GameObject* tile = gObjects + 304;
-GameObject* gEnemy = gObjects + 305;
-GameObject* gGoal = gObjects + 306;
-GameObject* gPlayer2 = gObjects + 307;
 
+GameObject* NoHeight = gObjects + 300;
+GameObject* NoLeftDown = gObjects + 301;
+GameObject* NoRightDown = gObjects + 302;
+GameObject* tile = gObjects + 303;
+
+GameObject gPlayer1;
+GameObject gPlayer2;
+GameObject gEnemy;
 GameObject gBackGround;				//背景
+
 GameObject gEffect[4];
+
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
 //*****************************************************************************
@@ -108,39 +110,30 @@ BOOL Game_Initialize()
 	// マップ生成
 	Map_Initialize(gObjects);
 
-	//プレイヤー初期化
-	Player_Initialize(gPlayer, gPlayer2);
-
-	//プレイヤー場所指定
-	Player_SetLocation(gPlayer, gObjects, 0, 5, 5,
-						gPlayer2, gObjects, 0, 6, 6);
-
 	//エフェクト生成
 	for (int i = 0; i < 4; i++) {
 		Effect_Init(&gEffect[i]);
 	}
-	////雪玉の初期化
-	//SnowBall_Initialize(SnowBall, SnowBall2);
+
+	//プレイヤー初期化
+	Player_Initialize(&gPlayer1);
+	Player_Initialize(&gPlayer2);
+
 	////雪玉の場所指定
-	//SnowBall_SetLocation(SnowBall, gObjects, 0, 6, 4,
-	//					 SnowBall2, gObjects, 0, 4, 6);
+	Player_SetLocation(&gPlayer1, gObjects, 0, 5, 5);
+	Player_SetLocation(&gPlayer2, gObjects, 0, 6, 6);
 
 	//敵の初期化
-	Enemy_Initialize(gEnemy);
+	Enemy_Initialize(&gEnemy);
 
 	//敵の場所指定
-	Enemy_SetLocation(gEnemy, gObjects, 0, 4, 4);
-
-	//遮蔽の初期化
-	//Shield_Initialize(gShield);
-	//遮蔽の場所指定
-	//Shield_SetLocation(gShield, gObjects, 0, 3, 6);
+	Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 4);
 
 	//ゴールの初期化
-	Goal_Initialize(gGoal);
+	//Goal_Initialize(&gGoal);
 
-	//ゴールの場所指定
-	Goal_SetLocation(gGoal, gObjects, 0, 6, 7);
+	////ゴールの場所指定
+	//Goal_SetLocation(&gGoal, gObjects, 0, 6, 7);
 
 	//デバック用
 	NoHeight->texture = new Sprite("assets/No.png", 13, 7);
@@ -167,20 +160,20 @@ BOOL Game_Update()
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 
 	//デバック用
-	NoHeight->texture->SetPart(gPlayer->mappos.Height, 0);
+	NoHeight->texture->SetPart(gPlayer1.mappos.Height, 0);
 	NoHeight->posX = 0.5f;
 	NoHeight->posY = 0.5f;
-	NoLeftDown->texture->SetPart(gPlayer->mappos.LeftDown, 0);
+	NoLeftDown->texture->SetPart(gPlayer1.mappos.LeftDown, 0);
 	NoLeftDown->posX = 0.6f;
 	NoLeftDown->posY = 0.5f;
-	NoRightDown->texture->SetPart(gPlayer->mappos.RightDown, 0);
+	NoRightDown->texture->SetPart(gPlayer1.mappos.RightDown, 0);
 	NoRightDown->posX = 0.7f;
 	NoRightDown->posY = 0.5f;
-	tile->texture->SetPart(Map_GetPlayerTile(gPlayer, gObjects), 0);
+	tile->texture->SetPart(Map_GetPlayerTile(&gPlayer1, gObjects), 0);
 	tile->posX = 0.3;
 	tile->posY = 0.6;
 	gBackGround.posX = -1;
-	gBackGround.posY = 1;
+	gBackGround.posY = 10;
 	for (int i = 0; i < 4; i++) {
 		Efffect_Move(&gEffect[i]);
 	}
@@ -189,45 +182,40 @@ BOOL Game_Update()
 
 	Map_Update(gObjects, &StoneMap, MapChip);	//マップ変更↑↓
 
-	//SnowBall_Hit(gPlayer, SnowBall); //雪玉当たり判定
-	//SnowBall_Hit(gPlayer, SnowBall2);
-	//SnowBall_Hit(gPlayer2, SnowBall);
-	//SnowBall_Hit(gPlayer2, SnowBall2);
-	//SnowBall_Update(SnowBall, gObjects, MapChip, SnowBall2, gObjects, MapChip);
-
 	switch (turn)
 	{
 	case PLAYER_TURN:
 
-		Player_Update(gPlayer, gObjects, MapChip, gPlayer, gObjects, MapChip);
-		Player_Input(gPlayer, gObjects, gPlayer2, gObjects);	//プレイヤー移動
+		Player_Input(&gPlayer1, &gPlayer2);	//プレイヤー移動
+		Player_Update(&gPlayer1, gObjects);
+		Player_Update(&gPlayer2, gObjects);
 
 		break;
 
 	case ENEMY_TURN:
 
-		if (gEnemy->direction == NULL_WAY)
+		if (gEnemy.direction == NULL_WAY)
 		{
 			//敵の巡回
-			Enemy_Move_Circle(gEnemy);
+			Enemy_Move_Circle(&gEnemy);
 			//敵の接近
-			Enemy_Move_Chase(gEnemy, gPlayer, gPlayer2);
+			Enemy_Move_Chase(&gEnemy, &gPlayer1, &gPlayer2);
 		}
 
-		Enemy_Hit(gEnemy);
+		Enemy_Hit(&gEnemy);
 		//敵のスタン
-		Enemy_Stun(gEnemy, gPlayer, gPlayer2, gObjects, MapChip);
+		Enemy_Stun(&gEnemy, &gPlayer1, &gPlayer2, gObjects, MapChip);
 
 		break;
 	case ENV_TURN:
 		toIce(gObjects);
 	}
 
-	if (gEnemy->enemyeye == ENEMYEYE_IN)
+	if (gEnemy.enemyeye == ENEMYEYE_IN)
 	{
 		//遮蔽でのヘイトそらし
 		for (int i = 0; i < StoneMap.size(); i++) {
-			Shield_Cancel(&StoneMap[i], gPlayer, gPlayer2, gEnemy);
+			Shield_Cancel(&StoneMap[i], &gPlayer1, &gPlayer2, &gEnemy);
 		}
 	}
 	//Shield_Hit(gShield, gPlayer);
@@ -237,8 +225,9 @@ BOOL Game_Update()
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		GameObject_DrowUpdate(&gObjects[i]);
 	}
-
-	
+	GameObject_DrowUpdate(&gPlayer1);
+	GameObject_DrowUpdate(&gPlayer2);
+	GameObject_DrowUpdate(&gEnemy);
 	GameObject_DrowUpdate(&gBackGround);
 	for (int i = 0; i < 4; i++) {
 		GameObject_DrowUpdate(&gEffect[i]);
@@ -263,6 +252,9 @@ void Game_Draw()
 	gEffect[1].texture->Draw();
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].texture->Draw();
+	gPlayer1.texture->Draw();
+	gPlayer2.texture->Draw();
+	gEnemy.texture->Draw();
 
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
@@ -276,14 +268,16 @@ void Game_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
 
+	delete gPlayer1.texture;
+	delete gPlayer2.texture;
+	delete gEnemy.texture;
 	delete gBackGround.texture;
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++)
 		delete gEffect[i].texture;
-	}
-	//delete gEffect.texture;
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		delete gObjects[i].texture;
 		gObjects[i].posX = 0;
 		gObjects[i].posY = 0;
 	}
+
 }

@@ -8,7 +8,7 @@ void Map_Initialize(GameObject * Map)
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				Map[i + MAP_EDGE * j + 100 * k].texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
+				Map[i + MAP_EDGE * j + 100 * k].texture = new Sprite("assets/Mapseat_kougasitu.png", 8, 1);
 				Map[i + MAP_EDGE * j + 100 * k].texture->SetSize(BOX_HEIGHT, BOX_WIDTH);
 			}
 		}
@@ -18,9 +18,9 @@ void Map_Initialize(GameObject * Map)
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
 				Map[i + j * MAP_EDGE + 100 * k].posX += MAP_LENGTH * (i + 1 - j);
-				Map[i + j * MAP_EDGE + 100 * k].posY -= MAP_LENGTH * (i + 1 + j);
+				Map[i + j * MAP_EDGE + 100 * k].posY -= (MAP_LENGTH-0.01f) * (i + 1 + j);
 
-				Map[i + j * MAP_EDGE + 100 * k].posY += 0.7f + k * MAP_LENGTH*1.375f;
+				Map[i + j * MAP_EDGE + 100 * k].posY += 0.7f + k * MAP_LENGTH*1.225f;
 				Map[i + j * MAP_EDGE + 100 * k].posX -= MAP_LENGTH * 2;
 			}
 		}
@@ -63,6 +63,13 @@ void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAG
 	//CSVの順番通りになる
 	if (Input_GetKeyTrigger(VK_DOWN) && gStarg > 0) {
 		StoneMap->clear();
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].changeFlag = false;
+				}
+			}
+		}
 		gStarg--;
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
@@ -143,7 +150,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				if (Player->animator.count != 0)
 					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
 				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
-				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.25f * 2;
 				Player->animator.count++;
 			}
 			else {
@@ -161,7 +168,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				if (Player->animator.count != 0)
 					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
 				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
-				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.25f * 2;
 				Player->animator.count++;
 			}
 			else {
@@ -207,6 +214,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
+
 				turn = ENEMY_TURN;
 			}
 			break;
@@ -352,15 +360,15 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->posY -= (Ice_Easing(tmp) - Ice_Easing(tmp1))*MAP_LENGTH;
 				Player->animator.count++;
 				if (Player->animator.count == PLAYER_SPEED) {	//止める
-					if(Map_GetPlayerTile_RightDown(Player, Map) != LEFTUP_SLOPE)
+					if (Map_GetPlayerTile_RightDown(Player, Map) != LEFTUP_SLOPE)
 						Player->direction = NULL_WAY;
 					Player->animator.count = 0;
 					Player->animator.ice = false;
 					turn = ENEMY_TURN;
 					if (Player->mappos.RightDown + 1 != MAP_EDGE &&
 						Map_GetPlayerTile_RightDown(Player, Map) != -1 &&//マップ外の時は動かさない
-					    Map_GetPlayerTile_RightDown(Player, Map) != RIGHTUP_SLOPE && Map_GetPlayerTile_RightDown(Player, Map) != STONE)
-					Player->mappos.RightDown++;
+						Map_GetPlayerTile_RightDown(Player, Map) != RIGHTUP_SLOPE && Map_GetPlayerTile_RightDown(Player, Map) != STONE)
+						Player->mappos.RightDown++;
 				}
 			}
 			else {
@@ -436,7 +444,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					Player->animator.ice = false;
 					turn = ENEMY_TURN;
 					if (Player->mappos.RightDown - 1 != -1) {
- 						if (Map_GetPlayerTile_LeftUp(Player, Map) != -1 && Map_GetPlayerTile_LeftUp(Player, Map) != STONE)
+						if (Map_GetPlayerTile_LeftUp(Player, Map) != -1 && Map_GetPlayerTile_LeftUp(Player, Map) != STONE)
 							Player->mappos.RightDown--;
 					}
 				}
@@ -576,7 +584,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				if (Player->animator.count != 0)
 					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
 				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
-				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.25f * 2;
 				Player->animator.count++;
 			}
 			else {
@@ -610,7 +618,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				if (Player->animator.count != 0)
 					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
 				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 2;
-				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.75f * 2;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH * 1.25f * 2;
 				Player->animator.count++;
 			}
 			else {
@@ -624,22 +632,21 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		else {
 			switch (Player->direction)
 			{
-				case RIGHT_UP:
-					Player->mappos.LeftDown++;
-					Player->direction = NULL_WAY;
-					Player->animator.count = 0;
-					return;
-				case LEFT_DOWN:
-					Player->mappos.LeftDown--;
-					Player->direction = NULL_WAY;
-					Player->animator.count = 0;
-					return;
+			case RIGHT_UP:
+				Player->mappos.LeftDown++;
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				return;
+			case LEFT_DOWN:
+				Player->mappos.LeftDown--;
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				return;
 			}
 		}
 	}
 	//石の時
-	else if (Map_GetPlayerTile(Player, Map) == STONE)
-	{
+	else if (Map_GetPlayerTile(Player, Map) == STONE) {
 		switch (Player->direction) {
 		case RIGHT_DOWN:
 			Player->mappos.RightDown--;
@@ -656,9 +663,78 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		}
 		Player->direction = NULL_WAY;
 	}
+	//ゴールの時
 	else if (Map_GetPlayerTile(Player, Map) == GOAL) {
+	Player->Goalfrg = true;
+		switch (Player->direction)
+		{
+		case RIGHT_DOWN:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				turn = ENEMY_TURN;
+			}
+			break;
 
+		case LEFT_DOWN:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				turn = ENEMY_TURN;
+			}
+			break;
 
+		case LEFT_UP:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				turn = ENEMY_TURN;
+			}
+			break;
 
+		case RIGHT_UP:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				turn = ENEMY_TURN;
+			}
+			break;
+		}
 	}
 }

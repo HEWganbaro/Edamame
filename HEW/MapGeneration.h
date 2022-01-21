@@ -16,7 +16,7 @@
 #define MAP_STAGE_FRG -99
 
 //移動スピード
-#define PLAYER_SPEED 60  //大きい方が遅い
+#define PLAYER_SPEED 30  //大きい方が遅い
 #define ENEMY_SPEED 30
 
 
