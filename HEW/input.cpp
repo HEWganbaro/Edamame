@@ -39,6 +39,7 @@ void Input_Update()
 	int iPad_left = 0, iPad_right = 0, iPad_up = 0, iPad_down = 0;
 	int iPad_leftshoulder = 0, iPad_rightshoulder = 0;
 	int iPad_A = 0, iPad_B = 0, iPad_X = 0, iPad_Y = 0;
+
 	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) iPad_left = 1;//ゲームパッド十字キー左
 	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) iPad_right = 1;//ゲームパッド十字キー右
 	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) iPad_up = 1;//ゲームパッド十字キー上
@@ -95,6 +96,8 @@ void Input_Update()
 	swprintf(wcText7, 256, L"bLeftTrigger=%d bRightTrigger=%d", state.Gamepad.bLeftTrigger, state.Gamepad.bRightTrigger);
 
 }
+
+
 
 bool Input_GetKeyPress(int vkey)
 {

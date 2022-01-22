@@ -18,9 +18,13 @@
 #define XINPUT_GAMEPAD_DPAD_RIGHTUP         0x0009
 #define XINPUT_GAMEPAD_DPAD_RIGHTDOWN       0x0010
 
+#define DEADZONE_STICK 15000
+#define DEADZONE_MSTICK -15000
+
 void Input_Update();
 bool Input_GetKeyPress(int vkey);
 bool Input_GetKeyTrigger(int vkey);
+bool Input_LstickRightUp();
 
 //--------------------------------------------------------------------------------------
 // DirectX11ÉNÉâÉXÅFDirectXä÷åW

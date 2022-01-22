@@ -37,25 +37,25 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 
 	//ステージマップによって分岐させる
 	if (Player->direction == NULL_WAY && Player->Goalfrg == false) {
-		if (Input_GetKeyTrigger('Q') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
+		if (Input_GetKeyTrigger('Q')|| (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
 			Player->direction = LEFT_UP;
 			Player->mappos.RightDown--;
 			Player1_cut++;
 			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('A')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
+		if (Input_GetKeyTrigger('A')|| (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)){
 			Player->direction = LEFT_DOWN;
 			Player->mappos.LeftDown++;
 			Player1_cut++;
 			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('E')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
+		if (Input_GetKeyTrigger('E')|| (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
 			Player->direction = RIGHT_UP;
 			Player->mappos.LeftDown--;
 			Player1_cut++;
 			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('D')||(state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
+		if (Input_GetKeyTrigger('D')|| (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)) {
 			Player->direction = RIGHT_DOWN;
 			Player->mappos.RightDown++;
 			Player1_cut++;
@@ -65,25 +65,25 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 
 	//プレイヤー2
 	if (Player2->direction == NULL_WAY && Player2->Goalfrg == false) {
-		if (Input_GetKeyTrigger('U') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
+		if (Input_GetKeyTrigger('U') || (state.Gamepad.sThumbRX < DEADZONE_MSTICK&&state.Gamepad.sThumbRY > DEADZONE_STICK)) {
 			Player2->direction = LEFT_UP;
 			Player2->mappos.RightDown--;
 			Player2_cut++;
 			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('J') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)) {
+		if (Input_GetKeyTrigger('J') || (state.Gamepad.sThumbRX < DEADZONE_MSTICK&&state.Gamepad.sThumbRY < DEADZONE_MSTICK)) {
 			Player2->direction = LEFT_DOWN;
 			Player2->mappos.LeftDown++;
 			Player2_cut++;
 			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('O') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
+		if (Input_GetKeyTrigger('O') || (state.Gamepad.sThumbRX > DEADZONE_STICK&&state.Gamepad.sThumbRY > DEADZONE_STICK)) {
 			Player2->direction = RIGHT_UP;
 			Player2->mappos.LeftDown--;
 			Player2_cut++;
 			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('L') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) && (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
+		if (Input_GetKeyTrigger('L') || (state.Gamepad.sThumbRX > DEADZONE_STICK&&state.Gamepad.sThumbRY < DEADZONE_MSTICK)) {
 			Player2->direction = RIGHT_DOWN;
 			Player2->mappos.RightDown++;
 			Player2_cut++;
