@@ -139,6 +139,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				case TITLE:
 					gScene.Title();
 					break;
+				case LEVEL:
+					gScene.Level();
+					break;
 				case GAME:
 					gScene.Game();
 					break;

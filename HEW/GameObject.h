@@ -20,6 +20,8 @@ extern int Player1_cut;
 extern int Player2_cut;
 extern int Enemy_flg;
 extern int turn;
+extern int stage;
+
 
 enum Direction
 {
@@ -49,6 +51,13 @@ enum Turn
 	PLAYER_TURN,
 	ENEMY_TURN,
 	ENV_TURN
+};
+
+enum Stage
+{
+	NO_STAGE,
+	STAGE_1,
+	STAGE_2,
 };
 
 struct MapPos

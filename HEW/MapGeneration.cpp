@@ -2,6 +2,8 @@
 #include "input.h"
 
 int gStarg = 0;
+int stage = NO_STAGE;
+
 
 void Map_Initialize(GameObject * Map)
 {
@@ -61,7 +63,7 @@ int Map_GetPlayerTile_Top(GameObject * Player, GameObject * Map)
 void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
 	//CSV‚Ì‡”Ô’Ê‚è‚É‚È‚é
-	if (Input_GetKeyTrigger(VK_DOWN) && gStarg > 0) {
+	if (stage == STAGE_1) {
 		StoneMap->clear();
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
@@ -74,19 +76,19 @@ void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAG
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
-					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[gStarg][k][j][i], 0);
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
 				}
 			}
 		}
 		Map_GetStone(StoneMap, Map);
 	}
-	if (Input_GetKeyTrigger(VK_UP) && gStarg < MAP_STAGE - 1) {
+	if (stage == STAGE_2) {
 		StoneMap->clear();
 		gStarg++;
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
-					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[gStarg][k][j][i], 0);
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
 				}
 			}
 		}

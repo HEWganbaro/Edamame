@@ -114,6 +114,9 @@
     <ClInclude Include="Effect.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>ヘッダー ファイル\Game\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>ソース ファイル\Game\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

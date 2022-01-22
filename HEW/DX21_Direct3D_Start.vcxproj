@@ -154,6 +154,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="MapGeneration.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="direct3d.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGeneration.cpp" />
     <ClCompile Include="Player.cpp" />
