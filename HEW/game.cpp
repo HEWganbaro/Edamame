@@ -136,11 +136,11 @@ BOOL Game_Initialize()
 	//Goal_SetLocation(&gGoal, gObjects, 0, 6, 7);
 
 	//デバック用
-	NoHeight->texture = new Sprite("assets/No.png", 13, 7);
+	NoHeight->texture = new Sprite("assets/dotFont.png", 16, 8);
 	NoHeight->texture->SetSize(80, 80);
-	NoLeftDown->texture = new Sprite("assets/No.png", 13, 7);
+	NoLeftDown->texture = new Sprite("assets/dotFont.png", 16, 8);
 	NoLeftDown->texture->SetSize(80, 80);
-	NoRightDown->texture = new Sprite("assets/No.png", 13, 7);
+	NoRightDown->texture = new Sprite("assets/dotFont.png", 16, 8);
 	NoRightDown->texture->SetSize(80, 80);
 	tile->texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
 	tile->texture->SetSize(200, 200);
@@ -163,10 +163,10 @@ BOOL Game_Update()
 	NoHeight->texture->SetPart(gPlayer1.mappos.Height, 0);
 	NoHeight->posX = 0.5f;
 	NoHeight->posY = 0.5f;
-	NoLeftDown->texture->SetPart(gPlayer1.mappos.LeftDown, 0);
+	NoLeftDown->texture->SetPart(gPlayer1.mappos.LeftDown, 1);
 	NoLeftDown->posX = 0.6f;
 	NoLeftDown->posY = 0.5f;
-	NoRightDown->texture->SetPart(gPlayer1.mappos.RightDown, 0);
+	NoRightDown->texture->SetPart(gPlayer1.mappos.RightDown, 2);
 	NoRightDown->posX = 0.7f;
 	NoRightDown->posY = 0.5f;
 	tile->texture->SetPart(Map_GetPlayerTile(&gPlayer1, gObjects), 0);

@@ -1,3 +1,5 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  Player.cpp
-  DX21_Direct3D_Start.vcxproj -> C:\Users\81803\Desktop\HAL\HEW_1\Edamame\HEW\x64\Debug\HEW.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+  game.cpp
+c:\users\namen\onedrive\ドキュメント\github\edamame_0122\hew\game.cpp(173): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+c:\users\namen\onedrive\ドキュメント\github\edamame_0122\hew\game.cpp(174): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  DX21_Direct3D_Start.vcxproj -> C:\Users\namen\OneDrive\ドキュメント\GitHub\Edamame_0122\HEW\x64\Debug\HEW.exe
