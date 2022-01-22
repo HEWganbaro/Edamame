@@ -23,6 +23,8 @@
 #include "Goal.h"
 #include "Effect.h"
 
+#define ASPECT 16/9
+
 BOOL Game_Initialize();
 BOOL Game_Update();
 void Game_Draw();

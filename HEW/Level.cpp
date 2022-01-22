@@ -55,14 +55,14 @@ BOOL Level_Initialize()
 	lBackGround.posX = -1;
 	lBackGround.posY = 1;
 
-	glevel.texture = new Sprite("assets/No.png", 13, 7);
-	glevel.texture->SetSize(80, 80);
+	glevel.texture = new Sprite("assets/dotFont.png", 16, 8);
+	glevel.texture->SetSize(80, 160);
 
-	glevel2.texture = new Sprite("assets/No.png", 13, 7);
-	glevel2.texture->SetSize(80, 80);
+	glevel2.texture = new Sprite("assets/dotFont.png", 16, 8);
+	glevel2.texture->SetSize(80, 160);
 
-	gchoice.texture = new Sprite("assets/No.png", 13, 7);
-	gchoice.texture->SetSize(80, 80);
+	gchoice.texture = new Sprite("assets/dotFont.png", 16, 8);
+	gchoice.texture->SetSize(80, 160);
 	gchoice.texture->SetPart(0, 0);
 	gchoice.posX = 0.8f;
 	gchoice.posY = 0.8f;
