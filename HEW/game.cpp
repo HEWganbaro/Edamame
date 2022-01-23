@@ -173,7 +173,7 @@ BOOL Game_Update()
 	tile->posX = 0.3;
 	tile->posY = 0.6;
 	gBackGround.posX = -1;
-	gBackGround.posY = 1;
+	gBackGround.posY = 10;
 	for (int i = 0; i < 4; i++) {
 		Efffect_Move(&gEffect[i]);
 	}

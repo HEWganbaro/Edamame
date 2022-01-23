@@ -45,18 +45,10 @@ public:
 	void SetPart(int x, int y);
 
 	int GetPart(void);
-	void SetAlpha(float a);
 
 // 分割されたテクスチャのどれを描画するのか。
 	int mPartX = 0; // 0～horizontalPartNum - 1
 	int mPartY = 0; // 0～verticalPartNum - 1
-
-	struct {
-		float r = 1.0f;
-		float g = 1.0f;
-		float b = 1.0f;
-		float a = 1.0f;
-	} color;
 
 private:
 	int mHorizontalPartNum;
@@ -66,8 +58,6 @@ private:
 	float mY = 0;
 	float mWidth = 0;
 	float mHeight = 0;
-
-	
 
 	
 
