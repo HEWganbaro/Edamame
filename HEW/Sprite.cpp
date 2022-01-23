@@ -6,7 +6,7 @@
 // game.cppのVERTEX_POSTEXと完全に一致させる必要がある。
 struct VERTEX_POSTEX {
 	float x, y, z;  // 頂点の位置
-	float r, g, b, a;  // 頂点の色（赤, 緑, 青, 透明度）
+
 	float u, v;  // テクスチャのUV座標
 };
 
@@ -68,23 +68,14 @@ void Sprite::Draw() {
 	float bv = (mPartY + 1) * v;
 
 	VERTEX_POSTEX vertexData[] = {
-		{l, t, 0,color.r,color.g,color.b,color.a, lu, tv},
-		{r, t, 0,color.r,color.g,color.b,color.a, ru, tv},
-		{r, b, 0,color.r,color.g,color.b,color.a, ru, bv},
-
-		{r, b, 0,color.r,color.g,color.b,color.a, ru, bv},
-		{l, b, 0,color.r,color.g,color.b,color.a, lu, bv},
-		{l, t, 0,color.r,color.g,color.b,color.a, lu, tv},
-
-		/*{l, t, 0, lu, tv},
+		{l, t, 0, lu, tv},
 		{r, t, 0, ru, tv},
 		{r, b, 0, ru, bv},
 
 		{r, b, 0, ru, bv},
 		{l, b, 0, lu, bv},
-		{l, t, 0, lu, tv},*/
+		{l, t, 0, lu, tv},
 	};
-
 
 	// 頂点バッファを更新
 	Direct3D_GetContext()->UpdateSubresource(mpVertexBuffer, 0, NULL, vertexData, 0, 0);
@@ -116,9 +107,4 @@ void Sprite::SetPart(int x, int y) {
 int Sprite::GetPart(void)
 {
 	return mPartX;
-}
-
-void Sprite::SetAlpha(float a) {
-	color.a = a;
-	
 }
