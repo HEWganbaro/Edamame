@@ -10,6 +10,7 @@ int Player2_cut = 0;
 void Player_Initialize(GameObject* Player) {
 	Player->texture = new Sprite("assets/snowBall.png", 2, 1);
 	Player->texture->SetSize(INIT_SNOW_SIZE, INIT_SNOW_SIZE);
+	Player->texture->SetAlpha(0.5f);
 	Player->posY = 0.5f;
 	Player->mappos.Height = 0;
 	Player->mappos.LeftDown = 0;
