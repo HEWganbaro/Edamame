@@ -30,9 +30,13 @@ enum Mapchip
 	LEFTUP_SLOPE,
 	STONE,
 	GOAL,
+	GOAL_LATER,
+	ITEM_FACE,
+	ITEM_ARM,
 };
 
 void Map_Initialize(GameObject* Map);
+int Map_GetStage();
 int Map_GetPlayerTile(GameObject* Player, GameObject* Map);
 int Map_GetPlayerTile_LeftUp(GameObject* Player, GameObject* Map);
 int Map_GetPlayerTile_RightDown(GameObject* Player, GameObject* Map);

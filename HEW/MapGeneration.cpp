@@ -10,7 +10,7 @@ void Map_Initialize(GameObject * Map)
 	for (int k = 0; k < MAP_HEIGHT; k++) {
 		for (int j = 0; j < MAP_EDGE; j++) {
 			for (int i = 0; i < MAP_EDGE; i++) {
-				Map[i + MAP_EDGE * j + 100 * k].texture = new Sprite("assets/Mapseat_kougasitu.png", 8, 1);
+				Map[i + MAP_EDGE * j + 100 * k].texture = new Sprite("assets/Sprite_seat.png", 11, 1);
 				Map[i + MAP_EDGE * j + 100 * k].texture->SetSize(BOX_HEIGHT, BOX_WIDTH);
 			}
 		}
@@ -27,6 +27,11 @@ void Map_Initialize(GameObject * Map)
 			}
 		}
 	}
+}
+
+int Map_GetStage()
+{
+	return gStarg;
 }
 
 int Map_GetPlayerTile(GameObject * Player, GameObject * Map)
@@ -62,17 +67,17 @@ int Map_GetPlayerTile_Top(GameObject * Player, GameObject * Map)
 //プレイヤーのタイルを返す関数
 void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
 {
+	for (int k = 0; k < MAP_HEIGHT; k++) {
+		for (int j = 0; j < MAP_EDGE; j++) {
+			for (int i = 0; i < MAP_EDGE; i++) {
+				Map[i + MAP_EDGE * j + 100 * k].changeFlag = false;
+			}
+		}
+	}
 	//CSVの順番通りになる
 	if (stage == STAGE_1) {
 		StoneMap->clear();
-		for (int k = 0; k < MAP_HEIGHT; k++) {
-			for (int j = 0; j < MAP_EDGE; j++) {
-				for (int i = 0; i < MAP_EDGE; i++) {
-					Map[i + MAP_EDGE * j + 100 * k].changeFlag = false;
-				}
-			}
-		}
-		gStarg--;
+		gStarg = 0;
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
@@ -84,7 +89,7 @@ void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAG
 	}
 	if (stage == STAGE_2) {
 		StoneMap->clear();
-		gStarg++;
+		gStarg = 1;
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
@@ -123,21 +128,25 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 	if (Player->mappos.LeftDown == -1) {
 		Player->mappos.LeftDown++;
 		Player->direction = NULL_WAY;
+		Player->animator.isActive = false;
 		return;
 	}
 	if (Player->mappos.RightDown == -1) {
 		Player->mappos.RightDown++;
 		Player->direction = NULL_WAY;
+		Player->animator.isActive = false;
 		return;
 	}
 	if (Player->mappos.LeftDown == MAP_EDGE) {
 		Player->mappos.LeftDown--;
 		Player->direction = NULL_WAY;
+		Player->animator.isActive = false;
 		return;
 	}
 	if (Player->mappos.RightDown == MAP_EDGE) {
 		Player->mappos.RightDown--;
 		Player->direction = NULL_WAY;
+		Player->animator.isActive = false;
 		return;
 	}
 	//進むマスが何か取得
@@ -197,6 +206,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				break;
 			}
 			Player->direction = NULL_WAY;
+			Player->animator.isActive = false;
 			return;
 		}
 	}//雪の上の時
@@ -216,7 +226,6 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			else {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
-
 				Player->animator.isActive = false;
 			}
 			break;
@@ -364,13 +373,18 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				if (Player->animator.count == PLAYER_SPEED) {	//止める
 					if (Map_GetPlayerTile_RightDown(Player, Map) != LEFTUP_SLOPE)
 						Player->direction = NULL_WAY;
-					Player->animator.count = 0;
-					Player->animator.ice = false;
-					Player->animator.isActive = false;
+						Player->animator.count = 0;
+						Player->animator.ice = false;
+						Player->animator.isActive = false;
 					if (Player->mappos.RightDown + 1 != MAP_EDGE &&
 						Map_GetPlayerTile_RightDown(Player, Map) != -1 &&//マップ外の時は動かさない
 						Map_GetPlayerTile_RightDown(Player, Map) != RIGHTUP_SLOPE && Map_GetPlayerTile_RightDown(Player, Map) != STONE)
 						Player->mappos.RightDown++;
+					//ゴールなら止める
+					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
+						Player->Goalfrg = true;
+					if (Map_GetPlayerTile(Player, Map) == GOAL)
+						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 				}
 			}
 			else {
@@ -404,13 +418,17 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				if (Player->animator.count == PLAYER_SPEED) {	//止める
 					if (Map_GetPlayerTile_LeftDown(Player, Map) != RIGHTUP_SLOPE)
 						Player->direction = NULL_WAY;
-					Player->animator.count = 0;
-					Player->animator.ice = false;
-					Player->animator.isActive = false;
+						Player->animator.count = 0;
+						Player->animator.ice = false;
+						Player->animator.isActive = false;
 					if (Player->mappos.LeftDown + 1 != MAP_EDGE &&
 						Map_GetPlayerTile_LeftDown(Player, Map) != -1 &&
 						Map_GetPlayerTile_LeftDown(Player, Map) != LEFTUP_SLOPE && Map_GetPlayerTile_LeftDown(Player, Map) != STONE)
 						Player->mappos.LeftDown++;
+					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
+						Player->Goalfrg = true;
+					if (Map_GetPlayerTile(Player, Map) == GOAL)
+						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 				}
 			}
 			else {
@@ -449,6 +467,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						if (Map_GetPlayerTile_LeftUp(Player, Map) != -1 && Map_GetPlayerTile_LeftUp(Player, Map) != STONE)
 							Player->mappos.RightDown--;
 					}
+					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
+						Player->Goalfrg = true;
+					if (Map_GetPlayerTile(Player, Map) == GOAL)
+						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 				}
 			}
 			else {
@@ -487,6 +509,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						if (Map_GetPlayerTile_RightUp(Player, Map) != -1 && Map_GetPlayerTile_RightUp(Player, Map) != STONE)
 							Player->mappos.LeftDown--;
 					}
+					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
+						Player->Goalfrg = true;
+					if (Map_GetPlayerTile(Player, Map) == GOAL)
+						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 				}
 			}
 			else {
@@ -602,11 +628,13 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			case RIGHT_DOWN:
 				Player->mappos.RightDown--;
 				Player->direction = NULL_WAY;
+				Player->animator.isActive = false;
 				Player->animator.count = 0;
 				return;
 			case LEFT_UP:
 				Player->mappos.RightDown++;
 				Player->direction = NULL_WAY;
+				Player->animator.isActive = false;
 				Player->animator.count = 0;
 				return;
 			}
@@ -637,11 +665,13 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			case RIGHT_UP:
 				Player->mappos.LeftDown++;
 				Player->direction = NULL_WAY;
+				Player->animator.isActive = false;
 				Player->animator.count = 0;
 				return;
 			case LEFT_DOWN:
 				Player->mappos.LeftDown--;
 				Player->direction = NULL_WAY;
+				Player->animator.isActive = false;
 				Player->animator.count = 0;
 				return;
 			}
@@ -652,23 +682,50 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		switch (Player->direction) {
 		case RIGHT_DOWN:
 			Player->mappos.RightDown--;
+			Player->animator.isActive = false;
 			break;
 		case LEFT_DOWN:
 			Player->mappos.LeftDown--;
+			Player->animator.isActive = false;
 			break;
 		case LEFT_UP:
 			Player->mappos.RightDown++;
+			Player->animator.isActive = false;
 			break;
 		case RIGHT_UP:
 			Player->mappos.LeftDown++;
+			Player->animator.isActive = false;
 			break;
 		}
 		Player->direction = NULL_WAY;
 	}
 	//ゴールの時
-	else if (Map_GetPlayerTile(Player, Map) == GOAL) {
-	Player->Goalfrg = true;
-	Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(0, 1);
+	else if (Map_GetPlayerTile(Player, Map) == GOAL|| Map_GetPlayerTile(Player, Map) == GOAL_LATER) {
+	//敵はゴールに入れない
+	if (Player->IsEnemy == true) {
+		switch (Player->direction) {
+		case RIGHT_DOWN:
+			Player->mappos.RightDown--;
+			Player->animator.isActive = false;
+			break;
+		case LEFT_DOWN:
+			Player->mappos.LeftDown--;
+			Player->animator.isActive = false;
+			break;
+		case LEFT_UP:
+			Player->mappos.RightDown++;
+			Player->animator.isActive = false;
+			break;
+		case RIGHT_UP:
+			Player->mappos.LeftDown++;
+			Player->animator.isActive = false;
+			break;
+		}
+		Player->direction = NULL_WAY;
+	}
+	else {
+		Player->Goalfrg = true;//プレイヤーを動けなくする
+	}
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
@@ -685,6 +742,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
+				Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 			}
 			break;
 
@@ -702,6 +760,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
+				Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 			}
 			break;
 
@@ -719,6 +778,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
+				Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 			}
 			break;
 
@@ -736,6 +796,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
+				Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
 			}
 			break;
 		}

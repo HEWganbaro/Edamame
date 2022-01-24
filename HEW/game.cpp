@@ -49,7 +49,7 @@ GameObject* tile = gObjects + 303;
 GameObject gPlayer1;
 GameObject gPlayer2;
 GameObject gEnemy;
-vector<GameObject> genemy;
+vector<GameObject> gEnemyVector;
 GameObject gBackGround;				//背景
 
 GameObject gEffect[4];
@@ -108,6 +108,8 @@ BOOL Game_Initialize()
 		}
 	}
 
+	turn = PLAYER_TURN;
+
 	// マップ生成
 	Map_Initialize(gObjects);
 
@@ -124,17 +126,27 @@ BOOL Game_Initialize()
 	Player_SetLocation(&gPlayer1, gObjects, 0, 5, 5);
 	Player_SetLocation(&gPlayer2, gObjects, 0, 6, 6);
 
-	//敵の初期化
-	Enemy_Initialize(&gEnemy);
+	//マップ変更
+	Map_Update(gObjects, &StoneMap, MapChip);
 
 	//敵の場所指定
-	Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 4);
 	//敵の場所を指定しておく
-	//switch (switch_on)
-	//{
-	//default:
-	//	break;
-	//}
+	switch (Map_GetStage())
+	{
+	case 0:
+		//敵の初期化
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 6);
+		gEnemyVector.emplace_back(gEnemy);
+
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 5, 4);
+		gEnemyVector.emplace_back(gEnemy);
+		break;
+
+	default:
+		break;
+	}
 
 	//背景描画
 	gBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
@@ -152,9 +164,6 @@ BOOL Game_Initialize()
 	tile->texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
 	tile->texture->SetSize(200, 200);
 
-	//マップ変更
-	Map_Update(gObjects, &StoneMap, MapChip);	
-
 	return TRUE;
 }
 
@@ -163,6 +172,8 @@ BOOL Game_Initialize()
 BOOL Game_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
+	XINPUT_STATE state;
+	XInputGetState(0, &state);
 
 	//デバック用
 	NoHeight->texture->SetPart(gPlayer1.mappos.Height, 0);
@@ -198,27 +209,66 @@ BOOL Game_Update()
 		break;
 
 	case ENEMY_TURN:
+	{
+		bool end = false;
 		//敵移動
-		if (gEnemy.direction == NULL_WAY) {
-			//敵の接近
-			//Enemy_Move_Chase(&gEnemy, &gPlayer1, &gPlayer2);
-			if (gEnemy.direction == NULL_WAY) {
-				//敵の巡回
-				Enemy_Move_Circle(&gEnemy);
+		for (int i = 0; i < gEnemyVector.size(); i++) {
+			if (gEnemyVector[i].direction == NULL_WAY && gEnemyVector[i].animator.oneAni == false) {
+				//敵の接近
+				if (gEnemyVector[i].direction == NULL_WAY) {
+					//敵のタイプに合わせて行動変化
+					switch (gEnemyVector[i].enemytype) {
+					case RANDOM:
+						Enemy_Move_Random(&gEnemyVector[i]);
+						break;
+
+					case FOLLOWING:
+						Enemy_Move_Chase(&gEnemyVector[i], &gPlayer1, &gPlayer2);
+						break;
+
+					case CIRCUMFRENCE:
+						Enemy_Move_Circle(&gEnemyVector[i]);
+						break;
+					}
+				}
+				end = true;
 			}
+			else {
+				//敵の移動処理
+				MapMove_Update(&gEnemyVector[i], gObjects);
+				if (gEnemyVector[i].animator.isActive != false) {
+					end = true;
+					gEnemyVector[i].animator.oneAni = true;
+				}
+			}
+			//敵のスタン
+			//Enemy_Stun(&gEnemy, &gPlayer1, &gPlayer2, gObjects, MapChip);
 		}
-		else {
-			//敵の移動処理
-			MapMove_Update(&gEnemy, gObjects);
-			if (gEnemy.direction == NULL_WAY)
-				turn = ENV_TURN;
+		if (end == false) {
+			turn = ENV_TURN;
+			for (int i = 0; i < gEnemyVector.size(); i++) 
+				gEnemyVector[i].animator.oneAni = false;
 		}
-		//敵のスタン
-		//Enemy_Stun(&gEnemy, &gPlayer1, &gPlayer2, gObjects, MapChip);
+	}
 		break;
 
 	case ENV_TURN:
 		toIce(gObjects);
+		for (int i = 0; i < gEnemyVector.size(); i++)
+			Enemy_Player_Hit(&gEnemyVector[i], &gPlayer1, &gPlayer2);
+		if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == true)
+			turn = CLEAR;
+		break;
+
+	case GAMEOVER:
+		//タイトルへ戻るフラグ
+		if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
+			return FALSE;
+		break;
+
+	case CLEAR:
+		if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
+			return FALSE;
 		break;
 	}
 
@@ -237,15 +287,12 @@ BOOL Game_Update()
 	}
 	GameObject_DrowUpdate(&gPlayer1);
 	GameObject_DrowUpdate(&gPlayer2);
-	GameObject_DrowUpdate(&gEnemy);
+	for (int i = 0; i < gEnemyVector.size(); i++)
+		GameObject_DrowUpdate(&gEnemyVector[i]);
 	GameObject_DrowUpdate(&gBackGround);
 	for (int i = 0; i < 4; i++) {
 		GameObject_DrowUpdate(&gEffect[i]);
 	}
-
-	//タイトルへ戻るフラグ
-	if (Input_GetKeyTrigger(VK_SPACE))
-		return FALSE;
 		
 	return TRUE;
 }
@@ -265,8 +312,8 @@ void Game_Draw()
 		gObjects[i].texture->Draw();
 	gPlayer1.texture->Draw();
 	gPlayer2.texture->Draw();
-	gEnemy.texture->Draw();
-
+	for (int i = 0; i < gEnemyVector.size(); i++)
+		gEnemyVector[i].texture->Draw();
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
 
@@ -281,7 +328,9 @@ void Game_Relese()
 
 	delete gPlayer1.texture;
 	delete gPlayer2.texture;
-	delete gEnemy.texture;
+	for (int i = 0; i < gEnemyVector.size(); i++)
+		delete gEnemyVector[i].texture;
+	gEnemyVector.clear();
 	delete gBackGround.texture;
 	for (int i = 0; i < 4; i++)
 		delete gEffect[i].texture;
@@ -290,5 +339,4 @@ void Game_Relese()
 		gObjects[i].posX = 0;
 		gObjects[i].posY = 0;
 	}
-
 }

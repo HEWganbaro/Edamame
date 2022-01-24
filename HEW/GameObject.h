@@ -31,6 +31,13 @@ enum Direction
 	RIGHT_UP,
 };
 
+//敵のタイプ
+enum EnemyType
+{
+	RANDOM,
+	FOLLOWING,
+	CIRCUMFRENCE,
+};
 //敵の視線
 enum Enemyeye
 {
@@ -49,7 +56,9 @@ enum Turn
 {
 	PLAYER_TURN,
 	ENEMY_TURN,
-	ENV_TURN
+	ENV_TURN,
+	GAMEOVER,
+	CLEAR,
 };
 
 enum Stage
@@ -75,8 +84,9 @@ struct GameObject {
 
 	bool changeFlag = false;//状態遷移などに使いたいとき用のフラグ
 	bool yobiFlag = false;//状態遷移に使った予備のフラグ
+	bool IsEnemy = false;
 
-	bool Goalfrg;
+	bool Goalfrg = false;
 	int SnowSize;//雪玉の大きさ
 
 	MapPos mappos;	//マップ単位でいる場所
@@ -86,7 +96,7 @@ struct GameObject {
 	Direction direction;	//進む方向
 
 	Enemyeye enemyeye;//敵の視線
-
+	EnemyType enemytype;//敵の種類
 	EnemyMove enemymove;//敵の動き
 
 	Turn turn;

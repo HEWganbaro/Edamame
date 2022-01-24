@@ -6,7 +6,7 @@
 int Enemy_cut;
 int turn = PLAYER_TURN;
 
-void Enemy_Initialize(GameObject * Enemy)
+GameObject* Enemy_Initialize(GameObject * Enemy, EnemyType type)
 {
 	Enemy->texture = new Sprite("assets/player.png", 1, 1);
 	Enemy->texture->SetSize(80, 80);
@@ -14,8 +14,12 @@ void Enemy_Initialize(GameObject * Enemy)
 	Enemy->mappos.Height = 0;
 	Enemy->mappos.LeftDown = 0;
 	Enemy->mappos.RightDown = 0;
+	Enemy->IsEnemy = true;
+	Enemy->enemytype = type;
 	Enemy->direction = NULL_WAY;
 	Enemy->enemyeye = ENEMYEYE_OUT;
+
+	return Enemy;
 }
 
 void Enemy_SetLocation(GameObject * Enemy, GameObject * Location, int Height, int LeftDown, int RightDown)
@@ -145,27 +149,50 @@ void Enemy_Move_Circle(GameObject * Enemy)
 {
 	if (Enemy->enemyeye == ENEMYEYE_OUT)
 	{
-		int ran = rand() % 4;
-		if (ran == 0) {
-			Enemy->direction = RIGHT_DOWN;
-			Enemy->mappos.RightDown++;
-			return;
-		}
-		if (ran == 1) {
-			Enemy->direction = LEFT_DOWN;
-			Enemy->mappos.LeftDown++;
-			return;
-		}
-		if (ran == 2) {
-			Enemy->direction = LEFT_UP;
-			Enemy->mappos.RightDown--;
-			return;
-		}
-		if (ran == 3) {
-			Enemy->direction = RIGHT_UP;
-			Enemy->mappos.LeftDown--;
-			return;
-		}
+
+	}
+}
+
+void Enemy_Move_Random(GameObject * Enemy)
+{
+	int ran = rand() % 4;
+	if (ran == 0) {
+		Enemy->direction = RIGHT_DOWN;
+		Enemy->mappos.RightDown++;
+		Enemy->animator.isActive = true;
+		return;
+	}
+	if (ran == 1) {
+		Enemy->direction = LEFT_DOWN;
+		Enemy->mappos.LeftDown++;
+		Enemy->animator.isActive = true;
+		return;
+	}
+	if (ran == 2) {
+		Enemy->direction = LEFT_UP;
+		Enemy->mappos.RightDown--;
+		Enemy->animator.isActive = true;
+		return;
+	}
+	if (ran == 3) {
+		Enemy->direction = RIGHT_UP;
+		Enemy->mappos.LeftDown--;
+		Enemy->animator.isActive = true;
+		return;
+	}
+}
+
+void Enemy_Player_Hit(GameObject * Enemy, GameObject * Player, GameObject * Player2)
+{
+	if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
+		Player->mappos.RightDown == Enemy->mappos.RightDown)
+	{
+		turn = GAMEOVER;
+	}
+	if (Player2->mappos.LeftDown == Enemy->mappos.LeftDown &&
+		Player2->mappos.RightDown == Enemy->mappos.RightDown)
+	{
+		turn = GAMEOVER;
 	}
 }
 
@@ -180,6 +207,7 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_DOWN;
+			Enemy->mappos.LeftDown++;
 		}
 	}
 	if (Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
@@ -189,6 +217,7 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_UP;
+			Enemy->mappos.LeftDown--;
 		}
 	}
 
@@ -198,7 +227,8 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		Enemy->enemyeye = ENEMYEYE_IN;
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
-			Enemy->direction = RIGHT_DOWN;;
+			Enemy->direction = RIGHT_DOWN;
+			Enemy->mappos.RightDown++;
 		}
 	}
 
@@ -209,6 +239,7 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_UP;
+			Enemy->mappos.RightDown--;
 		}
 	}
 
@@ -220,6 +251,7 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_DOWN;
+			Enemy->mappos.LeftDown++;
 		}
 	}
 	if (Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
@@ -229,6 +261,7 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_UP;
+			Enemy->mappos.LeftDown--;
 		}
 	}
 
@@ -239,6 +272,7 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = RIGHT_DOWN;
+			Enemy->mappos.RightDown++;
 		}
 	}
 
@@ -249,20 +283,10 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		if (Enemy->enemyeye == ENEMYEYE_IN)
 		{
 			Enemy->direction = LEFT_UP;
+			Enemy->mappos.RightDown--;
 		}
 	}
-	if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
-		Player->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		turn = ENV_TURN;
-	}
-	if (Player2->mappos.LeftDown == Enemy->mappos.LeftDown &&
-		Player2->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		turn = ENV_TURN;
-	}
 }
-
 
 //“G‚ÌƒXƒ^ƒ“
 void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])

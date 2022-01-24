@@ -18,7 +18,7 @@ struct Animator {
 
 	//アニメーションのON/OFFを切り替えるための変数
 	bool isActive;
-
+	bool oneAni;
 };
 
 

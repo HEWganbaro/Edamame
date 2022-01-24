@@ -106,13 +106,15 @@ void Player_Update(GameObject * Player, GameObject* Map)
 
 void toIce(GameObject* Map) {
 	for (int i = 0; i < 300; i++) {
-		if (Map[i].yobiFlag == false) {
-			if (Map[i].changeFlag == true) {
-				Map[i].texture->SetPart(2, 0);
+		if (Map[i].texture->GetPart() != GOAL_LATER) {
+			if (Map[i].yobiFlag == false) {
+				if (Map[i].changeFlag == true) {
+					Map[i].texture->SetPart(2, 0);
+				}
 			}
+			else
+				Map[i].yobiFlag = false;
 		}
-		else
-			Map[i].yobiFlag = false;
 	}
 	turn = PLAYER_TURN;
 }

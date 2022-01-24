@@ -6,7 +6,7 @@ void Animator_Initialize(Animator * pThis)
 	pThis->frame = 0;
 	pThis->time = 0.0f;
 	pThis->speed = 8.0;  // デフォルトのアニメーション速度
-	pThis->isActive = true;  // デフォルトはアニメーションON
+	pThis->isActive = false;  // デフォルトはアニメーションON
 }
 
 void Animator_Update(Animator * pThis)

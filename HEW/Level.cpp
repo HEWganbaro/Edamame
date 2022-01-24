@@ -73,6 +73,8 @@ BOOL Level_Initialize()
 BOOL Level_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
+	XINPUT_STATE state;
+	XInputGetState(0, &state);
 
 	glevel.texture->SetPart(1, 0);
 	glevel.posX = -0.5f;
@@ -82,11 +84,11 @@ BOOL Level_Update()
 	glevel2.posX = 0.4f;
 	glevel2.posY = 0.1f;
 
-	if (Input_GetKeyTrigger(VK_RETURN)) {
+	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
 		return FALSE;
 	}
 
-	if (Input_GetKeyTrigger('1'))
+	if (Input_GetKeyTrigger('1') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP))
 	{
 		stage = STAGE_1;
 		gchoice.texture->SetPart(1, 0);
@@ -94,7 +96,7 @@ BOOL Level_Update()
 		gchoice.posY = 0.8f;
 	}
 
-	if (Input_GetKeyTrigger('2'))
+	if (Input_GetKeyTrigger('2') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP))
 	{
 		stage = STAGE_2;
 		gchoice.texture->SetPart(2, 0);

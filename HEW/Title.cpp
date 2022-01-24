@@ -59,10 +59,12 @@ BOOL Title_Initialize()
 BOOL Title_Update()
 {
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
+	XINPUT_STATE state;
+	XInputGetState(0, &state);
 
 	GameObject_DrowUpdate(&tBackGround);
 
-	if (Input_GetKeyTrigger(VK_SPACE)) {
+	if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)) {
 		return FALSE;
 	}
 
