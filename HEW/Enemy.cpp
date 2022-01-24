@@ -4,7 +4,6 @@
 #include <time.h>
 
 int Enemy_cut;
-int Enemy_flg = 0;
 int turn = PLAYER_TURN;
 
 void Enemy_Initialize(GameObject * Enemy)
@@ -46,7 +45,7 @@ void Enemy_Hit(GameObject * Enemy)
 	srand((unsigned int)time(NULL));
 	r = rand() % 3 + 1;*/
 
-	int flg = 0;
+	//int flg = 0;
 
 	/*if (Player->mappos.RightDown && Enemy_way == NULL_WAY && flg == 0) {
 		Enemy_way = RIGHT_DOWN;
@@ -84,100 +83,87 @@ void Enemy_Hit(GameObject * Enemy)
 		}
 	}*/
 
-	switch (Enemy->direction)
-	{
-	case RIGHT_DOWN:
-		if (Enemy_cut != ENEMY_SPEED) {
-			Enemy->posX += MAP_LENGTH / ENEMY_SPEED;
-			Enemy->posY -= MAP_LENGTH / ENEMY_SPEED;
-			Enemy_cut++;
-		}
-		else {
-			Enemy->direction = NULL_WAY;
-			Enemy->mappos.RightDown++;
-			Enemy_cut = 0;
-		}
-		break;
+	//switch (Enemy->direction)
+	//{
+	//case RIGHT_DOWN:
+	//	if (Enemy_cut != ENEMY_SPEED) {
+	//		Enemy->posX += MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy->posY -= MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy_cut++;
+	//	}
+	//	else {
+	//		Enemy->direction = NULL_WAY;
+	//		Enemy->mappos.RightDown++;
+	//		Enemy_cut = 0;
+	//	}
+	//	break;
 
-	case LEFT_DOWN:
-		if (Enemy_cut != ENEMY_SPEED) {
-			Enemy->posX -= MAP_LENGTH / ENEMY_SPEED;
-			Enemy->posY -= MAP_LENGTH / ENEMY_SPEED;
-			Enemy_cut++;
-		}
-		else {
-			Enemy->direction = NULL_WAY;
-			Enemy->mappos.LeftDown++;
-			Enemy_cut = 0;
-		}
-		break;
+	//case LEFT_DOWN:
+	//	if (Enemy_cut != ENEMY_SPEED) {
+	//		Enemy->posX -= MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy->posY -= MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy_cut++;
+	//	}
+	//	else {
+	//		Enemy->direction = NULL_WAY;
+	//		Enemy->mappos.LeftDown++;
+	//		Enemy_cut = 0;
+	//	}
+	//	break;
 
-	case LEFT_UP:
-		if (Enemy_cut != ENEMY_SPEED) {
-			Enemy->posX -= MAP_LENGTH / ENEMY_SPEED;
-			Enemy->posY += MAP_LENGTH / ENEMY_SPEED;
-			Enemy_cut++;
-		}
-		else {
-			Enemy->direction = NULL_WAY;
-			Enemy->mappos.RightDown--;
-			Enemy_cut = 0;
-		}
-		break;
+	//case LEFT_UP:
+	//	if (Enemy_cut != ENEMY_SPEED) {
+	//		Enemy->posX -= MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy->posY += MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy_cut++;
+	//	}
+	//	else {
+	//		Enemy->direction = NULL_WAY;
+	//		Enemy->mappos.RightDown--;
+	//		Enemy_cut = 0;
+	//	}
+	//	break;
 
-	case RIGHT_UP:
-		if (Enemy_cut != ENEMY_SPEED) {
-			Enemy->posX += MAP_LENGTH / ENEMY_SPEED;
-			Enemy->posY += MAP_LENGTH / ENEMY_SPEED;
-			Enemy_cut++;
-		}
-		else {
-			Enemy->direction = NULL_WAY;
-			Enemy->mappos.LeftDown--;
-			Enemy_cut = 0;
-		}
-		break;
-	}
+	//case RIGHT_UP:
+	//	if (Enemy_cut != ENEMY_SPEED) {
+	//		Enemy->posX += MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy->posY += MAP_LENGTH / ENEMY_SPEED;
+	//		Enemy_cut++;
+	//	}
+	//	else {
+	//		Enemy->direction = NULL_WAY;
+	//		Enemy->mappos.LeftDown--;
+	//		Enemy_cut = 0;
+	//	}
+	//	break;
+	//}
 
 }
 
 //“G‚Ì„‰ñ
 void Enemy_Move_Circle(GameObject * Enemy)
 {
-
-	if (Enemy->enemyeye == ENEMYEYE_OUT && Enemy_flg == 1)
+	if (Enemy->enemyeye == ENEMYEYE_OUT)
 	{
-		if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-		{
+		int ran = rand() % 4;
+		if (ran == 0) {
 			Enemy->direction = RIGHT_DOWN;
-			Enemy_flg = 0;
-			turn = ENV_TURN;
+			Enemy->mappos.RightDown++;
 			return;
 		}
-
-		if ((Enemy->tmp.LeftDown == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown))
-		{
+		if (ran == 1) {
 			Enemy->direction = LEFT_DOWN;
-			Enemy_flg = 0;
-			turn = ENV_TURN;
+			Enemy->mappos.LeftDown++;
 			return;
 		}
-		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 2 == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown + 1 == Enemy->mappos.RightDown))
-		{
+		if (ran == 2) {
 			Enemy->direction = LEFT_UP;
-			Enemy_flg = 0;
-			turn = ENV_TURN;
+			Enemy->mappos.RightDown--;
 			return;
 		}
-		if ((Enemy->tmp.LeftDown + 2 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown) ||
-			(Enemy->tmp.LeftDown + 1 == Enemy->mappos.LeftDown && Enemy->tmp.RightDown == Enemy->mappos.RightDown))
-		{
+		if (ran == 3) {
 			Enemy->direction = RIGHT_UP;
-			Enemy_flg = 0;
-			turn = ENV_TURN;
+			Enemy->mappos.LeftDown--;
 			return;
 		}
 	}

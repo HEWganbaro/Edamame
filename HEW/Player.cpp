@@ -37,29 +37,25 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 
 	//ステージマップによって分岐させる
 	if (Player->direction == NULL_WAY && Player->Goalfrg == false) {
-		if (Input_GetKeyTrigger('Q')|| (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
+		if (Input_GetKeyTrigger('Q') || (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
 			Player->direction = LEFT_UP;
 			Player->mappos.RightDown--;
 			Player1_cut++;
-			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('A')|| (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)){
+		if (Input_GetKeyTrigger('A') || (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)){
 			Player->direction = LEFT_DOWN;
 			Player->mappos.LeftDown++;
 			Player1_cut++;
-			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('E')|| (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
+		if (Input_GetKeyTrigger('E') || (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
 			Player->direction = RIGHT_UP;
 			Player->mappos.LeftDown--;
 			Player1_cut++;
-			Enemy_flg = 1;
 		}
-		if (Input_GetKeyTrigger('D')|| (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)) {
+		if (Input_GetKeyTrigger('D') || (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)) {
 			Player->direction = RIGHT_DOWN;
 			Player->mappos.RightDown++;
 			Player1_cut++;
-			Enemy_flg = 1;
 		}
 	}
 
@@ -69,36 +65,24 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 			Player2->direction = LEFT_UP;
 			Player2->mappos.RightDown--;
 			Player2_cut++;
-			Enemy_flg = 1;
 		}
 		if (Input_GetKeyTrigger('J') || (state.Gamepad.sThumbRX < DEADZONE_MSTICK&&state.Gamepad.sThumbRY < DEADZONE_MSTICK)) {
 			Player2->direction = LEFT_DOWN;
 			Player2->mappos.LeftDown++;
 			Player2_cut++;
-			Enemy_flg = 1;
 		}
 		if (Input_GetKeyTrigger('O') || (state.Gamepad.sThumbRX > DEADZONE_STICK&&state.Gamepad.sThumbRY > DEADZONE_STICK)) {
 			Player2->direction = RIGHT_UP;
 			Player2->mappos.LeftDown--;
 			Player2_cut++;
-			Enemy_flg = 1;
 		}
 		if (Input_GetKeyTrigger('L') || (state.Gamepad.sThumbRX > DEADZONE_STICK&&state.Gamepad.sThumbRY < DEADZONE_MSTICK)) {
 			Player2->direction = RIGHT_DOWN;
 			Player2->mappos.RightDown++;
 			Player2_cut++;
-			Enemy_flg = 1;
 		}
 	}
 }
-
-//MapPos Player_GetMapPos(GameObject * Player, GameObject * Player2)
-//{
-//	MapPos mappos;
-//	mappos.Height = Player->mappos.Height;
-//	mappos.Height = Player2->mappos.Height;
-//	return mappos;
-//}
 
 void Player_Update(GameObject * Player, GameObject* Map)
 {
@@ -117,7 +101,7 @@ void Player_Update(GameObject * Player, GameObject* Map)
 	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
 		Player->texture->SetPart(1, 0);
 	}
-	Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
+	//Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
 }
 
 void toIce(GameObject* Map) {

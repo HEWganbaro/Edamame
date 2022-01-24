@@ -99,9 +99,6 @@
     <ClInclude Include="Shielding.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Goal.h">
-      <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>ヘッダー ファイル\Game\Title</Filter>
     </ClInclude>
@@ -162,9 +159,6 @@
       <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Shielding.cpp">
-      <Filter>ソース ファイル\Game\Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Goal.cpp">
       <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">

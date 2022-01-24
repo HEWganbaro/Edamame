@@ -20,7 +20,6 @@
 #include "MapGeneration.h"
 #include "Enemy.h"
 #include "Shielding.h"
-#include "Goal.h"
 #include "Effect.h"
 
 #define ASPECT 16/9

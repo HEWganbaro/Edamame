@@ -49,6 +49,7 @@ GameObject* tile = gObjects + 303;
 GameObject gPlayer1;
 GameObject gPlayer2;
 GameObject gEnemy;
+vector<GameObject> genemy;
 GameObject gBackGround;				//背景
 
 GameObject gEffect[4];
@@ -115,7 +116,7 @@ BOOL Game_Initialize()
 		Effect_Init(&gEffect[i]);
 	}
 
-	//プレイヤー初期化
+	//雪玉の初期化
 	Player_Initialize(&gPlayer1);
 	Player_Initialize(&gPlayer2);
 
@@ -128,12 +129,18 @@ BOOL Game_Initialize()
 
 	//敵の場所指定
 	Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 4);
+	//敵の場所を指定しておく
+	//switch (switch_on)
+	//{
+	//default:
+	//	break;
+	//}
 
-	//ゴールの初期化
-	//Goal_Initialize(&gGoal);
-
-	////ゴールの場所指定
-	//Goal_SetLocation(&gGoal, gObjects, 0, 6, 7);
+	//背景描画
+	gBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
+	gBackGround.texture->SetSize(1280 * 2, 720 * 2);
+	gBackGround.posX = -1;
+	gBackGround.posY = 1;
 
 	//デバック用
 	NoHeight->texture = new Sprite("assets/dotFont.png", 16, 8);
@@ -144,11 +151,9 @@ BOOL Game_Initialize()
 	NoRightDown->texture->SetSize(80, 160);
 	tile->texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
 	tile->texture->SetSize(200, 200);
-	gBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
-	gBackGround.texture->SetSize(1280*2, 720*2);
-	
-	//gEffect.texture = new Sprite("assets/Effect.png", 1, 3);
-	//gEffect.texture->SetSize(1280 * 2, 720 * 2);
+
+	//マップ変更
+	Map_Update(gObjects, &StoneMap, MapChip);	
 
 	return TRUE;
 }
@@ -173,52 +178,57 @@ BOOL Game_Update()
 	tile->posX = 0.3;
 	tile->posY = 0.6;
 	gBackGround.posX = -1;
-	gBackGround.posY = 10;
+	gBackGround.posY = 1;
+
 	for (int i = 0; i < 4; i++) {
 		Efffect_Move(&gEffect[i]);
 	}
-	//gEffect.posX = -1;
-	//gEffect.posY = 1;
-
-	Map_Update(gObjects, &StoneMap, MapChip);	//マップ変更↑↓
 
 	switch (turn)
 	{
 	case PLAYER_TURN:
-
-		Player_Input(&gPlayer1, &gPlayer2);	//プレイヤー移動
+		//プレイヤー移動
+		gPlayer1.animator.isActive = true;
+		gPlayer2.animator.isActive = true;
+		Player_Input(&gPlayer1, &gPlayer2);	
 		Player_Update(&gPlayer1, gObjects);
 		Player_Update(&gPlayer2, gObjects);
-
+		if (gPlayer1.animator.isActive == false || gPlayer2.animator.isActive == false)
+			turn = ENEMY_TURN;
 		break;
 
 	case ENEMY_TURN:
-
-		if (gEnemy.direction == NULL_WAY)
-		{
-			//敵の巡回
-			Enemy_Move_Circle(&gEnemy);
+		//敵移動
+		if (gEnemy.direction == NULL_WAY) {
 			//敵の接近
-			Enemy_Move_Chase(&gEnemy, &gPlayer1, &gPlayer2);
+			//Enemy_Move_Chase(&gEnemy, &gPlayer1, &gPlayer2);
+			if (gEnemy.direction == NULL_WAY) {
+				//敵の巡回
+				Enemy_Move_Circle(&gEnemy);
+			}
 		}
-
-		Enemy_Hit(&gEnemy);
+		else {
+			//敵の移動処理
+			MapMove_Update(&gEnemy, gObjects);
+			if (gEnemy.direction == NULL_WAY)
+				turn = ENV_TURN;
+		}
 		//敵のスタン
-		Enemy_Stun(&gEnemy, &gPlayer1, &gPlayer2, gObjects, MapChip);
-
+		//Enemy_Stun(&gEnemy, &gPlayer1, &gPlayer2, gObjects, MapChip);
 		break;
+
 	case ENV_TURN:
 		toIce(gObjects);
+		break;
 	}
 
-	if (gEnemy.enemyeye == ENEMYEYE_IN)
-	{
-		//遮蔽でのヘイトそらし
-		for (int i = 0; i < StoneMap.size(); i++) {
-			Shield_Cancel(&StoneMap[i], &gPlayer1, &gPlayer2, &gEnemy);
-		}
-	}
-	//Shield_Hit(gShield, gPlayer);
+	//if (gEnemy.enemyeye == ENEMYEYE_IN)
+	//{
+	//	//遮蔽でのヘイトそらし
+	//	for (int i = 0; i < StoneMap.size(); i++) {
+	//		Shield_Cancel(&StoneMap[i], &gPlayer1, &gPlayer2, &gEnemy);
+	//	}
+	//}
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	//GameObjectと画像の座標を合わせる
@@ -233,6 +243,7 @@ BOOL Game_Update()
 		GameObject_DrowUpdate(&gEffect[i]);
 	}
 
+	//タイトルへ戻るフラグ
 	if (Input_GetKeyTrigger(VK_SPACE))
 		return FALSE;
 		

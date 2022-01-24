@@ -18,7 +18,6 @@ using namespace std;
 
 extern int Player1_cut;
 extern int Player2_cut;
-extern int Enemy_flg;
 extern int turn;
 extern int stage;
 
