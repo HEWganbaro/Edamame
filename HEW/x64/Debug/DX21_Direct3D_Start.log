@@ -1,59 +1,92 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+  compilation header save succeeded; see C:\Users\namen\Documents\GitHub\Edamame_0125\HEW\ps.h
+  animator.cpp
+  CharController.cpp
+  direct3d.cpp
+  WICTextureLoader.cpp
+  Easing.cpp
+  Effect.cpp
+c:\users\namen\documents\github\edamame_0125\hew\effect.cpp(5): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\effect.cpp(44): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\effect.cpp(53): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\effect.cpp(57): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Enemy.cpp
+  GameObject.cpp
+  game.cpp
+c:\users\namen\documents\github\edamame_0125\hew\game.cpp(189): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+c:\users\namen\documents\github\edamame_0125\hew\game.cpp(190): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  GameTimer.cpp
+  input.cpp
+  Level.cpp
+  main.cpp
   MapGeneration.cpp
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(163): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(164): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(181): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(182): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(222): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(223): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(239): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(240): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(256): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(257): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(273): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(274): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(294): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(295): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(311): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(312): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(328): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(329): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(345): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(346): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(370): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(371): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(400): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(401): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(415): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(416): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(444): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(445): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(458): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(459): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(486): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(487): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(500): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(501): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(528): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(529): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(544): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(545): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(561): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(562): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(578): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(579): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(595): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(596): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(614): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(615): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(650): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(651): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(737): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(738): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(755): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(756): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(773): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(774): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(791): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(792): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  DX21_Direct3D_Start.vcxproj -> C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\HEW.exe
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(163): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(164): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(181): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(182): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(222): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(223): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(239): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(240): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(256): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(257): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(273): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(274): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(294): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(295): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(311): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(312): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(328): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(329): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(345): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(346): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(370): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(371): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(400): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(401): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(415): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(416): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(444): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(445): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(458): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(459): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(486): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(487): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(500): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(501): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(528): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(529): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(544): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(545): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(561): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(562): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(578): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(579): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(595): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(596): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(614): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(615): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(650): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(651): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(737): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(738): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(755): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(756): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(773): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(774): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(791): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\mapgeneration.cpp(792): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Player.cpp
+  Scene.cpp
+c:\users\namen\documents\github\edamame_0125\hew\scene.cpp(9): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\namen\documents\github\edamame_0125\hew\scene.cpp(22): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\namen\documents\github\edamame_0125\hew\scene.cpp(35): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+  Shielding.cpp
+  Sprite.cpp
+c:\users\namen\documents\github\edamame_0125\hew\sprite.cpp(61): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_0125\hew\sprite.cpp(62): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Title.cpp
+  XAudio2.cpp
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで C:\Users\namen\Documents\GitHub\Edamame_0125\HEW\x64\Debug\HEW.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  DX21_Direct3D_Start.vcxproj -> C:\Users\namen\Documents\GitHub\Edamame_0125\HEW\x64\Debug\HEW.exe
