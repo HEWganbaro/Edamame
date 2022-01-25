@@ -52,6 +52,9 @@
     <Filter Include="ソース ファイル\Game\Level">
       <UniqueIdentifier>{a107ed97-511f-4f73-a88e-e6a085d5d877}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Game\Level">
+      <UniqueIdentifier>{afca881e-034d-4cff-893e-dac86245eb94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="direct3d.h">
@@ -115,7 +118,7 @@
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>ヘッダー ファイル\Game\Title</Filter>
+      <Filter>ヘッダー ファイル\Game\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "animator.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,13 +9,13 @@ int turn = PLAYER_TURN;
 
 GameObject* Enemy_Initialize(GameObject * Enemy, EnemyType type)
 {
-	Enemy->texture = new Sprite("assets/player.png", 1, 1);
-	Enemy->texture->SetSize(80, 80);
-	Enemy->posY = 0.5f;
+	Enemy->texture = new Sprite("assets/penguin_tex.png", 16, 4);
+	Enemy->texture->SetSize(175, 175);
 	Enemy->mappos.Height = 0;
 	Enemy->mappos.LeftDown = 0;
 	Enemy->mappos.RightDown = 0;
 	Enemy->IsEnemy = true;
+	Enemy->animator.speed = 8.0f;
 	Enemy->enemytype = type;
 	Enemy->direction = NULL_WAY;
 	Enemy->enemyeye = ENEMYEYE_OUT;
@@ -24,8 +25,8 @@ GameObject* Enemy_Initialize(GameObject * Enemy, EnemyType type)
 
 void Enemy_SetLocation(GameObject * Enemy, GameObject * Location, int Height, int LeftDown, int RightDown)
 {
-	Enemy->posX = Location[Height * 100 + LeftDown * 10 + RightDown].posX + MAP_LENGTH / 2.0f;
-	Enemy->posY = Location[Height * 100 + LeftDown * 10 + RightDown].posY;
+	Enemy->posX = Location[Height * 100 + LeftDown * 10 + RightDown].posX;
+	Enemy->posY = Location[Height * 100 + LeftDown * 10 + RightDown].posY + MAP_LENGTH / 2.0f;
 	Enemy->mappos.Height = Height;
 	Enemy->mappos.LeftDown = LeftDown;
 	Enemy->mappos.RightDown = RightDown;
@@ -41,6 +42,34 @@ MapPos Enemy_GetMapPos(GameObject * Enemy)
 
 void Enemy_Update(GameObject * Enemy)
 {
+	Animator_Update(&Enemy->animator);
+
+	int walk = 0;
+	if (Enemy->animator.isActive == true)
+		walk = 8;
+	//アニメーション
+	switch (Enemy->direction)
+	{
+	case NULL_WAY:
+		Enemy->texture->SetPart(Enemy->animator.frame, 0);
+		break;
+
+	case RIGHT_DOWN:
+		Enemy->texture->SetPart(Enemy->animator.frame + walk, 0);
+		break;
+
+	case LEFT_DOWN:
+		Enemy->texture->SetPart(Enemy->animator.frame + walk, 1);
+		break;
+
+	case LEFT_UP:
+		Enemy->texture->SetPart(Enemy->animator.frame + walk, 2);
+		break;
+
+	case RIGHT_UP:
+		Enemy->texture->SetPart(Enemy->animator.frame + walk, 3);
+		break;
+	}
 }
 
 void Enemy_Hit(GameObject * Enemy)

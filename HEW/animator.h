@@ -1,9 +1,7 @@
 #pragma once
 
-
 // テーブルアニメーションでカウンターを０に戻せ、という合図
 #define ANIMATION_LOOP  -1
-
 
 // Animatorクラス
 

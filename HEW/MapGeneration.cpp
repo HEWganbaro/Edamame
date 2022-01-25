@@ -385,6 +385,18 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->Goalfrg = true;
 					if (Map_GetPlayerTile(Player, Map) == GOAL)
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
+						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
+							Player->Item_Face = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
+					if (Map_GetPlayerTile(Player, Map) == ITEM_ARM) {
+						if (Player->Item_Face == false) {	//アイテムは同時に2個持てない
+							Player->Item_Arm = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
 				}
 			}
 			else {
@@ -429,6 +441,18 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->Goalfrg = true;
 					if (Map_GetPlayerTile(Player, Map) == GOAL)
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
+						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
+							Player->Item_Face = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
+					if (Map_GetPlayerTile(Player, Map) == ITEM_ARM) {
+						if (Player->Item_Face == false) {	//アイテムは同時に2個持てない
+							Player->Item_Arm = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
 				}
 			}
 			else {
@@ -471,6 +495,18 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->Goalfrg = true;
 					if (Map_GetPlayerTile(Player, Map) == GOAL)
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
+						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
+							Player->Item_Face = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
+					if (Map_GetPlayerTile(Player, Map) == ITEM_ARM) {
+						if (Player->Item_Face == false) {	//アイテムは同時に2個持てない
+							Player->Item_Arm = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
 				}
 			}
 			else {
@@ -513,6 +549,18 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->Goalfrg = true;
 					if (Map_GetPlayerTile(Player, Map) == GOAL)
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
+						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
+							Player->Item_Face = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
+					if (Map_GetPlayerTile(Player, Map) == ITEM_ARM) {
+						if (Player->Item_Face == false) {	//アイテムは同時に2個持てない
+							Player->Item_Arm = true;
+							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+						}
+					}
 				}
 			}
 			else {
@@ -797,6 +845,172 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
 				Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+			}
+			break;
+		}
+	}
+	//顔アイテムの時
+	else if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
+	if (Player->Item_Arm == false)	//アイテムは同時に2個持てない
+			Player->Item_Face = true;
+		switch (Player->direction)
+		{
+		case RIGHT_DOWN:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Arm == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+			}
+			break;
+
+		case LEFT_DOWN:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Arm == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+			}
+			break;
+
+		case LEFT_UP:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Arm == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+			}
+			break;
+
+		case RIGHT_UP:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Arm == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+			}
+			break;
+		}
+	}
+	//腕アイテムの時
+	else if (Map_GetPlayerTile(Player, Map) == ITEM_ARM) {
+	if (Player->Item_Face == false)	//アイテムは同時に2個持てない
+			Player->Item_Arm = true;
+		switch (Player->direction)
+		{
+		case RIGHT_DOWN:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Face == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+			}
+			break;
+
+		case LEFT_DOWN:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Face == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+			}
+			break;
+
+		case LEFT_UP:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Face == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
+			}
+			break;
+
+		case RIGHT_UP:
+			if (Player->animator.count != PLAYER_SPEED) {
+				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+				double tmp1 = 0;
+				if (Player->animator.count != 0)
+					tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+				Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+				Player->animator.count++;
+			}
+			else {
+				Player->direction = NULL_WAY;
+				Player->animator.count = 0;
+				Player->animator.isActive = false;
+				if (Player->Item_Face == false)
+					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 			}
 			break;
 		}

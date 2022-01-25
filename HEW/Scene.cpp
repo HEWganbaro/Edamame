@@ -5,7 +5,8 @@ void Scene::Title()
 	if (FALSE == Title_Update()) {	//ÉVÅ[ÉìïœçX
 		Title_Relese();
 		scene = LEVEL;
-		if (FALSE == Level_Initialize())
+		StageScore score = TITLESCORE;
+		if (FALSE == Level_Initialize(score))
 			scene == -1;
 	}
 	else {
@@ -29,9 +30,10 @@ void Scene::Level()
 void Scene::Game()
 {
 	if (FALSE == Game_Update()) {
-		Game_Relese();
-		scene = TITLE;
-		if (FALSE == Title_Initialize())
+		StageScore score;
+		score = Game_Relese();
+		scene = LEVEL;
+		if (FALSE == Level_Initialize(score))
 			scene == -1;
 	}
 	else {

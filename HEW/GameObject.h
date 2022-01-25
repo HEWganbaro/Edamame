@@ -68,6 +68,23 @@ enum Stage
 	STAGE_2,
 };
 
+enum StageScore {
+	TITLESCORE,	//タイトルからステージへ
+
+	ZERO,	//失敗もしくはプレイしてない
+	STAGE_CLEAR,	//クリアのみ
+
+	BALANCE_CLEAR,	//バランスのみ
+	FACE_CLEAR,		//顔アイテムのみ
+	ARM_CLEAR,		//腕アイテムのみ
+
+	BALA_FACE_CLEAR,//バランス顔のみ
+	FACE_ARM_CLEAR,	//顔腕のみ
+	ARM_BALA_CLEAR,	//腕バランスのみ
+
+	ALL_CLEAR,		//全て完璧
+};
+
 struct MapPos
 {
 	int Height;
@@ -84,13 +101,14 @@ struct GameObject {
 
 	bool changeFlag = false;//状態遷移などに使いたいとき用のフラグ
 	bool yobiFlag = false;//状態遷移に使った予備のフラグ
-	bool IsEnemy = false;
+	bool IsEnemy = false;//敵か
 
 	bool Goalfrg = false;
 	int SnowSize;//雪玉の大きさ
+	bool Item_Face = false;
+	bool Item_Arm = false;
 
 	MapPos mappos;	//マップ単位でいる場所
-
 	MapPos tmp;	//一時保存場所
 
 	Direction direction;	//進む方向

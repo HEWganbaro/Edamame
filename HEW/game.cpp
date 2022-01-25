@@ -53,6 +53,7 @@ vector<GameObject> gEnemyVector;
 GameObject gBackGround;				//背景
 
 GameObject gEffect[4];
+bool GoalFast_1 = false;
 
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
@@ -130,18 +131,18 @@ BOOL Game_Initialize()
 	Map_Update(gObjects, &StoneMap, MapChip);
 
 	//敵の場所指定
-	//敵の場所を指定しておく
+	//敵の場所を指定しておくステージごとに
 	switch (Map_GetStage())
 	{
 	case 0:
 		//敵の初期化
 		Enemy_Initialize(&gEnemy, RANDOM);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 6);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
 		gEnemyVector.emplace_back(gEnemy);
 
-		Enemy_Initialize(&gEnemy, RANDOM);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 5, 4);
-		gEnemyVector.emplace_back(gEnemy);
+		//Enemy_Initialize(&gEnemy, RANDOM);
+		//Enemy_SetLocation(&gEnemy, gObjects, 0, 5, 4);
+		//gEnemyVector.emplace_back(gEnemy);
 		break;
 
 	default:
@@ -166,7 +167,6 @@ BOOL Game_Initialize()
 
 	return TRUE;
 }
-
 
 // ゲームループ中に実行したい、ゲームの処理を書く関数
 BOOL Game_Update()
@@ -194,6 +194,11 @@ BOOL Game_Update()
 	for (int i = 0; i < 4; i++) {
 		Efffect_Move(&gEffect[i]);
 	}
+
+	//アニメーション
+	//敵アニメーション
+	for (int i = 0; i < gEnemyVector.size(); i++)
+		Enemy_Update(&gEnemyVector[i]);
 
 	switch (turn)
 	{
@@ -256,6 +261,10 @@ BOOL Game_Update()
 		toIce(gObjects);
 		for (int i = 0; i < gEnemyVector.size(); i++)
 			Enemy_Player_Hit(&gEnemyVector[i], &gPlayer1, &gPlayer2);
+		//どちらの雪玉が早いか
+		if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == false)
+			GoalFast_1 = true;
+		//クリア
 		if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == true)
 			turn = CLEAR;
 		break;
@@ -322,7 +331,7 @@ void Game_Draw()
 }
 
 //作ったGameObjectはちゃんとdeleteしよう！
-void Game_Relese()
+StageScore Game_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
 
@@ -339,4 +348,53 @@ void Game_Relese()
 		gObjects[i].posX = 0;
 		gObjects[i].posY = 0;
 	}
+
+	//ステージスコアを返す
+	StageScore score;
+	bool Balance = false;
+	bool Face = false;
+	bool Arm = false;
+
+	//クリアしているか
+	if (turn == CLEAR) {
+		//バランスはどうか
+		if (GoalFast_1 == true) {
+			if (gPlayer1.SnowSize > gPlayer2.SnowSize) {
+				Balance = true;
+			}
+		}
+		else {
+			if (gPlayer1.SnowSize < gPlayer2.SnowSize) {
+				Balance = true;
+			}
+		}
+		//アイテムは獲得してるか
+		if (gPlayer1.Item_Face == true || gPlayer2.Item_Face == true)
+			Face = true;
+		if (gPlayer1.Item_Arm == true || gPlayer2.Item_Arm == true)
+			Arm = true;
+	}
+	else {	//失敗
+		score = ZERO;
+	}
+
+	//それぞれのクリアごとに分ける
+	if (Balance == false && Face == false && Arm == false)
+		score = STAGE_CLEAR;
+	if (Balance == true && Face == false && Arm == false)
+		score = BALANCE_CLEAR;
+	if (Balance == false && Face == true && Arm == false)
+		score = FACE_CLEAR;
+	if (Balance == false && Face == false && Arm == true)
+		score = ARM_CLEAR;
+	if (Balance == true && Face == true && Arm == false)
+		score = BALA_FACE_CLEAR;
+	if (Balance == false && Face == true && Arm == true)
+		score = FACE_ARM_CLEAR;
+	if (Balance == true && Face == false && Arm == true)
+		score = ARM_BALA_CLEAR;
+	if (Balance == true && Face == true && Arm == true)
+		score = ALL_CLEAR;
+
+	return score;
 }

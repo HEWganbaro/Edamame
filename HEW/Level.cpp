@@ -35,13 +35,15 @@ GameObject lBackGround;				//背景
 GameObject glevel;
 GameObject glevel2;
 GameObject gchoice;
+
+StageScore LevelScoreSheet[MAP_STAGE];
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
 //*****************************************************************************
 // 関数の定義　ここから　↓
 //*****************************************************************************
 
-BOOL Level_Initialize()
+BOOL Level_Initialize(StageScore score)
 {
 	// ゲーム時間の初期化をし、FPSを60に設定した。
 	GameTimer_Initialize(60);
@@ -50,7 +52,7 @@ BOOL Level_Initialize()
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
 
 	//背景
-	lBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
+	lBackGround.texture = new Sprite("assets/level.png", 1, 1);
 	lBackGround.texture->SetSize(1280 * 2, 720 * 2);
 	lBackGround.posX = -1;
 	lBackGround.posY = 1;
@@ -66,6 +68,10 @@ BOOL Level_Initialize()
 	gchoice.texture->SetPart(0, 0);
 	gchoice.posX = 0.8f;
 	gchoice.posY = 0.8f;
+
+	//スコアを代入
+	if (score != TITLESCORE)
+		LevelScoreSheet[stage - 1] = score;
 
 	return TRUE;
 }

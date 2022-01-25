@@ -27,4 +27,4 @@
 BOOL Game_Initialize();
 BOOL Game_Update();
 void Game_Draw();
-void Game_Relese();
+StageScore Game_Relese();

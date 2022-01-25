@@ -16,6 +16,8 @@ void Player_Initialize(GameObject* Player) {
 	Player->mappos.RightDown = 0;
 	Player->SnowSize = 0;
 	Player->Goalfrg = false;
+	Player->Item_Face = false;
+	Player->Item_Arm = false;
 	Player->direction = NULL_WAY;
 }
 
@@ -101,7 +103,7 @@ void Player_Update(GameObject * Player, GameObject* Map)
 	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
 		Player->texture->SetPart(1, 0);
 	}
-	//Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
+	Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
 }
 
 void toIce(GameObject* Map) {
