@@ -199,6 +199,8 @@ BOOL Game_Update()
 	//敵アニメーション
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		Enemy_Update(&gEnemyVector[i]);
+	Player_AniUpdate(&gPlayer1);
+	Player_AniUpdate(&gPlayer2);
 
 	switch (turn)
 	{
