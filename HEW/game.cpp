@@ -51,6 +51,8 @@ GameObject gPlayer2;
 GameObject gEnemy;
 vector<GameObject> gEnemyVector;
 GameObject gBackGround;				//背景
+GameObject gGauge;					//ゲージ
+GameObject gGauge2;
 
 GameObject gEffect[4];
 bool GoalFast_1 = false;
@@ -126,6 +128,9 @@ BOOL Game_Initialize()
 	////雪玉の場所指定
 	Player_SetLocation(&gPlayer1, gObjects, 0, 5, 5);
 	Player_SetLocation(&gPlayer2, gObjects, 0, 6, 6);
+
+	//ゲージの初期化
+	Gauge_Initialize(&gGauge, &gGauge2);
 
 	//マップ変更
 	Map_Update(gObjects, &StoneMap, MapChip);
@@ -298,6 +303,8 @@ BOOL Game_Update()
 	}
 	GameObject_DrowUpdate(&gPlayer1);
 	GameObject_DrowUpdate(&gPlayer2);
+	GameObject_DrowUpdate(&gGauge);
+	GameObject_DrowUpdate(&gGauge2);
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		GameObject_DrowUpdate(&gEnemyVector[i]);
 	GameObject_DrowUpdate(&gBackGround);
@@ -323,6 +330,8 @@ void Game_Draw()
 		gObjects[i].texture->Draw();
 	gPlayer1.texture->Draw();
 	gPlayer2.texture->Draw();
+	gGauge.texture->Draw();
+	gGauge2.texture->Draw();
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		gEnemyVector[i].texture->Draw();
 	gEffect[2].texture->Draw();
@@ -339,6 +348,8 @@ StageScore Game_Relese()
 
 	delete gPlayer1.texture;
 	delete gPlayer2.texture;
+	delete gGauge.texture;
+	delete gGauge2.texture;
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		delete gEnemyVector[i].texture;
 	gEnemyVector.clear();

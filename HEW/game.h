@@ -21,6 +21,8 @@
 #include "Enemy.h"
 #include "Shielding.h"
 #include "Effect.h"
+#include "Gauge.h"
+
 
 #define ASPECT 16/9
 
