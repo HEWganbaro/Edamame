@@ -150,6 +150,12 @@ BOOL Game_Initialize()
 		//gEnemyVector.emplace_back(gEnemy);
 		break;
 
+	case 1:
+		//“G‚Ì‰Šú‰»
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 7);
+		gEnemyVector.emplace_back(gEnemy);
+
 	default:
 		break;
 	}

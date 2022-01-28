@@ -1,6 +1,7 @@
 #include "Gauge.h"
 
-int gauge_change = 0;
+
+
 
 GameObject * Gauge_Initialize(GameObject * Gauge, GameObject * Gauge2)
 {
@@ -21,10 +22,10 @@ GameObject * Gauge_Initialize(GameObject * Gauge, GameObject * Gauge2)
 
 void Gauge_Update(GameObject * Gauge2, GameObject * Player, GameObject * Player2)
 {
-	gauge_change = (big_snowball + 1 / (Player->SnowSize + Player2->SnowSize));
-
-	if (gauge_change == 3)
-	{
-		Gauge2->sizeX = 50.0f;
-	}
+	float gauge_change = 0;//大きい方の雪玉のサイズを合計で割って割合を出す関数
+	float sumSnowSize = 0;//雪玉のサイズの合計を入れる
+	sumSnowSize = Player->SnowSize + Player2->SnowSize;//合計を入れる式
+	gauge_change = big_snowball / sumSnowSize;//大きい方のサイズを合計で割って割合を出す式
+	//Gauge2->sizeX = gauge_change * 100;
+	Gauge2->texture->SetSize(gauge_change * 900, 100);
 }

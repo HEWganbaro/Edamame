@@ -19,4 +19,4 @@ void Player_AniUpdate(GameObject* Player);
 //ŠÔ·‚Å•X‚É•Ï‚¦‚é‚½‚ß‚ÌŠÖ”
 void toIce(GameObject* Map);
 //‘å‚«‚¢á‹Ê‚ğ•Ô‚·ŠÖ”
-int Big_SnowBall(GameObject* Player, GameObject* Player2);
+float Big_SnowBall(GameObject* Player, GameObject* Player2);

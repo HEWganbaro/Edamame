@@ -31,6 +31,7 @@
 //ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
 
 GameObject tBackGround;				//背景
+GameObject tLogo;                   //タイトルロゴ
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
 //*****************************************************************************
@@ -46,10 +47,15 @@ BOOL Title_Initialize()
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
 
 	//背景
-	tBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
+	tBackGround.texture = new Sprite("assets/TitleBG.png", 1, 1);
 	tBackGround.texture->SetSize(1280 * 2, 720 * 2);
 	tBackGround.posX = -1;
 	tBackGround.posY = 1;
+
+	tLogo.texture = new Sprite("assets/TitleLOGO.png", 1, 1);
+	tLogo.texture->SetSize(1280 * 2, 720 * 2);
+	tLogo.posX = -1;
+	tLogo.posY = 1;
 
 	return TRUE;
 }
@@ -63,7 +69,7 @@ BOOL Title_Update()
 	XInputGetState(0, &state);
 
 	GameObject_DrowUpdate(&tBackGround);
-
+	GameObject_DrowUpdate(&tLogo);
 	if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)) {
 		return FALSE;
 	}
@@ -80,7 +86,7 @@ void Title_Draw()
 
 	//ゲームオブジェクトを全部描画する
 	tBackGround.texture->Draw();
-
+	tLogo.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
@@ -90,4 +96,5 @@ void Title_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
 	delete tBackGround.texture;
+	delete tLogo.texture;
 }

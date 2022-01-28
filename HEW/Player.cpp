@@ -159,16 +159,8 @@ void toIce(GameObject* Map) {
 	turn = PLAYER_TURN;
 }
 
-int Big_SnowBall(GameObject * Player, GameObject * Player2)
+float Big_SnowBall(GameObject * Player, GameObject * Player2)
 {
-	if (Player->SnowSize > Player2->SnowSize)
-	{
-		big_snowball = Player->SnowSize;
-	}
-	if (Player->SnowSize < Player2->SnowSize)
-	{
-		big_snowball = Player2->SnowSize;
-	}
-
+	big_snowball = (Player->SnowSize > Player2->SnowSize) ? Player->SnowSize : Player2->SnowSize;
 	return big_snowball;
 }
