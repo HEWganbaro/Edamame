@@ -141,7 +141,7 @@ BOOL Game_Initialize()
 	{
 	case 0:
 		//敵の初期化
-		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
 		gEnemyVector.emplace_back(gEnemy);
 
@@ -238,16 +238,16 @@ BOOL Game_Update()
 				if (gEnemyVector[i].direction == NULL_WAY) {
 					//敵のタイプに合わせて行動変化
 					switch (gEnemyVector[i].enemytype) {
-					case RANDOM:
+					case RANDOM:	//ランダム移動
 						Enemy_Move_Random(&gEnemyVector[i]);
 						break;
 
-					case FOLLOWING:
+					case FOLLOWING:	//範囲以内を索敵追尾
 						Enemy_Move_Chase(&gEnemyVector[i], &gPlayer1, &gPlayer2);
 						break;
 
 					case CIRCUMFRENCE:
-						Enemy_Move_Circle(&gEnemyVector[i]);
+						//Enemy_Move_Circle(&gEnemyVector[i]);
 						break;
 					}
 				}
@@ -273,7 +273,8 @@ BOOL Game_Update()
 		break;
 
 	case ENV_TURN:
-		toIce(gObjects);
+		//マップを状態に合わせて変更する
+		MapUpdate(gObjects, &gPlayer1, &gPlayer2);
 		for (int i = 0; i < gEnemyVector.size(); i++)
 			Enemy_Player_Hit(&gEnemyVector[i], &gPlayer1, &gPlayer2);
 		//どちらの雪玉が早いか

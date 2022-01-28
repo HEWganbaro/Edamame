@@ -149,6 +149,12 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		Player->animator.isActive = false;
 		return;
 	}
+	//何もしない
+	if (Player->direction == NO_ACTION) {
+		Player->animator.isActive = false;
+		return;
+	}
+
 	//進むマスが何か取得
 	//地面がないとき
 	if (Map_GetPlayerTile(Player, Map) == -1) {
@@ -261,6 +267,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
+				//Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown + 1].
 			}
 			break;
 
@@ -360,7 +367,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		case RIGHT_DOWN:	//イージング加速>最大速度で滑らす>イージング減速
 			if (Player->mappos.RightDown + 1 == MAP_EDGE ||
 				Map_GetPlayerTile_RightDown(Player, Map) == -1 ||//マップ外まで滑らない
-				Map_GetPlayerTile_RightDown(Player, Map) == LEFTUP_SLOPE || Map_GetPlayerTile_RightDown(Player, Map) == RIGHTUP_SLOPE || Map_GetPlayerTile_RightDown(Player, Map) == STONE)
+				Map_GetPlayerTile_RightDown(Player, Map) == LEFTUP_SLOPE || Map_GetPlayerTile_RightDown(Player, Map) == RIGHTUP_SLOPE || Map_GetPlayerTile_RightDown(Player, Map) == STONE || (Map_GetPlayerTile_RightUp(Player, Map) == GOAL && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
@@ -417,7 +424,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		case LEFT_DOWN:
 			if (Player->mappos.LeftDown + 1 == MAP_EDGE ||
 				Map_GetPlayerTile_LeftDown(Player, Map) == -1 ||
-				Map_GetPlayerTile_LeftDown(Player, Map) == RIGHTUP_SLOPE || Map_GetPlayerTile_LeftDown(Player, Map) == LEFTUP_SLOPE || Map_GetPlayerTile_LeftDown(Player, Map) == STONE)
+				Map_GetPlayerTile_LeftDown(Player, Map) == RIGHTUP_SLOPE || Map_GetPlayerTile_LeftDown(Player, Map) == LEFTUP_SLOPE || Map_GetPlayerTile_LeftDown(Player, Map) == STONE || (Map_GetPlayerTile_RightUp(Player, Map) == GOAL && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
@@ -472,7 +479,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			break;
 
 		case LEFT_UP:
-			if (Player->mappos.RightDown - 1 == -1 || Map_GetPlayerTile_LeftUp(Player, Map) == -1 || Map_GetPlayerTile_LeftUp(Player, Map) == STONE)
+			if (Player->mappos.RightDown - 1 == -1 || Map_GetPlayerTile_LeftUp(Player, Map) == -1 || Map_GetPlayerTile_LeftUp(Player, Map) == STONE || (Map_GetPlayerTile_RightUp(Player, Map) == GOAL && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
@@ -526,7 +533,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			break;
 
 		case RIGHT_UP:
-			if (Player->mappos.LeftDown - 1 == -1 || Map_GetPlayerTile_RightUp(Player, Map) == -1 || Map_GetPlayerTile_RightUp(Player, Map) == STONE)
+			if (Player->mappos.LeftDown - 1 == -1 || Map_GetPlayerTile_RightUp(Player, Map) == -1 || Map_GetPlayerTile_RightUp(Player, Map) == STONE || (Map_GetPlayerTile_RightUp(Player, Map) == GOAL && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;

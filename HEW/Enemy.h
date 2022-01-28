@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "MapGeneration.h"
 
+#define SCANNING_RANGE 3
+
 //敵を初期化する関数 
 GameObject* Enemy_Initialize(GameObject* Enemy, EnemyType type);
 //敵の場所をセットする(雪玉オブジェクト, 高さ, 左下, 右下) 0から始まる

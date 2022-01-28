@@ -92,20 +92,6 @@ void Player_Update(GameObject * Player, GameObject* Map)
 {
 	MapMove_Update(Player, Map);
 	//’n–Êó‘ÔˆÚs‚ð‚µ‚Ä‚È‚¢
-	if (Map_GetPlayerTile(Player, Map) == SNOW_GROUND) {
-		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->SetPart(1, 0);
-		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].yobiFlag = true;
-		//Player->texture->SetPart(0, 0);
-		Player->SnowSize++;
-	}
-	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
-		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].changeFlag = true;
-		//Player->texture->SetPart(0, 0);
-
-	}
-	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
-		//Player->texture->SetPart(1, 0);
-	}
 	Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
 }
 
@@ -144,17 +130,42 @@ void Player_AniUpdate(GameObject * Player)
 	}
 }
 
-void toIce(GameObject* Map) {
+void MapUpdate(GameObject* Map, GameObject* Player, GameObject* Player2) {
 	for (int i = 0; i < 300; i++) {
 		if (Map[i].texture->GetPart() != GOAL_LATER) {
-			if (Map[i].yobiFlag == false) {
-				if (Map[i].changeFlag == true) {
-					Map[i].texture->SetPart(2, 0);
-				}
+			if (Map[i].changeFlag == true) {
+				Map[i].texture->SetPart(2, 0);
 			}
-			else
-				Map[i].yobiFlag = false;
 		}
+	}
+	if (Map_GetPlayerTile(Player, Map) == SNOW_GROUND) {
+		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->SetPart(1, 0);
+		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].yobiFlag = SNOW_STATE;
+		//Player->texture->SetPart(0, 0);
+		Player->SnowSize++;
+	}
+	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
+		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].changeFlag = true;
+		//Player->texture->SetPart(0, 0);
+
+	}
+	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
+		//Player->texture->SetPart(1, 0);
+	}
+
+	if (Map_GetPlayerTile(Player2, Map) == SNOW_GROUND) {
+		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].texture->SetPart(1, 0);
+		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].yobiFlag = SNOW_STATE;
+		//Player2->texture->SetPart(0, 0);
+		Player2->SnowSize++;
+	}
+	else if (Map_GetPlayerTile(Player2, Map) == NORMAL_GROUND) {
+		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].changeFlag = true;
+		//Player2->texture->SetPart(0, 0);
+
+	}
+	else if (Map_GetPlayerTile(Player2, Map) == SOIL_GROUND) {
+		//Player2->texture->SetPart(1, 0);
 	}
 	turn = PLAYER_TURN;
 }

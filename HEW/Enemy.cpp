@@ -213,107 +213,191 @@ void Enemy_Move_Random(GameObject * Enemy)
 
 void Enemy_Player_Hit(GameObject * Enemy, GameObject * Player, GameObject * Player2)
 {
-	if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
-		Player->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		turn = GAMEOVER;
+	if (Player->Goalfrg == false) {
+		if ((Player->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
+			(Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
+			(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
+			(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown - 1 == Enemy->mappos.RightDown))
+			turn = GAMEOVER;
 	}
-	if (Player2->mappos.LeftDown == Enemy->mappos.LeftDown &&
-		Player2->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		turn = GAMEOVER;
+	if (Player2->Goalfrg == false) {
+		if ((Player2->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
+			(Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
+			(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
+			(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown - 1 == Enemy->mappos.RightDown))
+			turn = GAMEOVER;
 	}
 }
 
 //敵の雪玉への接近
 void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Player2)
 {
-	//Player
-	if (Player->mappos.LeftDown - 1 == Enemy->mappos.LeftDown &&
-		Player->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
+	//プレイヤーを~マス圏内で索敵する
+	const bool LeftDown_Player = SCANNING_RANGE >= abs(Enemy->mappos.LeftDown - Player->mappos.LeftDown);
+	const bool LeftDown_Player2 = SCANNING_RANGE >= abs(Enemy->mappos.LeftDown - Player2->mappos.LeftDown);
+	const bool RightDown_Player = SCANNING_RANGE >= abs(Enemy->mappos.RightDown - Player->mappos.RightDown);
+	const bool RightDown_Player2 = SCANNING_RANGE >= abs(Enemy->mappos.RightDown - Player2->mappos.RightDown);
+	bool Player_EnemyIn = LeftDown_Player && RightDown_Player;
+	bool Player_EnemyIn2 = LeftDown_Player2 && RightDown_Player2;
+	if (Player_EnemyIn == true && Player_EnemyIn2 == true)	//距離が近いほうを優先
+		if ((abs(Enemy->mappos.LeftDown - Player->mappos.LeftDown) + abs(Enemy->mappos.RightDown - Player->mappos.RightDown))
+			< (abs(Enemy->mappos.LeftDown - Player2->mappos.LeftDown) + abs(Enemy->mappos.RightDown - Player2->mappos.RightDown)))
+			Player_EnemyIn2 = false;
+		else
+			Player_EnemyIn = false;
+
+	if (Player_EnemyIn)
+		Enemy->enemyeye = ENEMYEYE_IN_1;
+	else if (Player_EnemyIn2)
+		Enemy->enemyeye = ENEMYEYE_IN_2;
+	else
+		Enemy->enemyeye = ENEMYEYE_OUT;
+	//ゴールしてないほうを追いかける
+	if (Player->Goalfrg == true)
+		Enemy->enemyeye = ENEMYEYE_IN_2;
+	if (Player2->Goalfrg == true)
+		Enemy->enemyeye = ENEMYEYE_IN_1;
+
+	if (Enemy->enemyeye == ENEMYEYE_IN_1) {
+		//距離を保存
+		const int Player_LeftDown = -(Enemy->mappos.LeftDown - Player->mappos.LeftDown);
+		const int Player_RightDown = -(Enemy->mappos.RightDown - Player->mappos.RightDown);
+
+		//同じであればその方向のどちらかの2方向を選ぶ
+		if (abs(Player_LeftDown) == abs(Player_RightDown)) {
+			if (Player_LeftDown < 0 && Player_RightDown < 0) {
+				if (rand() % 2) {
+					Enemy->direction = RIGHT_UP;
+					Enemy->mappos.LeftDown--;
+				}
+				else {
+					Enemy->direction = LEFT_UP;
+					Enemy->mappos.RightDown--;
+				}
+			}
+			else if (Player_LeftDown > 0 && Player_RightDown > 0) {
+				if (rand() % 2) {
+					Enemy->direction = RIGHT_DOWN;
+					Enemy->mappos.RightDown++;
+				}
+				else {
+					Enemy->direction = LEFT_DOWN;
+					Enemy->mappos.LeftDown++;
+				}
+			}
+			else if (Player_LeftDown > 0 && Player_RightDown < 0) {
+				if (rand() % 2) {
+					Enemy->direction = LEFT_UP;
+					Enemy->mappos.RightDown--;
+				}
+				else {
+					Enemy->direction = LEFT_DOWN;
+					Enemy->mappos.LeftDown++;
+				}
+			}
+			else if (Player_LeftDown < 0 && Player_RightDown > 0) {
+				if (rand() % 2) {
+					Enemy->direction = RIGHT_UP;
+					Enemy->mappos.LeftDown--;
+				}
+				else {
+					Enemy->direction = RIGHT_DOWN;
+					Enemy->mappos.RightDown++;
+				}
+			}
+		}//プレイヤーがいる方向に近づく
+		else if (Player_LeftDown > 1) {
 			Enemy->direction = LEFT_DOWN;
 			Enemy->mappos.LeftDown++;
 		}
-	}
-	if (Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
-		Player->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
-			Enemy->direction = RIGHT_UP;
-			Enemy->mappos.LeftDown--;
-		}
-	}
-
-	if (Player->mappos.RightDown - 1 == Enemy->mappos.RightDown &&
-		Player->mappos.LeftDown == Enemy->mappos.LeftDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
+		else if (Player_RightDown > 1) {
 			Enemy->direction = RIGHT_DOWN;
 			Enemy->mappos.RightDown++;
 		}
-	}
-
-	if (Player->mappos.RightDown + 1 == Enemy->mappos.RightDown &&
-		Player->mappos.LeftDown == Enemy->mappos.LeftDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
+		else if (Player_LeftDown < -1) {
+			Enemy->direction = RIGHT_UP;
+			Enemy->mappos.LeftDown--;
+		}
+		else if (Player_RightDown < -1) {
 			Enemy->direction = LEFT_UP;
 			Enemy->mappos.RightDown--;
 		}
+		else {
+			//攻撃範囲なら動かない
+			Enemy->direction = NO_ACTION;
+		}
+		Enemy->animator.isActive = true;
 	}
+	else if (Enemy->enemyeye == ENEMYEYE_IN_2) {
+		const int Player_LeftDown = -(Enemy->mappos.LeftDown - Player2->mappos.LeftDown);
+		const int Player_RightDown = -(Enemy->mappos.RightDown - Player2->mappos.RightDown);
 
-	//Player2
-	if (Player2->mappos.LeftDown - 1 == Enemy->mappos.LeftDown &&
-		Player2->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
+		if (abs(Player_LeftDown) == abs(Player_RightDown)) {
+			if (Player_LeftDown < 0 && Player_RightDown < 0) {
+				if (rand() % 2) {
+					Enemy->direction = RIGHT_UP;
+					Enemy->mappos.LeftDown--;
+				}
+				else {
+					Enemy->direction = LEFT_UP;
+					Enemy->mappos.RightDown--;
+				}
+			}
+			else if (Player_LeftDown > 0 && Player_RightDown > 0) {
+				if (rand() % 2) {
+					Enemy->direction = RIGHT_DOWN;
+					Enemy->mappos.RightDown++;
+				}
+				else {
+					Enemy->direction = LEFT_DOWN;
+					Enemy->mappos.LeftDown++;
+				}
+			}
+			else if (Player_LeftDown > 0 && Player_RightDown < 0) {
+				if (rand() % 2) {
+					Enemy->direction = LEFT_UP;
+					Enemy->mappos.RightDown--;
+				}
+				else {
+					Enemy->direction = LEFT_DOWN;
+					Enemy->mappos.LeftDown++;
+				}
+			}
+			else if (Player_LeftDown < 0 && Player_RightDown > 0) {
+				if (rand() % 2) {
+					Enemy->direction = RIGHT_UP;
+					Enemy->mappos.LeftDown--;
+				}
+				else {
+					Enemy->direction = RIGHT_DOWN;
+					Enemy->mappos.RightDown++;
+				}
+			}
+		}//プレイヤーがいる方向に近づく
+		else if (Player_LeftDown > 1) {
 			Enemy->direction = LEFT_DOWN;
 			Enemy->mappos.LeftDown++;
 		}
-	}
-	if (Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown &&
-		Player2->mappos.RightDown == Enemy->mappos.RightDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
-			Enemy->direction = RIGHT_UP;
-			Enemy->mappos.LeftDown--;
-		}
-	}
-
-	if (Player2->mappos.RightDown - 1 == Enemy->mappos.RightDown &&
-		Player2->mappos.LeftDown == Enemy->mappos.LeftDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
+		else if (Player_RightDown > 1) {
 			Enemy->direction = RIGHT_DOWN;
 			Enemy->mappos.RightDown++;
 		}
-	}
-
-	if (Player2->mappos.RightDown + 1 == Enemy->mappos.RightDown &&
-		Player2->mappos.LeftDown == Enemy->mappos.LeftDown)
-	{
-		Enemy->enemyeye = ENEMYEYE_IN;
-		if (Enemy->enemyeye == ENEMYEYE_IN)
-		{
+		else if (Player_LeftDown < -1) {
+			Enemy->direction = RIGHT_UP;
+			Enemy->mappos.LeftDown--;
+		}
+		else if (Player_RightDown < -1) {
 			Enemy->direction = LEFT_UP;
 			Enemy->mappos.RightDown--;
 		}
+		else {
+			//攻撃範囲なら動かない
+			Enemy->direction = NO_ACTION;
+		}
+		Enemy->animator.isActive = true;
+	}
+	else {
+		Enemy_Move_Random(Enemy);
 	}
 }
 

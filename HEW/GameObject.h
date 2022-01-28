@@ -30,6 +30,7 @@ enum Direction
 	LEFT_DOWN,
 	LEFT_UP,
 	RIGHT_UP,
+	NO_ACTION,
 };
 
 //敵のタイプ
@@ -42,8 +43,9 @@ enum EnemyType
 //敵の視線
 enum Enemyeye
 {
-	ENEMYEYE_IN,
 	ENEMYEYE_OUT,
+	ENEMYEYE_IN_1,
+	ENEMYEYE_IN_2,
 };
 
 //敵の挙動
@@ -101,7 +103,7 @@ struct GameObject {
 	float sizeX, sizeY; // 大きさ
 
 	bool changeFlag = false;//状態遷移などに使いたいとき用のフラグ
-	bool yobiFlag = false;//状態遷移に使った予備のフラグ
+	int yobiFlag;//状態遷移に使った予備のフラグ
 	bool IsEnemy = false;//敵か
 
 	bool Goalfrg = false;
