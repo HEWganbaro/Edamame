@@ -17,7 +17,7 @@
 //*****************************************************************************
 
 #define	CLASS_NAME		"サンプル"				// ウインドウクラスの名前
-#define WINDOW_NAME		"スケルトンプログラム"	// ウィンドウの名前
+#define WINDOW_NAME		"TwinSnow"	// ウィンドウの名前
 
 #define	SCREEN_WIDTH	(1280)					// ウインドウの幅
 #define	SCREEN_HEIGHT	(720)					// ウインドウの高さ

@@ -161,10 +161,11 @@ BOOL Game_Initialize()
 	}
 
 	//”wŒi•`‰æ
-	gBackGround.texture = new Sprite("assets/BackGround.png", 1, 1);
+	gBackGround.texture = new Sprite("assets/GameBG.png", 2, 1);
 	gBackGround.texture->SetSize(1280 * 2, 720 * 2);
 	gBackGround.posX = -1;
 	gBackGround.posY = 1;
+	gBackGround.texture->SetPart(1, 0);
 
 	//ƒfƒoƒbƒN—p
 	NoHeight->texture = new Sprite("assets/dotFont.png", 16, 8);
