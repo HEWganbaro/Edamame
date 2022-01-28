@@ -1,5 +1,7 @@
 #include "Gauge.h"
 
+int gauge_change = 0;
+
 GameObject * Gauge_Initialize(GameObject * Gauge, GameObject * Gauge2)
 {
 	Gauge->texture = new Sprite("assets/Image_Load.png", 1, 4);
@@ -15,4 +17,14 @@ GameObject * Gauge_Initialize(GameObject * Gauge, GameObject * Gauge2)
 	Gauge2->posY = -0.79f;
 
 	return Gauge, Gauge2;
+}
+
+void Gauge_Update(GameObject * Gauge2, GameObject * Player, GameObject * Player2)
+{
+	gauge_change = (big_snowball + 1 / (Player->SnowSize + Player2->SnowSize));
+
+	if (gauge_change == 3)
+	{
+		Gauge2->sizeX = 50.0f;
+	}
 }

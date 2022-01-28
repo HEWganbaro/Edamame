@@ -6,6 +6,7 @@
 
 int Player1_cut = 0;
 int Player2_cut = 0;
+int big_snowball = 0;
 
 void Player_Initialize(GameObject* Player) {
 	Player->texture = new Sprite("assets/yukichara.png", 32, 4);
@@ -14,7 +15,7 @@ void Player_Initialize(GameObject* Player) {
 	Player->mappos.Height = 0;
 	Player->mappos.LeftDown = 0;
 	Player->mappos.RightDown = 0;
-	Player->SnowSize = 0;
+	Player->SnowSize = 1;
 	Player->animator.speed = 8.0f;
 	Player->Goalfrg = false;
 	Player->Item_Face = false;
@@ -156,4 +157,18 @@ void toIce(GameObject* Map) {
 		}
 	}
 	turn = PLAYER_TURN;
+}
+
+int Big_SnowBall(GameObject * Player, GameObject * Player2)
+{
+	if (Player->SnowSize > Player2->SnowSize)
+	{
+		big_snowball = Player->SnowSize;
+	}
+	if (Player->SnowSize < Player2->SnowSize)
+	{
+		big_snowball = Player2->SnowSize;
+	}
+
+	return big_snowball;
 }
