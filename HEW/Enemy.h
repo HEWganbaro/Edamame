@@ -11,7 +11,7 @@ void Enemy_SetLocation(GameObject* Enemy, GameObject* Location, int Height, int 
 //敵のマップ座標取得
 MapPos Enemy_GetMapPos(GameObject* Enemy);
 //アップデート関数
-void Enemy_Update(GameObject* Enemy);
+void Enemy_Update(GameObject* Enemy, GameObject* Player);
 //敵の当たり判定
 void Enemy_Hit(GameObject* Enemy);
 //敵がプレイヤーを追いかける
@@ -22,5 +22,9 @@ void Enemy_Move_Circle(GameObject* Enemy);
 void Enemy_Move_Random(GameObject* Enemy);
 //ゲームオーバー処理
 void Enemy_Player_Hit(GameObject* Enemy, GameObject* Player, GameObject* Player2);
+//ゲームオーバー後移動
+void Enemy_GameOver_Move(GameObject* Enemy);
+//ゲームオーバー後の移動フラグ
+void Enemy_Move_Frg(GameObject* Enemy, GameObject* Player);
 //敵のスタン
-void Enemy_Stun(GameObject* Enemy, GameObject* Player, GameObject * Player2, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
+void Enemy_Stun(GameObject* Enemy, GameObject* Player, GameObject * Player2, GameObject* Map);

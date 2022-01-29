@@ -142,12 +142,16 @@ BOOL Game_Initialize()
 	case 0:
 		//敵の初期化
 		Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 5);
 		gEnemyVector.emplace_back(gEnemy);
 
 		//Enemy_Initialize(&gEnemy, RANDOM);
 		//Enemy_SetLocation(&gEnemy, gObjects, 0, 5, 4);
 		//gEnemyVector.emplace_back(gEnemy);
+
+		//雪玉初期化
+		Player_SetLocation(&gPlayer1, gObjects, 1, 0, 0);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 6, 6);
 		break;
 
 	case 1:
@@ -210,7 +214,7 @@ BOOL Game_Update()
 	//アニメーション
 	//敵アニメーション
 	for (int i = 0; i < gEnemyVector.size(); i++)
-		Enemy_Update(&gEnemyVector[i]);
+		Enemy_Update(&gEnemyVector[i], &gPlayer1);
 	Player_AniUpdate(&gPlayer1);
 	Player_AniUpdate(&gPlayer2);
 
@@ -263,19 +267,30 @@ BOOL Game_Update()
 				}
 			}
 			//敵のスタン
-			//Enemy_Stun(&gEnemy, &gPlayer1, &gPlayer2, gObjects, MapChip);
+			Enemy_Stun(&gEnemyVector[i], &gPlayer1, &gPlayer2, gObjects);
+			if (gEnemyVector[i].IsStun == Stun || gEnemyVector[i].IsStun == Stun_Release)
+				end = false;
 		}
 		if (end == false) {
 			turn = ENV_TURN;
-			for (int i = 0; i < gEnemyVector.size(); i++) 
+			for (int i = 0; i < gEnemyVector.size(); i++) {
 				gEnemyVector[i].animator.oneAni = false;
+				if (gEnemyVector[i].IsStun == Stun_) {
+					gEnemyVector[i].IsStun = Nothing;
+					gEnemyVector[i].direction = NULL_WAY;
+				}
+				if (gEnemyVector[i].IsStun == Stun)
+					gEnemyVector[i].IsStun = Stun_;
+				if (gEnemyVector[i].IsStun == Stun_Release)
+					gEnemyVector[i].IsStun = Stun;
+			}
 		}
 	}
 		break;
 
 	case ENV_TURN:
 		//マップを状態に合わせて変更する
-		MapUpdate(gObjects, &gPlayer1, &gPlayer2);
+ 		MapUpdate(gObjects, &gPlayer1, &gPlayer2);
 		for (int i = 0; i < gEnemyVector.size(); i++)
 			Enemy_Player_Hit(&gEnemyVector[i], &gPlayer1, &gPlayer2);
 		//どちらの雪玉が早いか
@@ -284,6 +299,41 @@ BOOL Game_Update()
 		//クリア
 		if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == true)
 			turn = CLEAR;
+		break;
+
+	case PENGUIN_ATTACK:
+		for (int i = 0; i < gEnemyVector.size(); i++) {
+			if (gEnemyVector[i].Enemycount < 50) {
+				if (gEnemyVector[i].EnemyAttak == true) {
+					gEnemyVector[i].posY += 0.2f / 50;
+					gEnemyVector[i].Enemycount++;
+				}
+			}
+			else {
+				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
+				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
+				if (gEnemyVector[i].EnemyAttak == true) {
+					gEnemyVector[i].animator.isActive = true;
+					Enemy_GameOver_Move(&gEnemyVector[i]);
+					if (gEnemyVector[i].animator.isActive == false || gEnemyVector[i].direction == NULL_WAY) {
+						gEnemyVector[i].Enemycount = 0;
+						gEnemyVector[i].direction = NO_ACTION;
+						turn = PENGUIN2;
+					}
+				}
+			}
+		} 
+		break;
+	case PENGUIN2:
+		for (int i = 0; i < gEnemyVector.size(); i++) {
+			if (gEnemyVector[i].Enemycount < 10) {
+				gEnemyVector[i].posY -= 0.2f / 10;
+				gEnemyVector[i].Enemycount++;
+			}
+			else {
+				turn = GAMEOVER;
+			}
+		}
 		break;
 
 	case GAMEOVER:
@@ -338,12 +388,18 @@ void Game_Draw()
 	gEffect[1].texture->Draw();
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].texture->Draw();
+	if (turn != GAMEOVER) {
+		for (int i = 0; i < gEnemyVector.size(); i++)
+			gEnemyVector[i].texture->Draw();
+	}
 	gPlayer1.texture->Draw();
 	gPlayer2.texture->Draw();
+	if (turn == GAMEOVER) {
+		for (int i = 0; i < gEnemyVector.size(); i++)
+			gEnemyVector[i].texture->Draw();
+	}
 	gGauge.texture->Draw();
 	gGauge2.texture->Draw();
-	for (int i = 0; i < gEnemyVector.size(); i++)
-		gEnemyVector[i].texture->Draw();
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
 

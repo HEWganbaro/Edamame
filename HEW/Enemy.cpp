@@ -9,7 +9,7 @@ int turn = PLAYER_TURN;
 
 GameObject* Enemy_Initialize(GameObject * Enemy, EnemyType type)
 {
-	Enemy->texture = new Sprite("assets/penguin_tex.png", 16, 4);
+	Enemy->texture = new Sprite("assets/penguin_tex.png", 48, 4);
 	Enemy->texture->SetSize(175, 175);
 	Enemy->mappos.Height = 0;
 	Enemy->mappos.LeftDown = 0;
@@ -19,6 +19,9 @@ GameObject* Enemy_Initialize(GameObject * Enemy, EnemyType type)
 	Enemy->enemytype = type;
 	Enemy->direction = NULL_WAY;
 	Enemy->enemyeye = ENEMYEYE_OUT;
+	Enemy->EnemyAttak = false;
+	Enemy->Enemycount = 0;
+	Enemy->IsStun = Nothing;
 
 	return Enemy;
 }
@@ -40,36 +43,81 @@ MapPos Enemy_GetMapPos(GameObject * Enemy)
 	return mappos;
 }
 
-void Enemy_Update(GameObject * Enemy)
+void Enemy_Update(GameObject * Enemy, GameObject* Player)
 {
 	Animator_Update(&Enemy->animator);
 
-	int walk = 0;
+	int walk = 0, stun = 0, following = 0, gameover = 0;
 	if (Enemy->animator.isActive == true)
-		walk = 8;
-	//アニメーション
-	switch (Enemy->direction)
-	{
-	case NULL_WAY:
-		Enemy->texture->SetPart(Enemy->animator.frame, 0);
-		break;
-
-	case RIGHT_DOWN:
-		Enemy->texture->SetPart(Enemy->animator.frame + walk, 0);
-		break;
-
-	case LEFT_DOWN:
-		Enemy->texture->SetPart(Enemy->animator.frame + walk, 1);
-		break;
-
-	case LEFT_UP:
-		Enemy->texture->SetPart(Enemy->animator.frame + walk, 2);
-		break;
-
-	case RIGHT_UP:
-		Enemy->texture->SetPart(Enemy->animator.frame + walk, 3);
-		break;
+		walk = 8;//歩くアニメーション
+	if (Enemy->IsStun == Stun)
+		stun = 16;//スタン
+	if (Enemy->IsStun == Stun_) {
+		stun++;
+		if (stun == 18)
+			stun = 17;
 	}
+	//追いかけるアニメーション
+	if (Enemy->enemyeye == ENEMYEYE_IN_1 || Enemy->enemyeye == ENEMYEYE_IN_2) {
+		following = 24 ;
+		walk = 0;
+	}
+	//ぺちゃんこにするアニメーション
+	if (turn == PENGUIN_ATTACK || turn == PENGUIN2 || turn == GAMEOVER) {
+		gameover = 32;
+		if (turn == PENGUIN2 || turn == GAMEOVER)
+			gameover = 47;
+		switch (Enemy->direction)
+		{ 
+		case NULL_WAY:
+			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
+			break;
+		case RIGHT_DOWN:
+			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
+			break;
+		case LEFT_DOWN:
+			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 1);
+			break;
+		case LEFT_UP:
+			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 2);
+			break;
+		case RIGHT_UP:
+			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 3);
+			break;
+		case NO_ACTION:
+			Enemy->texture->SetPart(gameover, 0);
+			break;
+		}
+	}
+	//アニメーション
+ 	else if (Enemy->IsStun == Stun || Enemy->IsStun == Stun_) {
+		Enemy->texture->SetPart(stun, 0);
+	}
+	else {
+		switch (Enemy->direction)
+		{
+		case NULL_WAY:
+			Enemy->texture->SetPart(Enemy->animator.frame + stun + following, 0);
+			break;
+
+		case RIGHT_DOWN:
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 0);
+			break;
+
+		case LEFT_DOWN:
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1);
+			break;
+
+		case LEFT_UP:
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 2);
+			break;
+
+		case RIGHT_UP:
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 3);
+			break;
+		}
+	}
+
 }
 
 void Enemy_Hit(GameObject * Enemy)
@@ -214,19 +262,122 @@ void Enemy_Move_Random(GameObject * Enemy)
 void Enemy_Player_Hit(GameObject * Enemy, GameObject * Player, GameObject * Player2)
 {
 	if (Player->Goalfrg == false) {
-		if ((Player->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
-			(Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
-			(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
-			(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown - 1 == Enemy->mappos.RightDown))
-			turn = GAMEOVER;
+		if (Enemy->IsStun == Stun || Enemy->IsStun == Stun_) {}
+		else {
+			if ((Player->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
+				(Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
+				(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
+				(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown - 1 == Enemy->mappos.RightDown) ||
+				(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown  == Enemy->mappos.RightDown)) {
+				turn = PENGUIN_ATTACK;
+				Enemy->EnemyAttak = true;
+				Player->EnemyAttak = true;
+			}
+		}
 	}
 	if (Player2->Goalfrg == false) {
-		if ((Player2->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
-			(Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
-			(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
-			(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown - 1 == Enemy->mappos.RightDown))
-			turn = GAMEOVER;
+		if (Enemy->IsStun == Stun || Enemy->IsStun == Stun_) {}
+		else {
+			if ((Player2->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
+				(Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
+				(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
+				(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown - 1 == Enemy->mappos.RightDown) ||
+				(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown)) {
+				turn = PENGUIN_ATTACK;
+				Enemy->EnemyAttak = true;
+				Player2->EnemyAttak = true;
+			}
+		}
 	}
+}
+
+void Enemy_GameOver_Move(GameObject * Player)
+{
+	switch (Player->direction)
+	{
+	case RIGHT_DOWN:
+		if (Player->animator.count != PLAYER_SPEED) {
+			double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+			double tmp1 = 0;
+			if (Player->animator.count != 0)
+				tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+			Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->animator.count++;
+		}
+		else {
+			Player->direction = NULL_WAY;
+			Player->animator.count = 0;
+			Player->animator.isActive = false;
+		}
+		break;
+
+	case LEFT_DOWN:
+		if (Player->animator.count != PLAYER_SPEED) {
+			double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+			double tmp1 = 0;
+			if (Player->animator.count != 0)
+				tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+			Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->posY -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->animator.count++;
+		}
+		else {
+			Player->direction = NULL_WAY;
+			Player->animator.count = 0;
+			Player->animator.isActive = false;
+		}
+		break;
+
+	case LEFT_UP:
+		if (Player->animator.count != PLAYER_SPEED) {
+			double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+			double tmp1 = 0;
+			if (Player->animator.count != 0)
+				tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+			Player->posX -= (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->animator.count++;
+		}
+		else {
+			Player->direction = NULL_WAY;
+			Player->animator.count = 0;
+			Player->animator.isActive = false;
+			//Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown + 1].
+		}
+		break;
+
+	case RIGHT_UP:
+		if (Player->animator.count != PLAYER_SPEED) {
+			double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
+			double tmp1 = 0;
+			if (Player->animator.count != 0)
+				tmp1 = (double)(Player->animator.count - 1) / (double)PLAYER_SPEED;
+			Player->posX += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->posY += (Move_Easing(tmp) - Move_Easing(tmp1))*MAP_LENGTH;
+			Player->animator.count++;
+		}
+		else {
+			Player->direction = NULL_WAY;
+			Player->animator.count = 0;
+			Player->animator.isActive = false;
+		}
+		break;
+	}
+}
+
+void Enemy_Move_Frg(GameObject * Enemy, GameObject * Player)
+{
+	if (Enemy->mappos.LeftDown == Player->mappos.LeftDown && Enemy->mappos.RightDown == Player->mappos.RightDown - 1)
+		Enemy->direction = RIGHT_DOWN;
+	if (Enemy->mappos.LeftDown == Player->mappos.LeftDown && Enemy->mappos.RightDown == Player->mappos.RightDown + 1)
+		Enemy->direction = LEFT_UP;
+	if (Enemy->mappos.LeftDown == Player->mappos.LeftDown - 1 && Enemy->mappos.RightDown == Player->mappos.RightDown)
+		Enemy->direction = LEFT_DOWN;
+	if (Enemy->mappos.LeftDown == Player->mappos.LeftDown + 1 && Enemy->mappos.RightDown == Player->mappos.RightDown)
+		Enemy->direction = RIGHT_UP;
+	if (Enemy->mappos.LeftDown == Player->mappos.LeftDown && Enemy->mappos.RightDown == Player->mappos.RightDown)
+		Enemy->direction = NULL_WAY;
 }
 
 //敵の雪玉への接近
@@ -253,9 +404,9 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 	else
 		Enemy->enemyeye = ENEMYEYE_OUT;
 	//ゴールしてないほうを追いかける
-	if (Player->Goalfrg == true)
-		Enemy->enemyeye = ENEMYEYE_IN_2;
 	if (Player2->Goalfrg == true)
+		Enemy->enemyeye = ENEMYEYE_IN_2;
+	if (Player->Goalfrg == true)
 		Enemy->enemyeye = ENEMYEYE_IN_1;
 
 	if (Enemy->enemyeye == ENEMYEYE_IN_1) {
@@ -402,63 +553,18 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 }
 
 //敵のスタン
-void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, GameObject* Map, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE])
+void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, GameObject* Map)
 {
-	//Player
-	if (Map_GetPlayerTile(Player, Map) &&
-		Player->mappos.LeftDown >= Enemy->mappos.LeftDown - 1 && Player->mappos.RightDown == Enemy->mappos.RightDown &&
-		Player->mappos.Height > Enemy->mappos.Height)
-	{
-		Enemy->direction = LEFT_DOWN;
-		Enemy->enemyeye = ENEMYEYE_OUT;
-		Enemy->enemymove = ENEMY_STOP;
-		Player1_cut = 0;
+	if (RIGHTUP_SLOPE == Map_GetPlayerTile_TopRightUp(Enemy, Map)) {
+		if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
+			Player->mappos.RightDown == Enemy->mappos.RightDown) {
+			Enemy->IsStun = Stun_Release;
+		}
 	}
-	if (Player1_cut == 5)
-	{
-		Enemy->enemymove = ENEMY_MOVE;
-	}
-
-	if (Map_GetPlayerTile(Player, Map) &&
-		Player->mappos.RightDown >= Enemy->mappos.RightDown - 1 && Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
-		Player->mappos.Height > Enemy->mappos.Height)
-	{
-		Enemy->direction = RIGHT_DOWN;
-		Enemy->enemyeye = ENEMYEYE_OUT;
-		Enemy->enemymove = ENEMY_STOP;
-		Player1_cut = 0;
-	}
-	if (Player1_cut == 5)
-	{
-		Enemy->enemymove = ENEMY_MOVE;
-	}
-
-	//Player2
-	if (Map_GetPlayerTile(Player2, Map) &&
-		Player2->mappos.LeftDown >= Enemy->mappos.LeftDown - 1 && Player2->mappos.RightDown == Enemy->mappos.RightDown &&
-		Player2->mappos.Height > Enemy->mappos.Height)
-	{
-		Enemy->direction = LEFT_DOWN;
-		Enemy->enemyeye = ENEMYEYE_OUT;
-		Enemy->enemymove = ENEMY_STOP;
-		Player2_cut = 0;
-	}
-	if (Player2_cut == 5)
-	{
-		Enemy->enemymove = ENEMY_MOVE;
-	}
-
-	if (Map_GetPlayerTile(Player2, Map) &&
-		Player2->mappos.RightDown >= Enemy->mappos.RightDown - 1 && Player2->mappos.LeftDown == Enemy->mappos.LeftDown &&
-		Player2->mappos.Height > Enemy->mappos.Height)
-	{
-		Enemy->direction = RIGHT_DOWN;
-		Enemy->enemyeye = ENEMYEYE_OUT;
-		Enemy->enemymove = ENEMY_STOP;
-		Player2_cut = 0;
-	}
-	if (Player2_cut == 5)
-	{
-		Enemy->enemymove = ENEMY_MOVE;
+	if (LEFTUP_SLOPE == Map_GetPlayerTile_TopLeftUp(Enemy, Map)) {
+		if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
+			Player->mappos.RightDown == Enemy->mappos.RightDown) {
+			Enemy->IsStun = Stun_Release;
+		}
 	}
 }

@@ -9,7 +9,7 @@ int Player2_cut = 0;
 int big_snowball = 0;
 
 void Player_Initialize(GameObject* Player) {
-	Player->texture = new Sprite("assets/yukichara.png", 32, 4);
+	Player->texture = new Sprite("assets/Player_kansei.png", 48, 8);
 	Player->texture->SetSize(INIT_SNOW_SIZE, INIT_SNOW_SIZE);
 	Player->posY = 0.5f;
 	Player->mappos.Height = 0;
@@ -20,6 +20,8 @@ void Player_Initialize(GameObject* Player) {
 	Player->Goalfrg = false;
 	Player->Item_Face = false;
 	Player->Item_Arm = false;
+	Player->SoilFrg = false;
+	Player->EnemyAttak = false;
 	Player->direction = NULL_WAY;
 }
 
@@ -100,32 +102,34 @@ void Player_AniUpdate(GameObject * Player)
 	//アニメーション
 	Animator_Update(&Player->animator);
 
-	int walk = 0, growth = 0;
+	int walk = 0, growth = 0, soil = 0;
 	if (Player->animator.isActive == true)
 		walk = 8;
 	if (Player->SnowSize > 3)
-		growth = 16;
+		growth = 24;
+	if (Player->SoilFrg == true)
+		soil = 1;
 	//アニメーション
 	switch (Player->direction)
 	{
 	case NULL_WAY:
-		Player->texture->SetPart(Player->animator.frame + growth, 0);
+		Player->texture->SetPart(Player->animator.frame + growth, 0 + soil);
 		break;
 
 	case RIGHT_DOWN:
-		Player->texture->SetPart(Player->animator.frame + walk + growth, 0);
+		Player->texture->SetPart(Player->animator.frame + walk + growth, 0 + soil);
 		break;
 
 	case LEFT_DOWN:
-		Player->texture->SetPart(Player->animator.frame + walk + growth, 1);
+		Player->texture->SetPart(Player->animator.frame + walk + growth, 2 + soil);
 		break;
 
 	case LEFT_UP:
-		Player->texture->SetPart(Player->animator.frame + walk + growth, 2);
+		Player->texture->SetPart(Player->animator.frame + walk + growth, 4 + soil);
 		break;
 
 	case RIGHT_UP:
-		Player->texture->SetPart(Player->animator.frame + walk + growth, 3);
+		Player->texture->SetPart(Player->animator.frame + walk + growth, 6 + soil);
 		break;
 	}
 }
@@ -142,14 +146,18 @@ void MapUpdate(GameObject* Map, GameObject* Player, GameObject* Player2) {
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].texture->SetPart(1, 0);
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].yobiFlag = SNOW_STATE;
 		//Player->texture->SetPart(0, 0);
+		if (Player->SoilFrg == true)
+			Player->SoilFrg = false;
 		Player->SnowSize++;
 	}
 	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].changeFlag = true;
 		//Player->texture->SetPart(0, 0);
-
+		if (Player->SoilFrg == true)
+			Player->SoilFrg = false;
 	}
 	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
+		Player->SoilFrg = true;
 		//Player->texture->SetPart(1, 0);
 	}
 
@@ -157,15 +165,19 @@ void MapUpdate(GameObject* Map, GameObject* Player, GameObject* Player2) {
 		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].texture->SetPart(1, 0);
 		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].yobiFlag = SNOW_STATE;
 		//Player2->texture->SetPart(0, 0);
+		if (Player2->SoilFrg == true)
+			Player2->SoilFrg = false;
 		Player2->SnowSize++;
 	}
 	else if (Map_GetPlayerTile(Player2, Map) == NORMAL_GROUND) {
 		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].changeFlag = true;
 		//Player2->texture->SetPart(0, 0);
-
+		if (Player2->SoilFrg == true)
+			Player2->SoilFrg = false;
 	}
 	else if (Map_GetPlayerTile(Player2, Map) == SOIL_GROUND) {
 		//Player2->texture->SetPart(1, 0);
+		Player2->SoilFrg = true;
 	}
 	turn = PLAYER_TURN;
 }

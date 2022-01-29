@@ -37,6 +37,9 @@ GameObject groad;		//道
 GameObject gstage[10];
 GameObject gcloud[10];
 
+int countLevel = 10;
+bool Right;
+bool Left;
 
 StageScore LevelScoreSheet[MAP_STAGE];
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -128,23 +131,6 @@ BOOL Level_Initialize(StageScore score)
 	gcloud[9].texture = new Sprite("assets/cloud.png", 1, 1);
 	gcloud[9].texture->SetSize(400, 160);
 
-	//スコアを代入
-	if (score != TITLESCORE)
-		LevelScoreSheet[stage - 1] = score;
-
-	return TRUE;
-}
-
-BOOL Level_Update()
-{
-	Input_Update();  // このゲームで使うキーの押下状態を調べて保
-	XINPUT_STATE state;
-	XInputGetState(0, &state);
-
-	groad.texture->SetPart(0, 0);
-	groad.posX = -1.05f;
-	groad.posY = 1.1f;
-
 	gstage[0].texture->SetPart(0, 0);
 	gstage[0].posX = -0.97f;
 	gstage[0].posY = 0.48f;
@@ -225,6 +211,23 @@ BOOL Level_Update()
 	gcloud[9].posX = 0.67f;
 	gcloud[9].posY = -0.53f;
 
+	//スコアを代入
+	if (score != TITLESCORE)
+		LevelScoreSheet[stage - 1] = score;
+
+	return TRUE;
+}
+
+BOOL Level_Update()
+{
+	Input_Update();  // このゲームで使うキーの押下状態を調べて保
+	XINPUT_STATE state;
+	XInputGetState(0, &state);
+
+	groad.texture->SetPart(0, 0);
+	groad.posX = -1.05f;
+	groad.posY = 1.1f;
+
 	GameObject_DrowUpdate(&lBackGround);
 	GameObject_DrowUpdate(&gchoice);
 	GameObject_DrowUpdate(&groad);
@@ -294,26 +297,51 @@ BOOL Level_Update()
 		}
 		break;
 	}
-	if (Input_GetKeyTrigger('1') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP))
-	{
-		stage = STAGE_1;
+	//if (Input_GetKeyTrigger('1') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP))
+	//{
+	//	stage = STAGE_1;
+	//	gchoice.texture->SetPart(1, 0);
+	//	gchoice.posX = 0.8f;
+	//	gchoice.posY = 0.8f;
+
+	//}
+	//if (Input_GetKeyTrigger('2') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP))
+	//{
+	//	stage = STAGE_2;
+	//	gchoice.texture->SetPart(2, 0);
+	//	gchoice.posX = 0.8f;
+	//	gchoice.posY = 0.8f;
+	//}
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP)
+		Left = true;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP)
+		Right = true;
+
+	if (state.Gamepad.wButtons == 0 && Left == true) {
+		stage--;
+		if (stage == 0)
+			stage = 1;
 		gchoice.texture->SetPart(1, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
-
+		Left = false;
 	}
-
-	if (Input_GetKeyTrigger('2') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP))
-	{
-		stage = STAGE_2;
+	if (state.Gamepad.wButtons == 0 && Right == true) {
+		stage++;
+		if (stage == 11)
+			stage = 10;
 		gchoice.texture->SetPart(2, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
+		Right = false;
 	}
 
 	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
 		fade = FADE_IN;
 	}
+	//上下にふわふわ移動する
+	gstage[stage - 1].posY += sin(countLevel / 5) / 600;
+	gcloud[stage - 1].posY += sin(countLevel / 5) / 600;
 
 	if (fade_in_cnt > 60)
 	{
@@ -324,6 +352,8 @@ BOOL Level_Update()
 			return FALSE;
 		}
 	}
+
+	countLevel++;
 
 	return TRUE;
 }

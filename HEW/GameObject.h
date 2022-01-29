@@ -25,8 +25,6 @@ extern int fade;
 extern int fade_in_cnt;
 extern int fade_out_cnt;
 
-
-
 enum Direction
 {
 	NULL_WAY,
@@ -64,6 +62,8 @@ enum Turn
 	PLAYER_TURN,
 	ENEMY_TURN,
 	ENV_TURN,
+	PENGUIN_ATTACK,
+	PENGUIN2,
 	GAMEOVER,
 	CLEAR,
 };
@@ -73,6 +73,14 @@ enum Stage
 	NO_STAGE,
 	STAGE_1,
 	STAGE_2,
+	STAGE_3,
+	STAGE_4,
+	STAGE_5,
+	STAGE_6,
+	STAGE_7,
+	STAGE_8,
+	STAGE_9,
+	STAGE_10,
 };
 
 enum StageScore {
@@ -99,7 +107,6 @@ enum Fade
 	FADE_OUT,
 };
 
-
 struct MapPos
 {
 	int Height;
@@ -107,19 +114,30 @@ struct MapPos
 	int RightDown;	//高さ 左下 右下
 };
 
+enum STUN
+{
+	Nothing,
+	Stun_Release,
+	Stun,
+	Stun_,
+};
+
 // GameObjectクラスで必要になる変数セットを構造体として定義
 struct GameObject {
 
 	// 変数書いていく
 	float posX, posY;  // 中心点の座標
-	float sizeX, sizeY; // 大きさ
 
 	bool changeFlag = false;//状態遷移などに使いたいとき用のフラグ
 	int yobiFlag;//状態遷移に使った予備のフラグ
 	bool IsEnemy = false;//敵か
+	bool EnemyAttak = false;
+	int Enemycount = 0;
+	STUN IsStun = Nothing;//スタンしているか
 
 	bool Goalfrg = false;
 	int SnowSize;//雪玉の大きさ
+	bool SoilFrg;//土を踏んだか
 	bool Item_Face = false;
 	bool Item_Arm = false;
 

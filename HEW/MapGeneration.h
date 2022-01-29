@@ -43,6 +43,8 @@ int Map_GetPlayerTile_RightDown(GameObject* Player, GameObject* Map);
 int Map_GetPlayerTile_LeftDown(GameObject* Player, GameObject* Map);
 int Map_GetPlayerTile_RightUp(GameObject* Player, GameObject* Map);
 int Map_GetPlayerTile_Top(GameObject* Player, GameObject* Map);
+int Map_GetPlayerTile_TopRightUp(GameObject* Player, GameObject* Map);
+int Map_GetPlayerTile_TopLeftUp(GameObject* Player, GameObject* Map);
 void Map_Update(GameObject* Map , vector<MapPos>* StoneMap, int MapChip[MAP_STAGE][MAP_HEIGHT][MAP_EDGE][MAP_EDGE]);
 void Map_GetStone(vector<MapPos>* stoneMap,GameObject* Map);
 void MapMove_Update(GameObject* Player, GameObject* Map);

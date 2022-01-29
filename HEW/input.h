@@ -13,6 +13,7 @@
 #include<Xinput.h>
 #include"Controller.h"
 
+#define XINPUT_GAMEPAD_DPAD_NOT			    0x0000
 #define XINPUT_GAMEPAD_DPAD_LEFTUP          0x0005
 #define XINPUT_GAMEPAD_DPAD_LEFTDOWN        0x0006
 #define XINPUT_GAMEPAD_DPAD_RIGHTUP         0x0009
