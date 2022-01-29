@@ -13,6 +13,7 @@
 
 #define MAP_LENGTH 0.075f // 一つのマスに対しての横移動量(DX座標)
 #define MAP_LENGTH_HEIGHT 0.1f // 一つのマスに対しての縦移動量(DX座標)
+#define FADETIME 30
 
 using namespace std;
 
@@ -21,9 +22,6 @@ extern int Player2_cut;
 extern int turn;
 extern int stage;
 extern int big_snowball;
-extern int fade;
-extern int fade_in_cnt;
-extern int fade_out_cnt;
 
 enum Direction
 {
@@ -100,12 +98,7 @@ enum StageScore {
 	ALL_CLEAR,		//全て完璧
 };
 
-enum Fade
-{
-	NO_FADE,
-	FADE_IN,
-	FADE_OUT,
-};
+
 
 struct MapPos
 {
@@ -168,9 +161,17 @@ struct FRECT {
 	float bottom;
 };
 
+struct FADE {
+	bool fadeout = false;
+	float framecnt;
+	float Alpha = 0;
+};
 
 // ↓↓　メンバー関数のプロトタイプ宣言
 void GameObject_DrowUpdate(GameObject*);
+
+//フェード関数です間借りします
+void FadeChange(FADE* fade);
 
 // スプライトの４隅のXY座標を計算して返す関数
 FRECT GameObject_GetXY(GameObject* pThis);

@@ -53,9 +53,16 @@ vector<GameObject> gEnemyVector;
 GameObject gBackGround;				//背景
 GameObject gGauge;					//ゲージ
 GameObject gGauge2;
+GameObject gGaugeframe;
+GameObject gCursor1;
+GameObject gCursor2;
+GameObject gFade;
+
 
 GameObject gEffect[4];
 bool GoalFast_1 = false;
+
+FADE GameFade;
 
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
@@ -132,6 +139,10 @@ BOOL Game_Initialize()
 	//ゲージの初期化
 	Gauge_Initialize(&gGauge, &gGauge2);
 
+	//カーソルの初期化
+	Cursor_Initialize(&gCursor1);
+	Cursor_Initialize(&gCursor2);
+
 	//マップ変更
 	Map_Update(gObjects, &StoneMap, MapChip);
 
@@ -171,6 +182,12 @@ BOOL Game_Initialize()
 	gBackGround.posY = 1;
 	gBackGround.texture->SetPart(1, 0);
 
+	//ゲージのフレーム
+	gGaugeframe.texture = new Sprite("assets/gaugeframe.png", 1, 1);
+	gGaugeframe.texture->SetSize(232 * 4, 64 * 4);
+	gGaugeframe.posX = 0.23f;
+	gGaugeframe.posY = -0.65f;
+
 	//デバック用
 	NoHeight->texture = new Sprite("assets/dotFont.png", 16, 8);
 	NoHeight->texture->SetSize(80, 160);
@@ -180,6 +197,18 @@ BOOL Game_Initialize()
 	NoRightDown->texture->SetSize(80, 160);
 	tile->texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
 	tile->texture->SetSize(200, 200);
+
+	//フェード
+	gFade.texture = new Sprite("assets/TitleBG.png", 1, 1);
+	gFade.texture->SetSize(1280 * 2, 720 * 2);
+	gFade.posX = -1;
+	gFade.posY = 1;
+	gFade.texture->color.r = 0.0f;
+	gFade.texture->color.g = 0.0f;
+	gFade.texture->color.b = 0.0f;
+	gFade.texture->color.a = 0.0f;
+	GameFade.framecnt = FADETIME - 0.1f;
+	GameFade.fadeout = false;
 
 	return TRUE;
 }
@@ -206,6 +235,7 @@ BOOL Game_Update()
 	tile->posY = 0.6;
 	gBackGround.posX = -1;
 	gBackGround.posY = 1;
+	gCursor1.texture->SetPart(1, 0);
 
 	for (int i = 0; i < 4; i++) {
 		Efffect_Move(&gEffect[i]);
@@ -217,6 +247,9 @@ BOOL Game_Update()
 		Enemy_Update(&gEnemyVector[i], &gPlayer1);
 	Player_AniUpdate(&gPlayer1);
 	Player_AniUpdate(&gPlayer2);
+	//カーソルの位置変更
+	Cursor_Update(&gPlayer1, &gCursor1);
+	Cursor_Update(&gPlayer2, &gCursor2);
 
 	switch (turn)
 	{
@@ -339,12 +372,12 @@ BOOL Game_Update()
 	case GAMEOVER:
 		//タイトルへ戻るフラグ
 		if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
-			return FALSE;
+			GameFade.fadeout = true;
 		break;
 
 	case CLEAR:
 		if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
-			return FALSE;
+			GameFade.fadeout = true;
 		break;
 	}
 
@@ -358,6 +391,14 @@ BOOL Game_Update()
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	//GameObjectと画像の座標を合わせる
+	FadeChange(&GameFade);
+	gFade.texture->color.a = GameFade.Alpha;
+	if (GameFade.Alpha > 1.0f)
+		return FALSE;
+	for (int i = 0; i < MAX_OBJECT; i++) {
+		GameObject_DrowUpdate(&gObjects[i]);
+	}
+
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		GameObject_DrowUpdate(&gObjects[i]);
 	}
@@ -365,6 +406,10 @@ BOOL Game_Update()
 	GameObject_DrowUpdate(&gPlayer2);
 	GameObject_DrowUpdate(&gGauge);
 	GameObject_DrowUpdate(&gGauge2);
+	GameObject_DrowUpdate(&gCursor1);
+	GameObject_DrowUpdate(&gCursor2);
+	GameObject_DrowUpdate(&gGaugeframe);
+	GameObject_DrowUpdate(&gFade);
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		GameObject_DrowUpdate(&gEnemyVector[i]);
 	GameObject_DrowUpdate(&gBackGround);
@@ -400,8 +445,12 @@ void Game_Draw()
 	}
 	gGauge.texture->Draw();
 	gGauge2.texture->Draw();
+	gCursor1.texture->Draw();
+	gCursor2.texture->Draw();
+	gGaugeframe.texture->Draw();
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
+	gFade.texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -416,6 +465,10 @@ StageScore Game_Relese()
 	delete gPlayer2.texture;
 	delete gGauge.texture;
 	delete gGauge2.texture;
+	delete gCursor1.texture;
+	delete gCursor2.texture;
+	delete gGaugeframe.texture;
+	delete gFade.texture;
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		delete gEnemyVector[i].texture;
 	gEnemyVector.clear();

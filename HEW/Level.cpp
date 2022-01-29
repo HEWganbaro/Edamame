@@ -36,6 +36,9 @@ GameObject gchoice;
 GameObject groad;		//道
 GameObject gstage[10];
 GameObject gcloud[10];
+GameObject lFade;
+
+FADE LevelFade;
 
 int countLevel = 10;
 bool Right;
@@ -67,6 +70,18 @@ BOOL Level_Initialize(StageScore score)
 	gchoice.texture->SetPart(0, 0);
 	gchoice.posX = 0.8f;
 	gchoice.posY = 0.8f;
+
+	//フェード
+	lFade.texture = new Sprite("assets/TitleBG.png", 1, 1);
+	lFade.texture->SetSize(1280 * 2, 720 * 2);
+	lFade.posX = -1;
+	lFade.posY = 1;
+	lFade.texture->color.r = 0.0f;
+	lFade.texture->color.g = 0.0f;
+	lFade.texture->color.b = 0.0f;
+	lFade.texture->color.a = 0.0f;
+	LevelFade.framecnt = FADETIME - 0.1f;
+	LevelFade.fadeout = false;
 
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
@@ -231,6 +246,7 @@ BOOL Level_Update()
 	GameObject_DrowUpdate(&lBackGround);
 	GameObject_DrowUpdate(&gchoice);
 	GameObject_DrowUpdate(&groad);
+	GameObject_DrowUpdate(&lFade);
 	for (int i = 0; i < 10; i++)
 	{
 		//ステージ
@@ -239,64 +255,7 @@ BOOL Level_Update()
 		GameObject_DrowUpdate(&gcloud[i]);
 	}
 
-	switch (fade)
-	{
-	case FADE_IN:
-		lBackGround.texture->color.a -= GameTimer_GetDeltaTime();
-		for (int i = 0; i < 10; i++)
-		{
-			gstage[i].texture->color.a -= GameTimer_GetDeltaTime();
-			gcloud[i].texture->color.a -= GameTimer_GetDeltaTime();
-		}
-		groad.texture->color.a -= GameTimer_GetDeltaTime();
-		gchoice.texture->color.a -= GameTimer_GetDeltaTime();
-		fade_in_cnt++;
-		if (lBackGround.texture->color.a < 0.0f)
-		{
-			lBackGround.texture->color.a = 0.0f;
-			groad.texture->color.a = 0.0f;
-			gchoice.texture->color.a = 0.0f;
-			for (int i = 0; i < 10; i++)
-			{
-				gstage[i].texture->color.a = 0.0f;
-				gcloud[i].texture->color.a = 0.0f;
-			}
-			fade = FADE_OUT;
-		}
-		break;
-
-	case FADE_OUT:
-		lBackGround.texture->color.a += GameTimer_GetDeltaTime();
-		groad.texture->color.a += GameTimer_GetDeltaTime();
-		gchoice.texture->color.a += GameTimer_GetDeltaTime();
-		for (int i = 0; i < 10; i++)
-		{
-			gstage[i].texture->color.a += GameTimer_GetDeltaTime();
-			gcloud[i].texture->color.a += GameTimer_GetDeltaTime();
-		}
-		fade_out_cnt++;
-		if (lBackGround.texture->color.a > 1.0f)
-		{
-			lBackGround.texture->color.a = 1.0f;
-			groad.texture->color.a = 1.0f;
-			gchoice.texture->color.a = 1.0f;
-			for (int i = 0; i < 10; i++)
-			{
-				gstage[i].texture->color.a = 1.0f;
-				gcloud[i].texture->color.a = 1.0f;
-			}
-			fade = NO_FADE;
-		}
-
-		if (fade_in_cnt > 60)
-		{
-			if (fade_out_cnt > 60)
-			{
-				fade = FADE_OUT;
-			}
-		}
-		break;
-	}
+	
 	//if (Input_GetKeyTrigger('1') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP))
 	//{
 	//	stage = STAGE_1;
@@ -337,22 +296,17 @@ BOOL Level_Update()
 	}
 
 	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
-		fade = FADE_IN;
+		LevelFade.fadeout = true;
 	}
+
+	FadeChange(&LevelFade);
+	lFade.texture->color.a = LevelFade.Alpha;
+	if (LevelFade.Alpha > 1.0f)
+		return FALSE;
+
 	//上下にふわふわ移動する
 	gstage[stage - 1].posY += sin(countLevel / 5) / 600;
 	gcloud[stage - 1].posY += sin(countLevel / 5) / 600;
-
-	if (fade_in_cnt > 60)
-	{
-		if (fade_out_cnt > 60)
-		{
-			fade_in_cnt = 0;
-			fade_out_cnt = 0;
-			return FALSE;
-		}
-	}
-
 	countLevel++;
 
 	return TRUE;
@@ -377,6 +331,7 @@ void Level_Draw()
 
 		gstage[i].texture->Draw();
 	}
+	lFade.texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -388,6 +343,7 @@ void Level_Relese()
 	delete lBackGround.texture;
 	delete gchoice.texture;
 	delete groad.texture;
+	delete lFade.texture;
 	for (int i = 0; i < 10; i++)
 	{
 		delete gstage[i].texture;

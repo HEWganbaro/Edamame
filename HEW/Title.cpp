@@ -32,9 +32,9 @@
 
 GameObject tBackGround;				//背景
 GameObject tLogo;                   //タイトルロゴ
-int fade = NO_FADE;
-int fade_in_cnt = 0;
-int fade_out_cnt = 0;
+GameObject tFade;
+
+FADE TitleFade;
 
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
@@ -55,11 +55,21 @@ BOOL Title_Initialize()
 	tBackGround.texture->SetSize(1280 * 2, 720 * 2);
 	tBackGround.posX = -1;
 	tBackGround.posY = 1;
-
+	//ロゴ
 	tLogo.texture = new Sprite("assets/TitleLOGO.png", 1, 1);
 	tLogo.texture->SetSize(1280 * 2, 720 * 2);
 	tLogo.posX = -1;
 	tLogo.posY = 1;
+	//フェード
+	tFade.texture = new Sprite("assets/TitleBG.png", 1, 1);
+	tFade.texture->SetSize(1280 * 2, 720 * 2);
+	tFade.posX = -1;
+	tFade.posY = 1;
+	tFade.texture->color.r = 0.0f;
+	tFade.texture->color.g = 0.0f;
+	tFade.texture->color.b = 0.0f;
+	tFade.texture->color.a = 0.0f;
+	TitleFade.framecnt = FADETIME - 0.1f;
 
 	return TRUE;
 }
@@ -74,48 +84,16 @@ BOOL Title_Update()
 
 	GameObject_DrowUpdate(&tBackGround);
 	GameObject_DrowUpdate(&tLogo);
+	GameObject_DrowUpdate(&tFade);
 
-	switch (fade)
-	{
-	case FADE_IN:
-		tBackGround.texture->color.a -= GameTimer_GetDeltaTime();
-		tLogo.texture->color.a -= GameTimer_GetDeltaTime();
-		fade_in_cnt++;
-		if (tBackGround.texture->color.a < 0.0f && tLogo.texture->color.a < 0.0f)
-		{
-			tBackGround.texture->color.a = 0.0f;
-			tLogo.texture->color.a = 0.0f;
-			fade = FADE_OUT;
-		}
-		break;
+	if (Input_GetKeyPress(VK_SPACE))
+		TitleFade.fadeout = true;
 
-	case FADE_OUT:
-		tBackGround.texture->color.a += GameTimer_GetDeltaTime();
-		tLogo.texture->color.a += GameTimer_GetDeltaTime();
-		fade_out_cnt++;
-		if (tBackGround.texture->color.a > 1.0f && tLogo.texture->color.a > 1.0f)
-		{
-			tBackGround.texture->color.a = 1.0f;
-			tLogo.texture->color.a = 1.0f;
-			fade = NO_FADE;
-		}
-		break;
-	}
-
-	if (Input_GetKeyPress(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) && NO_FADE) {
-		fade = FADE_IN;
-	}
-
-	if (fade_in_cnt > 60)
-	{
-		if (fade_out_cnt > 60)
-		{
-			fade_in_cnt = 0;
-			fade_out_cnt = 0;
-			return FALSE;
-		}
-	}
-
+	FadeChange(&TitleFade);
+	tFade.texture->color.a = TitleFade.Alpha;
+	if (TitleFade.Alpha > 1.0f)
+		return FALSE;
+	
 	return TRUE;
 }
 
@@ -129,6 +107,7 @@ void Title_Draw()
 	//ゲームオブジェクトを全部描画する
 	tBackGround.texture->Draw();
 	tLogo.texture->Draw();
+	tFade.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
@@ -139,4 +118,5 @@ void Title_Relese()
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
 	delete tBackGround.texture;
 	delete tLogo.texture;
+	delete tFade.texture;
 }

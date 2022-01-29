@@ -25,6 +25,14 @@ void Player_Initialize(GameObject* Player) {
 	Player->direction = NULL_WAY;
 }
 
+void Cursor_Initialize(GameObject * Cursor)
+{
+	Cursor->texture = new Sprite("assets/cursor.png", 2, 1);
+	Cursor->texture->SetSize(INIT_CURSOR_SIZE, INIT_CURSOR_SIZE * 2);
+	Cursor->posX = 0.5f;
+	Cursor->posY = 0.5f;
+}
+
 void Player_SetLocation(GameObject* Player, GameObject* Location,
 					int Height, int LeftDown, int RightDown)
 {
@@ -95,6 +103,12 @@ void Player_Update(GameObject * Player, GameObject* Map)
 	MapMove_Update(Player, Map);
 	//’n–Êó‘ÔˆÚs‚ð‚µ‚Ä‚È‚¢
 	Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
+}
+
+void Cursor_Update(GameObject * Player, GameObject * Cursor)
+{
+	Cursor->posX = Player->posX + 0.05f;
+	Cursor->posY = Player->posY + 0.1f;
 }
 
 void Player_AniUpdate(GameObject * Player)

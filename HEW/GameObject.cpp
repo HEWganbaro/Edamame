@@ -55,3 +55,14 @@ vector<string> split(string& input, char delimiter)
 	}
 	return result;
 }
+
+void FadeChange(FADE* fade) {
+	if (fade->fadeout == true)
+		fade->framecnt++;
+	else {
+		fade->framecnt--;
+		if (fade->framecnt < 0)
+			fade->framecnt = 0;
+	}
+	fade->Alpha = fade->framecnt / FADETIME;
+}
