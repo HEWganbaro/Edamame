@@ -30,11 +30,31 @@
 
 //ID3D11Buffer* gpVertexBuffer;  // 頂点バッファ用の変数
 //ID3D11ShaderResourceView* gpTexture; // テクスチャ用変数
+
 GameObject lBackGround;				//背景
 GameObject gchoice;
 GameObject groad;		//道
-GameObject gstage[10];
-GameObject gcloud[10];
+GameObject gstage1;
+GameObject gstage2;
+GameObject gstage3;
+GameObject gstage4;
+GameObject gstage5;
+GameObject gstage6;
+GameObject gstage7;
+GameObject gstage8;
+GameObject gstage9;
+GameObject gstage10;
+GameObject gcloud1;
+GameObject gcloud2;
+GameObject gcloud3;
+GameObject gcloud4;
+GameObject gcloud5;
+GameObject gcloud6;
+GameObject gcloud7;
+GameObject gcloud8;
+GameObject gcloud9;
+GameObject gcloud10;
+
 
 StageScore LevelScoreSheet[MAP_STAGE];
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -66,65 +86,65 @@ BOOL Level_Initialize(StageScore score)
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
 
-	gstage[0].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[0].texture->SetSize(320, 320);
+	gstage1.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage1.texture->SetSize(320, 320);
 
-	gstage[1].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[1].texture->SetSize(320, 320);
+	gstage2.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage2.texture->SetSize(320, 320);
 
-	gstage[2].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[2].texture->SetSize(320, 320);
+	gstage3.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage3.texture->SetSize(320, 320);
 
-	gstage[3].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[3].texture->SetSize(320, 320);
+	gstage4.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage4.texture->SetSize(320, 320);
 
-	gstage[4].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[4].texture->SetSize(320, 320);
+	gstage5.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage5.texture->SetSize(320, 320);
 
-	gstage[5].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[5].texture->SetSize(320, 320);
+	gstage6.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage6.texture->SetSize(320, 320);
 
-	gstage[6].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[6].texture->SetSize(320, 320);
+	gstage7.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage7.texture->SetSize(320, 320);
 
-	gstage[7].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[7].texture->SetSize(320, 320);
+	gstage8.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage8.texture->SetSize(320, 320);
 
-	gstage[8].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[8].texture->SetSize(320, 320);
+	gstage9.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage9.texture->SetSize(320, 320);
 
-	gstage[9].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[9].texture->SetSize(320, 320);
+	gstage10.texture = new Sprite("assets/Level_tile.png", 2, 1);
+	gstage10.texture->SetSize(320, 320);
 
-	gcloud[0].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[0].texture->SetSize(400, 160);
+	gcloud1.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud1.texture->SetSize(400, 160);
 
-	gcloud[1].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[1].texture->SetSize(400, 160);
+	gcloud2.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud2.texture->SetSize(400, 160);
 
-	gcloud[2].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[2].texture->SetSize(400, 160);
+	gcloud3.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud3.texture->SetSize(400, 160);
 
-	gcloud[3].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[3].texture->SetSize(400, 160);
+	gcloud4.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud4.texture->SetSize(400, 160);
 
-	gcloud[4].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[4].texture->SetSize(400, 160);
+	gcloud5.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud5.texture->SetSize(400, 160);
 
-	gcloud[5].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[5].texture->SetSize(400, 160);
+	gcloud6.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud6.texture->SetSize(400, 160);
 
-	gcloud[6].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[6].texture->SetSize(400, 160);
+	gcloud7.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud7.texture->SetSize(400, 160);
 
-	gcloud[7].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[7].texture->SetSize(400, 160);
+	gcloud8.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud8.texture->SetSize(400, 160);
 
-	gcloud[8].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[8].texture->SetSize(400, 160);
+	gcloud9.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud9.texture->SetSize(400, 160);
 
-	gcloud[9].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[9].texture->SetSize(400, 160);
+	gcloud10.texture = new Sprite("assets/cloud.png", 1, 1);
+	gcloud10.texture->SetSize(400, 160);
 
 	//スコアを代入
 	if (score != TITLESCORE)
@@ -139,141 +159,89 @@ BOOL Level_Update()
 	XINPUT_STATE state;
 	XInputGetState(0, &state);
 
-	switch (fade)
-	{
-	case FADE_IN:
-		lBackGround.texture->color.a -= GameTimer_GetDeltaTime();
-		groad.texture->color.a -= GameTimer_GetDeltaTime();
-		gchoice.texture->color.a -= GameTimer_GetDeltaTime();
-		for (int i = 0; i < 10; i++)
-		{
-			gstage[i].texture->color.a -= GameTimer_GetDeltaTime();
-			gcloud[i].texture->color.a -= GameTimer_GetDeltaTime();
-		}
-		fade_in_cnt++;
-
-		if (lBackGround.texture->color.a < 0.0f)
-		{
-			lBackGround.texture->color.a = 0.0f;
-			groad.texture->color.a = 0.0f;
-			gchoice.texture->color.a = 0.0f;
-			for (int i = 0; i < 10; i++)
-			{
-				gstage[i].texture->color.a = 0.0f;
-				gcloud[i].texture->color.a = 0.0f;
-			}
-		}
-		break;
-
-	case FADE_OUT:
-		lBackGround.texture->color.a += GameTimer_GetDeltaTime();
-		groad.texture->color.a -= GameTimer_GetDeltaTime();
-		gchoice.texture->color.a -= GameTimer_GetDeltaTime();
-		for (int i = 0; i < 10; i++)
-		{
-			gstage[i].texture->color.a -= GameTimer_GetDeltaTime();
-			gcloud[i].texture->color.a -= GameTimer_GetDeltaTime();
-		}
-		fade_out_cnt++;
-
-		if (lBackGround.texture->color.a > 1.0f)
-		{
-			lBackGround.texture->color.a = 1.0f;
-			groad.texture->color.a = 0.0f;
-			gchoice.texture->color.a = 0.0f;
-			for (int i = 0; i < 10; i++)
-			{
-				gstage[i].texture->color.a = 0.0f;
-				gcloud[i].texture->color.a = 0.0f;
-			}
-		}
-		break;
-	}
-	fade = FADE_IN;
-
 	groad.texture->SetPart(0, 0);
 	groad.posX = -1.05f;
 	groad.posY = 1.1f;
 
-	gstage[0].texture->SetPart(0, 0);
-	gstage[0].posX = -0.97f;
-	gstage[0].posY = 0.48f;
+	gstage1.texture->SetPart(0, 0);
+	gstage1.posX = -0.97f;
+	gstage1.posY = 0.48f;
 
-	gstage[1].texture->SetPart(0, 0);
-	gstage[1].posX = -0.77f;
-	gstage[1].posY = -0.1f;
+	gstage2.texture->SetPart(0, 0);
+	gstage2.posX = -0.77f;
+	gstage2.posY = -0.1f;
 
-	gstage[2].texture->SetPart(0, 0);
-	gstage[2].posX = -0.58f;
-	gstage[2].posY = 0.68f;
+	gstage3.texture->SetPart(0, 0);
+	gstage3.posX = -0.58f;
+	gstage3.posY = 0.68f;
 
-	gstage[3].texture->SetPart(0, 0);
-	gstage[3].posX = -0.24f;
-	gstage[3].posY = 0.54f;
+	gstage4.texture->SetPart(0, 0);
+	gstage4.posX = -0.24f;
+	gstage4.posY = 0.54f;
 
-	gstage[4].texture->SetPart(0, 0);
-	gstage[4].posX = -0.36f;
-	gstage[4].posY = -0.14f;
+	gstage5.texture->SetPart(0, 0);
+	gstage5.posX = -0.36f;
+	gstage5.posY = -0.14f;
 
-	gstage[5].texture->SetPart(1, 0);
-	gstage[5].posX = 0.02f;
-	gstage[5].posY = -0.23f;
+	gstage6.texture->SetPart(1, 0);
+	gstage6.posX = 0.02f;
+	gstage6.posY = -0.23f;
 
-	gstage[6].texture->SetPart(1, 0);
-	gstage[6].posX = 0.068f;
-	gstage[6].posY = 0.58f;
+	gstage7.texture->SetPart(1, 0);
+	gstage7.posX = 0.068f;
+	gstage7.posY = 0.58f;
 
-	gstage[7].texture->SetPart(1, 0);
-	gstage[7].posX = 0.48f;
-	gstage[7].posY = 0.7f;
+	gstage8.texture->SetPart(1, 0);
+	gstage8.posX = 0.48f;
+	gstage8.posY = 0.7f;
 
-	gstage[8].texture->SetPart(1, 0);
-	gstage[8].posX = 0.43f;
-	gstage[8].posY = 0.04f;
+	gstage9.texture->SetPart(1, 0);
+	gstage9.posX = 0.43f;
+	gstage9.posY = 0.04f;
 
-	gstage[9].texture->SetPart(1, 0);
-	gstage[9].posX = 0.7f;
-	gstage[9].posY = -0.25f;
+	gstage10.texture->SetPart(1, 0);
+	gstage10.posX = 0.7f;
+	gstage10.posY = -0.25f;
 
-	gcloud[0].texture->SetPart(0, 0);
-	gcloud[0].posX = -1.0f;
-	gcloud[0].posY = 0.19f;
+	gcloud1.texture->SetPart(0, 0);
+	gcloud1.posX = -1.0f;
+	gcloud1.posY = 0.19f;
 
-	gcloud[1].texture->SetPart(0, 0);
-	gcloud[1].posX = -0.8f;
-	gcloud[1].posY = -0.38f;
+	gcloud2.texture->SetPart(0, 0);
+	gcloud2.posX = -0.8f;
+	gcloud2.posY = -0.38f;
 
-	gcloud[2].texture->SetPart(0, 0);
-	gcloud[2].posX = -0.61f;
-	gcloud[2].posY = 0.4f;
+	gcloud3.texture->SetPart(0, 0);
+	gcloud3.posX = -0.61f;
+	gcloud3.posY = 0.4f;
 
-	gcloud[3].texture->SetPart(0, 0);
-	gcloud[3].posX = -0.27f;
-	gcloud[3].posY = 0.26f;
+	gcloud4.texture->SetPart(0, 0);
+	gcloud4.posX = -0.27f;
+	gcloud4.posY = 0.26f;
 
-	gcloud[4].texture->SetPart(0, 0);
-	gcloud[4].posX = -0.39f;
-	gcloud[4].posY = -0.42f;
+	gcloud5.texture->SetPart(0, 0);
+	gcloud5.posX = -0.39f;
+	gcloud5.posY = -0.42f;
 
-	gcloud[5].texture->SetPart(0, 0);
-	gcloud[5].posX = -0.01f;
-	gcloud[5].posY = -0.51f;
+	gcloud6.texture->SetPart(0, 0);
+	gcloud6.posX = -0.01f;
+	gcloud6.posY = -0.51f;
 
-	gcloud[6].texture->SetPart(0, 0);
-	gcloud[6].posX = 0.04f;
-	gcloud[6].posY = 0.3f;
+	gcloud7.texture->SetPart(0, 0);
+	gcloud7.posX = 0.04f;
+	gcloud7.posY = 0.3f;
 
-	gcloud[7].texture->SetPart(0, 0);
-	gcloud[7].posX = 0.45f;
-	gcloud[7].posY = 0.42f;
+	gcloud8.texture->SetPart(0, 0);
+	gcloud8.posX = 0.45f;
+	gcloud8.posY = 0.42f;
 
-	gcloud[8].texture->SetPart(0, 0);
-	gcloud[8].posX = 0.4f;
-	gcloud[8].posY = -0.24f;
+	gcloud9.texture->SetPart(0, 0);
+	gcloud9.posX = 0.4f;
+	gcloud9.posY = -0.24f;
 
-	gcloud[9].texture->SetPart(0, 0);
-	gcloud[9].posX = 0.67f;
-	gcloud[9].posY = -0.53f;
+	gcloud10.texture->SetPart(0, 0);
+	gcloud10.posX = 0.67f;
+	gcloud10.posY = -0.53f;
 
 	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
 		return FALSE;
@@ -285,10 +253,6 @@ BOOL Level_Update()
 		gchoice.texture->SetPart(1, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
-		if (fade_in_cnt > 60)
-		{
-			fade = FADE_OUT;
-		}
 	}
 
 	if (Input_GetKeyTrigger('2') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP))
@@ -297,21 +261,32 @@ BOOL Level_Update()
 		gchoice.texture->SetPart(2, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
-		if (fade_in_cnt > 60)
-		{
-			fade = FADE_OUT;
-		}
 	}
 	GameObject_DrowUpdate(&lBackGround);
 	GameObject_DrowUpdate(&gchoice);
 	GameObject_DrowUpdate(&groad);
-	for (int i = 0; i < 10; i++)
-	{
-		//ステージ
-		GameObject_DrowUpdate(&gstage[i]);
-		//雲
-		GameObject_DrowUpdate(&gcloud[i]);
-	}
+	//ステージ
+	GameObject_DrowUpdate(&gstage1);
+	GameObject_DrowUpdate(&gstage2);
+	GameObject_DrowUpdate(&gstage3);
+	GameObject_DrowUpdate(&gstage4);
+	GameObject_DrowUpdate(&gstage5);
+	GameObject_DrowUpdate(&gstage6);
+	GameObject_DrowUpdate(&gstage7);
+	GameObject_DrowUpdate(&gstage8);
+	GameObject_DrowUpdate(&gstage9);
+	GameObject_DrowUpdate(&gstage10);
+	//雲
+	GameObject_DrowUpdate(&gcloud1);
+	GameObject_DrowUpdate(&gcloud2);
+	GameObject_DrowUpdate(&gcloud3);
+	GameObject_DrowUpdate(&gcloud4);
+	GameObject_DrowUpdate(&gcloud5);
+	GameObject_DrowUpdate(&gcloud6);
+	GameObject_DrowUpdate(&gcloud7);
+	GameObject_DrowUpdate(&gcloud8);
+	GameObject_DrowUpdate(&gcloud9);
+	GameObject_DrowUpdate(&gcloud10);
 
 	return TRUE;
 }
@@ -329,12 +304,27 @@ void Level_Draw()
 	gchoice.texture->Draw();
 	groad.texture->Draw();
 
-	for (int i = 0; i < 10; i++)
-	{
-		gcloud[i].texture->Draw();
+	gcloud1.texture->Draw();
+	gcloud2.texture->Draw();
+	gcloud3.texture->Draw();
+	gcloud4.texture->Draw();
+	gcloud5.texture->Draw();
+	gcloud6.texture->Draw();
+	gcloud7.texture->Draw();
+	gcloud8.texture->Draw();
+	gcloud9.texture->Draw();
+	gcloud10.texture->Draw();
 
-		gstage[i].texture->Draw();
-	}
+	gstage1.texture->Draw();
+	gstage2.texture->Draw();
+	gstage3.texture->Draw();
+	gstage4.texture->Draw();
+	gstage5.texture->Draw();
+	gstage6.texture->Draw();
+	gstage7.texture->Draw();
+	gstage8.texture->Draw();
+	gstage9.texture->Draw();
+	gstage10.texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -346,9 +336,24 @@ void Level_Relese()
 	delete lBackGround.texture;
 	delete gchoice.texture;
 	delete groad.texture;
-	for (int i = 0; i < 10; i++)
-	{
-		delete gstage[i].texture;
-		delete gcloud[i].texture;
-	}
+	delete gstage1.texture;
+	delete gstage2.texture;
+	delete gstage3.texture;
+	delete gstage4.texture;
+	delete gstage5.texture;
+	delete gstage6.texture;
+	delete gstage7.texture;
+	delete gstage8.texture;
+	delete gstage9.texture;
+	delete gstage10.texture;
+	delete gcloud1.texture;
+	delete gcloud2.texture;
+	delete gcloud3.texture;
+	delete gcloud4.texture;
+	delete gcloud5.texture;
+	delete gcloud6.texture;
+	delete gcloud7.texture;
+	delete gcloud8.texture;
+	delete gcloud9.texture;
+	delete gcloud10.texture;
 }
