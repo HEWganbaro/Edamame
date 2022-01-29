@@ -86,7 +86,7 @@ BOOL Level_Initialize(StageScore score)
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
 
-	gstage[0].texture = new Sprite("assets/Level_tile.png", 2, 1);
+	/*gstage[0].texture = new Sprite("assets/Level_tile.png", 2, 1);
 	gstage[0].texture->SetSize(320, 320);
 
 	gstage[1].texture = new Sprite("assets/Level_tile.png", 2, 1);
@@ -115,8 +115,17 @@ BOOL Level_Initialize(StageScore score)
 
 	gstage[9].texture = new Sprite("assets/Level_tile.png", 2, 1);
 	gstage[9].texture->SetSize(320, 320);
+*/
+	for (int i = 0; i < 10; i++) {
+		gstage[i].texture = new Sprite("assets/Level_tile.png", 2, 1);
+		gstage[i].texture->SetSize(320, 320);
 
-	gcloud[0].texture = new Sprite("assets/cloud.png", 1, 1);
+		gcloud[i].texture = new Sprite("assets/cloud.png", 1, 1);
+		gcloud[i].texture->SetSize(400, 160);
+	}
+
+
+	/*gcloud[0].texture = new Sprite("assets/cloud.png", 1, 1);
 	gcloud[0].texture->SetSize(400, 160);
 
 	gcloud[1].texture = new Sprite("assets/cloud.png", 1, 1);
@@ -144,7 +153,7 @@ BOOL Level_Initialize(StageScore score)
 	gcloud[8].texture->SetSize(400, 160);
 
 	gcloud[9].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[9].texture->SetSize(400, 160);
+	gcloud[9].texture->SetSize(400, 160);*/
 
 	gstage[0].texture->SetPart(0, 0);
 	gstage[0].posX = -0.97f;
@@ -299,7 +308,7 @@ BOOL Level_Update()
 		LevelFade.fadeout = true;
 	}
 
-	FadeChange(&LevelFade);
+	FadeChange(&LevelFade);//フェードを司る関数、触らないで
 	lFade.texture->color.a = LevelFade.Alpha;
 	if (LevelFade.Alpha > 1.0f)
 		return FALSE;

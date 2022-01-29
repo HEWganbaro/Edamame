@@ -89,7 +89,7 @@ BOOL Title_Update()
 	if (Input_GetKeyPress(VK_SPACE))
 		TitleFade.fadeout = true;
 
-	FadeChange(&TitleFade);
+	FadeChange(&TitleFade);//フェードを司る関数、触らないで
 	tFade.texture->color.a = TitleFade.Alpha;
 	if (TitleFade.Alpha > 1.0f)
 		return FALSE;

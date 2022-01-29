@@ -7,7 +7,7 @@
 int Player1_cut = 0;
 int Player2_cut = 0;
 int big_snowball = 0;
-
+//プレイヤーの初期化
 void Player_Initialize(GameObject* Player) {
 	Player->texture = new Sprite("assets/Player_kansei.png", 48, 8);
 	Player->texture->SetSize(INIT_SNOW_SIZE, INIT_SNOW_SIZE);
@@ -24,7 +24,7 @@ void Player_Initialize(GameObject* Player) {
 	Player->EnemyAttak = false;
 	Player->direction = NULL_WAY;
 }
-
+//カーソルの初期化
 void Cursor_Initialize(GameObject * Cursor)
 {
 	Cursor->texture = new Sprite("assets/cursor.png", 2, 1);
@@ -32,7 +32,7 @@ void Cursor_Initialize(GameObject * Cursor)
 	Cursor->posX = 0.5f;
 	Cursor->posY = 0.5f;
 }
-
+//プレイヤーを指定の座標にスポーンさせる
 void Player_SetLocation(GameObject* Player, GameObject* Location,
 					int Height, int LeftDown, int RightDown)
 {
@@ -42,7 +42,7 @@ void Player_SetLocation(GameObject* Player, GameObject* Location,
 	Player->mappos.LeftDown = LeftDown;
 	Player->mappos.RightDown = RightDown;
 }
-
+//プレイヤーの移動入力
 void Player_Input(GameObject * Player, GameObject * Player2)
 {
 	//プレイヤー1
@@ -97,20 +97,20 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 		}
 	}
 }
-
+//プレイヤーの見た目の更新(サイズ)
 void Player_Update(GameObject * Player, GameObject* Map)
 {
 	MapMove_Update(Player, Map);
 	//地面状態移行をしてない
 	Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
 }
-
+//カーソルがプレイヤーを追尾するように
 void Cursor_Update(GameObject * Player, GameObject * Cursor)
 {
 	Cursor->posX = Player->posX + 0.05f;
 	Cursor->posY = Player->posY + 0.1f;
 }
-
+//プレイヤーのアニメーション
 void Player_AniUpdate(GameObject * Player)
 {
 	//アニメーション
@@ -147,7 +147,7 @@ void Player_AniUpdate(GameObject * Player)
 		break;
 	}
 }
-
+//プレイヤーがマップを通った時の更新処理
 void MapUpdate(GameObject* Map, GameObject* Player, GameObject* Player2) {
 	for (int i = 0; i < 300; i++) {
 		if (Map[i].texture->GetPart() != GOAL_LATER) {
@@ -195,7 +195,7 @@ void MapUpdate(GameObject* Map, GameObject* Player, GameObject* Player2) {
 	}
 	turn = PLAYER_TURN;
 }
-
+//どっちの雪玉が大きいかを出す処理
 float Big_SnowBall(GameObject * Player, GameObject * Player2)
 {
 	big_snowball = (Player->SnowSize > Player2->SnowSize) ? Player->SnowSize : Player2->SnowSize;

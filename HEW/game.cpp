@@ -391,7 +391,7 @@ BOOL Game_Update()
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	//GameObjectと画像の座標を合わせる
-	FadeChange(&GameFade);
+	FadeChange(&GameFade);//フェード関連全てを司ってます触らないで
 	gFade.texture->color.a = GameFade.Alpha;
 	if (GameFade.Alpha > 1.0f)
 		return FALSE;
