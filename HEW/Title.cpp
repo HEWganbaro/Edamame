@@ -79,20 +79,24 @@ BOOL Title_Update()
 	{
 	case FADE_IN:
 		tBackGround.texture->color.a -= GameTimer_GetDeltaTime();
+		tLogo.texture->color.a -= GameTimer_GetDeltaTime();
 		fade_in_cnt++;
-		if (tBackGround.texture->color.a < 0.0f)
+		if (tBackGround.texture->color.a < 0.0f && tLogo.texture->color.a < 0.0f)
 		{
 			tBackGround.texture->color.a = 0.0f;
+			tLogo.texture->color.a = 0.0f;
 			fade = FADE_OUT;
 		}
 		break;
 
 	case FADE_OUT:
 		tBackGround.texture->color.a += GameTimer_GetDeltaTime();
+		tLogo.texture->color.a += GameTimer_GetDeltaTime();
 		fade_out_cnt++;
-		if (tBackGround.texture->color.a > 1.0f)
+		if (tBackGround.texture->color.a > 1.0f && tLogo.texture->color.a > 1.0f)
 		{
 			tBackGround.texture->color.a = 1.0f;
+			tLogo.texture->color.a = 1.0f;
 			fade = NO_FADE;
 		}
 		break;
