@@ -108,12 +108,12 @@ BOOL Title_Update()
 
 	if (fade_in_cnt > 60)
 	{
-		fade_in_cnt = 0;
-	}
-	if (fade_out_cnt > 60)
-	{
-		fade_out_cnt = 0;
-		return FALSE;
+		if (fade_out_cnt > 60)
+		{
+			fade_in_cnt = 0;
+			fade_out_cnt = 0;
+			return FALSE;
+		}
 	}
 
 	return TRUE;
