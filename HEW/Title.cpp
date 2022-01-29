@@ -32,6 +32,10 @@
 
 GameObject tBackGround;				//背景
 GameObject tLogo;                   //タイトルロゴ
+int fade = NO_FADE;
+int fade_in_cnt = 0;
+int fade_out_cnt = 0;
+
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
 //*****************************************************************************
@@ -70,7 +74,41 @@ BOOL Title_Update()
 
 	GameObject_DrowUpdate(&tBackGround);
 	GameObject_DrowUpdate(&tLogo);
-	if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)) {
+
+	switch (fade)
+	{
+	case FADE_IN:
+		tBackGround.texture->color.a -= GameTimer_GetDeltaTime();
+		fade_in_cnt++;
+		if (tBackGround.texture->color.a < 0.0f)
+		{
+			tBackGround.texture->color.a = 0.0f;
+			fade = FADE_OUT;
+		}
+		break;
+
+	case FADE_OUT:
+		tBackGround.texture->color.a += GameTimer_GetDeltaTime();
+		fade_out_cnt++;
+		if (tBackGround.texture->color.a > 1.0f)
+		{
+			tBackGround.texture->color.a = 1.0f;
+			fade = NO_FADE;
+		}
+		break;
+	}
+
+	if (Input_GetKeyPress(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) && NO_FADE) {
+		fade = FADE_IN;
+	}
+
+	if (fade_in_cnt > 60)
+	{
+		fade_in_cnt = 0;
+	}
+	if (fade_out_cnt > 60)
+	{
+		fade_out_cnt = 0;
 		return FALSE;
 	}
 

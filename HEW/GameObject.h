@@ -21,6 +21,10 @@ extern int Player2_cut;
 extern int turn;
 extern int stage;
 extern int big_snowball;
+extern int fade;
+extern int fade_in_cnt;
+extern int fade_out_cnt;
+
 
 
 enum Direction
@@ -87,6 +91,14 @@ enum StageScore {
 
 	ALL_CLEAR,		//‘S‚ÄŠ®àø
 };
+
+enum Fade
+{
+	NO_FADE,
+	FADE_IN,
+	FADE_OUT,
+};
+
 
 struct MapPos
 {
