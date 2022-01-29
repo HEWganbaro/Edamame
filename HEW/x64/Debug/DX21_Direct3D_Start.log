@@ -1,5 +1,13 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+  Gauge.cpp
+c:\users\namen\documents\github\0130\hew\gauge.cpp(27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Scene.cpp
+c:\users\namen\documents\github\0130\hew\scene.cpp(10): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\namen\documents\github\0130\hew\scene.cpp(23): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\namen\documents\github\0130\hew\scene.cpp(37): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
   game.cpp
 c:\users\namen\documents\github\0130\hew\game.cpp(234): warning C4305: '=': 'double' から 'float' へ切り詰めます。
 c:\users\namen\documents\github\0130\hew\game.cpp(235): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  main.cpp
+  コードを生成中...
   DX21_Direct3D_Start.vcxproj -> C:\Users\namen\Documents\GitHub\0130\HEW\x64\Debug\HEW.exe

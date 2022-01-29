@@ -261,7 +261,7 @@ BOOL Game_Update()
 		Player_Update(&gPlayer1, gObjects);
 		Player_Update(&gPlayer2, gObjects);
 		Big_SnowBall(&gPlayer1, &gPlayer2);
-		Gauge_Update(&gGauge2, &gPlayer1, &gPlayer2);
+		Gauge_Update(&gGauge, &gGauge2, &gPlayer1, &gPlayer2);
 		if (gPlayer1.animator.isActive == false || gPlayer2.animator.isActive == false)
 			turn = ENEMY_TURN;
 		break;

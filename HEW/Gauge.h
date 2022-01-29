@@ -9,4 +9,4 @@ GameObject* Gauge_Initialize(GameObject* Gauge, GameObject* Gauge2);
 
 
 //アップデート関数
-void Gauge_Update(GameObject* Gauge2, GameObject* Player, GameObject* Player2);
+void Gauge_Update(GameObject* Gauge1, GameObject* Gauge2, GameObject* Player, GameObject* Player2);
