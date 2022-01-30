@@ -33,8 +33,11 @@
 GameObject oBackGround;				//背景
 GameObject oLogo;
 GameObject oFade;
+GameObject oFadeLogo;
+GameObject oPlayer;
 
 FADE GameOverFade;
+FADE GameLogo;
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
 //*****************************************************************************
@@ -55,6 +58,12 @@ BOOL GameOver_Initialize()
 	oBackGround.posX = -1;
 	oBackGround.posY = 1;
 
+	oPlayer.texture = new Sprite("assets/Player_kansei.png", 48, 8);
+	oPlayer.texture->SetSize(INIT_SNOW_SIZE, INIT_SNOW_SIZE);
+	oPlayer.posX = -0.08f;
+	oPlayer.posY = -0.4f;
+	oPlayer.animator.speed = 8.0f;
+
 	oLogo.texture = new Sprite("assets/追加テクスチャ/gameover_2.png", 1, 1);
 	oLogo.texture->SetSize(1280 * 2, 720 * 2);
 	oLogo.posX = -1;
@@ -71,6 +80,17 @@ BOOL GameOver_Initialize()
 	oFade.texture->color.a = 0.0f;
 	GameOverFade.framecnt = FADETIME - 0.1f;
 
+	oFadeLogo.texture = new Sprite("assets/追加テクスチャ/gameover_2.png", 1, 1);
+	oFadeLogo.texture->SetSize(1280 * 2, 720 * 2);
+	oFadeLogo.posX = -1;
+	oFadeLogo.posY = 1;
+	oFadeLogo.texture->color.r = 0.0f;
+	oFadeLogo.texture->color.g = 0.0f;
+	oFadeLogo.texture->color.b = 0.0f;
+	oFadeLogo.texture->color.a = 0.0f;
+	GameLogo.framecnt = FADETIME - 0.1f;
+	GameLogo.fadeout = true;
+
 	return TRUE;
 }
 
@@ -83,12 +103,27 @@ BOOL GameOver_Update()
 	XInputGetState(0, &state);
 
 	GameObject_DrowUpdate(&oBackGround);
+	GameObject_DrowUpdate(&oPlayer);
 	GameObject_DrowUpdate(&oLogo);
-
 	GameObject_DrowUpdate(&oFade);
+	GameObject_DrowUpdate(&oFadeLogo);
+
+	Animator_Update(&oPlayer.animator);
+	oPlayer.animator.isActive = true;
+
+	oPlayer.texture->SetPart(oPlayer.animator.frame, 0);
+
+	for (int i = 0; i < 10; i++)
+	{
+		oPlayer.posY += 0.0001;
+	}
 
 	if (Input_GetKeyPress(VK_SPACE))
 		GameOverFade.fadeout = true;
+
+	FadeChange(&GameLogo);//フェードを司る関数、触らないで
+	oFadeLogo.texture->color.a = GameLogo.Alpha;
+	GameLogo.fadeout = false;
 
 	FadeChange(&GameOverFade);//フェードを司る関数、触らないで
 	oFade.texture->color.a = GameOverFade.Alpha;
@@ -107,8 +142,11 @@ void GameOver_Draw()
 
 	//ゲームオブジェクトを全部描画する
 	oBackGround.texture->Draw();
+	oPlayer.texture->Draw();
 	oLogo.texture->Draw();
 	oFade.texture->Draw();
+	oFadeLogo.texture->Draw();
+
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
@@ -118,6 +156,8 @@ void GameOver_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
 	delete oBackGround.texture;
+	delete oPlayer.texture;
 	delete oLogo.texture;
 	delete oFade.texture;
+	delete oFadeLogo.texture;
 }

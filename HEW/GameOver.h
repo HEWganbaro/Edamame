@@ -9,6 +9,7 @@
 #include "ObjectGenerator.h"
 #include "Sprite.h"
 #include "XAudio2.h"
+#include "Player.h"
 
 BOOL GameOver_Initialize();
 BOOL GameOver_Update();
