@@ -523,7 +523,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Map_GetPlayerTile_LeftUp(Player, Map) == -1 || 
 				Map_GetPlayerTile_LeftUp(Player, Map) == STONE || 
 				(Map_GetPlayerTile_LeftUp(Player, Map) == GOAL && Player->IsEnemy == true) || 
-				(Map_GetPlayerTile_LeftDown(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
+				(Map_GetPlayerTile_LeftUp(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
@@ -588,7 +588,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Map_GetPlayerTile_RightUp(Player, Map) == -1 ||
 				Map_GetPlayerTile_RightUp(Player, Map) == STONE || 
 				(Map_GetPlayerTile_RightUp(Player, Map) == GOAL && Player->IsEnemy == true) || 
-				(Map_GetPlayerTile_LeftDown(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
+				(Map_GetPlayerTile_RightUp(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
