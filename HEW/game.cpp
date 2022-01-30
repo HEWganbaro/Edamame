@@ -58,6 +58,8 @@ GameObject gCursor1;
 GameObject gCursor2;
 GameObject gFade;
 
+GameObject gTutorial;
+bool TutoLeft, TutoRight;
 
 GameObject gEffect[4];
 bool GoalFast_1 = false;
@@ -157,10 +159,6 @@ BOOL Game_Initialize()
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
 		gEnemyVector.emplace_back(gEnemy);
 
-		//Enemy_Initialize(&gEnemy, RANDOM);
-		//Enemy_SetLocation(&gEnemy, gObjects, 0, 5, 4);
-		//gEnemyVector.emplace_back(gEnemy);
-
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 1, 0, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 6, 6);
@@ -211,6 +209,21 @@ BOOL Game_Initialize()
 	GameFade.framecnt = FADETIME - 0.1f;
 	GameFade.fadeout = false;
 
+	//チュートリアル
+	gTutorial.texture = new Sprite("assets/tutorial.png", 4, 1);
+	gTutorial.texture->SetPart(0, 0);
+	gTutorial.texture->SetSize(1280 * 2, 720 * 2);
+	//チュートリアル
+	if (stage == 1) {
+		gTutorial.posX = -1;
+		gTutorial.posY = 1;
+		turn = TUTORIAL;
+	}
+	else {
+		gTutorial.posX = -10;
+		gTutorial.posY = 10;
+	}
+
 	return TRUE;
 }
 
@@ -248,6 +261,7 @@ BOOL Game_Update()
 		Enemy_Update(&gEnemyVector[i], &gPlayer1);
 	Player_AniUpdate(&gPlayer1);
 	Player_AniUpdate(&gPlayer2);
+
 	//カーソルの位置変更
 	Cursor_Update(&gPlayer1, &gCursor1);
 	Cursor_Update(&gPlayer2, &gCursor2);
@@ -383,6 +397,37 @@ BOOL Game_Update()
 		return FALSE;
 			GameFade.fadeout = true;
 		break;
+
+	case TUTORIAL:
+		if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP)
+			TutoLeft = true;
+		if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP)
+			TutoRight = true;
+
+		int page = gTutorial.texture->GetPart();
+
+		if (Input_GetKeyTrigger(VK_LEFT) || state.Gamepad.wButtons == 0 && TutoLeft == true) {
+			page--;
+			if (page == -1)
+				page = 0;
+			TutoLeft = false;
+		}
+
+		if (Input_GetKeyTrigger(VK_RIGHT) || state.Gamepad.wButtons == 0 && TutoRight == true) {
+			page++;
+			if (page == 4)
+				page = 3;
+			TutoRight = false;
+		}
+
+		if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
+			turn = PLAYER_TURN;
+			gTutorial.posX = -10;
+			gTutorial.posY = 10;
+		}
+
+		gTutorial.texture->SetPart(page, 0);
+		break;
 	}
 
 	//if (gEnemy.enemyeye == ENEMYEYE_IN)
@@ -420,7 +465,7 @@ BOOL Game_Update()
 	for (int i = 0; i < 4; i++) {
 		GameObject_DrowUpdate(&gEffect[i]);
 	}
-		
+	GameObject_DrowUpdate(&gTutorial);
 	return TRUE;
 }
 
@@ -455,7 +500,7 @@ void Game_Draw()
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
 	gFade.texture->Draw();
-
+	gTutorial.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
@@ -484,6 +529,7 @@ StageScore Game_Relese()
 		gObjects[i].posX = 0;
 		gObjects[i].posY = 0;
 	}
+	delete gTutorial.texture;
 
 	//ステージスコアを返す
 	StageScore score;

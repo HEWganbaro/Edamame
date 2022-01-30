@@ -64,6 +64,7 @@ enum Turn
 	PENGUIN2,
 	GAMEOVER,
 	CLEAR,
+	TUTORIAL,
 };
 
 enum Stage

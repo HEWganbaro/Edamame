@@ -41,6 +41,8 @@ GameObject lFade;
 
 FADE LevelFade;
 
+int clear[10];
+
 int countLevel = 10;
 bool Right;
 bool Left;
@@ -89,7 +91,7 @@ BOOL Level_Initialize(StageScore score)
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
 
 	for (int i = 0; i < 10; i++) {
-		gstage[i].texture = new Sprite("assets/Level_tile.png", 2, 1);
+		gstage[i].texture = new Sprite("assets/Level_tile.png", 4, 1);
 		gstage[i].texture->SetSize(320, 320);
 
 		gcloud[i].texture = new Sprite("assets/cloud.png", 1, 1);
@@ -100,43 +102,52 @@ BOOL Level_Initialize(StageScore score)
 		gstar[i].texture->SetPart(0, 0);
 	}
 
-	gstage[0].texture->SetPart(0, 0);
+	for (int i = 0; i < 10; i++) {
+		if (LevelScoreSheet[i] == TITLESCORE || LevelScoreSheet[i] == ZERO) {
+			clear[i] = 2;
+		}
+		else
+			clear[i] = 0;
+	}
+	clear[0] = 0;
+
+	gstage[0].texture->SetPart(clear[0], 0);
 	gstage[0].posX = -0.97f;
 	gstage[0].posY = 0.48f;
 
-	gstage[1].texture->SetPart(0, 0);
+	gstage[1].texture->SetPart(clear[1], 0);
 	gstage[1].posX = -0.77f;
 	gstage[1].posY = -0.1f;
 
-	gstage[2].texture->SetPart(0, 0);
+	gstage[2].texture->SetPart(clear[2], 0);
 	gstage[2].posX = -0.58f;
 	gstage[2].posY = 0.68f;
 
-	gstage[3].texture->SetPart(0, 0);
+	gstage[3].texture->SetPart(clear[3], 0);
 	gstage[3].posX = -0.24f;
 	gstage[3].posY = 0.54f;
 
-	gstage[4].texture->SetPart(0, 0);
+	gstage[4].texture->SetPart(clear[4], 0);
 	gstage[4].posX = -0.36f;
 	gstage[4].posY = -0.14f;
 
-	gstage[5].texture->SetPart(1, 0);
+	gstage[5].texture->SetPart(clear[5] + 1, 0);
 	gstage[5].posX = 0.02f;
 	gstage[5].posY = -0.23f;
 
-	gstage[6].texture->SetPart(1, 0);
+	gstage[6].texture->SetPart(clear[6] + 1, 0);
 	gstage[6].posX = 0.068f;
 	gstage[6].posY = 0.58f;
 
-	gstage[7].texture->SetPart(1, 0);
+	gstage[7].texture->SetPart(clear[7] + 1, 0);
 	gstage[7].posX = 0.48f;
 	gstage[7].posY = 0.7f;
 
-	gstage[8].texture->SetPart(1, 0);
+	gstage[8].texture->SetPart(clear[8] + 1, 0);
 	gstage[8].posX = 0.43f;
 	gstage[8].posY = 0.04f;
 
-	gstage[9].texture->SetPart(1, 0);
+	gstage[9].texture->SetPart(clear[9] + 1, 0);
 	gstage[9].posX = 0.7f;
 	gstage[9].posY = -0.25f;
 
@@ -349,43 +360,43 @@ void Level_Relese()
 
 void SetPos()
 {
-	gstage[0].texture->SetPart(0, 0);
+	gstage[0].texture->SetPart(clear[0], 0);
 	gstage[0].posX = -0.97f;
 	gstage[0].posY = 0.48f;
 
-	gstage[1].texture->SetPart(0, 0);
+	gstage[1].texture->SetPart(clear[1], 0);
 	gstage[1].posX = -0.77f;
 	gstage[1].posY = -0.1f;
 
-	gstage[2].texture->SetPart(0, 0);
+	gstage[2].texture->SetPart(clear[2], 0);
 	gstage[2].posX = -0.58f;
 	gstage[2].posY = 0.68f;
 
-	gstage[3].texture->SetPart(0, 0);
+	gstage[3].texture->SetPart(clear[3], 0);
 	gstage[3].posX = -0.24f;
 	gstage[3].posY = 0.54f;
 
-	gstage[4].texture->SetPart(0, 0);
+	gstage[4].texture->SetPart(clear[4], 0);
 	gstage[4].posX = -0.36f;
 	gstage[4].posY = -0.14f;
 
-	gstage[5].texture->SetPart(1, 0);
+	gstage[5].texture->SetPart(clear[5] + 1, 0);
 	gstage[5].posX = 0.02f;
 	gstage[5].posY = -0.23f;
 
-	gstage[6].texture->SetPart(1, 0);
+	gstage[6].texture->SetPart(clear[6] + 1, 0);
 	gstage[6].posX = 0.068f;
 	gstage[6].posY = 0.58f;
 
-	gstage[7].texture->SetPart(1, 0);
+	gstage[7].texture->SetPart(clear[7] + 1, 0);
 	gstage[7].posX = 0.48f;
 	gstage[7].posY = 0.7f;
 
-	gstage[8].texture->SetPart(1, 0);
+	gstage[8].texture->SetPart(clear[8] + 1, 0);
 	gstage[8].posX = 0.43f;
 	gstage[8].posY = 0.04f;
 
-	gstage[9].texture->SetPart(1, 0);
+	gstage[9].texture->SetPart(clear[9] + 1, 0);
 	gstage[9].posX = 0.7f;
 	gstage[9].posY = -0.25f;
 
