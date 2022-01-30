@@ -67,27 +67,50 @@ void Enemy_Update(GameObject * Enemy, GameObject* Player)
 		gameover = 32;
 		if (turn == PENGUIN2 || turn == GAMEOVER)
 			gameover = 47;
-		switch (Enemy->direction)
-		{ 
-		case NULL_WAY:
-			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
-			break;
-		case RIGHT_DOWN:
-			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
-			break;
-		case LEFT_DOWN:
-			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 1);
-			break;
-		case LEFT_UP:
-			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 2);
-			break;
-		case RIGHT_UP:
-			Enemy->texture->SetPart(Enemy->animator.frame + gameover, 3);
-			break;
-		case NO_ACTION:
-			Enemy->texture->SetPart(gameover, 0);
-			break;
+		if (turn == PENGUIN2 || turn == GAMEOVER) {
+			switch (Enemy->direction)
+			{
+			case NULL_WAY:
+			case RIGHT_DOWN:
+				Enemy->texture->SetPart(gameover, 0);
+				break;
+			case LEFT_DOWN:
+				Enemy->texture->SetPart(gameover, 1);
+				break;
+			case LEFT_UP:
+				Enemy->texture->SetPart(gameover, 2);
+				break;
+			case RIGHT_UP:
+				Enemy->texture->SetPart(gameover, 3);
+				break;
+			case NO_ACTION:
+				Enemy->texture->SetPart( gameover, 0);
+				break;
+			}
 		}
+		else {
+			switch (Enemy->direction)
+			{
+			case NULL_WAY:
+			case RIGHT_DOWN:
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
+				break;
+			case LEFT_DOWN:
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 1);
+				break;
+			case LEFT_UP:
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 2);
+				break;
+			case RIGHT_UP:
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 3);
+				break;
+			case NO_ACTION:
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
+				break;
+			}
+		}
+
+
 	}
 	//アニメーション
  	else if (Enemy->IsStun == Stun || Enemy->IsStun == Stun_) {
@@ -97,7 +120,28 @@ void Enemy_Update(GameObject * Enemy, GameObject* Player)
 		switch (Enemy->direction)
 		{
 		case NULL_WAY:
-			Enemy->texture->SetPart(Enemy->animator.frame + stun + following, 0);
+			switch (Enemy->diretmp)
+			{
+			case NULL_WAY:
+				Enemy->texture->SetPart(Enemy->animator.frame + stun + following, 0);
+				break;
+
+			case RIGHT_DOWN:
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 0);
+				break;
+
+			case LEFT_DOWN:
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1);
+				break;
+
+			case LEFT_UP:
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 2);
+				break;
+
+			case RIGHT_UP:
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 3);
+				break;
+			}
 			break;
 
 		case RIGHT_DOWN:
@@ -264,28 +308,32 @@ void Enemy_Player_Hit(GameObject * Enemy, GameObject * Player, GameObject * Play
 	if (Player->Goalfrg == false) {
 		if (Enemy->IsStun == Stun || Enemy->IsStun == Stun_) {}
 		else {
-			if ((Player->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
-				(Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
-				(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
-				(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown - 1 == Enemy->mappos.RightDown) ||
-				(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown  == Enemy->mappos.RightDown)) {
-				turn = PENGUIN_ATTACK;
-				Enemy->EnemyAttak = true;
-				Player->EnemyAttak = true;
+			if (Player->mappos.Height == Enemy->mappos.Height) {
+				if ((Player->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
+					(Player->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown) ||
+					(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
+					(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown - 1 == Enemy->mappos.RightDown) ||
+					(Player->mappos.LeftDown == Enemy->mappos.LeftDown && Player->mappos.RightDown == Enemy->mappos.RightDown)) {
+					turn = PENGUIN_ATTACK;
+					Enemy->EnemyAttak = true;
+					Player->EnemyAttak = true;
+				}
 			}
 		}
 	}
 	if (Player2->Goalfrg == false) {
 		if (Enemy->IsStun == Stun || Enemy->IsStun == Stun_) {}
 		else {
-			if ((Player2->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
-				(Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
-				(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
-				(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown - 1 == Enemy->mappos.RightDown) ||
-				(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown)) {
-				turn = PENGUIN_ATTACK;
-				Enemy->EnemyAttak = true;
-				Player2->EnemyAttak = true;
+			if (Player2->mappos.Height == Enemy->mappos.Height) {
+				if ((Player2->mappos.LeftDown - 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
+					(Player2->mappos.LeftDown + 1 == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown) ||
+					(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown + 1 == Enemy->mappos.RightDown) ||
+					(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown - 1 == Enemy->mappos.RightDown) ||
+					(Player2->mappos.LeftDown == Enemy->mappos.LeftDown && Player2->mappos.RightDown == Enemy->mappos.RightDown)) {
+					turn = PENGUIN_ATTACK;
+					Enemy->EnemyAttak = true;
+					Player2->EnemyAttak = true;
+				}
 			}
 		}
 	}

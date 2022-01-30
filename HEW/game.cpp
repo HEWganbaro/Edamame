@@ -336,6 +336,8 @@ BOOL Game_Update()
 
 	case PENGUIN_ATTACK:
 		for (int i = 0; i < gEnemyVector.size(); i++) {
+			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
+			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
 			if (gEnemyVector[i].Enemycount < 50) {
 				if (gEnemyVector[i].EnemyAttak == true) {
 					gEnemyVector[i].posY += 0.2f / 50;
@@ -343,14 +345,11 @@ BOOL Game_Update()
 				}
 			}
 			else {
-				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
-				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
 				if (gEnemyVector[i].EnemyAttak == true) {
 					gEnemyVector[i].animator.isActive = true;
 					Enemy_GameOver_Move(&gEnemyVector[i]);
 					if (gEnemyVector[i].animator.isActive == false || gEnemyVector[i].direction == NULL_WAY) {
 						gEnemyVector[i].Enemycount = 0;
-						gEnemyVector[i].direction = NO_ACTION;
 						turn = PENGUIN2;
 					}
 				}
@@ -359,6 +358,8 @@ BOOL Game_Update()
 		break;
 	case PENGUIN2:
 		for (int i = 0; i < gEnemyVector.size(); i++) {
+			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
+			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
 			if (gEnemyVector[i].Enemycount < 10) {
 				gEnemyVector[i].posY -= 0.2f / 10;
 				gEnemyVector[i].Enemycount++;
@@ -435,13 +436,13 @@ void Game_Draw()
 	gEffect[1].texture->Draw();
 	for (int i = 0; i < MAX_OBJECT; i++)
 		gObjects[i].texture->Draw();
-	if (turn != GAMEOVER) {
+	if (turn != GAMEOVER || turn != PENGUIN2) {
 		for (int i = 0; i < gEnemyVector.size(); i++)
 			gEnemyVector[i].texture->Draw();
 	}
 	gPlayer1.texture->Draw();
 	gPlayer2.texture->Draw();
-	if (turn == GAMEOVER) {
+	if (turn == GAMEOVER || turn == PENGUIN2) {
 		for (int i = 0; i < gEnemyVector.size(); i++)
 			gEnemyVector[i].texture->Draw();
 	}

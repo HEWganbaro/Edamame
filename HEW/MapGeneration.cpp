@@ -134,6 +134,8 @@ void Map_GetStone(vector<MapPos>* StoneMap, GameObject* Map)
 //戻り値 無し
 //////////////////////////////////////////////////////////
 void MapMove_Update(GameObject * Player, GameObject* Map) {
+	if (Player->direction != NULL_WAY)
+		Player->diretmp = Player->direction;
 	// マップ外にはいかない
 	if (Player->mappos.LeftDown == -1) {
 		Player->mappos.LeftDown++;

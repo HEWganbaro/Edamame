@@ -137,6 +137,7 @@ struct GameObject {
 	MapPos mappos;	//マップ単位でいる場所
 	MapPos tmp;	//一時保存場所
 
+	Direction diretmp;		//前回保存場所
 	Direction direction;	//進む方向
 
 	Enemyeye enemyeye;//敵の視線

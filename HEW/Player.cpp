@@ -50,7 +50,7 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 	XInputGetState(0, &state);
 
 	//ステージマップによって分岐させる
-	if (Player->direction == NULL_WAY && Player->Goalfrg == false) {
+	if (Player->direction == NULL_WAY && Player2->direction == NULL_WAY && Player->Goalfrg == false) {
 		if (Input_GetKeyTrigger('Q') || (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
 			Player->direction = LEFT_UP;
 			Player->mappos.RightDown--;
@@ -74,7 +74,7 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 	}
 
 	//プレイヤー2
-	if (Player2->direction == NULL_WAY && Player2->Goalfrg == false) {
+	if (Player->direction == NULL_WAY && Player2->direction == NULL_WAY && Player2->Goalfrg == false) {
 		if (Input_GetKeyTrigger('U') || (state.Gamepad.sThumbRX < DEADZONE_MSTICK&&state.Gamepad.sThumbRY > DEADZONE_STICK)) {
 			Player2->direction = LEFT_UP;
 			Player2->mappos.RightDown--;
@@ -116,18 +116,40 @@ void Player_AniUpdate(GameObject * Player)
 	//アニメーション
 	Animator_Update(&Player->animator);
 
-	int walk = 0, growth = 0, soil = 0;
+	int walk = 0, growth = 0, soil = 0, gameover = 0;
 	if (Player->animator.isActive == true)
 		walk = 8;
 	if (Player->SnowSize > 3)
 		growth = 24;
 	if (Player->SoilFrg == true)
 		soil = 1;
+	if (turn == GAMEOVER || turn == PENGUIN2)
+		gameover = 16;
 	//アニメーション
 	switch (Player->direction)
 	{
 	case NULL_WAY:
-		Player->texture->SetPart(Player->animator.frame + growth, 0 + soil);
+		switch (Player->diretmp)
+		{
+		case NULL_WAY:
+			Player->texture->SetPart(Player->animator.frame +  growth, 0 + soil);
+			break;
+		case RIGHT_DOWN:
+			Player->texture->SetPart(Player->animator.frame +  growth, 0 + soil);
+			break;
+
+		case LEFT_DOWN:
+			Player->texture->SetPart(Player->animator.frame +  growth, 2 + soil);
+			break;
+
+		case LEFT_UP:
+			Player->texture->SetPart(Player->animator.frame +  growth, 4 + soil);
+			break;
+
+		case RIGHT_UP:
+			Player->texture->SetPart(Player->animator.frame +  growth, 6 + soil);
+			break;
+		}
 		break;
 
 	case RIGHT_DOWN:
@@ -145,6 +167,30 @@ void Player_AniUpdate(GameObject * Player)
 	case RIGHT_UP:
 		Player->texture->SetPart(Player->animator.frame + walk + growth, 6 + soil);
 		break;
+	}
+	if (turn == GAMEOVER || turn == PENGUIN2) {
+		switch (Player->direction)
+		{
+		case NULL_WAY:
+			Player->texture->SetPart(Player->animator.frame + gameover + growth, 0 + soil);
+			break;
+
+		case RIGHT_DOWN:
+			Player->texture->SetPart(Player->animator.frame + gameover + growth, 0 + soil);
+			break;
+
+		case LEFT_DOWN:
+			Player->texture->SetPart(Player->animator.frame + gameover + growth, 2 + soil);
+			break;
+
+		case LEFT_UP:
+			Player->texture->SetPart(Player->animator.frame + gameover + growth, 4 + soil);
+			break;
+
+		case RIGHT_UP:
+			Player->texture->SetPart(Player->animator.frame + gameover + growth, 6 + soil);
+			break;
+		}
 	}
 }
 //プレイヤーがマップを通った時の更新処理
