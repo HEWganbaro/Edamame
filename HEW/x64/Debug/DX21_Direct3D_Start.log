@@ -1,41 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  compilation header save succeeded; see C:\Users\naoki\Documents\GitHub\Edamame\HEW\ps.h
-  compilation header save succeeded; see C:\Users\naoki\Documents\GitHub\Edamame\HEW\vs.h
-  compilation object save succeeded; see C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\vs.cso
-  animator.cpp
-  CharController.cpp
-  direct3d.cpp
-  WICTextureLoader.cpp
-  Easing.cpp
-  Effect.cpp
-c:\users\naoki\documents\github\edamame\hew\effect.cpp(5): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\effect.cpp(26): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\effect.cpp(48): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\effect.cpp(52): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-  Enemy.cpp
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(304): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(305): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(321): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(322): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(338): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(339): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(356): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(357): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  GameClear.cpp
-  GameObject.cpp
-  game.cpp
-c:\users\naoki\documents\github\edamame\hew\game.cpp(234): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(235): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-  GameOver.cpp
-  GameTimer.cpp
-  Gauge.cpp
-c:\users\naoki\documents\github\edamame\hew\gauge.cpp(27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-  input.cpp
-  Level.cpp
-c:\users\naoki\documents\github\edamame\hew\level.cpp(87): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-c:\users\naoki\documents\github\edamame\hew\level.cpp(317): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\level.cpp(318): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  main.cpp
   MapGeneration.cpp
 c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(179): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
 c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(180): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
@@ -109,23 +72,4 @@ c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(1054): warning C42
 c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(1055): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
 c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(1073): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
 c:\users\naoki\documents\github\edamame\hew\mapgeneration.cpp(1074): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  Player.cpp
-c:\users\naoki\documents\github\edamame\hew\player.cpp(202): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
-  Scene.cpp
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(10): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(23): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(39): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(45): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(60): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(74): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-  Shielding.cpp
-  コードを生成中...
-  コンパイル中...
-  Sprite.cpp
-c:\users\naoki\documents\github\edamame\hew\sprite.cpp(61): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\sprite.cpp(62): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-  Title.cpp
-  XAudio2.cpp
-  コードを生成中...
-  LINK : 前回のインクリメンタル リンクで C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\HEW.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
   DX21_Direct3D_Start.vcxproj -> C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\HEW.exe

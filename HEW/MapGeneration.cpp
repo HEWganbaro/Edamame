@@ -476,7 +476,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					}
 					bool mapedge = Player->mappos.LeftDown + 1 != MAP_EDGE;
 					bool mapout = Map_GetPlayerTile_LeftDown(Player, Map) != -1;
-					bool mapslope = Map_GetPlayerTile_LeftDown(Player, Map) != RIGHTUP_SLOPE;
+					bool mapslope = Map_GetPlayerTile_LeftDown(Player, Map) != LEFTUP_SLOPE;
 					bool mapstone = Map_GetPlayerTile_LeftDown(Player, Map) != STONE;
 					bool enemygoal = Map_GetPlayerTile_LeftDown(Player, Map) == GOAL && Player->IsEnemy == true;
 					bool enemygoallater = Map_GetPlayerTile_LeftDown(Player, Map) == GOAL_LATER && Player->IsEnemy == true;
