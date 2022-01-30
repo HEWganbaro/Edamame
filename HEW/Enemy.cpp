@@ -559,11 +559,11 @@ void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, G
 		if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
 			Player->mappos.RightDown == Enemy->mappos.RightDown) {
 			Enemy->IsStun = Stun_Release;
-			XA_Play(SOUND_LABEL(SOUND_LABEL_SD000));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ENEMYSTAN));
 		}
 		else
 		{
-			XA_Stop(SOUND_LABEL(SOUND_LABEL_SD000));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_ENEMYSTAN));
 		}
 	}
 
@@ -571,11 +571,11 @@ void Enemy_Stun(GameObject * Enemy, GameObject * Player, GameObject * Player2, G
 		if (Player->mappos.LeftDown == Enemy->mappos.LeftDown &&
 			Player->mappos.RightDown == Enemy->mappos.RightDown) {
 			Enemy->IsStun = Stun_Release;
-			XA_Play(SOUND_LABEL(SOUND_LABEL_SD000));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ENEMYSTAN));
 		}
 		else
 		{
-			XA_Stop(SOUND_LABEL(SOUND_LABEL_SD000));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_ENEMYSTAN));
 		}
 	}
 }

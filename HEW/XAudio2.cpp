@@ -15,7 +15,9 @@ typedef struct
 
 PARAM g_param[SOUND_LABEL_MAX] =
 {
-	{"assets/BGM/GameBgm.wav", true},
+	{"assets/BGM/TitleBGM.wav", true},
+	{"assets/BGM/LevelBGM.wav", true},
+	{"assets/BGM/GameBGM.wav", true},
 	{"assets/SD/penguin_stan.wav", true},
 };
 

@@ -78,7 +78,7 @@ BOOL Game_Initialize()
 	srand((unsigned)time(NULL));
 	
 	//BGMçƒê∂
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
 
 	// CSVÇîzóÒÇ…äiî[
 	ifstream ifs("assets/data.csv");
@@ -461,7 +461,7 @@ void Game_Draw()
 //çÏÇ¡ÇΩGameObjectÇÕÇøÇ·ÇÒÇ∆deleteÇµÇÊÇ§ÅI
 StageScore Game_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
 
 	delete gPlayer1.texture;
 	delete gPlayer2.texture;

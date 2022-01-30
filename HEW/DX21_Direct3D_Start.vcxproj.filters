@@ -37,23 +37,17 @@
     <Filter Include="ソース ファイル\Game\Game\Object">
       <UniqueIdentifier>{e2642171-68fa-4bc4-912c-fdb16de709ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Game\Title">
-      <UniqueIdentifier>{32a44e34-f89a-4d59-8fab-beaa78ece832}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Title">
-      <UniqueIdentifier>{68592236-cd91-40d2-b90c-d5e86fc22511}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ヘッダー ファイル\Game\Game">
       <UniqueIdentifier>{e2387bf0-bfcd-4766-94a9-6a5261dc74a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="ヘッダー ファイル\Game\Game\Object">
       <UniqueIdentifier>{55d75048-8528-4909-8501-a8b4be5a1e85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Game\Level">
-      <UniqueIdentifier>{a107ed97-511f-4f73-a88e-e6a085d5d877}</UniqueIdentifier>
+    <Filter Include="ヘッダー ファイル\Game\Game\Scene">
+      <UniqueIdentifier>{e95597e9-4632-403f-9233-908ee59d5bd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Game\Level">
-      <UniqueIdentifier>{afca881e-034d-4cff-893e-dac86245eb94}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Game\Game\Scene">
+      <UniqueIdentifier>{b2d9fe1b-672c-4846-881e-081b33ec6e01}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,29 +99,29 @@
     <ClInclude Include="Shielding.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Title.h">
-      <Filter>ヘッダー ファイル\Game\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>ヘッダー ファイル\Game\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>ヘッダー ファイル\Game\Level</Filter>
     </ClInclude>
     <ClInclude Include="Gauge.h">
       <Filter>ヘッダー ファイル\Game\Game\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>ヘッダー ファイル\Game\Game</Filter>
+    <ClInclude Include="Level.h">
+      <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameClear.h">
-      <Filter>ヘッダー ファイル\Game</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameOver.h">
-      <Filter>ヘッダー ファイル\Game</Filter>
+      <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -176,29 +170,29 @@
     <ClCompile Include="Shielding.cpp">
       <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp">
-      <Filter>ソース ファイル\Game\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>ソース ファイル\Game\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>ソース ファイル\Game\Game\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>ソース ファイル\Game\Level</Filter>
     </ClCompile>
     <ClCompile Include="Gauge.cpp">
       <Filter>ソース ファイル\Game\Game\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>ソース ファイル\Game\Game</Filter>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>ソース ファイル\Game\Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameOver.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Game\Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameClear.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Level.cpp">
+      <Filter>ソース ファイル\Game\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>ソース ファイル\Game\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>ソース ファイル\Game\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>ソース ファイル\Game\Game\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

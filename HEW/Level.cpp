@@ -57,7 +57,7 @@ BOOL Level_Initialize(StageScore score)
 	GameTimer_Initialize(60);
 
 	//BGMÄ¶
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_LEVEL));
 
 	//”wŒi
 	lBackGround.texture = new Sprite("assets/level.png", 1, 1);
@@ -285,20 +285,20 @@ BOOL Level_Update()
 	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP)
 		Right = true;
 
-	if (state.Gamepad.wButtons == 0 && Left == true) {
+	if (Input_GetKeyTrigger(VK_LEFT) || state.Gamepad.wButtons == 0 && Left == true) {
 		stage--;
 		if (stage == 0)
 			stage = 1;
-		gchoice.texture->SetPart(1, 0);
+		gchoice.texture->SetPart(stage, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
 		Left = false;
 	}
-	if (state.Gamepad.wButtons == 0 && Right == true) {
+	if (Input_GetKeyTrigger(VK_RIGHT) || state.Gamepad.wButtons == 0 && Right == true) {
 		stage++;
 		if (stage == 11)
 			stage = 10;
-		gchoice.texture->SetPart(2, 0);
+		gchoice.texture->SetPart(stage, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
 		Right = false;
@@ -348,7 +348,7 @@ void Level_Draw()
 
 void Level_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_LEVEL));
 	delete lBackGround.texture;
 	delete gchoice.texture;
 	delete groad.texture;

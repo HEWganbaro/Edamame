@@ -48,7 +48,7 @@ BOOL Title_Initialize()
 	GameTimer_Initialize(60);
 
 	//BGMçƒê∂
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_TITLE));
 
 	//îwåi
 	tBackGround.texture = new Sprite("assets/TitleBG.png", 1, 1);
@@ -115,7 +115,7 @@ void Title_Draw()
 //çÏÇ¡ÇΩGameObjectÇÕÇøÇ·ÇÒÇ∆deleteÇµÇÊÇ§ÅI
 void Title_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_TITLE));
 	delete tBackGround.texture;
 	delete tLogo.texture;
 	delete tFade.texture;

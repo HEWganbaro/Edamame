@@ -47,7 +47,7 @@ BOOL GameOver_Initialize()
 	GameTimer_Initialize(60);
 
 	//BGM再生
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
 
 	//背景
 	oBackGround.texture = new Sprite("assets/追加テクスチャ/gameover_1.png", 1, 1);
@@ -116,7 +116,7 @@ void GameOver_Draw()
 //作ったGameObjectはちゃんとdeleteしよう！
 void GameOver_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
 	delete oBackGround.texture;
 	delete oLogo.texture;
 	delete oFade.texture;

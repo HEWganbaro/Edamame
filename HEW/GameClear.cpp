@@ -46,7 +46,7 @@ BOOL GameClear_Initialize()
 	GameTimer_Initialize(60);
 
 	//BGM再生
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
 
 	//背景
 	cBackGround.texture = new Sprite("assets/追加テクスチャ/GameClear.png", 8, 1);
@@ -114,7 +114,7 @@ void GameClear_Draw()
 //作ったGameObjectはちゃんとdeleteしよう！
 void GameClear_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM000));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
 	delete cBackGround.texture;
 	delete cFade.texture;
 }
