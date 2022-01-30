@@ -145,6 +145,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				case GAME:
 					gScene.Game();
 					break;
+				case GAME_CLEAR:
+					gScene.Clear();
+					break;
+				case GAME_OVER:
+					gScene.Over();
+					break;
 				default:
 					MessageBoxA(hWnd, "èâä˙âªÇ…é∏îs", "ÉGÉâÅ[", MB_OK | MB_ICONERROR);
 					goto INIT_ERROR;

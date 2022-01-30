@@ -153,6 +153,8 @@
     <ClInclude Include="Easing.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameClear.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Gauge.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MapGeneration.h" />
@@ -178,8 +180,10 @@
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameClear.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Gauge.cpp" />
     <ClCompile Include="input.cpp" />

@@ -371,12 +371,14 @@ BOOL Game_Update()
 
 	case GAMEOVER:
 		//タイトルへ戻るフラグ
-		if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
+		//if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
+		return FALSE;
 			GameFade.fadeout = true;
 		break;
 
 	case CLEAR:
-		if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
+		//if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
+		return FALSE;
 			GameFade.fadeout = true;
 		break;
 	}
