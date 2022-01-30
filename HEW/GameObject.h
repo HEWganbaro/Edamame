@@ -22,6 +22,8 @@ extern int Player2_cut;
 extern int turn;
 extern int stage;
 extern int big_snowball;
+extern int korokoroX;
+extern int korokoroY;
 
 enum Direction
 {

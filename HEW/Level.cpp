@@ -38,6 +38,7 @@ GameObject gstage[10];
 GameObject gcloud[10];
 GameObject gstar[10];
 GameObject lFade;
+GameObject lKorokoro;
 
 FADE LevelFade;
 
@@ -86,6 +87,12 @@ BOOL Level_Initialize(StageScore score)
 	lFade.texture->color.a = 0.0f;
 	LevelFade.framecnt = FADETIME - 0.1f;
 	LevelFade.fadeout = false;
+
+	//ころころ
+	lKorokoro.texture = new Sprite("assets/fadekorokoro.png", 20, 2);
+	lKorokoro.texture->SetSize(1280 * 2, 720 * 2);
+	lKorokoro.posX = -1;
+	lKorokoro.posY = 1;
 
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
@@ -242,6 +249,7 @@ BOOL Level_Update()
 	GameObject_DrowUpdate(&gchoice);
 	GameObject_DrowUpdate(&groad);
 	GameObject_DrowUpdate(&lFade);
+	GameObject_DrowUpdate(&lKorokoro);
 	for (int i = 0; i < 10; i++)
 	{
 		//ステージ
@@ -297,9 +305,13 @@ BOOL Level_Update()
 	}
 
 	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
+		korokoroX = 0;
 		LevelFade.fadeout = true;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	}
+
+	lKorokoro.texture->SetPart(korokoroX / 4, 0);
+	korokoroX++;
 
 	FadeChange(&LevelFade);//フェードを司る関数、触らないで
 	lFade.texture->color.a = LevelFade.Alpha;
@@ -338,6 +350,7 @@ void Level_Draw()
 		gstar[i].texture->Draw();
 	}
 	lFade.texture->Draw();
+	lKorokoro.texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -351,6 +364,7 @@ void Level_Relese()
 	delete gchoice.texture;
 	delete groad.texture;
 	delete lFade.texture;
+	delete lKorokoro.texture;
 	for (int i = 0; i < 10; i++)
 	{
 		delete gstage[i].texture;

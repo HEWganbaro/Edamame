@@ -32,6 +32,7 @@
 
 GameObject cBackGround;				//背景
 GameObject cFade;
+GameObject cKorokoro;
 
 FADE GameClearFade;
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -67,6 +68,13 @@ BOOL GameClear_Initialize()
 	cFade.texture->color.b = 0.0f;
 	cFade.texture->color.a = 0.0f;
 	GameClearFade.framecnt = FADETIME - 0.1f;
+	GameClearFade.fadeout = false;
+
+	//ころころ
+	cKorokoro.texture = new Sprite("assets/fadekorokoro.png", 20, 2);
+	cKorokoro.texture->SetSize(1280 * 2, 720 * 2);
+	cKorokoro.posX = -1;
+	cKorokoro.posY = 1;
 
 	return TRUE;
 }
@@ -85,11 +93,12 @@ BOOL GameClear_Update()
 	cBackGround.texture->SetPart(cBackGround.animator.frame, 0);
 
 	GameObject_DrowUpdate(&cBackGround);
-
 	GameObject_DrowUpdate(&cFade);
+	GameObject_DrowUpdate(&cKorokoro);
 
 	if (Input_GetKeyTrigger(VK_SPACE))
 	{
+		korokoroX = 0;
 		GameClearFade.fadeout = true;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	}
@@ -98,6 +107,9 @@ BOOL GameClear_Update()
 	cFade.texture->color.a = GameClearFade.Alpha;
 	if (GameClearFade.Alpha > 1.0f)
 		return FALSE;
+
+	cKorokoro.texture->SetPart(korokoroX / 4, 0);
+	korokoroX++;
 
 	return TRUE;
 }
@@ -112,6 +124,7 @@ void GameClear_Draw()
 	//ゲームオブジェクトを全部描画する
 	cBackGround.texture->Draw();
 	cFade.texture->Draw();
+	cKorokoro.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
@@ -123,4 +136,5 @@ void GameClear_Relese()
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	delete cBackGround.texture;
 	delete cFade.texture;
+	delete cKorokoro.texture;
 }

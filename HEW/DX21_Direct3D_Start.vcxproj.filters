@@ -123,6 +123,9 @@
     <ClInclude Include="game.h">
       <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Kamishibai.h">
+      <Filter>ヘッダー ファイル\Game\Game\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="directxtex\include\WICTextureLoader.cpp">
@@ -192,6 +195,9 @@
       <Filter>ソース ファイル\Game\Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Title.cpp">
+      <Filter>ソース ファイル\Game\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Kamishibai.cpp">
       <Filter>ソース ファイル\Game\Game\Scene</Filter>
     </ClCompile>
   </ItemGroup>

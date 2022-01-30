@@ -1,5 +1,6 @@
 #pragma once
 #include "game.h"
+#include "Kamishibai.h"
 #include "Title.h"
 #include "Level.h"
 #include "GameClear.h"
@@ -8,6 +9,7 @@
 enum SCENE
 {
 	TITLE,
+	KAMISHIBAI,
 	LEVEL,
 	GAME,
 	GAME_CLEAR,
@@ -20,6 +22,7 @@ public:
 	SCENE scene;
 
 	void Title();
+	void Kami();
 	void Level();
 	void Game();
 	void Clear();

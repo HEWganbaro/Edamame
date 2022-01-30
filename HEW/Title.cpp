@@ -33,8 +33,11 @@
 GameObject tBackGround;				//背景
 GameObject tLogo;                   //タイトルロゴ
 GameObject tFade;
+GameObject tKorokoro;
 
 FADE TitleFade;
+int korokoroX;
+int korokoroY;
 
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
 
@@ -70,6 +73,13 @@ BOOL Title_Initialize()
 	tFade.texture->color.b = 0.0f;
 	tFade.texture->color.a = 0.0f;
 	TitleFade.framecnt = FADETIME - 0.1f;
+	TitleFade.fadeout = false;
+	//ころころ
+	tKorokoro.texture = new Sprite("assets/fadekorokoro.png", 20, 2);
+	tKorokoro.texture->SetSize(1280 * 2, 720 * 2);
+	tKorokoro.posX = -1;
+	tKorokoro.posY = 1;
+	korokoroX = 1000;
 
 	return TRUE;
 }
@@ -85,18 +95,22 @@ BOOL Title_Update()
 	GameObject_DrowUpdate(&tBackGround);
 	GameObject_DrowUpdate(&tLogo);
 	GameObject_DrowUpdate(&tFade);
+	GameObject_DrowUpdate(&tKorokoro);
 
 	if (Input_GetKeyTrigger(VK_SPACE))
 	{
 		TitleFade.fadeout = true;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+		korokoroX = 0;
 	}
 
+	tKorokoro.texture->SetPart(korokoroX / 4, 0);
+	korokoroX++;
 	FadeChange(&TitleFade);//フェードを司る関数、触らないで
 	tFade.texture->color.a = TitleFade.Alpha;
 	if (TitleFade.Alpha > 1.0f)
 		return FALSE;
-	
+
 	return TRUE;
 }
 
@@ -111,6 +125,7 @@ void Title_Draw()
 	tBackGround.texture->Draw();
 	tLogo.texture->Draw();
 	tFade.texture->Draw();
+	tKorokoro.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
@@ -123,4 +138,5 @@ void Title_Relese()
 	delete tBackGround.texture;
 	delete tLogo.texture;
 	delete tFade.texture;
+	delete tKorokoro.texture;
 }

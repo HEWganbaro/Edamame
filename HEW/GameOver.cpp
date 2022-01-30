@@ -50,7 +50,7 @@ BOOL GameOver_Initialize()
 	GameTimer_Initialize(60);
 
 	//BGM再生
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAMEOVER));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
 
@@ -61,9 +61,9 @@ BOOL GameOver_Initialize()
 	oBackGround.posY = 1;
 
 	oPlayer.texture = new Sprite("assets/Player_kansei.png", 48, 8);
-	oPlayer.texture->SetSize(INIT_SNOW_SIZE, INIT_SNOW_SIZE);
-	oPlayer.posX = -0.08f;
-	oPlayer.posY = -0.4f;
+	oPlayer.texture->SetSize(512, 512);
+	oPlayer.posX = -0.25f;
+	oPlayer.posY = -0.2f;
 	oPlayer.animator.speed = 8.0f;
 
 	oLogo.texture = new Sprite("assets/追加テクスチャ/gameover_2.png", 1, 1);
@@ -81,6 +81,7 @@ BOOL GameOver_Initialize()
 	oFade.texture->color.b = 0.0f;
 	oFade.texture->color.a = 0.0f;
 	GameOverFade.framecnt = FADETIME - 0.1f;
+	GameOverFade.fadeout = false;
 
 	oFadeLogo.texture = new Sprite("assets/追加テクスチャ/gameover_2.png", 1, 1);
 	oFadeLogo.texture->SetSize(1280 * 2, 720 * 2);
@@ -92,6 +93,8 @@ BOOL GameOver_Initialize()
 	oFadeLogo.texture->color.a = 0.0f;
 	GameLogo.framecnt = FADETIME - 0.1f;
 	GameLogo.fadeout = true;
+
+	
 
 	return TRUE;
 }
@@ -159,7 +162,7 @@ void GameOver_Draw()
 //作ったGameObjectはちゃんとdeleteしよう！
 void GameOver_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAMEOVER));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	delete oBackGround.texture;
 	delete oPlayer.texture;

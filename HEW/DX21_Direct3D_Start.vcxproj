@@ -156,6 +156,7 @@
     <ClInclude Include="GameClear.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="Gauge.h" />
+    <ClInclude Include="Kamishibai.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="MapGeneration.h" />
     <ClInclude Include="Player.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Gauge.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="Kamishibai.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGeneration.cpp" />

@@ -57,12 +57,14 @@ GameObject gGaugeframe;
 GameObject gCursor1;
 GameObject gCursor2;
 GameObject gFade;
+GameObject gKorokoro;
 
 GameObject gTutorial;
 bool TutoLeft, TutoRight;
 
 GameObject gEffect[4];
 bool GoalFast_1 = false;
+bool onceFlag = true;
 
 FADE GameFade;
 
@@ -209,6 +211,12 @@ BOOL Game_Initialize()
 	GameFade.framecnt = FADETIME - 0.1f;
 	GameFade.fadeout = false;
 
+	//ころころ
+	gKorokoro.texture = new Sprite("assets/fadekorokoro.png", 20, 2);
+	gKorokoro.texture->SetSize(1280 * 2, 720 * 2);
+	gKorokoro.posX = -1;
+	gKorokoro.posY = 1;
+
 	//チュートリアル
 	gTutorial.texture = new Sprite("assets/tutorial.png", 4, 1);
 	gTutorial.texture->SetPart(0, 0);
@@ -265,6 +273,9 @@ BOOL Game_Update()
 	//カーソルの位置変更
 	Cursor_Update(&gPlayer1, &gCursor1);
 	Cursor_Update(&gPlayer2, &gCursor2);
+
+	gKorokoro.texture->SetPart(korokoroX / 4, 0);
+	korokoroX++;
 
 	switch (turn)
 	{
@@ -388,13 +399,16 @@ BOOL Game_Update()
 	case GAMEOVER:
 		//タイトルへ戻るフラグ
 		//if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
-		return FALSE;
+		
 			GameFade.fadeout = true;
 		break;
 
 	case CLEAR:
 		//if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
-		return FALSE;
+		if (onceFlag == true) {
+			korokoroX = 0;
+			onceFlag = false;
+		}
 			GameFade.fadeout = true;
 		break;
 
@@ -425,6 +439,8 @@ BOOL Game_Update()
 			gTutorial.posX = -10;
 			gTutorial.posY = 10;
 		}
+
+		
 
 		gTutorial.texture->SetPart(page, 0);
 		break;
@@ -466,6 +482,7 @@ BOOL Game_Update()
 		GameObject_DrowUpdate(&gEffect[i]);
 	}
 	GameObject_DrowUpdate(&gTutorial);
+	GameObject_DrowUpdate(&gKorokoro);
 	return TRUE;
 }
 
@@ -501,6 +518,7 @@ void Game_Draw()
 	gEffect[3].texture->Draw();
 	gFade.texture->Draw();
 	gTutorial.texture->Draw();
+	gKorokoro.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
 }
@@ -518,6 +536,7 @@ StageScore Game_Relese()
 	delete gCursor2.texture;
 	delete gGaugeframe.texture;
 	delete gFade.texture;
+	delete gKorokoro.texture;
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		delete gEnemyVector[i].texture;
 	gEnemyVector.clear();

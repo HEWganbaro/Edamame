@@ -24,6 +24,8 @@ PARAM g_param[SOUND_LABEL_MAX] =
 	{"assets/sound_tyousei/player_grow.wav", true},
 	{"assets/sound_tyousei/Button_push.wav", true},
 	{"assets/sound_tyousei/move.wav", true},
+	{"assets/sound_tyousei/GameOverBGM.wav", true},
+	{"assets/sound_tyousei/Paper.wav", true},
 };
 
 #ifdef _XBOX //Big-Endian

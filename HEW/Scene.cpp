@@ -6,12 +6,27 @@ void Scene::Title()
 {
 	if (FALSE == Title_Update()) {	//シーン変更
 		Title_Relese();
-		scene = LEVEL;
-		if (FALSE == Level_Initialize(score))
+		scene = KAMISHIBAI;
+		StageScore score = TITLESCORE;
+		if (FALSE == Kamishibai_Initialize())
 			scene == -1;
 	}
 	else {
 		Title_Draw();
+	}
+}
+
+void Scene::Kami()
+{
+	if (FALSE == Kamishibai_Update()) {	//シーン変更
+		Kamishibai_Relese();
+		scene = LEVEL;
+		StageScore score = TITLESCORE;
+		if (FALSE == Level_Initialize(score))
+			scene == -1;
+	}
+	else {
+		Kamishibai_Draw();
 	}
 }
 
