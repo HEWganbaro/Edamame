@@ -404,10 +404,18 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 	else
 		Enemy->enemyeye = ENEMYEYE_OUT;
 	//ƒS[ƒ‹‚µ‚Ä‚È‚¢‚Ù‚¤‚ð’Ç‚¢‚©‚¯‚é
-	if (Player2->Goalfrg == true)
-		Enemy->enemyeye = ENEMYEYE_IN_2;
-	if (Player->Goalfrg == true)
-		Enemy->enemyeye = ENEMYEYE_IN_1;
+	if (Player2->Goalfrg == true) {
+		if (Player_EnemyIn)
+			Enemy->enemyeye = ENEMYEYE_IN_1;
+		else
+			Enemy->enemyeye = ENEMYEYE_OUT;
+	}
+	if (Player->Goalfrg == true) {
+		if (Player_EnemyIn2)
+			Enemy->enemyeye = ENEMYEYE_IN_2;
+		else
+			Enemy->enemyeye = ENEMYEYE_OUT;
+	}
 
 	if (Enemy->enemyeye == ENEMYEYE_IN_1) {
 		//‹——£‚ð•Û‘¶

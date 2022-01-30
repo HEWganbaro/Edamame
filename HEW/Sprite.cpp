@@ -106,6 +106,8 @@ void Sprite::SetPart(int x, int y) {
 
 int Sprite::GetPart(void)
 {
+	if (this == nullptr)
+		return -1;
 	return mPartX;
 }
 

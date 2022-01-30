@@ -153,7 +153,7 @@ BOOL Game_Initialize()
 	case 0:
 		//“G‚Ì‰Šú‰»
 		Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 5);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
 		gEnemyVector.emplace_back(gEnemy);
 
 		//Enemy_Initialize(&gEnemy, RANDOM);
