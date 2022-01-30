@@ -12,6 +12,7 @@
 typedef enum
 {
 	SOUND_LABEL_BGM000 = 0,		// ƒTƒ“ƒvƒ‹BGM
+	SOUND_LABEL_SD000,
 	SOUND_LABEL_MAX,
 } SOUND_LABEL;
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "MapGeneration.h"
+#include "XAudio2.h"
 
 #define SCANNING_RANGE 3
 

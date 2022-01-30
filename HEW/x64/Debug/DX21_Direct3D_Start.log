@@ -1,5 +1,31 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+  Enemy.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(304): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(305): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(321): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(322): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(338): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(339): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(356): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(357): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  GameClear.cpp
+  GameOver.cpp
+  Level.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(87): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(317): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(318): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Scene.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(10): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(23): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(39): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(45): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(60): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(74): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+  Title.cpp
+  XAudio2.cpp
   game.cpp
 c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\game.cpp(234): warning C4305: '=': 'double' から 'float' へ切り詰めます。
 c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\game.cpp(235): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  main.cpp
+  コードを生成中...
   DX21_Direct3D_Start.vcxproj -> C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame13\HEW\x64\Debug\HEW.exe
