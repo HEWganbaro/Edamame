@@ -47,6 +47,8 @@ BOOL GameClear_Initialize()
 
 	//BGM再生
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
 
 	//背景
 	cBackGround.texture = new Sprite("assets/追加テクスチャ/GameClear.png", 8, 1);
@@ -86,8 +88,11 @@ BOOL GameClear_Update()
 
 	GameObject_DrowUpdate(&cFade);
 
-	if (Input_GetKeyPress(VK_SPACE))
+	if (Input_GetKeyTrigger(VK_SPACE))
+	{
 		GameClearFade.fadeout = true;
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+	}
 
 	FadeChange(&GameClearFade);//フェードを司る関数、触らないで
 	cFade.texture->color.a = GameClearFade.Alpha;
@@ -115,6 +120,7 @@ void GameClear_Draw()
 void GameClear_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	delete cBackGround.texture;
 	delete cFade.texture;
 }

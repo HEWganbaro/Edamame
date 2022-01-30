@@ -59,6 +59,7 @@ BOOL Level_Initialize(StageScore score)
 
 	//BGMçƒê∂
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_LEVEL));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 
 	//îwåi
 	lBackGround.texture = new Sprite("assets/level.png", 1, 1);
@@ -286,6 +287,7 @@ BOOL Level_Update()
 
 	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
 		LevelFade.fadeout = true;
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	}
 
 	FadeChange(&LevelFade);//ÉtÉFÅ[ÉhÇéiÇÈä÷êîÅAêGÇÁÇ»Ç¢Ç≈
@@ -333,6 +335,7 @@ void Level_Draw()
 void Level_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_LEVEL));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	delete lBackGround.texture;
 	delete gchoice.texture;
 	delete groad.texture;

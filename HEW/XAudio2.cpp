@@ -15,10 +15,15 @@ typedef struct
 
 PARAM g_param[SOUND_LABEL_MAX] =
 {
-	{"assets/BGM/TitleBGM.wav", true},
-	{"assets/BGM/LevelBGM.wav", true},
-	{"assets/BGM/GameBGM.wav", true},
-	{"assets/SD/penguin_stan.wav", true},
+	{"assets/sound_tyousei/TitleBGM.wav", true},
+	{"assets/sound_tyousei/LevelBGM.wav", true},
+	{"assets/sound_tyousei/GameBGM.wav", true},
+	{"assets/sound_tyousei/penguin_stan.wav", true},
+	{"assets/sound_tyousei/player_crush.wav", true},
+	{"assets/sound_tyousei/Snow_hundatoki.wav", true},
+	{"assets/sound_tyousei/player_grow.wav", true},
+	{"assets/sound_tyousei/Button_push.wav", true},
+	{"assets/sound_tyousei/move.wav", true},
 };
 
 #ifdef _XBOX //Big-Endian

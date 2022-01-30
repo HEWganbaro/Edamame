@@ -51,6 +51,8 @@ BOOL GameOver_Initialize()
 
 	//BGM再生
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
 
 	//背景
 	oBackGround.texture = new Sprite("assets/追加テクスチャ/gameover_1.png", 1, 1);
@@ -118,8 +120,11 @@ BOOL GameOver_Update()
 		oPlayer.posY += 0.0001;
 	}
 
-	if (Input_GetKeyPress(VK_SPACE))
+	if (Input_GetKeyTrigger(VK_SPACE))
+	{
 		GameOverFade.fadeout = true;
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+	}
 
 	FadeChange(&GameLogo);//フェードを司る関数、触らないで
 	oFadeLogo.texture->color.a = GameLogo.Alpha;
@@ -155,6 +160,7 @@ void GameOver_Draw()
 void GameOver_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	delete oBackGround.texture;
 	delete oPlayer.texture;
 	delete oLogo.texture;

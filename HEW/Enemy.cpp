@@ -357,6 +357,7 @@ void Enemy_GameOver_Move(GameObject * Player)
 			Player->direction = NULL_WAY;
 			Player->animator.count = 0;
 			Player->animator.isActive = false;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
 		}
 		break;
 
@@ -374,6 +375,7 @@ void Enemy_GameOver_Move(GameObject * Player)
 			Player->direction = NULL_WAY;
 			Player->animator.count = 0;
 			Player->animator.isActive = false;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
 		}
 		break;
 
@@ -392,6 +394,7 @@ void Enemy_GameOver_Move(GameObject * Player)
 			Player->animator.count = 0;
 			Player->animator.isActive = false;
 			//Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown + 1].
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
 		}
 		break;
 
@@ -409,6 +412,7 @@ void Enemy_GameOver_Move(GameObject * Player)
 			Player->direction = NULL_WAY;
 			Player->animator.count = 0;
 			Player->animator.isActive = false;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
 		}
 		break;
 	}

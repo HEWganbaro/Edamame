@@ -55,21 +55,33 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 			Player->direction = LEFT_UP;
 			Player->mappos.RightDown--;
 			Player1_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 		if (Input_GetKeyTrigger('A') || (state.Gamepad.sThumbLX < DEADZONE_MSTICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)){
 			Player->direction = LEFT_DOWN;
 			Player->mappos.LeftDown++;
 			Player1_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 		if (Input_GetKeyTrigger('E') || (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY > DEADZONE_STICK)) {
 			Player->direction = RIGHT_UP;
 			Player->mappos.LeftDown--;
 			Player1_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 		if (Input_GetKeyTrigger('D') || (state.Gamepad.sThumbLX > DEADZONE_STICK&&state.Gamepad.sThumbLY < DEADZONE_MSTICK)) {
 			Player->direction = RIGHT_DOWN;
 			Player->mappos.RightDown++;
 			Player1_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 	}
 
@@ -79,21 +91,33 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 			Player2->direction = LEFT_UP;
 			Player2->mappos.RightDown--;
 			Player2_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 		if (Input_GetKeyTrigger('J') || (state.Gamepad.sThumbRX < DEADZONE_MSTICK&&state.Gamepad.sThumbRY < DEADZONE_MSTICK)) {
 			Player2->direction = LEFT_DOWN;
 			Player2->mappos.LeftDown++;
 			Player2_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 		if (Input_GetKeyTrigger('O') || (state.Gamepad.sThumbRX > DEADZONE_STICK&&state.Gamepad.sThumbRY > DEADZONE_STICK)) {
 			Player2->direction = RIGHT_UP;
 			Player2->mappos.LeftDown--;
 			Player2_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 		if (Input_GetKeyTrigger('L') || (state.Gamepad.sThumbRX > DEADZONE_STICK&&state.Gamepad.sThumbRY < DEADZONE_MSTICK)) {
 			Player2->direction = RIGHT_DOWN;
 			Player2->mappos.RightDown++;
 			Player2_cut++;
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		}
 	}
 }
@@ -209,16 +233,24 @@ void MapUpdate(GameObject* Map, GameObject* Player, GameObject* Player2) {
 		if (Player->SoilFrg == true)
 			Player->SoilFrg = false;
 		Player->SnowSize++;
+		XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+		if (Player2->SnowSize == 4)
+		{
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+		}
 	}
 	else if (Map_GetPlayerTile(Player, Map) == NORMAL_GROUND) {
 		Map[Player->mappos.Height * 100 + Player->mappos.LeftDown * 10 + Player->mappos.RightDown].changeFlag = true;
 		//Player->texture->SetPart(0, 0);
+		XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		if (Player->SoilFrg == true)
 			Player->SoilFrg = false;
 	}
 	else if (Map_GetPlayerTile(Player, Map) == SOIL_GROUND) {
 		Player->SoilFrg = true;
 		//Player->texture->SetPart(1, 0);
+		XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 	}
 
 	if (Map_GetPlayerTile(Player2, Map) == SNOW_GROUND) {
@@ -228,15 +260,23 @@ void MapUpdate(GameObject* Map, GameObject* Player, GameObject* Player2) {
 		if (Player2->SoilFrg == true)
 			Player2->SoilFrg = false;
 		Player2->SnowSize++;
+		XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+		if (Player2->SnowSize == 4)
+		{
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+		}
 	}
 	else if (Map_GetPlayerTile(Player2, Map) == NORMAL_GROUND) {
 		Map[Player2->mappos.Height * 100 + Player2->mappos.LeftDown * 10 + Player2->mappos.RightDown].changeFlag = true;
+		XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		//Player2->texture->SetPart(0, 0);
 		if (Player2->SoilFrg == true)
 			Player2->SoilFrg = false;
 	}
 	else if (Map_GetPlayerTile(Player2, Map) == SOIL_GROUND) {
 		//Player2->texture->SetPart(1, 0);
+		XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 		Player2->SoilFrg = true;
 	}
 	turn = PLAYER_TURN;

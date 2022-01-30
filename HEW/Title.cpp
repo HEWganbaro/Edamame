@@ -86,8 +86,11 @@ BOOL Title_Update()
 	GameObject_DrowUpdate(&tLogo);
 	GameObject_DrowUpdate(&tFade);
 
-	if (Input_GetKeyPress(VK_SPACE))
+	if (Input_GetKeyTrigger(VK_SPACE))
+	{
 		TitleFade.fadeout = true;
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+	}
 
 	FadeChange(&TitleFade);//フェードを司る関数、触らないで
 	tFade.texture->color.a = TitleFade.Alpha;
@@ -116,6 +119,7 @@ void Title_Draw()
 void Title_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_TITLE));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	delete tBackGround.texture;
 	delete tLogo.texture;
 	delete tFade.texture;

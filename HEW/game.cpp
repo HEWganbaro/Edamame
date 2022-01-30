@@ -79,6 +79,7 @@ BOOL Game_Initialize()
 	
 	//BGMçƒê∂
 	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 
 	// CSVÇîzóÒÇ…äiî[
 	ifstream ifs("assets/data.csv");

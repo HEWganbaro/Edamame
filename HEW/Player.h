@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "input.h"
 #include "MapGeneration.h"
+#include "XAudio2.h"
 
 #define INIT_SNOW_SIZE 175
 #define INIT_CURSOR_SIZE 64
