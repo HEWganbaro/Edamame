@@ -1,11 +1,12 @@
 #include "Scene.h"
 
+StageScore score;
+
 void Scene::Title()
 {
 	if (FALSE == Title_Update()) {	//ÉVÅ[ÉìïœçX
 		Title_Relese();
 		scene = LEVEL;
-		StageScore score = TITLESCORE;
 		if (FALSE == Level_Initialize(score))
 			scene == -1;
 	}
@@ -30,7 +31,6 @@ void Scene::Level()
 void Scene::Game()
 {
 	if (FALSE == Game_Update()) {
-		StageScore score;
 		score = Game_Relese();
 		if (turn == CLEAR)
 		{

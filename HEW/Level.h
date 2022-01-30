@@ -15,3 +15,5 @@ BOOL Level_Initialize(StageScore score);
 BOOL Level_Update();
 void Level_Draw();
 void Level_Relese();
+
+void SetPos();

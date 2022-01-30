@@ -9,7 +9,7 @@
 //マップの列数
 #define MAP_EDGE 10		// 10*10の床
 #define MAP_HEIGHT 3	// 高さ
-#define MAP_STAGE 2		// ステージ数
+#define MAP_STAGE 10		// ステージ数
 
 // 
 #define MAP_HEIGH_FRG -9

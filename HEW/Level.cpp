@@ -36,6 +36,7 @@ GameObject gchoice;
 GameObject groad;		//“¹
 GameObject gstage[10];
 GameObject gcloud[10];
+GameObject gstar[10];
 GameObject lFade;
 
 FADE LevelFade;
@@ -86,74 +87,17 @@ BOOL Level_Initialize(StageScore score)
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
 
-	/*gstage[0].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[0].texture->SetSize(320, 320);
-
-	gstage[1].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[1].texture->SetSize(320, 320);
-
-	gstage[2].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[2].texture->SetSize(320, 320);
-
-	gstage[3].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[3].texture->SetSize(320, 320);
-
-	gstage[4].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[4].texture->SetSize(320, 320);
-
-	gstage[5].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[5].texture->SetSize(320, 320);
-
-	gstage[6].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[6].texture->SetSize(320, 320);
-
-	gstage[7].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[7].texture->SetSize(320, 320);
-
-	gstage[8].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[8].texture->SetSize(320, 320);
-
-	gstage[9].texture = new Sprite("assets/Level_tile.png", 2, 1);
-	gstage[9].texture->SetSize(320, 320);
-*/
 	for (int i = 0; i < 10; i++) {
 		gstage[i].texture = new Sprite("assets/Level_tile.png", 2, 1);
 		gstage[i].texture->SetSize(320, 320);
 
 		gcloud[i].texture = new Sprite("assets/cloud.png", 1, 1);
 		gcloud[i].texture->SetSize(400, 160);
+
+		gstar[i].texture = new Sprite("assets/Star.png", 1, 8);
+		gstar[i].texture->SetSize(272, 100);
+		gstar[i].texture->SetPart(0, 0);
 	}
-
-
-	/*gcloud[0].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[0].texture->SetSize(400, 160);
-
-	gcloud[1].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[1].texture->SetSize(400, 160);
-
-	gcloud[2].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[2].texture->SetSize(400, 160);
-
-	gcloud[3].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[3].texture->SetSize(400, 160);
-
-	gcloud[4].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[4].texture->SetSize(400, 160);
-
-	gcloud[5].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[5].texture->SetSize(400, 160);
-
-	gcloud[6].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[6].texture->SetSize(400, 160);
-
-	gcloud[7].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[7].texture->SetSize(400, 160);
-
-	gcloud[8].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[8].texture->SetSize(400, 160);
-
-	gcloud[9].texture = new Sprite("assets/cloud.png", 1, 1);
-	gcloud[9].texture->SetSize(400, 160);*/
 
 	gstage[0].texture->SetPart(0, 0);
 	gstage[0].posX = -0.97f;
@@ -235,6 +179,36 @@ BOOL Level_Initialize(StageScore score)
 	gcloud[9].posX = 0.67f;
 	gcloud[9].posY = -0.53f;
 
+	gstar[0].posX= -0.95f;
+	gstar[0].posY = 0.16f;
+
+	gstar[1].posX = -0.75f;
+	gstar[1].posY = -0.42f;
+
+	gstar[2].posX = -0.56f;
+	gstar[2].posY = 0.36f;
+
+	gstar[3].posX = -0.22f;
+	gstar[3].posY = 0.22f;
+
+	gstar[4].posX = -0.34f;
+	gstar[4].posY = -0.46f;
+
+	gstar[5].posX = 0.04f;
+	gstar[5].posY = -0.56f;
+
+	gstar[6].posX = 0.09f;
+	gstar[6].posY = 0.25f;
+
+	gstar[7].posX = 0.50f;
+	gstar[7].posY = 0.38f;
+
+	gstar[8].posX = 0.45f;
+	gstar[8].posY = -0.28f;
+
+	gstar[9].posX = 0.72f;
+	gstar[9].posY = -0.57f;
+
 	//ƒXƒRƒA‚ð‘ã“ü
 	if (score != TITLESCORE)
 		LevelScoreSheet[stage - 1] = score;
@@ -262,6 +236,8 @@ BOOL Level_Update()
 		GameObject_DrowUpdate(&gstage[i]);
 		//‰_
 		GameObject_DrowUpdate(&gcloud[i]);
+
+		GameObject_DrowUpdate(&gstar[i]);
 	}
 
 	
@@ -293,6 +269,8 @@ BOOL Level_Update()
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
 		Left = false;
+
+		SetPos();
 	}
 	if (Input_GetKeyTrigger(VK_RIGHT) || state.Gamepad.wButtons == 0 && Right == true) {
 		stage++;
@@ -302,6 +280,8 @@ BOOL Level_Update()
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
 		Right = false;
+
+		SetPos();
 	}
 
 	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
@@ -313,9 +293,11 @@ BOOL Level_Update()
 	if (LevelFade.Alpha > 1.0f)
 		return FALSE;
 
+	int size = 200;	//ˆÚ“®—Ê‚Ì‘å‚«‚³
+	int cycle = 10;	//‘¬‚³
 	//ã‰º‚É‚Ó‚í‚Ó‚íˆÚ“®‚·‚é
-	gstage[stage - 1].posY += sin(countLevel / 5) / 600;
-	gcloud[stage - 1].posY += sin(countLevel / 5) / 600;
+	gstage[stage - 1].posY += sin(countLevel / cycle) / size;
+	gcloud[stage - 1].posY += sin(countLevel / cycle) / size;
 	countLevel++;
 
 	return TRUE;
@@ -339,6 +321,8 @@ void Level_Draw()
 		gcloud[i].texture->Draw();
 
 		gstage[i].texture->Draw();
+
+		gstar[i].texture->Draw();
 	}
 	lFade.texture->Draw();
 
@@ -358,4 +342,87 @@ void Level_Relese()
 		delete gstage[i].texture;
 		delete gcloud[i].texture;
 	}
+}
+
+void SetPos()
+{
+	gstage[0].texture->SetPart(0, 0);
+	gstage[0].posX = -0.97f;
+	gstage[0].posY = 0.48f;
+
+	gstage[1].texture->SetPart(0, 0);
+	gstage[1].posX = -0.77f;
+	gstage[1].posY = -0.1f;
+
+	gstage[2].texture->SetPart(0, 0);
+	gstage[2].posX = -0.58f;
+	gstage[2].posY = 0.68f;
+
+	gstage[3].texture->SetPart(0, 0);
+	gstage[3].posX = -0.24f;
+	gstage[3].posY = 0.54f;
+
+	gstage[4].texture->SetPart(0, 0);
+	gstage[4].posX = -0.36f;
+	gstage[4].posY = -0.14f;
+
+	gstage[5].texture->SetPart(1, 0);
+	gstage[5].posX = 0.02f;
+	gstage[5].posY = -0.23f;
+
+	gstage[6].texture->SetPart(1, 0);
+	gstage[6].posX = 0.068f;
+	gstage[6].posY = 0.58f;
+
+	gstage[7].texture->SetPart(1, 0);
+	gstage[7].posX = 0.48f;
+	gstage[7].posY = 0.7f;
+
+	gstage[8].texture->SetPart(1, 0);
+	gstage[8].posX = 0.43f;
+	gstage[8].posY = 0.04f;
+
+	gstage[9].texture->SetPart(1, 0);
+	gstage[9].posX = 0.7f;
+	gstage[9].posY = -0.25f;
+
+	gcloud[0].texture->SetPart(0, 0);
+	gcloud[0].posX = -1.0f;
+	gcloud[0].posY = 0.19f;
+
+	gcloud[1].texture->SetPart(0, 0);
+	gcloud[1].posX = -0.8f;
+	gcloud[1].posY = -0.38f;
+
+	gcloud[2].texture->SetPart(0, 0);
+	gcloud[2].posX = -0.61f;
+	gcloud[2].posY = 0.4f;
+
+	gcloud[3].texture->SetPart(0, 0);
+	gcloud[3].posX = -0.27f;
+	gcloud[3].posY = 0.26f;
+
+	gcloud[4].texture->SetPart(0, 0);
+	gcloud[4].posX = -0.39f;
+	gcloud[4].posY = -0.42f;
+
+	gcloud[5].texture->SetPart(0, 0);
+	gcloud[5].posX = -0.01f;
+	gcloud[5].posY = -0.51f;
+
+	gcloud[6].texture->SetPart(0, 0);
+	gcloud[6].posX = 0.04f;
+	gcloud[6].posY = 0.3f;
+
+	gcloud[7].texture->SetPart(0, 0);
+	gcloud[7].posX = 0.45f;
+	gcloud[7].posY = 0.42f;
+
+	gcloud[8].texture->SetPart(0, 0);
+	gcloud[8].posX = 0.4f;
+	gcloud[8].posY = -0.24f;
+
+	gcloud[9].texture->SetPart(0, 0);
+	gcloud[9].posX = 0.67f;
+	gcloud[9].posY = -0.53f;
 }
