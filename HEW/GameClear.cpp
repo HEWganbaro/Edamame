@@ -53,6 +53,7 @@ BOOL GameClear_Initialize()
 	cBackGround.texture->SetSize(1280 * 2, 720 * 2);
 	cBackGround.posX = -1;
 	cBackGround.posY = 1;
+	cBackGround.animator.speed = 8.0f;
 
 	//フェード
 	cFade.texture = new Sprite("assets/追加テクスチャ/GameClear.png", 8, 1);
@@ -75,6 +76,11 @@ BOOL GameClear_Update()
 	Input_Update();  // このゲームで使うキーの押下状態を調べて保
 	XINPUT_STATE state;
 	XInputGetState(0, &state);
+
+	Animator_Update(&cBackGround.animator);
+	cBackGround.animator.isActive = true;
+
+	cBackGround.texture->SetPart(cBackGround.animator.frame, 0);
 
 	GameObject_DrowUpdate(&cBackGround);
 
