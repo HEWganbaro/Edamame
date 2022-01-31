@@ -42,6 +42,7 @@ GameObject lKorokoro;
 GameObject lPause;
 GameObject lCrystal;
 GameObject lStart;
+GameObject lKettei;
 
 FADE LevelFade;
 
@@ -104,6 +105,8 @@ BOOL Level_Initialize(StageScore score)
 	lPause.posX = -1;
 	lPause.posY = 1;
 
+	
+
 	//クリスタル
 	lCrystal.texture = new Sprite("assets/crystal.png", 1, 1);
 	lCrystal.texture->SetSize(256, 256);
@@ -115,6 +118,12 @@ BOOL Level_Initialize(StageScore score)
 	lStart.texture->SetSize(400, 80);
 	lStart.posX = 0.6f;
 	lStart.posY = 0.8f;
+
+	//決定
+	lKettei.texture = new Sprite("assets/kettei.png", 1, 1);
+	lKettei.texture->SetSize(400,80);
+	lKettei.posX = 0.6f;
+	lKettei.posY = 0.7f;
 
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
@@ -276,6 +285,7 @@ BOOL Level_Update()
 	GameObject_DrowUpdate(&lPause);
 	GameObject_DrowUpdate(&lCrystal);
 	GameObject_DrowUpdate(&lStart);
+	GameObject_DrowUpdate(&lKettei);
 	for (int i = 0; i < 10; i++)
 	{
 		//ステージ
@@ -370,6 +380,10 @@ BOOL Level_Update()
 			if (pauseChoice > 1)
 				pauseChoice = 0;
 		}
+		if (Input_GetControllerTrigger(XINPUT_GAMEPAD_A)) {
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+			pause = lLEVEL;
+		}
 		switch (pauseChoice)
 		{
 		case 0:
@@ -426,6 +440,7 @@ void Level_Draw()
 		gstar[i].texture->Draw();
 	}
 	lStart.texture->Draw();
+	lKettei.texture->Draw();
 	lPause.texture->Draw();
 	lCrystal.texture->Draw();
 	lFade.texture->Draw();
@@ -448,6 +463,7 @@ void Level_Relese()
 	delete lKorokoro.texture;
 	delete lPause.texture;
 	delete lCrystal.texture;
+	delete lKettei.texture;
 	for (int i = 0; i < 10; i++)
 	{
 		delete gstage[i].texture;

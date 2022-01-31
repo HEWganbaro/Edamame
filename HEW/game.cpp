@@ -26,7 +26,7 @@
 //#define VERTEX_BUFFER_SIZE  (MAX_SPRITE*sizeof(VERTEX_POSTEX)*VERTEX_PER_SPRITE)
 
 // オブジェクトの発生数 (多かったり少なかったりするとエラーが出る)
-#define MAX_OBJECT   304
+#define MAX_OBJECT   300
 
 //*****************************************************************************
 // グローバル変数
@@ -41,10 +41,6 @@ vector<MapPos> StoneMap;
 
 GameObject gObjects[MAX_OBJECT];  // オブジェクト配列
 
-GameObject* NoHeight = gObjects + 300;
-GameObject* NoLeftDown = gObjects + 301;
-GameObject* NoRightDown = gObjects + 302;
-GameObject* tile = gObjects + 303;
 
 GameObject gPlayer1;
 GameObject gPlayer2;
@@ -62,6 +58,7 @@ GameObject Effect;
 GameObject gPause;
 GameObject gCrystal;
 GameObject gStart;
+GameObject gArrow;
 
 GameObject gTutorial;
 bool TutoLeft, TutoRight;
@@ -172,12 +169,16 @@ BOOL Game_Initialize()
 
 	case 1:
 		//敵の初期化
-		/*Enemy_Initialize(&gEnemy, RANDOM);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 7);
-		gEnemyVector.emplace_back(gEnemy);*/
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 0);
+		gEnemyVector.emplace_back(gEnemy);
 
-		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
-		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 0);
+		gEnemyVector.emplace_back(gEnemy);
+
+		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 1);
 	}
 
 	//背景描画
@@ -194,14 +195,7 @@ BOOL Game_Initialize()
 	gGaugeframe.posY = -0.65f;
 
 	//デバック用
-	NoHeight->texture = new Sprite("assets/dotFont.png", 16, 8);
-	NoHeight->texture->SetSize(80, 160);
-	NoLeftDown->texture = new Sprite("assets/dotFont.png", 16, 8);
-	NoLeftDown->texture->SetSize(80, 160);
-	NoRightDown->texture = new Sprite("assets/dotFont.png", 16, 8);
-	NoRightDown->texture->SetSize(80, 160);
-	tile->texture = new Sprite("assets/Mapseat_v2.png", 7, 1);
-	tile->texture->SetSize(200, 200);
+	
 
 	//フェード
 	gFade.texture = new Sprite("assets/TitleBG.png", 1, 1);
@@ -221,6 +215,12 @@ BOOL Game_Initialize()
 	gKorokoro.posX = -1;
 	gKorokoro.posY = 1;
 	onceFlag = true;
+
+	//矢印
+	gArrow.texture = new Sprite("assets/yajirushi.png", 1, 1);
+	gArrow.texture->SetSize(128, 128);
+	gArrow.posX = 0.9f;
+	gArrow.posY = 0.0f;
 
 	//ポーズ
 	gPause.texture = new Sprite("assets/pause.png", 2, 1);
@@ -274,18 +274,7 @@ BOOL Game_Update()
 	XInputGetState(0, &state);
 
 	//デバック用
-	NoHeight->texture->SetPart(gPlayer1.mappos.Height, 0);
-	NoHeight->posX = 0.5f;
-	NoHeight->posY = 0.5f;
-	NoLeftDown->texture->SetPart(gPlayer1.mappos.LeftDown, 1);
-	NoLeftDown->posX = 0.6f;
-	NoLeftDown->posY = 0.5f;
-	NoRightDown->texture->SetPart(gPlayer1.mappos.RightDown, 2);
-	NoRightDown->posX = 0.7f;
-	NoRightDown->posY = 0.5f;
-	tile->texture->SetPart(Map_GetPlayerTile(&gPlayer1, gObjects), 0);
-	tile->posX = 0.3;
-	tile->posY = 0.6;
+	
 	gBackGround.posX = -1;
 	gBackGround.posY = 1;
 	gCursor1.texture->SetPart(1, 0);
@@ -506,6 +495,10 @@ BOOL Game_Update()
 		case gPAUSE:
 			gPause.posX = -1.0f;
 			gCrystal.posX = -0.4f;
+			if (Input_GetControllerTrigger(XINPUT_GAMEPAD_A)) {
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+				pause = gGAME;
+			}
 			if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_UP)) {
 				pauseChoice -= 1;
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
@@ -592,6 +585,7 @@ BOOL Game_Update()
 	GameObject_DrowUpdate(&gPause);
 	GameObject_DrowUpdate(&gCrystal);
 	GameObject_DrowUpdate(&gStart);
+	GameObject_DrowUpdate(&gArrow);
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		GameObject_DrowUpdate(&gEnemyVector[i]);
 	GameObject_DrowUpdate(&gBackGround);
@@ -646,6 +640,9 @@ void Game_Draw()
 	gCrystal.texture->Draw();
 	gFade.texture->Draw();
 	gTutorial.texture->Draw();
+	if (turn == TUTORIAL) {
+		gArrow.texture->Draw();
+	}	
 	gKorokoro.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -673,6 +670,7 @@ StageScore Game_Relese()
 	delete gPause.texture;
 	delete gCrystal.texture;
 	delete gStart.texture;
+	delete gArrow.texture;
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		delete gEnemyVector[i].texture;
 	gEnemyVector.clear();

@@ -34,6 +34,7 @@ GameObject tBackGround;				//背景
 GameObject tLogo;                   //タイトルロゴ
 GameObject tFade;
 GameObject tKorokoro;
+GameObject tPress;
 
 FADE TitleFade;
 int korokoroX;
@@ -81,6 +82,12 @@ BOOL Title_Initialize()
 	tKorokoro.posY = 1;
 	korokoroX = 1000;
 
+	//ころころ
+	tPress.texture = new Sprite("assets/press_B.png", 1, 1);
+	tPress.texture->SetSize(800, 160);
+	tPress.posX = 0.3;
+	tPress.posY = -0.7;
+
 	return TRUE;
 }
 
@@ -96,6 +103,7 @@ BOOL Title_Update()
 	GameObject_DrowUpdate(&tLogo);
 	GameObject_DrowUpdate(&tFade);
 	GameObject_DrowUpdate(&tKorokoro);
+	GameObject_DrowUpdate(&tPress);
 
 	if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
 	{
@@ -124,7 +132,8 @@ void Title_Draw()
 	//ゲームオブジェクトを全部描画する
 	tBackGround.texture->Draw();
 	tLogo.texture->Draw();
-	tFade.texture->Draw();
+	tPress.texture->Draw();
+	tFade.texture->Draw();	
 	tKorokoro.texture->Draw();
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -139,4 +148,5 @@ void Title_Relese()
 	delete tLogo.texture;
 	delete tFade.texture;
 	delete tKorokoro.texture;
+	delete tPress.texture;
 }

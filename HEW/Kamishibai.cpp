@@ -9,6 +9,7 @@ GameObject kBackGround;				//”wŒi
 GameObject kFade;
 GameObject kKorokoro;
 GameObject kKamishibai;
+GameObject kArrow;
 
 FADE KamiFade;
 int page = 0;
@@ -61,6 +62,12 @@ BOOL Kamishibai_Initialize()
 	kKorokoro.posX = -1;
 	kKorokoro.posY = 1;
 
+	//–îˆó
+	kArrow.texture = new Sprite("assets/yajirushi.png", 1, 1);
+	kArrow.texture->SetSize(128, 128);
+	kArrow.posX = 0.9f;
+	kArrow.posY = 0.0f;
+
 	page = 0;
 	
 	return TRUE;
@@ -78,7 +85,7 @@ BOOL Kamishibai_Update()
 		//#define XINPUT_GAMEPAD_DPAD_RIGHT       0x0008
 		//#define XINPUT_GAMEPAD_START            0x0010
 		//#define XINPUT_GAMEPAD_BACK             0x0020
-	if (Input_GetKeyTrigger(VK_RIGHT)||Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
+	if (Input_GetKeyTrigger(VK_RIGHT)||Input_GetControllerTrigger(XINPUT_GAMEPAD_B) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
 		page++;
 		if (page % 2 == 0) {
 			//BGMÄ¶
@@ -97,6 +104,7 @@ BOOL Kamishibai_Update()
 	GameObject_DrowUpdate(&kKamishibai);
 	GameObject_DrowUpdate(&kFade);
 	GameObject_DrowUpdate(&kKorokoro);
+	GameObject_DrowUpdate(&kArrow);
 	
 	kKorokoro.texture->SetPart(korokoroX / 4, 0);
 	korokoroX++;
@@ -116,6 +124,7 @@ void Kamishibai_Draw()
 	//ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ð‘S•”•`‰æ‚·‚é
 	kBackGround.texture->Draw();
 	kKamishibai.texture->Draw();
+	kArrow.texture->Draw();
 	kFade.texture->Draw();
 	kKorokoro.texture->Draw();
 
@@ -131,5 +140,6 @@ void Kamishibai_Relese()
 	delete kKamishibai.texture;
 	delete kFade.texture;
 	delete kKorokoro.texture;
+	delete kArrow.texture;
 
 }
