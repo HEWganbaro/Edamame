@@ -394,9 +394,11 @@ BOOL Game_Update()
 			break;
 
 		case PENGUIN_ATTACK:
-			if (gEnemyVector[0].EnemyAttak == true && gEnemyVector[1].EnemyAttak == true)
-				gEnemyVector[0].EnemyAttak = false;
-			 
+			if (gEnemyVector.size() > 1) {
+				if (gEnemyVector[0].EnemyAttak == true && gEnemyVector[1].EnemyAttak == true)
+					gEnemyVector[0].EnemyAttak = false;
+			}
+
 			for (int i = 0; i < gEnemyVector.size(); i++) {
 				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
 				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);

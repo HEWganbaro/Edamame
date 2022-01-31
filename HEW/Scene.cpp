@@ -1,13 +1,13 @@
 #include "Scene.h"
 
-StageScore score;
+StageScore Stagescore;
 
 void Scene::Title()
 {
 	if (FALSE == Title_Update()) {	//シーン変更
 		Title_Relese();
 		scene = KAMISHIBAI;
-		StageScore score = TITLESCORE;
+		Stagescore = TITLESCORE;
 		if (FALSE == Kamishibai_Initialize())
 			scene == -1;
 	}
@@ -21,8 +21,8 @@ void Scene::Kami()
 	if (FALSE == Kamishibai_Update()) {	//シーン変更
 		Kamishibai_Relese();
 		scene = LEVEL;
-		StageScore score = TITLESCORE;
-		if (FALSE == Level_Initialize(score))
+		Stagescore = TITLESCORE;
+		if (FALSE == Level_Initialize(Stagescore))
 			scene == -1;
 	}
 	else {
@@ -56,7 +56,7 @@ void Scene::Level()
 void Scene::Game()
 {
 	if (FALSE == Game_Update()) {
-		score = Game_Relese();
+		Stagescore = Game_Relese();
 		
 		if (pause == gPAUSE) {
 			if (pauseChoice == gRESPAWN) {
@@ -102,8 +102,7 @@ void Scene::Clear()
 		if (FALSE == Title_Initialize())
 			scene == -1;*/
 		scene = LEVEL;
-		StageScore score = TITLESCORE;
-		if (FALSE == Level_Initialize(score))
+		if (FALSE == Level_Initialize(Stagescore))
 			scene == -1;
 	}
 	else {

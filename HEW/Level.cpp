@@ -140,12 +140,16 @@ BOOL Level_Initialize(StageScore score)
 		gstar[i].texture->SetPart(0, 0);
 	}
 
-	for (int i = 0; i < 10; i++) {
+	//スコアを代入
+	if (score != TITLESCORE)
+ 		LevelScoreSheet[stage - 1] = score;
+
+	for (int i = 0; i < 9; i++) {
 		if (LevelScoreSheet[i] == TITLESCORE || LevelScoreSheet[i] == ZERO) {
-			clear[i] = 2;
+			clear[i + 1] = 2;
 		}
 		else
-			clear[i] = 0;
+			clear[i + 1] = 0;
 	}
 	clear[0] = 0;
 
@@ -259,9 +263,6 @@ BOOL Level_Initialize(StageScore score)
 	gstar[9].posX = 0.72f;
 	gstar[9].posY = -0.57f;
 
-	//スコアを代入
-	if (score != TITLESCORE)
-		LevelScoreSheet[stage - 1] = score;
 	pause = lLEVEL;
 
 	return TRUE;
@@ -296,22 +297,6 @@ BOOL Level_Update()
 		GameObject_DrowUpdate(&gstar[i]);
 	}
 
-	
-	//if (Input_GetKeyTrigger('1') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP))
-	//{
-	//	stage = STAGE_1;
-	//	gchoice.texture->SetPart(1, 0);
-	//	gchoice.posX = 0.8f;
-	//	gchoice.posY = 0.8f;
-
-	//}
-	//if (Input_GetKeyTrigger('2') || (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP))
-	//{
-	//	stage = STAGE_2;
-	//	gchoice.texture->SetPart(2, 0);
-	//	gchoice.posX = 0.8f;
-	//	gchoice.posY = 0.8f;
-	//}
 	int size = 200;	//移動量の大きさ
 	int cycle = 10;	//速さ
 	switch (pause)
@@ -334,7 +319,9 @@ BOOL Level_Update()
 			SetPos();
 		}
 		if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
-			stage++;
+			if (LevelScoreSheet[stage - 1] == TITLESCORE || LevelScoreSheet[stage - 1] == ZERO) {}
+			else
+				stage++;
 			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 			if (stage == 11)
 			{
@@ -357,13 +344,54 @@ BOOL Level_Update()
 			pause = lPAUSE;
 		}
 
-
-
-
 		//上下にふわふわ移動する
 		gstage[stage - 1].posY += sin(countLevel / cycle) / size;
 		gcloud[stage - 1].posY += sin(countLevel / cycle) / size;
 		countLevel++;
+
+		//ステージ明るさ
+		for (int i = 0; i < 10; i++) {
+			if (LevelScoreSheet[i] == TITLESCORE) {
+				groad.texture->SetPart(0, i);
+			}
+		}
+
+		//星の反映
+		for (int i = 0; i < 10; i++) {
+			switch (LevelScoreSheet[i])
+			{
+			case TITLESCORE:
+			case ZERO:
+				gstar[i].texture->SetPart(0, 0);
+				break;
+
+			case STAGE_CLEAR:
+			case BALANCE_CLEAR:
+				gstar[i].texture->SetPart(0, 1);
+				break;
+
+			case FACE_CLEAR:
+				gstar[i].texture->SetPart(0, 2);
+
+			case ARM_CLEAR:
+				gstar[i].texture->SetPart(0, 4);
+				break;
+
+			case BALA_FACE_CLEAR:
+				gstar[i].texture->SetPart(0, 3);
+
+			case FACE_ARM_CLEAR:
+				gstar[i].texture->SetPart(0, 6);
+
+			case ARM_BALA_CLEAR:
+				gstar[i].texture->SetPart(0, 5);
+
+			case ALL_CLEAR:
+				gstar[i].texture->SetPart(0, 7);
+				break;
+			} 
+		}
+
 		break;
 	case lPAUSE:
 		lPause.posX = -1.0f;
