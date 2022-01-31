@@ -384,7 +384,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Map_GetPlayerTile_RightDown(Player, Map) == STONE ||
 				(Map_GetPlayerTile_RightDown(Player, Map) == GOAL && Player->IsEnemy == true) ||
 				(Map_GetPlayerTile_RightDown(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
-					Player->animator.ice = true;
+				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
 				double tmp1 = 0;
@@ -458,7 +458,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Map_GetPlayerTile_LeftDown(Player, Map) == STONE ||
 				(Map_GetPlayerTile_LeftDown(Player, Map) == GOAL && Player->IsEnemy == true) ||
 				(Map_GetPlayerTile_LeftDown(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
-					Player->animator.ice = true;
+				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
 				double tmp = (double)Player->animator.count / (double)PLAYER_SPEED;
 				double tmp1 = 0;
@@ -526,9 +526,9 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 
 		case LEFT_UP:
 			if (Player->mappos.RightDown - 1 == -1 ||
-				Map_GetPlayerTile_LeftUp(Player, Map) == -1 || 
-				Map_GetPlayerTile_LeftUp(Player, Map) == STONE || 
-				(Map_GetPlayerTile_LeftUp(Player, Map) == GOAL && Player->IsEnemy == true) || 
+				Map_GetPlayerTile_LeftUp(Player, Map) == -1 ||
+				Map_GetPlayerTile_LeftUp(Player, Map) == STONE ||
+				(Map_GetPlayerTile_LeftUp(Player, Map) == GOAL && Player->IsEnemy == true) ||
 				(Map_GetPlayerTile_LeftUp(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
@@ -597,8 +597,8 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		case RIGHT_UP:
 			if (Player->mappos.LeftDown - 1 == -1 ||
 				Map_GetPlayerTile_RightUp(Player, Map) == -1 ||
-				Map_GetPlayerTile_RightUp(Player, Map) == STONE || 
-				(Map_GetPlayerTile_RightUp(Player, Map) == GOAL && Player->IsEnemy == true) || 
+				Map_GetPlayerTile_RightUp(Player, Map) == STONE ||
+				(Map_GetPlayerTile_RightUp(Player, Map) == GOAL && Player->IsEnemy == true) ||
 				(Map_GetPlayerTile_RightUp(Player, Map) == GOAL_LATER && Player->IsEnemy == true))
 				Player->animator.ice = true;
 			if (Player->animator.count < PLAYER_SPEED / 2 || Player->animator.ice == true) {
@@ -833,29 +833,29 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		Player->direction = NULL_WAY;
 	}
 	//ゴールの時
-	else if (Map_GetPlayerTile(Player, Map) == GOAL|| Map_GetPlayerTile(Player, Map) == GOAL_LATER) {
-	//敵はゴールに入れない
-	if (Player->IsEnemy == true) {
-		switch (Player->direction) {
-		case RIGHT_DOWN:
-			Player->mappos.RightDown--;
-			Player->animator.isActive = false;
-			break;
-		case LEFT_DOWN:
-			Player->mappos.LeftDown--;
-			Player->animator.isActive = false;
-			break;
-		case LEFT_UP:
-			Player->mappos.RightDown++;
-			Player->animator.isActive = false;
-			break;
-		case RIGHT_UP:
-			Player->mappos.LeftDown++;
-			Player->animator.isActive = false;
-			break;
+	else if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER) {
+		//敵はゴールに入れない
+		if (Player->IsEnemy == true) {
+			switch (Player->direction) {
+			case RIGHT_DOWN:
+				Player->mappos.RightDown--;
+				Player->animator.isActive = false;
+				break;
+			case LEFT_DOWN:
+				Player->mappos.LeftDown--;
+				Player->animator.isActive = false;
+				break;
+			case LEFT_UP:
+				Player->mappos.RightDown++;
+				Player->animator.isActive = false;
+				break;
+			case RIGHT_UP:
+				Player->mappos.LeftDown++;
+				Player->animator.isActive = false;
+				break;
+			}
+			Player->direction = NULL_WAY;
 		}
-		Player->direction = NULL_WAY;
-	}
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
@@ -870,7 +870,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			}
 			else {
 				Player->Goalfrg = true;//プレイヤーを動けなくする
-				Player->GoalEffect = true; 
+				Player->GoalEffect = true;
 				delete Player->texture;
 				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
 				Player->posY += 0.225f;
@@ -953,7 +953,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 	}
 	//顔アイテムの時
 	else if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
-	if (Player->Item_Arm == false)	//アイテムは同時に2個持てない
+		if (Player->Item_Arm == false)	//アイテムは同時に2個持てない
 			Player->Item_Face = true;
 		switch (Player->direction)
 		{
@@ -1036,7 +1036,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 	}
 	//腕アイテムの時
 	else if (Map_GetPlayerTile(Player, Map) == ITEM_ARM) {
-	if (Player->Item_Face == false)	//アイテムは同時に2個持てない
+		if (Player->Item_Face == false)	//アイテムは同時に2個持てない
 			Player->Item_Arm = true;
 		switch (Player->direction)
 		{
