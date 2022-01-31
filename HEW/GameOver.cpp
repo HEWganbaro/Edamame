@@ -76,7 +76,7 @@ BOOL GameOver_Initialize()
 	oCrystal.texture = new Sprite("assets/crystal.png", 1, 1);
 	oCrystal.texture->SetSize(256, 256);
 	oCrystal.posX = -0.5;
-	oCrystal.posY = 1;
+	oCrystal.posY = 10;
 
 	//フェード
 	oFade.texture = new Sprite("assets/追加テクスチャ/gameover_1.png", 1, 1);

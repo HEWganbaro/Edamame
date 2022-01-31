@@ -170,15 +170,15 @@ BOOL Game_Initialize()
 	case 1:
 		//ìGÇÃèâä˙âª
 		Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 0);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 6, 5);
 		gEnemyVector.emplace_back(gEnemy);
 
-		Enemy_Initialize(&gEnemy, FOLLOWING);
+		/*Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 0);
-		gEnemyVector.emplace_back(gEnemy);
+		gEnemyVector.emplace_back(gEnemy);*/
 
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
-		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 1);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
 	}
 
 	//îwåiï`âÊ
@@ -232,7 +232,7 @@ BOOL Game_Initialize()
 	//É|Å[ÉY
 	gCrystal.texture = new Sprite("assets/crystal.png", 1, 1);
 	gCrystal.texture->SetSize(256, 256);
-	gCrystal.posX = -1;
+	gCrystal.posX = -15;
 	gCrystal.posY = 1;
 
 	//É|Å[ÉY
