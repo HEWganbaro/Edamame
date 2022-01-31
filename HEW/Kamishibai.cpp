@@ -77,10 +77,10 @@ BOOL Kamishibai_Update()
 		page++;
 		if (page % 2 == 0) {
 			//BGMÄ¶
-			XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_PAPER));
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
 		}
 		else
-			XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_PAPER));
+			XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
 		if (page > 7) {
 			korokoroX = 0;
 			KamiFade.fadeout = true;
@@ -121,7 +121,7 @@ void Kamishibai_Draw()
 void Kamishibai_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_TITLE));
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_PAPER));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
 	delete kBackGround.texture;
 	delete kKamishibai.texture;
 	delete kFade.texture;

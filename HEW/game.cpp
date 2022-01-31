@@ -527,6 +527,10 @@ void Game_Draw()
 StageScore Game_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
 
 	delete gPlayer1.texture;
 	delete gPlayer2.texture;

@@ -47,7 +47,7 @@ BOOL GameClear_Initialize()
 	GameTimer_Initialize(60);
 
 	//BGMçƒê∂
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_CLEAR));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERCRUSH));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
 
@@ -132,7 +132,7 @@ void GameClear_Draw()
 //çÏÇ¡ÇΩGameObjectÇÕÇøÇ·ÇÒÇ∆deleteÇµÇÊÇ§ÅI
 void GameClear_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_GAME));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_CLEAR));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	delete cBackGround.texture;
 	delete cFade.texture;
