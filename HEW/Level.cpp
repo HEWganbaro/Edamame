@@ -351,22 +351,16 @@ BOOL Level_Update()
 		lPause.posX = -1.0f;
 		lCrystal.posX = -0.5f;
 		if (Input_GetKeyTrigger(VK_LEFT)) {
-			pauseChoice = 0;
+			pauseChoice -= 1;
 			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
-			if (pauseChoice = -1)
-			{
-				pauseChoice = 0;
-				//XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
-			}
+			if (pauseChoice < 0)
+				pauseChoice = 1;
 		}
 		if (Input_GetKeyTrigger(VK_RIGHT)) {
-			pauseChoice = 1;
+			pauseChoice += 1;
 			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
-			if (pauseChoice = 2)
-			{
-				pauseChoice = 1;
-				//XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
-			}
+			if (pauseChoice > 1)
+				pauseChoice = 0;
 		}
 		switch (pauseChoice)
 		{

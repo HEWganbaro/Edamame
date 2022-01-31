@@ -499,19 +499,13 @@ BOOL Game_Update()
 				pauseChoice -= 1;
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 				if (pauseChoice < 0)
-				{
 					pauseChoice = 2;
-					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
-				}
 			}
 			if (Input_GetKeyTrigger(VK_RIGHT)) {
 				pauseChoice += 1;
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 				if (pauseChoice > 2)
-				{
 					pauseChoice = 0;
-					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
-				}
 			}
 			switch (pauseChoice)
 			{
@@ -519,12 +513,14 @@ BOOL Game_Update()
 				gCrystal.posY = 0.3f;
 
 				if (Input_GetKeyTrigger(VK_RETURN)) {
+					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 					pause=gGAME;
 				}
 				break;
 			case 1:
 				gCrystal.posY = 0.0f;
 				if (Input_GetKeyTrigger(VK_RETURN)) {
+					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 					pauseChoice = gRESPAWN;
 					if (onceFlag == true) {
 						korokoroX = 0;
@@ -536,6 +532,7 @@ BOOL Game_Update()
 			case 2:
 				gCrystal.posY = -0.3f;
 				if (Input_GetKeyTrigger(VK_RETURN)) {
+					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 					pauseChoice = gLEVEL;
 					if (onceFlag == true) {
 						korokoroX = 0;
