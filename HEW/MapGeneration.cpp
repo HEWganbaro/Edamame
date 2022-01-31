@@ -856,6 +856,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			}
 			else {
 				Player->Goalfrg = true;//プレイヤーを動けなくする
+				Player->GoalEffect = true; 
 				delete Player->texture;
 				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
 				Player->posY += 0.225f;
@@ -878,6 +879,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			}
 			else {
 				Player->Goalfrg = true;//プレイヤーを動けなくする
+				Player->GoalEffect = true;
 				delete Player->texture;
 				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
 				Player->posY += 0.225f;
@@ -900,6 +902,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			}
 			else {
 				Player->Goalfrg = true;//プレイヤーを動けなくする
+				Player->GoalEffect = true;
 				delete Player->texture;
 				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
 				Player->posY += 0.225f;
@@ -922,6 +925,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 			}
 			else {
 				Player->Goalfrg = true;//プレイヤーを動けなくする
+				Player->GoalEffect = true;
 				delete Player->texture;
 				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
 				Player->posY += 0.225f;

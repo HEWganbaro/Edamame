@@ -27,7 +27,7 @@ void Player_Input(GameObject* Player, GameObject* Player2);
 //MapPos Player_GetMapPos(GameObject* Player);
 //アップデート関数
 void Player_Update(GameObject* Player, GameObject* Map);
-void Goal_Update(GameObject* Player, GameObject* Player2);
+void Goal_Update(GameObject* Player, GameObject* Player2 ,GameObject* Effect);
 void Player_AniUpdate(GameObject* Player);
 //カーソルアップデート
 void Cursor_Update(GameObject* Player, GameObject* Cursor);

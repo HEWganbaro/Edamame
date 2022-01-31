@@ -13,8 +13,6 @@ void Enemy_SetLocation(GameObject* Enemy, GameObject* Location, int Height, int 
 MapPos Enemy_GetMapPos(GameObject* Enemy);
 //アップデート関数
 void Enemy_Update(GameObject* Enemy, GameObject* Player);
-//敵の当たり判定
-void Enemy_Hit(GameObject* Enemy);
 //敵がプレイヤーを追いかける
 void Enemy_Move_Chase(GameObject* Enemy, GameObject* Player, GameObject* Player2);
 //敵の巡回

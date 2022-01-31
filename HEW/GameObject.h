@@ -131,7 +131,9 @@ struct GameObject {
 	int Enemycount = 0;
 	STUN IsStun = Nothing;//ƒXƒ^ƒ“‚µ‚Ä‚¢‚é‚©
 
+	bool GoalFast = false;
 	bool Goalfrg = false;
+	bool GoalEffect = false;
 	int SnowSize;//á‹Ê‚Ì‘å‚«‚³
 	bool SoilFrg;//“y‚ğ“¥‚ñ‚¾‚©
 	bool Item_Face = false;

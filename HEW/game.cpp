@@ -58,6 +58,7 @@ GameObject gCursor1;
 GameObject gCursor2;
 GameObject gFade;
 GameObject gKorokoro;
+GameObject Effect;
 
 GameObject gTutorial;
 bool TutoLeft, TutoRight;
@@ -221,6 +222,12 @@ BOOL Game_Initialize()
 	gTutorial.texture = new Sprite("assets/tutorial.png", 4, 1);
 	gTutorial.texture->SetPart(0, 0);
 	gTutorial.texture->SetSize(1280 * 2, 720 * 2);
+
+	Effect.texture = new Sprite("assets/yukiEffect.png", 12, 2);
+	Effect.texture->SetPart(0, 0);
+	Effect.posX = 10;
+	Effect.texture->SetSize(INIT_SNOW_SIZE, INIT_SNOW_SIZE);
+
 	//チュートリアル
 	if (stage == 1) {
 		gTutorial.posX = -1;
@@ -274,7 +281,7 @@ BOOL Game_Update()
 		Player_AniUpdate(&gPlayer2);
 
 	//ゴールの状態変化
-	Goal_Update(&gPlayer1, &gPlayer2);
+	Goal_Update(&gPlayer1, &gPlayer2, &Effect);
 
 	//カーソルの位置変更
 	Cursor_Update(&gPlayer1, &gCursor1);
@@ -468,7 +475,6 @@ BOOL Game_Update()
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		GameObject_DrowUpdate(&gObjects[i]);
 	}
-
 	for (int i = 0; i < MAX_OBJECT; i++) {
 		GameObject_DrowUpdate(&gObjects[i]);
 	}
@@ -488,6 +494,7 @@ BOOL Game_Update()
 	}
 	GameObject_DrowUpdate(&gTutorial);
 	GameObject_DrowUpdate(&gKorokoro);
+	GameObject_DrowUpdate(&Effect);
 	return TRUE;
 }
 
@@ -527,6 +534,7 @@ void Game_Draw()
 	gGaugeframe.texture->Draw();
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
+	Effect.texture->Draw();
 	gFade.texture->Draw();
 	gTutorial.texture->Draw();
 	gKorokoro.texture->Draw();
@@ -564,6 +572,7 @@ StageScore Game_Relese()
 		gObjects[i].posY = 0;
 	}
 	delete gTutorial.texture;
+	delete Effect.texture;
 
 	//ステージスコアを返す
 	StageScore score;
