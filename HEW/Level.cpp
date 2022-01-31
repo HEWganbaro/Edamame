@@ -341,6 +341,7 @@ BOOL Level_Update()
 		}
 
 		if (Input_GetKeyTrigger(VK_UP)|| Input_GetControllerTrigger(XINPUT_GAMEPAD_START)) {
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 			pause = lPAUSE;
 		}
 
