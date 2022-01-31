@@ -458,15 +458,23 @@ BOOL Game_Update()
 
 			if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
 				page--;
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
 				if (page == -1)
+				{
 					page = 0;
+					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
+				}
 				TutoLeft = false;
 			}
 
 			if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
 				page++;
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
 				if (page == 4)
+				{
 					page = 3;
+					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
+				}
 				TutoRight = false;
 			}
 
@@ -474,6 +482,7 @@ BOOL Game_Update()
 				turn = PLAYER_TURN;
 				gTutorial.posX = -10;
 				gTutorial.posY = 10;
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 			}
 
 
@@ -488,13 +497,21 @@ BOOL Game_Update()
 			gCrystal.posX = -0.5f;
 			if (Input_GetKeyTrigger(VK_LEFT)) {
 				pauseChoice -= 1;
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 				if (pauseChoice < 0)
+				{
 					pauseChoice = 2;
+					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+				}
 			}
 			if (Input_GetKeyTrigger(VK_RIGHT)) {
 				pauseChoice += 1;
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 				if (pauseChoice > 2)
+				{
 					pauseChoice = 0;
+					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+				}
 			}
 			switch (pauseChoice)
 			{

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Easing.h"
+#include "XAudio2.h"
 
 //” ‚Ì‘å‚«‚³
 #define BOX_HEIGHT 200	// c

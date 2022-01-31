@@ -303,8 +303,12 @@ BOOL Level_Update()
 		lCrystal.posX = 5.0f;
 		if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
 			stage--;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 			if (stage == 0)
+			{
 				stage = 1;
+				XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+			}
 			gchoice.texture->SetPart(stage, 0);
 			gchoice.posX = 0.8f;
 			gchoice.posY = 0.8f;
@@ -313,8 +317,12 @@ BOOL Level_Update()
 		}
 		if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			stage++;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 			if (stage == 11)
+			{
 				stage = 10;
+				XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+			}
 			gchoice.texture->SetPart(stage, 0);
 			gchoice.posX = 0.8f;
 			gchoice.posY = 0.8f;
@@ -344,9 +352,21 @@ BOOL Level_Update()
 		lCrystal.posX = -0.5f;
 		if (Input_GetKeyTrigger(VK_LEFT)) {
 			pauseChoice = 0;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+			if (pauseChoice = -1)
+			{
+				pauseChoice = 0;
+				//XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+			}
 		}
 		if (Input_GetKeyTrigger(VK_RIGHT)) {
 			pauseChoice = 1;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+			if (pauseChoice = 2)
+			{
+				pauseChoice = 1;
+				//XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+			}
 		}
 		switch (pauseChoice)
 		{
@@ -354,12 +374,14 @@ BOOL Level_Update()
 			lCrystal.posY = 0.3f;
 
 			if (Input_GetKeyTrigger(VK_RETURN)) {
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 				LevelFade.fadeout = true;
 			}
 			break;
 		case 1:
 			lCrystal.posY = 0.0f;
 			if (Input_GetKeyTrigger(VK_RETURN)) {
+				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 				pause = lLEVEL;
 			}
 		}
@@ -414,6 +436,7 @@ void Level_Relese()
 {
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_LEVEL));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 	delete lBackGround.texture;
 	delete gchoice.texture;
 	delete groad.texture;

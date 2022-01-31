@@ -133,11 +133,13 @@ BOOL GameOver_Update()
 	
 	if (Input_GetKeyTrigger(VK_UP)) {
 		pauseChoice -= 1;
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 		if (pauseChoice < 0)
 			pauseChoice = 1;
 	}
 	if (Input_GetKeyTrigger(VK_DOWN)) {
 		pauseChoice += 1;
+		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 		if (pauseChoice > 1)
 			pauseChoice = 0;
 	}

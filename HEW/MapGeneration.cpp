@@ -399,10 +399,12 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->animator.ice = false;
 						Player->animator.isActive = false;
 						Player->direction = NULL_WAY;
+						XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 					}
 					else {
 						Player->animator.ice = false;
 						Player->animator.count = 0;
+						XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 					}
 					bool mapedge = Player->mappos.RightDown + 1 != MAP_EDGE;
 					bool mapout = Map_GetPlayerTile_RightDown(Player, Map) != -1;
@@ -471,10 +473,12 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->animator.ice = false;
 						Player->animator.isActive = false;
 						Player->direction = NULL_WAY;
+						XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 					}
 					else {
 						Player->animator.ice = false;
 						Player->animator.count = 0;
+						XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 					}
 					bool mapedge = Player->mappos.LeftDown + 1 != MAP_EDGE;
 					bool mapout = Map_GetPlayerTile_LeftDown(Player, Map) != -1;
@@ -540,6 +544,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					Player->animator.count = 0;
 					Player->animator.ice = false;
 					Player->animator.isActive = false;
+					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 
 					bool mapedge = Player->mappos.RightDown + 1 != MAP_EDGE;
 					bool mapout = Map_GetPlayerTile_LeftUp(Player, Map) != -1;
@@ -567,6 +572,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 						}
 					}
+				}
+				else
+				{
+					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 				}
 			}
 			else {
@@ -605,6 +614,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					Player->animator.count = 0;
 					Player->animator.ice = false;
 					Player->animator.isActive = false;
+					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 
 					bool mapedge = Player->mappos.LeftDown + 1 != MAP_EDGE;
 					bool mapout = Map_GetPlayerTile_RightUp(Player, Map) != -1;
@@ -632,6 +642,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 							Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 						}
 					}
+				}
+				else
+				{
+					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 				}
 			}
 			else {
