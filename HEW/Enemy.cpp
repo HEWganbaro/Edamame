@@ -9,7 +9,7 @@ int turn = PLAYER_TURN;
 
 GameObject* Enemy_Initialize(GameObject * Enemy, EnemyType type)
 {
-	Enemy->texture = new Sprite("assets/penguin_tex.png", 48, 8);
+	Enemy->texture = new Sprite("assets/penguin_texv2.png", 48, 8);
 	Enemy->texture->SetSize(175, 175);
 	Enemy->mappos.Height = 0;
 	Enemy->mappos.LeftDown = 0;

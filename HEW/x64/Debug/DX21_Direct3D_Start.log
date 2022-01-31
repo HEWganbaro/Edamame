@@ -1,6 +1,6 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
   Level.cpp
-c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(113): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(346): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(347): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  DX21_Direct3D_Start.vcxproj -> C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame13\HEW\x64\Debug\HEW.exe
+c:\users\namen\documents\github\edamame_pushyou\hew\level.cpp(120): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+c:\users\namen\documents\github\edamame_pushyou\hew\level.cpp(354): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\namen\documents\github\edamame_pushyou\hew\level.cpp(355): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  DX21_Direct3D_Start.vcxproj -> C:\Users\namen\Documents\GitHub\Edamame_pushyou\HEW\x64\Debug\HEW.exe

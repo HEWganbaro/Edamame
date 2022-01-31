@@ -23,7 +23,7 @@ BOOL Kamishibai_Initialize()
 	GameTimer_Initialize(60);
 
 	//BGMçƒê∂
-	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_TITLE));
+	XA_Play(SOUND_LABEL(SOUND_LABEL_BGM_KAMISHIBAI));
 
 	////îwåi
 	//tBackGround.texture = new Sprite("assets/TitleBG.png", 1, 1);
@@ -72,8 +72,13 @@ BOOL Kamishibai_Update()
 	Input_Update();  // Ç±ÇÃÉQÅ[ÉÄÇ≈égÇ§ÉLÅ[ÇÃâüâ∫èÛë‘Çí≤Ç◊Çƒï€
 	XINPUT_STATE state;
 	XInputGetState(0, &state);
-
-	if (Input_GetKeyTrigger(VK_RIGHT)) {
+		//#define XINPUT_GAMEPAD_DPAD_UP          0x0001
+		//#define XINPUT_GAMEPAD_DPAD_DOWN        0x0002
+		//#define XINPUT_GAMEPAD_DPAD_LEFT        0x0004
+		//#define XINPUT_GAMEPAD_DPAD_RIGHT       0x0008
+		//#define XINPUT_GAMEPAD_START            0x0010
+		//#define XINPUT_GAMEPAD_BACK             0x0020
+	if (Input_GetKeyTrigger(VK_RIGHT)||Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 		page++;
 		if (page % 2 == 0) {
 			//BGMçƒê∂
@@ -120,7 +125,7 @@ void Kamishibai_Draw()
 }
 void Kamishibai_Relese()
 {
-	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_TITLE));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_KAMISHIBAI));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
 	delete kBackGround.texture;
 	delete kKamishibai.texture;

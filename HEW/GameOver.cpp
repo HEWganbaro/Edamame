@@ -131,13 +131,13 @@ BOOL GameOver_Update()
 		oPlayer.posY += 0.0001;
 	}
 	
-	if (Input_GetKeyTrigger(VK_UP)) {
+	if (Input_GetKeyTrigger(VK_UP) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_UP)) {
 		pauseChoice -= 1;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 		if (pauseChoice < 0)
 			pauseChoice = 1;
 	}
-	if (Input_GetKeyTrigger(VK_DOWN)) {
+	if (Input_GetKeyTrigger(VK_DOWN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_DOWN)) {
 		pauseChoice += 1;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 		if (pauseChoice > 1)
@@ -146,10 +146,10 @@ BOOL GameOver_Update()
 	switch (pauseChoice)
 	{
 	case 0:
-		oCrystal.posY = -0.3f;
+		oCrystal.posY = -0.2f;
 		break;
 	case 1:
-		oCrystal.posY = -0.5f;
+		oCrystal.posY = -0.45f;
 	}
 	
 	if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
@@ -181,9 +181,10 @@ void GameOver_Draw()
 	oBackGround.texture->Draw();
 	oPlayer.texture->Draw();
 	oLogo.texture->Draw();
+	oCrystal.texture->Draw();
 	oFade.texture->Draw();
 	oFadeLogo.texture->Draw();
-	oCrystal.texture->Draw();
+	
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);

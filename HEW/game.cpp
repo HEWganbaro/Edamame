@@ -61,6 +61,7 @@ GameObject gKorokoro;
 GameObject Effect;
 GameObject gPause;
 GameObject gCrystal;
+GameObject gStart;
 
 GameObject gTutorial;
 bool TutoLeft, TutoRight;
@@ -234,6 +235,12 @@ BOOL Game_Initialize()
 	gCrystal.posX = -1;
 	gCrystal.posY = 1;
 
+	//ポーズ
+	gStart.texture = new Sprite("assets/start_pause.png", 1, 1);
+	gStart.texture->SetSize(400, 80);
+	gStart.posX = 0.6f;
+	gStart.posY = 0.8f;
+
 	//チュートリアル
 	gTutorial.texture = new Sprite("assets/tutorial.png", 4, 1);
 	gTutorial.texture->SetPart(0, 0);
@@ -309,13 +316,14 @@ BOOL Game_Update()
 		Cursor_Update(&gPlayer2, &gCursor2);
 
 
-		if (Input_GetKeyTrigger(VK_UP)) {
-			pause = gPAUSE;
-		}
+		
 
 		switch (turn)
 		{
 		case PLAYER_TURN:
+			if (Input_GetKeyTrigger(VK_UP) || Input_GetControllerTrigger(XINPUT_GAMEPAD_START)) {
+				pause = gPAUSE;
+			}
 			//プレイヤー移動
 			gPlayer1.animator.isActive = true;
 			gPlayer2.animator.isActive = true;
@@ -494,14 +502,14 @@ BOOL Game_Update()
 		break;
 		case gPAUSE:
 			gPause.posX = -1.0f;
-			gCrystal.posX = -0.5f;
-			if (Input_GetKeyTrigger(VK_LEFT)) {
+			gCrystal.posX = -0.4f;
+			if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_UP)) {
 				pauseChoice -= 1;
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 				if (pauseChoice < 0)
 					pauseChoice = 2;
 			}
-			if (Input_GetKeyTrigger(VK_RIGHT)) {
+			if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_DOWN)) {
 				pauseChoice += 1;
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 				if (pauseChoice > 2)
@@ -510,16 +518,16 @@ BOOL Game_Update()
 			switch (pauseChoice)
 			{
 			case 0:
-				gCrystal.posY = 0.3f;
+				gCrystal.posY = 0.25f;
 
-				if (Input_GetKeyTrigger(VK_RETURN)) {
+				if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 					pause=gGAME;
 				}
 				break;
 			case 1:
 				gCrystal.posY = 0.0f;
-				if (Input_GetKeyTrigger(VK_RETURN)) {
+				if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 					pauseChoice = gRESPAWN;
 					if (onceFlag == true) {
@@ -530,8 +538,8 @@ BOOL Game_Update()
 				}
 				break;
 			case 2:
-				gCrystal.posY = -0.3f;
-				if (Input_GetKeyTrigger(VK_RETURN)) {
+				gCrystal.posY = -0.15f;
+				if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 					pauseChoice = gLEVEL;
 					if (onceFlag == true) {
@@ -580,6 +588,7 @@ BOOL Game_Update()
 	GameObject_DrowUpdate(&gFade);
 	GameObject_DrowUpdate(&gPause);
 	GameObject_DrowUpdate(&gCrystal);
+	GameObject_DrowUpdate(&gStart);
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		GameObject_DrowUpdate(&gEnemyVector[i]);
 	GameObject_DrowUpdate(&gBackGround);
@@ -629,6 +638,7 @@ void Game_Draw()
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
 	Effect.texture->Draw();
+	gStart.texture->Draw();
 	gPause.texture->Draw();
 	gCrystal.texture->Draw();
 	gFade.texture->Draw();
@@ -658,6 +668,7 @@ StageScore Game_Relese()
 	delete gKorokoro.texture;
 	delete gPause.texture;
 	delete gCrystal.texture;
+	delete gStart.texture;
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		delete gEnemyVector[i].texture;
 	gEnemyVector.clear();

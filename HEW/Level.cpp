@@ -41,6 +41,7 @@ GameObject lFade;
 GameObject lKorokoro;
 GameObject lPause;
 GameObject lCrystal;
+GameObject lStart;
 
 FADE LevelFade;
 
@@ -75,7 +76,7 @@ BOOL Level_Initialize(StageScore score)
 
 	gchoice.texture = new Sprite("assets/dotFont.png", 16, 8);
 	gchoice.texture->SetSize(80, 160);
-	gchoice.texture->SetPart(0, 0);
+	gchoice.texture->SetPart(1, 0);
 	gchoice.posX = 0.8f;
 	gchoice.posY = 0.8f;
 
@@ -103,11 +104,17 @@ BOOL Level_Initialize(StageScore score)
 	lPause.posX = -1;
 	lPause.posY = 1;
 
-	//ポーズ
+	//クリスタル
 	lCrystal.texture = new Sprite("assets/crystal.png", 1, 1);
 	lCrystal.texture->SetSize(256, 256);
 	lCrystal.posX = -1;
 	lCrystal.posY = 1;
+
+	//ポーズ
+	lStart.texture = new Sprite("assets/start_pause.png", 1, 1);
+	lStart.texture->SetSize(400, 80);
+	lStart.posX = 0.6f;
+	lStart.posY = 0.8f;
 
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
@@ -268,6 +275,7 @@ BOOL Level_Update()
 	GameObject_DrowUpdate(&lKorokoro);
 	GameObject_DrowUpdate(&lPause);
 	GameObject_DrowUpdate(&lCrystal);
+	GameObject_DrowUpdate(&lStart);
 	for (int i = 0; i < 10; i++)
 	{
 		//ステージ
@@ -335,7 +343,7 @@ BOOL Level_Update()
 			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 		}
 
-		if (Input_GetKeyTrigger(VK_UP)) {
+		if (Input_GetKeyTrigger(VK_UP)|| Input_GetControllerTrigger(XINPUT_GAMEPAD_START)) {
 			pause = lPAUSE;
 		}
 
@@ -349,14 +357,14 @@ BOOL Level_Update()
 		break;
 	case lPAUSE:
 		lPause.posX = -1.0f;
-		lCrystal.posX = -0.5f;
-		if (Input_GetKeyTrigger(VK_LEFT)) {
+		lCrystal.posX = -0.4f;
+		if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_UP)) {
 			pauseChoice -= 1;
 			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 			if (pauseChoice < 0)
 				pauseChoice = 1;
 		}
-		if (Input_GetKeyTrigger(VK_RIGHT)) {
+		if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_DOWN)) {
 			pauseChoice += 1;
 			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
 			if (pauseChoice > 1)
@@ -365,16 +373,16 @@ BOOL Level_Update()
 		switch (pauseChoice)
 		{
 		case 0:
-			lCrystal.posY = 0.3f;
+			lCrystal.posY = 0.25f;
 
-			if (Input_GetKeyTrigger(VK_RETURN)) {
+			if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 				LevelFade.fadeout = true;
 			}
 			break;
 		case 1:
-			lCrystal.posY = 0.0f;
-			if (Input_GetKeyTrigger(VK_RETURN)) {
+			lCrystal.posY = 0.05f;
+			if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 				pause = lLEVEL;
 			}
@@ -406,7 +414,7 @@ void Level_Draw()
 	//ゲームオブジェクトを全部描画する
 	lBackGround.texture->Draw();
 
-	gchoice.texture->Draw();
+	//gchoice.texture->Draw();
 	groad.texture->Draw();
 
 	for (int i = 0; i < 10; i++)
@@ -417,6 +425,7 @@ void Level_Draw()
 
 		gstar[i].texture->Draw();
 	}
+	lStart.texture->Draw();
 	lPause.texture->Draw();
 	lCrystal.texture->Draw();
 	lFade.texture->Draw();
@@ -431,6 +440,7 @@ void Level_Relese()
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_BGM_LEVEL));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_KA_SORU));
+	delete lStart.texture;
 	delete lBackGround.texture;
 	delete gchoice.texture;
 	delete groad.texture;
