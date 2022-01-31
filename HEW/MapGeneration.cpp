@@ -971,7 +971,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Arm == false)
+				if (Player->Item_Arm == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}
@@ -991,7 +991,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Arm == false)
+				if (Player->Item_Arm == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}
@@ -1011,7 +1011,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Arm == false)
+				if (Player->Item_Arm == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}
@@ -1031,7 +1031,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Arm == false)
+				if (Player->Item_Arm == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}

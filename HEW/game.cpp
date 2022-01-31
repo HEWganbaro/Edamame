@@ -304,9 +304,6 @@ BOOL Game_Update()
 		Cursor_Update(&gPlayer1, &gCursor1);
 		Cursor_Update(&gPlayer2, &gCursor2);
 
-
-		
-
 		switch (turn)
 		{
 		case PLAYER_TURN:
