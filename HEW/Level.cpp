@@ -39,12 +39,17 @@ GameObject gcloud[10];
 GameObject gstar[10];
 GameObject lFade;
 GameObject lKorokoro;
+GameObject lPause;
+GameObject lCrystal;
 
 FADE LevelFade;
 
 int clear[10];
 
 int countLevel = 10;
+
+int pause;
+int pauseChoice;
 
 StageScore LevelScoreSheet[MAP_STAGE];
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -91,6 +96,18 @@ BOOL Level_Initialize(StageScore score)
 	lKorokoro.texture->SetSize(1280 * 2, 720 * 2);
 	lKorokoro.posX = -1;
 	lKorokoro.posY = 1;
+
+	//ポーズ
+	lPause.texture = new Sprite("assets/pause.png", 2, 1);
+	lPause.texture->SetSize(1280 * 2, 720 * 2);
+	lPause.posX = -1;
+	lPause.posY = 1;
+
+	//ポーズ
+	lCrystal.texture = new Sprite("assets/crystal.png", 1, 1);
+	lCrystal.texture->SetSize(256, 256);
+	lCrystal.posX = -1;
+	lCrystal.posY = 1;
 
 	groad.texture = new Sprite("assets/road.png", 1, 10);
 	groad.texture->SetSize(1330 * 2, 720 * 2.3);
@@ -229,6 +246,7 @@ BOOL Level_Initialize(StageScore score)
 	//スコアを代入
 	if (score != TITLESCORE)
 		LevelScoreSheet[stage - 1] = score;
+	pause = lLEVEL;
 
 	return TRUE;
 }
@@ -248,6 +266,8 @@ BOOL Level_Update()
 	GameObject_DrowUpdate(&groad);
 	GameObject_DrowUpdate(&lFade);
 	GameObject_DrowUpdate(&lKorokoro);
+	GameObject_DrowUpdate(&lPause);
+	GameObject_DrowUpdate(&lCrystal);
 	for (int i = 0; i < 10; i++)
 	{
 		//ステージ
@@ -274,32 +294,80 @@ BOOL Level_Update()
 	//	gchoice.posX = 0.8f;
 	//	gchoice.posY = 0.8f;
 	//}
+	int size = 200;	//移動量の大きさ
+	int cycle = 10;	//速さ
+	switch (pause)
+	{
+	case lLEVEL:
+		lPause.posX = 5.0f;
+		lCrystal.posX = 5.0f;
+		if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
+			stage--;
+			if (stage == 0)
+				stage = 1;
+			gchoice.texture->SetPart(stage, 0);
+			gchoice.posX = 0.8f;
+			gchoice.posY = 0.8f;
 
-	if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
-		stage--;
-		if (stage == 0)
-			stage = 1;
-		gchoice.texture->SetPart(stage, 0);
-		gchoice.posX = 0.8f;
-		gchoice.posY = 0.8f;
+			SetPos();
+		}
+		if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
+			stage++;
+			if (stage == 11)
+				stage = 10;
+			gchoice.texture->SetPart(stage, 0);
+			gchoice.posX = 0.8f;
+			gchoice.posY = 0.8f;
 
-		SetPos();
+			SetPos();
+		}
+
+		if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
+			LevelFade.fadeout = true;
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+		}
+
+		if (Input_GetKeyTrigger(VK_UP)) {
+			pause = lPAUSE;
+		}
+
+
+
+
+		//上下にふわふわ移動する
+		gstage[stage - 1].posY += sin(countLevel / cycle) / size;
+		gcloud[stage - 1].posY += sin(countLevel / cycle) / size;
+		countLevel++;
+		break;
+	case lPAUSE:
+		lPause.posX = -1.0f;
+		lCrystal.posX = -0.5f;
+		if (Input_GetKeyTrigger(VK_LEFT)) {
+			pauseChoice = 0;
+		}
+		if (Input_GetKeyTrigger(VK_RIGHT)) {
+			pauseChoice = 1;
+		}
+		switch (pauseChoice)
+		{
+		case 0:
+			lCrystal.posY = 0.3f;
+
+			if (Input_GetKeyTrigger(VK_RETURN)) {
+				LevelFade.fadeout = true;
+			}
+			break;
+		case 1:
+			lCrystal.posY = 0.0f;
+			if (Input_GetKeyTrigger(VK_RETURN)) {
+				pause = lLEVEL;
+			}
+		}
+		break;
 	}
-	if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
-		stage++;
-		if (stage == 11)
-			stage = 10;
-		gchoice.texture->SetPart(stage, 0);
-		gchoice.posX = 0.8f;
-		gchoice.posY = 0.8f;
 
-		SetPos();
-	}
 
-	if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
-		LevelFade.fadeout = true;
-		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
-	}
+
 
 	lKorokoro.texture->SetPart(korokoroX / 4, 0);
 	korokoroX++;
@@ -308,13 +376,6 @@ BOOL Level_Update()
 	lFade.texture->color.a = LevelFade.Alpha;
 	if (LevelFade.Alpha > 1.0f)
 		return FALSE;
-
-	int size = 200;	//移動量の大きさ
-	int cycle = 10;	//速さ
-	//上下にふわふわ移動する
-	gstage[stage - 1].posY += sin(countLevel / cycle) / size;
-	gcloud[stage - 1].posY += sin(countLevel / cycle) / size;
-	countLevel++;
 
 	return TRUE;
 }
@@ -340,6 +401,8 @@ void Level_Draw()
 
 		gstar[i].texture->Draw();
 	}
+	lPause.texture->Draw();
+	lCrystal.texture->Draw();
 	lFade.texture->Draw();
 	lKorokoro.texture->Draw();
 
@@ -356,6 +419,8 @@ void Level_Relese()
 	delete groad.texture;
 	delete lFade.texture;
 	delete lKorokoro.texture;
+	delete lPause.texture;
+	delete lCrystal.texture;
 	for (int i = 0; i < 10; i++)
 	{
 		delete gstage[i].texture;

@@ -59,13 +59,15 @@ GameObject gCursor2;
 GameObject gFade;
 GameObject gKorokoro;
 GameObject Effect;
+GameObject gPause;
+GameObject gCrystal;
 
 GameObject gTutorial;
 bool TutoLeft, TutoRight;
 
 GameObject gEffect[4];
 bool GoalFast_1 = false;
-bool onceFlag = true;
+bool onceFlag;
 
 FADE GameFade;
 
@@ -217,6 +219,20 @@ BOOL Game_Initialize()
 	gKorokoro.texture->SetSize(1280 * 2, 720 * 2);
 	gKorokoro.posX = -1;
 	gKorokoro.posY = 1;
+	onceFlag = true;
+
+	//ポーズ
+	gPause.texture = new Sprite("assets/pause.png", 2, 1);
+	gPause.texture->SetSize(1280 * 2, 720 * 2);
+	gPause.posX = -1;
+	gPause.posY = 1;
+	gPause.texture->SetPart(1, 0);
+
+	//ポーズ
+	gCrystal.texture = new Sprite("assets/crystal.png", 1, 1);
+	gCrystal.texture->SetSize(256, 256);
+	gCrystal.posX = -1;
+	gCrystal.posY = 1;
 
 	//チュートリアル
 	gTutorial.texture = new Sprite("assets/tutorial.png", 4, 1);
@@ -238,6 +254,7 @@ BOOL Game_Initialize()
 		gTutorial.posX = -10;
 		gTutorial.posY = 10;
 	}
+	pause = gGAME;
 
 	return TRUE;
 }
@@ -265,198 +282,256 @@ BOOL Game_Update()
 	gBackGround.posX = -1;
 	gBackGround.posY = 1;
 	gCursor1.texture->SetPart(1, 0);
-
-	for (int i = 0; i < 4; i++) {
-		Efffect_Move(&gEffect[i]);
-	}
-
-	//アニメーション
-	//敵アニメーション
-	for (int i = 0; i < gEnemyVector.size(); i++)
-		Enemy_Update(&gEnemyVector[i], &gPlayer1);
-
-	if (gPlayer1.Goalfrg == false)
-		Player_AniUpdate(&gPlayer1);
-	if (gPlayer2.Goalfrg == false)
-		Player_AniUpdate(&gPlayer2);
-
-	//ゴールの状態変化
-	Goal_Update(&gPlayer1, &gPlayer2, &Effect);
-
-	//カーソルの位置変更
-	Cursor_Update(&gPlayer1, &gCursor1);
-	Cursor_Update(&gPlayer2, &gCursor2);
-
-	gKorokoro.texture->SetPart(korokoroX / 4, 0);
-	korokoroX++;
-
-	switch (turn)
+	switch (pause)
 	{
-	case PLAYER_TURN:
-		//プレイヤー移動
-		gPlayer1.animator.isActive = true;
-		gPlayer2.animator.isActive = true;
-		Player_Input(&gPlayer1, &gPlayer2);	
-		Player_Update(&gPlayer1, gObjects);
-		Player_Update(&gPlayer2, gObjects);
-		Big_SnowBall(&gPlayer1, &gPlayer2);
-		Gauge_Update(&gGauge, &gGauge2, &gPlayer1, &gPlayer2);
-		if (gPlayer1.animator.isActive == false || gPlayer2.animator.isActive == false)
-			turn = ENEMY_TURN;
-		break;
+	case gGAME:
+		gPause.posX = 5.0f;
+		gCrystal.posX = 5.0f;
+		for (int i = 0; i < 4; i++) {
+			Efffect_Move(&gEffect[i]);
+		}
 
-	case ENEMY_TURN:
-	{
-		bool end = false;
-		//敵移動
-		for (int i = 0; i < gEnemyVector.size(); i++) {
-			if (gEnemyVector[i].direction == NULL_WAY && gEnemyVector[i].animator.oneAni == false) {
-				//敵の接近
-				if (gEnemyVector[i].direction == NULL_WAY) {
-					//敵のタイプに合わせて行動変化
-					switch (gEnemyVector[i].enemytype) {
-					case RANDOM:	//ランダム移動
-						Enemy_Move_Random(&gEnemyVector[i]);
-						break;
+		//アニメーション
+		//敵アニメーション
+		for (int i = 0; i < gEnemyVector.size(); i++)
+			Enemy_Update(&gEnemyVector[i], &gPlayer1);
 
-					case FOLLOWING:	//範囲以内を索敵追尾
-						Enemy_Move_Chase(&gEnemyVector[i], &gPlayer1, &gPlayer2);
-						break;
+		if (gPlayer1.Goalfrg == false)
+			Player_AniUpdate(&gPlayer1);
+		if (gPlayer2.Goalfrg == false)
+			Player_AniUpdate(&gPlayer2);
 
-					case CIRCUMFRENCE:
-						//Enemy_Move_Circle(&gEnemyVector[i]);
-						break;
+		//ゴールの状態変化
+		Goal_Update(&gPlayer1, &gPlayer2, &Effect);
+
+		//カーソルの位置変更
+		Cursor_Update(&gPlayer1, &gCursor1);
+		Cursor_Update(&gPlayer2, &gCursor2);
+
+
+		if (Input_GetKeyTrigger(VK_UP)) {
+			pause = gPAUSE;
+		}
+
+		switch (turn)
+		{
+		case PLAYER_TURN:
+			//プレイヤー移動
+			gPlayer1.animator.isActive = true;
+			gPlayer2.animator.isActive = true;
+			Player_Input(&gPlayer1, &gPlayer2);
+			Player_Update(&gPlayer1, gObjects);
+			Player_Update(&gPlayer2, gObjects);
+			Big_SnowBall(&gPlayer1, &gPlayer2);
+			Gauge_Update(&gGauge, &gGauge2, &gPlayer1, &gPlayer2);
+			if (gPlayer1.animator.isActive == false || gPlayer2.animator.isActive == false)
+				turn = ENEMY_TURN;
+			break;
+
+		case ENEMY_TURN:
+		{
+			bool end = false;
+			//敵移動
+			for (int i = 0; i < gEnemyVector.size(); i++) {
+				if (gEnemyVector[i].direction == NULL_WAY && gEnemyVector[i].animator.oneAni == false) {
+					//敵の接近
+					if (gEnemyVector[i].direction == NULL_WAY) {
+						//敵のタイプに合わせて行動変化
+						switch (gEnemyVector[i].enemytype) {
+						case RANDOM:	//ランダム移動
+							Enemy_Move_Random(&gEnemyVector[i]);
+							break;
+
+						case FOLLOWING:	//範囲以内を索敵追尾
+							Enemy_Move_Chase(&gEnemyVector[i], &gPlayer1, &gPlayer2);
+							break;
+
+						case CIRCUMFRENCE:
+							//Enemy_Move_Circle(&gEnemyVector[i]);
+							break;
+						}
+					}
+					end = true;
+				}
+				else {
+					//敵の移動処理
+					MapMove_Update(&gEnemyVector[i], gObjects);
+					if (gEnemyVector[i].animator.isActive != false) {
+						end = true;
+						gEnemyVector[i].animator.oneAni = true;
 					}
 				}
-				end = true;
+				//敵のスタン
+				Enemy_Stun(&gEnemyVector[i], &gPlayer1, &gPlayer2, gObjects);
+				if (gEnemyVector[i].IsStun == Stun || gEnemyVector[i].IsStun == Stun_Release)
+					end = false;
 			}
-			else {
-				//敵の移動処理
-				MapMove_Update(&gEnemyVector[i], gObjects);
-				if (gEnemyVector[i].animator.isActive != false) {
-					end = true;
-					gEnemyVector[i].animator.oneAni = true;
+			if (end == false) {
+				turn = ENV_TURN;
+				for (int i = 0; i < gEnemyVector.size(); i++) {
+					gEnemyVector[i].animator.oneAni = false;
+					if (gEnemyVector[i].IsStun == Stun_) {
+						gEnemyVector[i].IsStun = Nothing;
+						gEnemyVector[i].direction = NULL_WAY;
+					}
+					if (gEnemyVector[i].IsStun == Stun)
+						gEnemyVector[i].IsStun = Stun_;
+					if (gEnemyVector[i].IsStun == Stun_Release)
+						gEnemyVector[i].IsStun = Stun;
 				}
 			}
-			//敵のスタン
-			Enemy_Stun(&gEnemyVector[i], &gPlayer1, &gPlayer2, gObjects);
-			if (gEnemyVector[i].IsStun == Stun || gEnemyVector[i].IsStun == Stun_Release)
-				end = false;
 		}
-		if (end == false) {
-			turn = ENV_TURN;
+		break;
+
+		case ENV_TURN:
+			//マップを状態に合わせて変更する
+			MapUpdate(gObjects, &gPlayer1, &gPlayer2);
+			for (int i = 0; i < gEnemyVector.size(); i++)
+				Enemy_Player_Hit(&gEnemyVector[i], &gPlayer1, &gPlayer2);
+			//どちらの雪玉が早いか
+			if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == false)
+				GoalFast_1 = true;
+			//クリア
+			if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == true)
+				turn = CLEAR;
+			break;
+
+		case PENGUIN_ATTACK:
 			for (int i = 0; i < gEnemyVector.size(); i++) {
-				gEnemyVector[i].animator.oneAni = false;
-				if (gEnemyVector[i].IsStun == Stun_) {
-					gEnemyVector[i].IsStun = Nothing;
-					gEnemyVector[i].direction = NULL_WAY;
+				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
+				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
+				if (gEnemyVector[i].Enemycount < 50) {
+					if (gEnemyVector[i].EnemyAttak == true) {
+						gEnemyVector[i].posY += 0.2f / 50;
+						gEnemyVector[i].Enemycount++;
+					}
 				}
-				if (gEnemyVector[i].IsStun == Stun)
-					gEnemyVector[i].IsStun = Stun_;
-				if (gEnemyVector[i].IsStun == Stun_Release)
-					gEnemyVector[i].IsStun = Stun;
+				else {
+					if (gEnemyVector[i].EnemyAttak == true) {
+						gEnemyVector[i].animator.isActive = true;
+						Enemy_GameOver_Move(&gEnemyVector[i]);
+						if (gEnemyVector[i].animator.isActive == false || gEnemyVector[i].direction == NULL_WAY) {
+							gEnemyVector[i].Enemycount = 0;
+							turn = PENGUIN2;
+						}
+					}
+				}
 			}
-		}
-	}
-		break;
-
-	case ENV_TURN:
-		//マップを状態に合わせて変更する
- 		MapUpdate(gObjects, &gPlayer1, &gPlayer2);
-		for (int i = 0; i < gEnemyVector.size(); i++)
-			Enemy_Player_Hit(&gEnemyVector[i], &gPlayer1, &gPlayer2);
-		//どちらの雪玉が早いか
-		if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == false)
-			GoalFast_1 = true;
-		//クリア
-		if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == true)
-			turn = CLEAR;
-		break;
-
-	case PENGUIN_ATTACK:
-		for (int i = 0; i < gEnemyVector.size(); i++) {
-			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
-			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
-			if (gEnemyVector[i].Enemycount < 50) {
-				if (gEnemyVector[i].EnemyAttak == true) {
-					gEnemyVector[i].posY += 0.2f / 50;
+			break;
+		case PENGUIN2:
+			for (int i = 0; i < gEnemyVector.size(); i++) {
+				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
+				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
+				if (gEnemyVector[i].Enemycount < 10) {
+					gEnemyVector[i].posY -= 0.2f / 10;
 					gEnemyVector[i].Enemycount++;
 				}
-			}
-			else {
-				if (gEnemyVector[i].EnemyAttak == true) {
-					gEnemyVector[i].animator.isActive = true;
-					Enemy_GameOver_Move(&gEnemyVector[i]);
-					if (gEnemyVector[i].animator.isActive == false || gEnemyVector[i].direction == NULL_WAY) {
-						gEnemyVector[i].Enemycount = 0;
-						turn = PENGUIN2;
-					}
+				else {
+					turn = GAMEOVER;
 				}
 			}
-		} 
-		break;
-	case PENGUIN2:
-		for (int i = 0; i < gEnemyVector.size(); i++) {
-			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
-			Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
-			if (gEnemyVector[i].Enemycount < 10) {
-				gEnemyVector[i].posY -= 0.2f / 10;
-				gEnemyVector[i].Enemycount++;
-			}
-			else {
-				turn = GAMEOVER;
-			}
-		}
-		break;
+			break;
 
-	case GAMEOVER:
-		//タイトルへ戻るフラグ
-		if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
-		return FALSE;
+		case GAMEOVER:
+			//タイトルへ戻るフラグ
+			if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
+				return FALSE;
 
 			GameFade.fadeout = true;
-		break;
+			break;
 
-	case CLEAR:
- 		if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
-		return FALSE;
+		case CLEAR:
+			if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
+				//return FALSE;
 
-		if (onceFlag == true) {
-			korokoroX = 0;
-			onceFlag = false;
-		}
+			if (onceFlag == true) {
+				korokoroX = 0;
+				onceFlag = false;
+			}
 			GameFade.fadeout = true;
+			break;
+
+		case TUTORIAL:
+
+			int page = gTutorial.texture->GetPart();
+
+			if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
+				page--;
+				if (page == -1)
+					page = 0;
+				TutoLeft = false;
+			}
+
+			if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
+				page++;
+				if (page == 4)
+					page = 3;
+				TutoRight = false;
+			}
+
+			if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
+				turn = PLAYER_TURN;
+				gTutorial.posX = -10;
+				gTutorial.posY = 10;
+			}
+
+
+
+			gTutorial.texture->SetPart(page, 0);
+			break;
+		}
+
 		break;
+		case gPAUSE:
+			gPause.posX = -1.0f;
+			gCrystal.posX = -0.5f;
+			if (Input_GetKeyTrigger(VK_LEFT)) {
+				pauseChoice -= 1;
+				if (pauseChoice < 0)
+					pauseChoice = 2;
+			}
+			if (Input_GetKeyTrigger(VK_RIGHT)) {
+				pauseChoice += 1;
+				if (pauseChoice > 2)
+					pauseChoice = 0;
+			}
+			switch (pauseChoice)
+			{
+			case 0:
+				gCrystal.posY = 0.3f;
 
-	case TUTORIAL:
-
-		int page = gTutorial.texture->GetPart();
-
-		if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
-			page--;
-			if (page == -1)
-				page = 0;
-			TutoLeft = false;
-		}
-
-		if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
-			page++;
-			if (page == 4)
-				page = 3;
-			TutoRight = false;
-		}
-
-		if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
-			turn = PLAYER_TURN;
-			gTutorial.posX = -10;
-			gTutorial.posY = 10;
-		}
-
+				if (Input_GetKeyTrigger(VK_RETURN)) {
+					pause=gGAME;
+				}
+				break;
+			case 1:
+				gCrystal.posY = 0.0f;
+				if (Input_GetKeyTrigger(VK_RETURN)) {
+					pauseChoice = gRESPAWN;
+					if (onceFlag == true) {
+						korokoroX = 0;
+						onceFlag = false;
+					}
+					GameFade.fadeout = true;
+				}
+				break;
+			case 2:
+				gCrystal.posY = -0.3f;
+				if (Input_GetKeyTrigger(VK_RETURN)) {
+					pauseChoice = gLEVEL;
+					if (onceFlag == true) {
+						korokoroX = 0;
+						onceFlag = false;
+					}
+					GameFade.fadeout = true;
+				}
+				break;
+			}
+			
 		
 
-		gTutorial.texture->SetPart(page, 0);
-		break;
 	}
+	
 
 	//if (gEnemy.enemyeye == ENEMYEYE_IN)
 	//{
@@ -468,6 +543,8 @@ BOOL Game_Update()
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	//GameObjectと画像の座標を合わせる
+	gKorokoro.texture->SetPart(korokoroX / 4, 0);
+	korokoroX++;
 	FadeChange(&GameFade);//フェード関連全てを司ってます触らないで
 	gFade.texture->color.a = GameFade.Alpha;
 	if (GameFade.Alpha > 1.0f)
@@ -486,6 +563,8 @@ BOOL Game_Update()
 	GameObject_DrowUpdate(&gCursor2);
 	GameObject_DrowUpdate(&gGaugeframe);
 	GameObject_DrowUpdate(&gFade);
+	GameObject_DrowUpdate(&gPause);
+	GameObject_DrowUpdate(&gCrystal);
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		GameObject_DrowUpdate(&gEnemyVector[i]);
 	GameObject_DrowUpdate(&gBackGround);
@@ -535,6 +614,8 @@ void Game_Draw()
 	gEffect[2].texture->Draw();
 	gEffect[3].texture->Draw();
 	Effect.texture->Draw();
+	gPause.texture->Draw();
+	gCrystal.texture->Draw();
 	gFade.texture->Draw();
 	gTutorial.texture->Draw();
 	gKorokoro.texture->Draw();
@@ -560,6 +641,8 @@ StageScore Game_Relese()
 	delete gGaugeframe.texture;
 	delete gFade.texture;
 	delete gKorokoro.texture;
+	delete gPause.texture;
+	delete gCrystal.texture;
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		delete gEnemyVector[i].texture;
 	gEnemyVector.clear();

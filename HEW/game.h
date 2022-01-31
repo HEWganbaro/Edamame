@@ -30,3 +30,14 @@ BOOL Game_Initialize();
 BOOL Game_Update();
 void Game_Draw();
 StageScore Game_Relese();
+
+enum GamePause {
+	gGAME,
+	gPAUSE
+};
+
+enum PauseChoice {
+	gRERURN,
+	gRESPAWN,
+	gLEVEL,
+};

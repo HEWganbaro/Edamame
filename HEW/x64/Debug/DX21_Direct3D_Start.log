@@ -1,24 +1,5 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
-  Enemy.cpp
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(248): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(249): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(266): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(267): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(284): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(285): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(303): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-c:\users\naoki\documents\github\edamame\hew\enemy.cpp(304): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  Scene.cpp
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(12): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(26): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(39): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(54): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(60): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(75): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
-c:\users\naoki\documents\github\edamame\hew\scene.cpp(89): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
   game.cpp
-c:\users\naoki\documents\github\edamame\hew\game.cpp(263): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-c:\users\naoki\documents\github\edamame\hew\game.cpp(264): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-  main.cpp
-  コードを生成中...
-  DX21_Direct3D_Start.vcxproj -> C:\Users\naoki\Documents\GitHub\Edamame\HEW\x64\Debug\HEW.exe
+c:\users\namen\documents\github\edamame_pushyou\hew\game.cpp(280): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+c:\users\namen\documents\github\edamame_pushyou\hew\game.cpp(281): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  DX21_Direct3D_Start.vcxproj -> C:\Users\namen\Documents\GitHub\Edamame_pushyou\HEW\x64\Debug\HEW.exe

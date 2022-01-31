@@ -21,6 +21,8 @@ extern int Player1_cut;
 extern int Player2_cut;
 extern int turn;
 extern int stage;
+extern int pause;
+extern int pauseChoice;
 extern int big_snowball;
 extern int korokoroX;
 extern int korokoroY;

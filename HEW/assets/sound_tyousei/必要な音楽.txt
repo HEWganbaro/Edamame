@@ -1,35 +1,41 @@
 タイトル画面
 
-BGM
+BGM 済
 TitleBGM.wav
-ボタン押したときの音
+ボタン押したときの音　済
 Button_push.wav
 ********************************
+紙芝居
 
+BGM 
+
+紙めくる音 済
+Paper.wav
+********************************
 レベル選択画面
 
-BGM
+BGM　済
 LevelBGM.wav
 選択中のところを変える時の音
 ka-soruidou.wav
-決定した時の音
+決定した時の音　済
 Button_push.wav
 ********************************
 
 ゲーム画面
-BGM
+BGM　済
 GameBGM.wav
-キャラとペンギンの移動音
+キャラとペンギンの移動音　済
 move.wav
-雪を取った時の音
+雪を取った時の音　済
 Snow_hundatoki.wav
 氷の上を滑る時の音 
 ice_suberutoki.wav
-ペンギンをスタンさせたときの音
+ペンギンをスタンさせたときの音　済
 penguin_stan.wav
-雪玉が潰された時の音
+雪玉が潰された時の音　済
 player_crush.wav
-雪玉が成長した時の音
+雪玉が成長した時の音　済
 player_grow.wav
 収集アイテムを取った時の音
 item_colect.wav
@@ -38,13 +44,13 @@ sabukuetassei.wav
 *********************************
 
 クリア画面
-BGM
+BGM　済
 
-ボタン押したときの音
+ボタン押したときの音　済
 Button_push.wav
 *********************************
 ゲームオーバー画面 
-BGM
+BGM　済
 
-ボタン押したときの音
+ボタン押したときの音　済
 Button_push.wav

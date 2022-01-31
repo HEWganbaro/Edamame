@@ -17,3 +17,7 @@ void Level_Draw();
 void Level_Relese();
 
 void SetPos();
+enum LevelPause {
+	lLEVEL,
+	lPAUSE,
+};

@@ -34,9 +34,19 @@ void Scene::Level()
 {
 	if (FALSE == Level_Update()) {	//ÉVÅ[ÉìïœçX
 		Level_Relese();
-		scene = GAME;
-		if (FALSE == Game_Initialize())
-			scene == -1;
+
+		if (pause == lPAUSE) {
+			scene = TITLE;
+			if (FALSE == Title_Initialize())
+				scene == -1;
+		}
+		else {
+			scene = GAME;
+			if (FALSE == Game_Initialize())
+				scene == -1;
+		}
+
+
 	}
 	else {
 		Level_Draw();
@@ -58,6 +68,18 @@ void Scene::Game()
 			scene = GAME_OVER;
 			if (FALSE == GameOver_Initialize())
 				scene == -1;
+		}
+		if (pauseChoice == gRESPAWN) {
+			scene = GAME;
+			if (FALSE == Game_Initialize())
+				scene == -1;			
+		}
+		else if (pauseChoice == gLEVEL) {
+			scene = LEVEL;
+			StageScore score = TITLESCORE;
+			if (FALSE == Level_Initialize(score))
+				scene == -1;
+
 		}
 	}
 	else {
