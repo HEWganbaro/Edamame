@@ -7,6 +7,8 @@
 #define INIT_SNOW_SIZE 175
 #define INIT_CURSOR_SIZE 64
 
+#define PLAYER_SIZEUP 3
+
 enum SNOW_STATE {
 	SNOW_STATE,
 	NORMAL_STATE,
@@ -25,6 +27,7 @@ void Player_Input(GameObject* Player, GameObject* Player2);
 //MapPos Player_GetMapPos(GameObject* Player);
 //アップデート関数
 void Player_Update(GameObject* Player, GameObject* Map);
+void Goal_Update(GameObject* Player, GameObject* Player2);
 void Player_AniUpdate(GameObject* Player);
 //カーソルアップデート
 void Cursor_Update(GameObject* Player, GameObject* Cursor);

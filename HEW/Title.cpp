@@ -97,7 +97,7 @@ BOOL Title_Update()
 	GameObject_DrowUpdate(&tFade);
 	GameObject_DrowUpdate(&tKorokoro);
 
-	if (Input_GetKeyTrigger(VK_SPACE))
+	if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
 	{
 		TitleFade.fadeout = true;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));

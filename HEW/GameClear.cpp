@@ -96,7 +96,7 @@ BOOL GameClear_Update()
 	GameObject_DrowUpdate(&cFade);
 	GameObject_DrowUpdate(&cKorokoro);
 
-	if (Input_GetKeyTrigger(VK_SPACE))
+	if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
 	{
 		korokoroX = 0;
 		GameClearFade.fadeout = true;

@@ -25,7 +25,8 @@
 void Input_Update();
 bool Input_GetKeyPress(int vkey);
 bool Input_GetKeyTrigger(int vkey);
-bool Input_LstickRightUp();
+bool Input_GetControllerPress(int vkey);
+bool Input_GetControllerTrigger(int vkey);
 
 //--------------------------------------------------------------------------------------
 // DirectX11ÉNÉâÉXÅFDirectXä÷åW

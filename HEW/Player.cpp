@@ -125,14 +125,157 @@ void Player_Input(GameObject * Player, GameObject * Player2)
 void Player_Update(GameObject * Player, GameObject* Map)
 {
 	MapMove_Update(Player, Map);
+
 	//地面状態移行をしてない
-	Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
+	if (Player->Goalfrg == false)
+		Player->texture->SetSize(INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f), INIT_SNOW_SIZE * (1 + Player->SnowSize*0.05f));
 }
+
+void Goal_Update(GameObject * Player, GameObject* Player2)
+{
+	if (Player->Goalfrg == true) {
+		Player->texture->SetSize(INIT_SNOW_SIZE*1.1f, INIT_SNOW_SIZE * 2);
+
+		if (Player->SnowSize > PLAYER_SIZEUP) {
+			Player->texture->SetPart(10, 0);
+			if (Player->Item_Arm == true)
+				Player->texture->SetPart(11, 0);
+			if (Player->Item_Face == true)
+				Player->texture->SetPart(12, 0);
+		}
+		else {
+			Player->texture->SetPart(0, 0);
+			if (Player->Item_Arm == true)
+				Player->texture->SetPart(1, 0);
+			if (Player->Item_Face == true)
+				Player->texture->SetPart(2, 0);
+		}
+		if (Player2->Goalfrg == true) {
+			if (Player->SnowSize < Player2->SnowSize) {
+				Player->texture->SetPart(3, 0);
+				if (Player->Item_Arm == true && Player2->Item_Face == false)
+					Player->texture->SetPart(4, 0);
+				else if (Player->Item_Face == true && Player2->Item_Arm == false)
+					Player->texture->SetPart(5, 0);
+				else if (Player->Item_Face == true && Player2->Item_Arm == true)
+					Player->texture->SetPart(7, 0);
+				else if(Player->Item_Face == false && Player2->Item_Arm == true)
+					Player->texture->SetPart(6, 0);
+				else if (Player->Item_Arm == false && Player2->Item_Face == true)
+					Player->texture->SetPart(8, 0);
+				else if (Player->Item_Arm == true && Player2->Item_Face == true)
+					Player->texture->SetPart(9, 0);
+			}
+			else if (Player->SnowSize > Player2->SnowSize) {
+				Player->texture->SetPart(13, 0);
+				if (Player->Item_Arm == true && Player2->Item_Face == false)
+					Player->texture->SetPart(14, 0);
+				else if (Player->Item_Face == true && Player2->Item_Arm == false)
+					Player->texture->SetPart(15, 0);
+				else if (Player->Item_Face == true && Player2->Item_Arm == true)
+					Player->texture->SetPart(17, 0);
+				else if (Player->Item_Face == false && Player2->Item_Arm == true)
+					Player->texture->SetPart(16, 0);
+				else if (Player->Item_Arm == false && Player2->Item_Face == true)
+					Player->texture->SetPart(18, 0);
+				else if (Player->Item_Arm == true && Player2->Item_Face == true)
+					Player->texture->SetPart(19, 0);
+			}
+			else {
+				Player->texture->SetPart(20, 0);
+				if (Player->Item_Arm == true && Player2->Item_Face == false)
+					Player->texture->SetPart(21, 0);
+				else if (Player->Item_Face == true && Player2->Item_Arm == false)
+					Player->texture->SetPart(22, 0);
+				else if (Player->Item_Face == true && Player2->Item_Arm == true)
+					Player->texture->SetPart(24, 0);
+				else if (Player->Item_Face == false && Player2->Item_Arm == true)
+					Player->texture->SetPart(23, 0);
+				else if (Player->Item_Arm == false && Player2->Item_Face == true)
+					Player->texture->SetPart(25, 0);
+				else if (Player->Item_Arm == true && Player2->Item_Face == true)
+					Player->texture->SetPart(26, 0);
+			}
+		}
+	}
+
+	if (Player2->Goalfrg == true) {
+		Player2->texture->SetSize(INIT_SNOW_SIZE*1.1f, INIT_SNOW_SIZE * 2);
+
+		if (Player2->SnowSize > PLAYER_SIZEUP) {
+			Player2->texture->SetPart(10, 0);
+			if (Player2->Item_Arm == true)
+				Player2->texture->SetPart(11, 0);
+			if (Player2->Item_Face == true)
+				Player2->texture->SetPart(12, 0);
+		}
+		else {
+			Player2->texture->SetPart(0, 0);
+			if (Player2->Item_Arm == true)
+				Player2->texture->SetPart(1, 0);
+			if (Player2->Item_Face == true)
+				Player2->texture->SetPart(2, 0); 
+		}
+		if (Player->Goalfrg == true) {
+			if (Player2->SnowSize < Player->SnowSize) {
+				Player->texture->SetPart(3, 0);
+				if (Player2->Item_Arm == true && Player->Item_Face == false)
+					Player->texture->SetPart(4, 0);
+				else if (Player2->Item_Face == true && Player->Item_Arm == false)
+					Player->texture->SetPart(5, 0);
+				else if (Player2->Item_Face == true && Player->Item_Arm == true)
+					Player->texture->SetPart(7, 0);
+				else if (Player2->Item_Face == false && Player->Item_Arm == true)
+					Player->texture->SetPart(6, 0);
+				else if (Player2->Item_Arm == false && Player->Item_Face == true)
+					Player->texture->SetPart(8, 0);
+				else if (Player2->Item_Arm == true && Player->Item_Face == true)
+					Player->texture->SetPart(9, 0);
+			}
+			else if (Player2->SnowSize > Player->SnowSize) {
+				Player->texture->SetPart(13, 0);
+				if (Player2->Item_Arm == true && Player->Item_Face == false)
+					Player->texture->SetPart(14, 0);
+				else if (Player2->Item_Face == true && Player->Item_Arm == false)
+					Player->texture->SetPart(15, 0);
+				else if (Player2->Item_Face == true && Player->Item_Arm == true)
+					Player->texture->SetPart(17, 0);
+				else if (Player2->Item_Face == false && Player->Item_Arm == true)
+					Player->texture->SetPart(16, 0);
+				else if (Player2->Item_Arm == false && Player->Item_Face == true)
+					Player->texture->SetPart(18, 0);
+				else if (Player2->Item_Arm == true && Player->Item_Face == true)
+					Player->texture->SetPart(19, 0);
+			}
+			else {
+				Player->texture->SetPart(20, 0);
+				if (Player2->Item_Arm == true && Player->Item_Face == false)
+					Player->texture->SetPart(21, 0);
+				else if (Player2->Item_Face == true && Player->Item_Arm == false)
+					Player->texture->SetPart(22, 0);
+				else if (Player2->Item_Face == true && Player->Item_Arm == true)
+					Player->texture->SetPart(24, 0);
+				else if (Player2->Item_Face == false && Player->Item_Arm == true)
+					Player->texture->SetPart(23, 0);
+				else if (Player2->Item_Arm == false && Player->Item_Face == true)
+					Player->texture->SetPart(25, 0);
+				else if (Player2->Item_Arm == true && Player->Item_Face == true)
+					Player->texture->SetPart(26, 0);
+			}
+		}
+	}
+
+	if (Player->Goalfrg == true && Player2->Goalfrg == true)
+		Player2->posX = 10;
+}
+
 //カーソルがプレイヤーを追尾するように
 void Cursor_Update(GameObject * Player, GameObject * Cursor)
 {
 	Cursor->posX = Player->posX + 0.05f;
 	Cursor->posY = Player->posY + 0.1f;
+	if (Player->Goalfrg == true)
+		Cursor->posX = 10;
 }
 //プレイヤーのアニメーション
 void Player_AniUpdate(GameObject * Player)
@@ -143,7 +286,7 @@ void Player_AniUpdate(GameObject * Player)
 	int walk = 0, growth = 0, soil = 0, gameover = 0;
 	if (Player->animator.isActive == true)
 		walk = 8;
-	if (Player->SnowSize > 3)
+	if (Player->SnowSize > PLAYER_SIZEUP)
 		growth = 24;
 	if (Player->SoilFrg == true)
 		soil = 1;

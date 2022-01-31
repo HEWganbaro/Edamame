@@ -157,23 +157,23 @@ BOOL Game_Initialize()
 	{
 	case 0:
 		//敵の初期化
-		Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
-		gEnemyVector.emplace_back(gEnemy);
+		//Enemy_Initialize(&gEnemy, FOLLOWING);
+		//Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
+		//gEnemyVector.emplace_back(gEnemy);
 
 		//雪玉初期化
-		Player_SetLocation(&gPlayer1, gObjects, 1, 0, 0);
-		Player_SetLocation(&gPlayer2, gObjects, 0, 6, 6);
+		Player_SetLocation(&gPlayer1, gObjects, 0, 0, 6);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 7);
 		break;
 
 	case 1:
 		//敵の初期化
-		Enemy_Initialize(&gEnemy, RANDOM);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 7);
-		gEnemyVector.emplace_back(gEnemy);
+		//Enemy_Initialize(&gEnemy, RANDOM);
+		//Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 7);
+		//gEnemyVector.emplace_back(gEnemy);
 
-	default:
-		break;
+		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
 	}
 
 	//背景描画
@@ -267,8 +267,14 @@ BOOL Game_Update()
 	//敵アニメーション
 	for (int i = 0; i < gEnemyVector.size(); i++)
 		Enemy_Update(&gEnemyVector[i], &gPlayer1);
-	Player_AniUpdate(&gPlayer1);
-	Player_AniUpdate(&gPlayer2);
+
+	if (gPlayer1.Goalfrg == false)
+		Player_AniUpdate(&gPlayer1);
+	if (gPlayer2.Goalfrg == false)
+		Player_AniUpdate(&gPlayer2);
+
+	//ゴールの状態変化
+	Goal_Update(&gPlayer1, &gPlayer2);
 
 	//カーソルの位置変更
 	Cursor_Update(&gPlayer1, &gCursor1);
@@ -398,13 +404,16 @@ BOOL Game_Update()
 
 	case GAMEOVER:
 		//タイトルへ戻るフラグ
-		//if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
-		
+		if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
+		return FALSE;
+
 			GameFade.fadeout = true;
 		break;
 
 	case CLEAR:
-		//if (Input_GetKeyTrigger(VK_SPACE) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_A))
+ 		if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
+		return FALSE;
+
 		if (onceFlag == true) {
 			korokoroX = 0;
 			onceFlag = false;
@@ -413,28 +422,24 @@ BOOL Game_Update()
 		break;
 
 	case TUTORIAL:
-		if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP)
-			TutoLeft = true;
-		if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP)
-			TutoRight = true;
 
 		int page = gTutorial.texture->GetPart();
 
-		if (Input_GetKeyTrigger(VK_LEFT) || state.Gamepad.wButtons == 0 && TutoLeft == true) {
+		if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
 			page--;
 			if (page == -1)
 				page = 0;
 			TutoLeft = false;
 		}
 
-		if (Input_GetKeyTrigger(VK_RIGHT) || state.Gamepad.wButtons == 0 && TutoRight == true) {
+		if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			page++;
 			if (page == 4)
 				page = 3;
 			TutoRight = false;
 		}
 
-		if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
+		if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 			turn = PLAYER_TURN;
 			gTutorial.posX = -10;
 			gTutorial.posY = 10;
@@ -503,12 +508,18 @@ void Game_Draw()
 		for (int i = 0; i < gEnemyVector.size(); i++)
 			gEnemyVector[i].texture->Draw();
 	}
-	gPlayer1.texture->Draw();
-	gPlayer2.texture->Draw();
+	if (gPlayer1.Goalfrg == false)
+		gPlayer1.texture->Draw();
+	if (gPlayer2.Goalfrg == false)
+		gPlayer2.texture->Draw();
 	if (turn == GAMEOVER || turn == PENGUIN2) {
 		for (int i = 0; i < gEnemyVector.size(); i++)
 			gEnemyVector[i].texture->Draw();
 	}
+	if (gPlayer1.Goalfrg == true)
+		gPlayer1.texture->Draw();
+	if (gPlayer2.Goalfrg == true)
+		gPlayer2.texture->Draw();
 	gGauge.texture->Draw();
 	gGauge2.texture->Draw();
 	gCursor1.texture->Draw();

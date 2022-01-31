@@ -45,8 +45,6 @@ FADE LevelFade;
 int clear[10];
 
 int countLevel = 10;
-bool Right;
-bool Left;
 
 StageScore LevelScoreSheet[MAP_STAGE];
 //GameObjectを追加するときは必ずMAX_OBJECTの数を合わせないとエラーが出るよ！
@@ -276,36 +274,29 @@ BOOL Level_Update()
 	//	gchoice.posX = 0.8f;
 	//	gchoice.posY = 0.8f;
 	//}
-	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFTUP)
-		Left = true;
-	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHTUP)
-		Right = true;
 
-	if (Input_GetKeyTrigger(VK_LEFT) || state.Gamepad.wButtons == 0 && Left == true) {
+	if (Input_GetKeyTrigger(VK_LEFT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_LEFT)) {
 		stage--;
 		if (stage == 0)
 			stage = 1;
 		gchoice.texture->SetPart(stage, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
-		Left = false;
 
 		SetPos();
 	}
-	if (Input_GetKeyTrigger(VK_RIGHT) || state.Gamepad.wButtons == 0 && Right == true) {
+	if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
 		stage++;
 		if (stage == 11)
 			stage = 10;
 		gchoice.texture->SetPart(stage, 0);
 		gchoice.posX = 0.8f;
 		gchoice.posY = 0.8f;
-		Right = false;
 
 		SetPos();
 	}
 
-	if (Input_GetKeyTrigger(VK_RETURN) || (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)) {
-		korokoroX = 0;
+	if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
 		LevelFade.fadeout = true;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 	}

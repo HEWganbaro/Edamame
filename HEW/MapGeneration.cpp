@@ -842,9 +842,6 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 		}
 		Player->direction = NULL_WAY;
 	}
-	else {
-		Player->Goalfrg = true;//プレイヤーを動けなくする
-	}
 		switch (Player->direction)
 		{
 		case RIGHT_DOWN:
@@ -858,6 +855,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->animator.count++;
 			}
 			else {
+				Player->Goalfrg = true;//プレイヤーを動けなくする
+				delete Player->texture;
+				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+				Player->posY += 0.225f;
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
@@ -876,6 +877,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->animator.count++;
 			}
 			else {
+				Player->Goalfrg = true;//プレイヤーを動けなくする
+				delete Player->texture;
+				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+				Player->posY += 0.225f;
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
@@ -894,6 +899,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->animator.count++;
 			}
 			else {
+				Player->Goalfrg = true;//プレイヤーを動けなくする
+				delete Player->texture;
+				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+				Player->posY += 0.225f;
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
@@ -912,6 +921,10 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->animator.count++;
 			}
 			else {
+				Player->Goalfrg = true;//プレイヤーを動けなくする
+				delete Player->texture;
+				Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+				Player->posY += 0.225f;
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;

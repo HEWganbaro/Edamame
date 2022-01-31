@@ -123,7 +123,7 @@ BOOL GameOver_Update()
 		oPlayer.posY += 0.0001;
 	}
 
-	if (Input_GetKeyTrigger(VK_SPACE))
+	if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
 	{
 		GameOverFade.fadeout = true;
 		XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
