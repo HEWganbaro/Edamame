@@ -15,3 +15,8 @@ BOOL GameOver_Initialize();
 BOOL GameOver_Update();
 void GameOver_Draw();
 void GameOver_Relese();
+
+enum OverChoice {
+	oRESPAWN,
+	oTITLE,
+};

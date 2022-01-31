@@ -140,6 +140,8 @@ struct GameObject {
 	bool SoilFrg;//土を踏んだか
 	bool Item_Face = false;
 	bool Item_Arm = false;
+	bool dirtF = false;
+	bool stanF = false;
 
 	MapPos mappos;	//マップ単位でいる場所
 	MapPos tmp;	//一時保存場所

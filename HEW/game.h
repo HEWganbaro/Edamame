@@ -22,6 +22,7 @@
 #include "Shielding.h"
 #include "Effect.h"
 #include "Gauge.h"
+#include "SubQuest.h"
 
 
 #define ASPECT 16/9

@@ -35,6 +35,7 @@ GameObject oLogo;
 GameObject oFade;
 GameObject oFadeLogo;
 GameObject oPlayer;
+GameObject oCrystal;
 
 FADE GameOverFade;
 FADE GameLogo;
@@ -71,6 +72,12 @@ BOOL GameOver_Initialize()
 	oLogo.posX = -1;
 	oLogo.posY = 1;
 
+	//どこ選択してるか
+	oCrystal.texture = new Sprite("assets/crystal.png", 1, 1);
+	oCrystal.texture->SetSize(256, 256);
+	oCrystal.posX = -0.5;
+	oCrystal.posY = 1;
+
 	//フェード
 	oFade.texture = new Sprite("assets/追加テクスチャ/gameover_1.png", 1, 1);
 	oFade.texture->SetSize(1280 * 2, 720 * 2);
@@ -94,7 +101,7 @@ BOOL GameOver_Initialize()
 	GameLogo.framecnt = FADETIME - 0.1f;
 	GameLogo.fadeout = true;
 
-	
+	//pauseChoice = oRESPAWN;
 
 	return TRUE;
 }
@@ -112,6 +119,7 @@ BOOL GameOver_Update()
 	GameObject_DrowUpdate(&oLogo);
 	GameObject_DrowUpdate(&oFade);
 	GameObject_DrowUpdate(&oFadeLogo);
+	GameObject_DrowUpdate(&oCrystal);
 
 	Animator_Update(&oPlayer.animator);
 	oPlayer.animator.isActive = true;
@@ -122,7 +130,26 @@ BOOL GameOver_Update()
 	{
 		oPlayer.posY += 0.0001;
 	}
-
+	
+	if (Input_GetKeyTrigger(VK_UP)) {
+		pauseChoice -= 1;
+		if (pauseChoice < 0)
+			pauseChoice = 1;
+	}
+	if (Input_GetKeyTrigger(VK_DOWN)) {
+		pauseChoice += 1;
+		if (pauseChoice > 1)
+			pauseChoice = 0;
+	}
+	switch (pauseChoice)
+	{
+	case 0:
+		oCrystal.posY = -0.3f;
+		break;
+	case 1:
+		oCrystal.posY = -0.5f;
+	}
+	
 	if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
 	{
 		GameOverFade.fadeout = true;
@@ -154,6 +181,7 @@ void GameOver_Draw()
 	oLogo.texture->Draw();
 	oFade.texture->Draw();
 	oFadeLogo.texture->Draw();
+	oCrystal.texture->Draw();
 
 	// ダブル・バッファのディスプレイ領域へのコピー命令
 	Direct3D_GetSwapChain()->Present(0, 0);
@@ -169,4 +197,5 @@ void GameOver_Relese()
 	delete oLogo.texture;
 	delete oFade.texture;
 	delete oFadeLogo.texture;
+	delete oCrystal.texture;
 }

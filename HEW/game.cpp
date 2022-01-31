@@ -160,9 +160,9 @@ BOOL Game_Initialize()
 	{
 	case 0:
 		//敵の初期化
-		//Enemy_Initialize(&gEnemy, FOLLOWING);
-		//Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
-		//gEnemyVector.emplace_back(gEnemy);
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
+		gEnemyVector.emplace_back(gEnemy);
 
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 0, 0, 6);
@@ -171,9 +171,9 @@ BOOL Game_Initialize()
 
 	case 1:
 		//敵の初期化
-		//Enemy_Initialize(&gEnemy, RANDOM);
-		//Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 7);
-		//gEnemyVector.emplace_back(gEnemy);
+		/*Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 7);
+		gEnemyVector.emplace_back(gEnemy);*/
 
 		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
@@ -433,9 +433,10 @@ BOOL Game_Update()
 			break;
 
 		case GAMEOVER:
+			return FALSE;
 			//タイトルへ戻るフラグ
 			if (Input_GetKeyTrigger(VK_SPACE) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B))
-				return FALSE;
+				
 
 			GameFade.fadeout = true;
 			break;

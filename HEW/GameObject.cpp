@@ -55,7 +55,7 @@ vector<string> split(string& input, char delimiter)
 	}
 	return result;
 }
-
+//間借りします、フェード用関数です
 void FadeChange(FADE* fade) {
 	if (fade->fadeout == true)
 		fade->framecnt++;

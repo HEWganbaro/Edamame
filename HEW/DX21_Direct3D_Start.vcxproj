@@ -169,6 +169,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shielding.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SubQuest.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="vs.h" />
     <ClInclude Include="XAudio2.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shielding.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SubQuest.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="XAudio2.cpp" />
   </ItemGroup>
