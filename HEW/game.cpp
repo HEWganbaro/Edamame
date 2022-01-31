@@ -162,6 +162,10 @@ BOOL Game_Initialize()
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 6, 6);
 		gEnemyVector.emplace_back(gEnemy);
 
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
+		gEnemyVector.emplace_back(gEnemy);
+
 		//ê·ã èâä˙âª
 		Player_SetLocation(&gPlayer1, gObjects, 0, 4, 6);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 7);
@@ -421,11 +425,11 @@ BOOL Game_Update()
 			for (int i = 0; i < gEnemyVector.size(); i++) {
 				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer1);
 				Enemy_Move_Frg(&gEnemyVector[i], &gPlayer2);
-				if (gEnemyVector[i].Enemycount < 10) {
+				if (gEnemyVector[i].Enemycount < 10 && gEnemyVector[i].EnemyAttak == true) {
 					gEnemyVector[i].posY -= 0.2f / 10;
 					gEnemyVector[i].Enemycount++;
 				}
-				else {
+  				if (gEnemyVector[i].Enemycount == 10) {
 					turn = GAMEOVER;
 				}
 			}
