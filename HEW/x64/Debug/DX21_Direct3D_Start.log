@@ -1,0 +1,139 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中間ディレクトリ (x64\Debug\) に別のプロジェクト (DX21_Move.vcxproj) と共有されているファイルが含まれています。これにより、クリーンしてリビルド動作が適切に行われない可能性があります。
+  compilation header save succeeded; see C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame13\HEW\ps.h
+  compilation header save succeeded; see C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame13\HEW\vs.h
+  compilation object save succeeded; see C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame13\HEW\x64\Debug\vs.cso
+  CharController.cpp
+  Easing.cpp
+  Effect.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\effect.cpp(5): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\effect.cpp(26): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\effect.cpp(48): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\effect.cpp(52): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Enemy.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(248): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(249): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(266): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(267): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(284): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(285): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(303): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\enemy.cpp(304): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  GameClear.cpp
+  GameObject.cpp
+  GameOver.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\gameover.cpp(131): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+  GameTimer.cpp
+  Gauge.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\gauge.cpp(27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Kamishibai.cpp
+  Level.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(120): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(354): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\level.cpp(355): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  MapGeneration.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(181): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(182): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(199): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(200): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(240): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(241): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(257): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(258): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(274): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(275): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(292): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(293): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(313): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(314): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(330): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(331): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(347): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(348): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(364): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(365): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(393): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(394): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(448): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(449): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(467): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(468): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(521): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(522): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(539): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(540): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(591): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(592): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(609): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(610): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(661): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(662): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(677): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(678): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(694): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(695): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(711): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(712): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(728): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(729): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(747): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(748): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(783): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(784): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(867): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(868): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(890): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(891): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(913): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(914): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(936): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(937): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(966): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(967): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(986): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(987): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1006): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1007): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1026): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1027): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1053): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1054): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1073): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1074): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1093): warning C4244: '-=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1094): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1113): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\mapgeneration.cpp(1114): warning C4244: '+=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Player.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\player.cpp(464): warning C4244: 'return': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Scene.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(12): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(26): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(41): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(46): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(65): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(71): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(80): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(86): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(107): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(122): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\scene.cpp(127): warning C4553: '==': 式の結果が使用されていません。'=' を意図していますか?
+  Shielding.cpp
+  Sprite.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\sprite.cpp(61): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\sprite.cpp(62): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+  SubQuest.cpp
+  Title.cpp
+  XAudio2.cpp
+  animator.cpp
+  コードを生成中...
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\kamishibai.cpp(108): warning C4715: 'Kamishibai_Update': 値を返さないコントロール パスがあります。
+  コンパイル中...
+  direct3d.cpp
+  WICTextureLoader.cpp
+  game.cpp
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\game.cpp(287): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+c:\users\yudai\onedrive\デスクトップ\hew\edamame13\hew\game.cpp(288): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  input.cpp
+  main.cpp
+  コードを生成中...
+  DX21_Direct3D_Start.vcxproj -> C:\Users\yudai\OneDrive\デスクトップ\HEW\Edamame13\HEW\x64\Debug\HEW.exe

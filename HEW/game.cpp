@@ -659,6 +659,7 @@ StageScore Game_Relese()
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_SNOWHUNDA));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PLAYERGROW));
 	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_MOVE));
+	XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 
 	delete gPlayer1.texture;
 	delete gPlayer2.texture;
