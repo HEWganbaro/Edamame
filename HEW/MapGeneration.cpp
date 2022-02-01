@@ -109,6 +109,102 @@ void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAG
 		}
 		Map_GetStone(StoneMap, Map);
 	}
+	if (stage == STAGE_3) {
+		StoneMap->clear();
+		gStarg = 3;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
+	if (stage == STAGE_4) {
+		StoneMap->clear();
+		gStarg = 4;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
+	if (stage == STAGE_5) {
+		StoneMap->clear();
+		gStarg = 5;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
+	if (stage == STAGE_6) {
+		StoneMap->clear();
+		gStarg = 6;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
+	if (stage == STAGE_7) {
+		StoneMap->clear();
+		gStarg = 7;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
+	if (stage == STAGE_8) {
+		StoneMap->clear();
+		gStarg = 8;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
+	if (stage == STAGE_9) {
+		StoneMap->clear();
+		gStarg = 9;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
+	if (stage == STAGE_10) {
+		StoneMap->clear();
+		gStarg = 10;
+		for (int k = 0; k < MAP_HEIGHT; k++) {
+			for (int j = 0; j < MAP_EDGE; j++) {
+				for (int i = 0; i < MAP_EDGE; i++) {
+					Map[i + MAP_EDGE * j + 100 * k].texture->SetPart(MapChip[stage - 1][k][j][i], 0);
+				}
+			}
+		}
+		Map_GetStone(StoneMap, Map);
+	}
 }
 
 void Map_GetStone(vector<MapPos>* StoneMap, GameObject* Map)
@@ -1058,7 +1154,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Face == false)
+				if (Player->Item_Face == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}
@@ -1078,7 +1174,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Face == false)
+				if (Player->Item_Face == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}
@@ -1098,7 +1194,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Face == false)
+				if (Player->Item_Face == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}
@@ -1118,7 +1214,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 				Player->direction = NULL_WAY;
 				Player->animator.count = 0;
 				Player->animator.isActive = false;
-				if (Player->Item_Face == false)
+				if (Player->Item_Face == false && Player->IsEnemy == false)
 					Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(1, 0);
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ITEM));
 			}

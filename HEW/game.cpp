@@ -157,32 +157,114 @@ BOOL Game_Initialize()
 	switch (Map_GetStage())
 	{
 	case 0:
-		//敵の初期化
-		Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 6, 6);
-		gEnemyVector.emplace_back(gEnemy);
-
-		Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 6);
-		gEnemyVector.emplace_back(gEnemy);
-
-		//雪玉初期化
-		Player_SetLocation(&gPlayer1, gObjects, 0, 4, 6);
-		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 7);
+		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
 		break;
 
 	case 1:
-		//敵の初期化
-		Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 6, 5);
+		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
+		break;
+
+	case 2:
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 2, 1);
 		gEnemyVector.emplace_back(gEnemy);
 
-		/*Enemy_Initialize(&gEnemy, FOLLOWING);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 0);
-		gEnemyVector.emplace_back(gEnemy);*/
+		//雪玉初期化
+		Player_SetLocation(&gPlayer1, gObjects, 1, 8, 0);
+		Player_SetLocation(&gPlayer2, gObjects, 1, 0, 8);
+		break;
 
+	case 3:
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 1, 5, 5);
+		gEnemyVector.emplace_back(gEnemy);
+
+		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
+		break;
+
+	case 4:
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 1, 4, 1);
+		gEnemyVector.emplace_back(gEnemy);
+
+
+		Player_SetLocation(&gPlayer1, gObjects, 0, 8, 1);    //小さいステージ
+		Player_SetLocation(&gPlayer2, gObjects, 1, 1, 1);    //
+		break;
+
+	case 5:
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 2, 1);
+		gEnemyVector.emplace_back(gEnemy);
+
+		//雪玉初期化
+		Player_SetLocation(&gPlayer1, gObjects, 1, 8, 0);
+		Player_SetLocation(&gPlayer2, gObjects, 1, 0, 8);
+		break;
+
+	case 6:
+		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);//10x10
+		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
+
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 6, 5);//違うステージ
+		gEnemyVector.emplace_back(gEnemy);
+		break;
+
+	case 7:
+		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);//10x10
+		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 1);
+
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 0);//違うステージ
+		gEnemyVector.emplace_back(gEnemy);
+
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 0);
+		gEnemyVector.emplace_back(gEnemy);
+		break;
+
+	case 8:
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 5);
+		gEnemyVector.emplace_back(gEnemy);
+		/*敵の初期化*/
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 5, 4);
+		gEnemyVector.emplace_back(gEnemy);
+
+		//雪玉初期化
+		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
+		break;
+
+	case 9:
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 1, 1);
+		gEnemyVector.emplace_back(gEnemy);
+		/*敵の初期化*/
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 9, 9);
+		gEnemyVector.emplace_back(gEnemy);
+
+		//雪玉初期化
+		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 1);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 1, 9);
+		break;
+
+	case 10:
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 3);
+		gEnemyVector.emplace_back(gEnemy);
+
+		//雪玉初期化
+		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 0);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 7, 7);
+		break;
 	}
 
 	//背景描画
