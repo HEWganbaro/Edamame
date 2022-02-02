@@ -152,6 +152,13 @@ BOOL Game_Initialize()
 	//マップ変更
 	Map_Update(gObjects, &StoneMap, MapChip);
 
+	//背景描画
+	gBackGround.texture = new Sprite("assets/GameBG.png", 2, 1);
+	gBackGround.texture->SetSize(1280 * 2, 720 * 2);
+	gBackGround.posX = -1;
+	gBackGround.posY = 1;
+	gBackGround.texture->SetPart(1, 0);
+
 	//敵の場所指定
 	//敵の場所を指定しておくステージごとに
 	switch (Map_GetStage())
@@ -159,31 +166,37 @@ BOOL Game_Initialize()
 	case 0:
 		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
+		gBackGround.texture->SetPart(0, 0);
 		break;
 
 	case 1:
 		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
+		gBackGround.texture->SetPart(0, 0);
 		break;
 
 	case 2:
 		Enemy_Initialize(&gEnemy, RANDOM);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 2, 1);
 		gEnemyVector.emplace_back(gEnemy);
+		
 
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 1, 8, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 1, 0, 8);
+		gBackGround.texture->SetPart(0, 0);
 		break;
 
 	case 3:
 		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 1, 5, 5);
 		gEnemyVector.emplace_back(gEnemy);
+		
 
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
+		gBackGround.texture->SetPart(0, 0);
 		break;
 
 	case 4:
@@ -192,8 +205,10 @@ BOOL Game_Initialize()
 		gEnemyVector.emplace_back(gEnemy);
 
 
+
 		Player_SetLocation(&gPlayer1, gObjects, 0, 8, 1);    //小さいステージ
 		Player_SetLocation(&gPlayer2, gObjects, 1, 1, 1);    //
+		gBackGround.texture->SetPart(0, 0);
 		break;
 
 	case 5:
@@ -204,6 +219,7 @@ BOOL Game_Initialize()
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 1, 8, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 1, 0, 8);
+		gBackGround.texture->SetPart(1, 0);
 		break;
 
 	case 6:
@@ -213,6 +229,7 @@ BOOL Game_Initialize()
 		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 6, 5);//違うステージ
 		gEnemyVector.emplace_back(gEnemy);
+		gBackGround.texture->SetPart(1, 0);
 		break;
 
 	case 7:
@@ -226,6 +243,7 @@ BOOL Game_Initialize()
 		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 0);
 		gEnemyVector.emplace_back(gEnemy);
+		gBackGround.texture->SetPart(1, 0);
 		break;
 
 	case 8:
@@ -240,6 +258,7 @@ BOOL Game_Initialize()
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
+		gBackGround.texture->SetPart(1, 0);
 		break;
 
 	case 9:
@@ -254,6 +273,7 @@ BOOL Game_Initialize()
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 1);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 1, 9);
+		gBackGround.texture->SetPart(1, 0);
 		break;
 
 	case 10:
@@ -264,15 +284,11 @@ BOOL Game_Initialize()
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 7, 7);
+		gBackGround.texture->SetPart(1, 0);
 		break;
 	}
 
-	//背景描画
-	gBackGround.texture = new Sprite("assets/GameBG.png", 2, 1);
-	gBackGround.texture->SetSize(1280 * 2, 720 * 2);
-	gBackGround.posX = -1;
-	gBackGround.posY = 1;
-	gBackGround.texture->SetPart(1, 0);
+	
 
 	//ゲージのフレーム
 	gGaugeframe.texture = new Sprite("assets/gaugeframe.png", 1, 1);
