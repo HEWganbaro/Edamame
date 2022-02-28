@@ -129,6 +129,7 @@ void Enemy_Update(GameObject * Enemy, GameObject* Player)
 				break;
 
 			case LEFT_DOWN:
+			case STAY:
 				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1);
 				break;
 
@@ -147,6 +148,7 @@ void Enemy_Update(GameObject * Enemy, GameObject* Player)
 			break;
 
 		case LEFT_DOWN:
+		case STAY:
 			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1);
 			break;
 
@@ -431,7 +433,10 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		}
 		else {
 			//UŒ‚”ÍˆÍ‚È‚ç“®‚©‚È‚¢
-			Enemy->direction = NO_ACTION;
+			if (Player->mappos.Height == Enemy->mappos.Height)
+				Enemy->direction = NO_ACTION;
+			else
+				Enemy->direction = STAY;
 		}
 		Enemy->animator.isActive = true;
 	}
@@ -499,7 +504,10 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		}
 		else {
 			//UŒ‚”ÍˆÍ‚È‚ç“®‚©‚È‚¢
-			Enemy->direction = NO_ACTION;
+			if (Player2->mappos.Height == Enemy->mappos.Height)
+				Enemy->direction = NO_ACTION;
+			else
+				Enemy->direction = STAY;
 		}
 		Enemy->animator.isActive = true;
 	}

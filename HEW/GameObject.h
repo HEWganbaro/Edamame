@@ -35,6 +35,7 @@ enum Direction
 	LEFT_UP,
 	RIGHT_UP,
 	NO_ACTION,
+	STAY,
 };
 
 //“G‚Ìƒ^ƒCƒv

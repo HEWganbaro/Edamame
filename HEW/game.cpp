@@ -288,16 +288,11 @@ BOOL Game_Initialize()
 		break;
 	}
 
-	
-
 	//ゲージのフレーム
 	gGaugeframe.texture = new Sprite("assets/gaugeframe.png", 1, 1);
 	gGaugeframe.texture->SetSize(232 * 4, 64 * 4);
 	gGaugeframe.posX = 0.23f;
 	gGaugeframe.posY = -0.65f;
-
-	//デバック用
-	
 
 	//フェード
 	gFade.texture = new Sprite("assets/TitleBG.png", 1, 1);
@@ -364,6 +359,9 @@ BOOL Game_Initialize()
 		gTutorial.posY = 10;
 	}
 	pause = gGAME;
+
+	//雪玉が早いほうの初期化
+	GoalFast_1 = false;
 
 	return TRUE;
 }
@@ -456,6 +454,10 @@ BOOL Game_Update()
 					if (gEnemyVector[i].animator.isActive != false) {
 						end = true;
 						gEnemyVector[i].animator.oneAni = true;
+					}
+					if (gEnemyVector[i].direction == STAY) {
+						end = false;
+						gEnemyVector[i].direction = NULL_WAY;
 					}
 				}
 				//敵のスタン

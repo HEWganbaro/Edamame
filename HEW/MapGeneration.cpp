@@ -515,8 +515,16 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					//ゴールなら止める
 					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
 						Player->Goalfrg = true;
-					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false)
+					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false) {
+						Player->GoalEffect = true;
+						delete Player->texture;
+						Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+						Player->posY += 0.225f;
+						Player->direction = NULL_WAY;
+						Player->animator.count = 0;
+						Player->animator.isActive = false;
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					}
 					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
 						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
 							Player->Item_Face = true;
@@ -588,8 +596,16 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->mappos.LeftDown--;
 					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
 						Player->Goalfrg = true;
-					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false)
+					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false) {
+						Player->GoalEffect = true;
+						delete Player->texture;
+						Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+						Player->posY += 0.225f;
+						Player->direction = NULL_WAY;
+						Player->animator.count = 0;
+						Player->animator.isActive = false;
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					}
 					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
 						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
 							Player->Item_Face = true;
@@ -643,7 +659,7 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_ICEHUNDA));
 
 					bool mapedge = Player->mappos.RightDown + 1 != MAP_EDGE;
-					bool mapout = Map_GetPlayerTile_LeftUp(Player, Map) != -1;
+					bool mapout = Map_GetPlayerTile_LeftUp(Player, Map) != -1 && Player->mappos.RightDown != 0;
 					bool mapslope = Map_GetPlayerTile_LeftUp(Player, Map) != RIGHTUP_SLOPE;
 					bool mapstone = Map_GetPlayerTile_LeftUp(Player, Map) != STONE;
 					bool enemygoal = Map_GetPlayerTile_LeftUp(Player, Map) == GOAL && Player->IsEnemy == true;
@@ -654,8 +670,16 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->mappos.RightDown++;
 					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
 						Player->Goalfrg = true;
-					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false)
+					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false) {
+						Player->GoalEffect = true;
+						delete Player->texture;
+						Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+						Player->posY += 0.225f;
+						Player->direction = NULL_WAY;
+						Player->animator.count = 0;
+						Player->animator.isActive = false;
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					}
 					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
 						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
 							Player->Item_Face = true;
@@ -724,8 +748,16 @@ void MapMove_Update(GameObject * Player, GameObject* Map) {
 						Player->mappos.LeftDown++;
 					if (Map_GetPlayerTile(Player, Map) == GOAL || Map_GetPlayerTile(Player, Map) == GOAL_LATER)
 						Player->Goalfrg = true;
-					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false)
+					if (Map_GetPlayerTile(Player, Map) == GOAL && Player->IsEnemy == false) {
+						Player->GoalEffect = true;
+						delete Player->texture;
+						Player->texture = new Sprite("assets/yukidaruma.png", 27, 1);
+						Player->posY += 0.225f;
+						Player->direction = NULL_WAY;
+						Player->animator.count = 0;
+						Player->animator.isActive = false;
 						Map[Player->mappos.RightDown + MAP_EDGE * Player->mappos.LeftDown + 100 * Player->mappos.Height].texture->SetPart(8, 0);
+					}
 					if (Map_GetPlayerTile(Player, Map) == ITEM_FACE) {
 						if (Player->Item_Arm == false) {	//アイテムは同時に2個持てない
 							Player->Item_Face = true;
