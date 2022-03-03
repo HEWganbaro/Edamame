@@ -170,8 +170,6 @@ BOOL Game_Initialize()
 	//敵の場所を指定しておくステージごとに
 	switch (Map_GetStage())
 	{
-	
-
 	case 1:
 		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
@@ -180,16 +178,11 @@ BOOL Game_Initialize()
 		break;
 
 	case 2:
-		Enemy_Initialize(&gEnemy, RANDOM);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 2, 1);
-		gEnemyVector.emplace_back(gEnemy);
-		gPenUI.texture->SetPart(RAND, 0);
-		
-
 		//雪玉初期化
-		Player_SetLocation(&gPlayer1, gObjects, 1, 8, 0);
-		Player_SetLocation(&gPlayer2, gObjects, 1, 0, 8);
+		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
 		gBackGround.texture->SetPart(0, 0);
+		gPenUI.texture->SetPart(NONE, 0);
 		break;
 
 	case 3:
@@ -210,8 +203,6 @@ BOOL Game_Initialize()
 		Enemy_SetLocation(&gEnemy, gObjects, 1, 4, 1);
 		gEnemyVector.emplace_back(gEnemy);
 		gPenUI.texture->SetPart(RAND, 0);
-
-
 
 		Player_SetLocation(&gPlayer1, gObjects, 0, 8, 1);    //小さいステージ
 		Player_SetLocation(&gPlayer2, gObjects, 1, 1, 1);    //

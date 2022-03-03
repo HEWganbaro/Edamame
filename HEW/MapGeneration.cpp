@@ -87,7 +87,7 @@ void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAG
 	//CSV‚Ì‡”Ô’Ê‚è‚É‚È‚é
 	if (stage == STAGE_1) {
 		StoneMap->clear();
-		gStarg = 0;
+		gStarg = 1;
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
@@ -99,7 +99,7 @@ void Map_Update(GameObject * Map, vector<MapPos>* StoneMap, int MapChip[MAP_STAG
 	}
 	if (stage == STAGE_2) {
 		StoneMap->clear();
-		gStarg = 1;
+		gStarg = 2;
 		for (int k = 0; k < MAP_HEIGHT; k++) {
 			for (int j = 0; j < MAP_EDGE; j++) {
 				for (int i = 0; i < MAP_EDGE; i++) {
