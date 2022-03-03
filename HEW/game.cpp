@@ -49,6 +49,7 @@ vector<GameObject> gEnemyVector;
 GameObject gBackGround;				//背景
 GameObject gGauge;					//ゲージ
 GameObject gGauge2;
+GameObject gPenUI;
 GameObject gGaugeframe;
 GameObject gCursor1;
 GameObject gCursor2;
@@ -159,26 +160,30 @@ BOOL Game_Initialize()
 	gBackGround.posY = 1;
 	gBackGround.texture->SetPart(1, 0);
 
+	//ゲージのフレーム
+	gPenUI.texture = new Sprite("assets/penguin_ui.png", 4, 1);
+	gPenUI.texture->SetSize(150 * 4, 80 * 4);
+	gPenUI.posX = -0.9f;
+	gPenUI.posY = 0.8f;
+
 	//敵の場所指定
 	//敵の場所を指定しておくステージごとに
 	switch (Map_GetStage())
 	{
-	case 0:
-		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
-		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
-		gBackGround.texture->SetPart(0, 0);
-		break;
+	
 
 	case 1:
 		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 2);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 2, 7);
 		gBackGround.texture->SetPart(0, 0);
+		gPenUI.texture->SetPart(NONE, 0);
 		break;
 
 	case 2:
 		Enemy_Initialize(&gEnemy, RANDOM);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 2, 1);
 		gEnemyVector.emplace_back(gEnemy);
+		gPenUI.texture->SetPart(RAND, 0);
 		
 
 		//雪玉初期化
@@ -191,6 +196,7 @@ BOOL Game_Initialize()
 		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 1, 5, 5);
 		gEnemyVector.emplace_back(gEnemy);
+		gPenUI.texture->SetPart(FOLLOW, 0);
 		
 
 		//雪玉初期化
@@ -203,6 +209,7 @@ BOOL Game_Initialize()
 		Enemy_Initialize(&gEnemy, RANDOM);
 		Enemy_SetLocation(&gEnemy, gObjects, 1, 4, 1);
 		gEnemyVector.emplace_back(gEnemy);
+		gPenUI.texture->SetPart(RAND, 0);
 
 
 
@@ -215,6 +222,7 @@ BOOL Game_Initialize()
 		Enemy_Initialize(&gEnemy, RANDOM);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 2, 1);
 		gEnemyVector.emplace_back(gEnemy);
+		gPenUI.texture->SetPart(RAND, 0);
 
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 1, 8, 0);
@@ -230,6 +238,8 @@ BOOL Game_Initialize()
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 6, 5);//違うステージ
 		gEnemyVector.emplace_back(gEnemy);
 		gBackGround.texture->SetPart(1, 0);
+		gPenUI.texture->SetPart(FOLLOW, 0);
+
 		break;
 
 	case 7:
@@ -244,6 +254,7 @@ BOOL Game_Initialize()
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 0);
 		gEnemyVector.emplace_back(gEnemy);
 		gBackGround.texture->SetPart(1, 0);
+		gPenUI.texture->SetPart(FOLLOW, 0);
 		break;
 
 	case 8:
@@ -259,6 +270,7 @@ BOOL Game_Initialize()
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
 		gBackGround.texture->SetPart(1, 0);
+		gPenUI.texture->SetPart(FOLLOW, 0);
 		break;
 
 	case 9:
@@ -274,12 +286,14 @@ BOOL Game_Initialize()
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 1);
 		Player_SetLocation(&gPlayer2, gObjects, 0, 1, 9);
 		gBackGround.texture->SetPart(1, 0);
+		gPenUI.texture->SetPart(FOLLOW, 0);
 		break;
 
 	case 10:
 		Enemy_Initialize(&gEnemy, RANDOM);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 3);
 		gEnemyVector.emplace_back(gEnemy);
+		gPenUI.texture->SetPart(RAND, 0);
 
 		//雪玉初期化
 		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 0);
@@ -293,6 +307,8 @@ BOOL Game_Initialize()
 	gGaugeframe.texture->SetSize(232 * 4, 64 * 4);
 	gGaugeframe.posX = 0.23f;
 	gGaugeframe.posY = -0.65f;
+
+
 
 	//フェード
 	gFade.texture = new Sprite("assets/TitleBG.png", 1, 1);
@@ -318,6 +334,7 @@ BOOL Game_Initialize()
 	gArrow.texture->SetSize(128, 128);
 	gArrow.posX = 0.9f;
 	gArrow.posY = 0.0f;
+
 
 	//ポーズ
 	gPause.texture = new Sprite("assets/pause.png", 2, 1);
@@ -574,10 +591,14 @@ BOOL Game_Update()
 			if (Input_GetKeyTrigger(VK_RIGHT) || Input_GetControllerTrigger(XINPUT_GAMEPAD_DPAD_RIGHT)) {
 				page++;
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
+				if (page == 3) {
+					gArrow.posY = 4.0;
+				}
 				if (page == 4)
 				{
 					page = 3;
 					XA_Stop(SOUND_LABEL(SOUND_LABEL_SE_PAPER));
+					
 				}
 				TutoRight = false;
 			}
@@ -682,6 +703,7 @@ BOOL Game_Update()
 	GameObject_DrowUpdate(&gPlayer2);
 	GameObject_DrowUpdate(&gGauge);
 	GameObject_DrowUpdate(&gGauge2);
+	GameObject_DrowUpdate(&gPenUI);
 	GameObject_DrowUpdate(&gCursor1);
 	GameObject_DrowUpdate(&gCursor2);
 	GameObject_DrowUpdate(&gGaugeframe);
@@ -733,6 +755,7 @@ void Game_Draw()
 		gPlayer2.texture->Draw();
 	gGauge.texture->Draw();
 	gGauge2.texture->Draw();
+	gPenUI.texture->Draw();
 	gCursor1.texture->Draw();
 	gCursor2.texture->Draw();
 	gGaugeframe.texture->Draw();
@@ -766,6 +789,7 @@ StageScore Game_Relese()
 	delete gPlayer2.texture;
 	delete gGauge.texture;
 	delete gGauge2.texture;
+	delete gPenUI.texture;
 	delete gCursor1.texture;
 	delete gCursor2.texture;
 	delete gGaugeframe.texture;

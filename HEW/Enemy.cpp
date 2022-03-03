@@ -22,6 +22,12 @@ GameObject* Enemy_Initialize(GameObject * Enemy, EnemyType type)
 	Enemy->EnemyAttak = false;
 	Enemy->Enemycount = 0;
 	Enemy->IsStun = Nothing;
+	if (type == FOLLOWING) {
+		Enemy->Pentype = 4;
+	}
+	else if (type == RANDOM) {
+		Enemy->Pentype = 0;
+	}
 
 	return Enemy;
 }
@@ -72,19 +78,19 @@ void Enemy_Update(GameObject * Enemy, GameObject* Player)
 			{
 			case NULL_WAY:
 			case RIGHT_DOWN:
-				Enemy->texture->SetPart(gameover, 0);
+				Enemy->texture->SetPart(gameover, 0 + Enemy->Pentype);
 				break;
 			case LEFT_DOWN:
-				Enemy->texture->SetPart(gameover, 1);
+				Enemy->texture->SetPart(gameover, 1 + Enemy->Pentype);
 				break;
 			case LEFT_UP:
-				Enemy->texture->SetPart(gameover, 2);
+				Enemy->texture->SetPart(gameover, 2 + Enemy->Pentype);
 				break;
 			case RIGHT_UP:
-				Enemy->texture->SetPart(gameover, 3);
+				Enemy->texture->SetPart(gameover, 3 + Enemy->Pentype);
 				break;
 			case NO_ACTION:
-				Enemy->texture->SetPart( gameover, 0);
+				Enemy->texture->SetPart( gameover, 0 + Enemy->Pentype);
 				break;
 			}
 		}
@@ -93,19 +99,19 @@ void Enemy_Update(GameObject * Enemy, GameObject* Player)
 			{
 			case NULL_WAY:
 			case RIGHT_DOWN:
-				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0 + Enemy->Pentype);
 				break;
 			case LEFT_DOWN:
-				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 1);
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 1 + Enemy->Pentype);
 				break;
 			case LEFT_UP:
-				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 2);
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 2 + Enemy->Pentype);
 				break;
 			case RIGHT_UP:
-				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 3);
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 3 + Enemy->Pentype);
 				break;
 			case NO_ACTION:
-				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0);
+				Enemy->texture->SetPart(Enemy->animator.frame + gameover, 0 + Enemy->Pentype);
 				break;
 			}
 		}
@@ -121,43 +127,43 @@ void Enemy_Update(GameObject * Enemy, GameObject* Player)
 			switch (Enemy->diretmp)
 			{
 			case NULL_WAY:
-				Enemy->texture->SetPart(Enemy->animator.frame + stun + following, 0);
+				Enemy->texture->SetPart(Enemy->animator.frame + stun + following, 0 + Enemy->Pentype);
 				break;
 
 			case RIGHT_DOWN:
-				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 0);
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 0 + Enemy->Pentype);
 				break;
 
 			case LEFT_DOWN:
 			case STAY:
-				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1);
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1 + Enemy->Pentype);
 				break;
 
 			case LEFT_UP:
-				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 2);
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 2 + Enemy->Pentype);
 				break;
 
 			case RIGHT_UP:
-				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 3);
+				Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 3 + Enemy->Pentype);
 				break;
 			}
 			break;
 
 		case RIGHT_DOWN:
-			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 0);
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 0 + Enemy->Pentype);
 			break;
 
 		case LEFT_DOWN:
 		case STAY:
-			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1);
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 1 + Enemy->Pentype);
 			break;
 
 		case LEFT_UP:
-			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 2);
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 2 + Enemy->Pentype);
 			break;
 
 		case RIGHT_UP:
-			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 3);
+			Enemy->texture->SetPart(Enemy->animator.frame + walk + following, 3 + Enemy->Pentype);
 			break;
 		}
 	}

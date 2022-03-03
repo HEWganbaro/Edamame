@@ -45,6 +45,15 @@ enum EnemyType
 	FOLLOWING,
 	CIRCUMFRENCE,
 };
+
+//ステージのタイプ
+enum StageType
+{
+	NONE,
+	RAND,
+	FOLLOW,
+	BOTH,
+};
 //敵の視線
 enum Enemyeye
 {
@@ -138,6 +147,7 @@ struct GameObject {
 	bool Goalfrg = false;
 	bool GoalEffect = false;
 	int SnowSize;//雪玉の大きさ
+	int Pentype = 0;
 	bool SoilFrg;//土を踏んだか
 	bool Item_Face = false;
 	bool Item_Arm = false;
