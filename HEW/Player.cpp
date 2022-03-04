@@ -288,8 +288,14 @@ void Goal_Update(GameObject * Player, GameObject* Player2, GameObject* Effect)
 			Player->posX = 10;
 
 	if (Player->GoalEffect == true) {
-		Effect->posX = Player->posX;
-		Effect->posY = Player->posY - 0.225f;
+		if (Player->GoalFast == true) {
+			Effect->posX = Player->posX;
+			Effect->posY = Player->posY - 0.225f;
+		}
+		else {
+			Effect->posX = Player2->posX;
+			Effect->posY = Player2->posY - 0.1f;
+		}
 		ani++;
 		Effect->texture->SetPart(ani/5, 0);
 		if (ani == 55) {
@@ -297,11 +303,20 @@ void Goal_Update(GameObject * Player, GameObject* Player2, GameObject* Effect)
 			Effect->posX = 10;
 			ani = 0;
 			Player->GoalEffect = false;
+			//クリア
+			if (Player->Goalfrg == true && Player2->Goalfrg == true)
+				turn = CLEAR;
 		}
 	}
 	if (Player2->GoalEffect == true) {
-		Effect->posX = Player2->posX;
-		Effect->posY = Player2->posY - 0.225f;
+		if (Player2->GoalFast == true) {
+			Effect->posX = Player2->posX;
+			Effect->posY = Player2->posY - 0.225f;
+		}
+		else {
+			Effect->posX = Player->posX;
+			Effect->posY = Player->posY - 0.1f;
+		}
 		ani++;
 		Effect->texture->SetPart(ani/5, 0);
 		if (ani == 55) {
@@ -309,6 +324,9 @@ void Goal_Update(GameObject * Player, GameObject* Player2, GameObject* Effect)
 			Effect->posX = 10;
 			ani = 0;
 			Player2->GoalEffect = false;
+			//クリア
+			if (Player->Goalfrg == true && Player2->Goalfrg == true)
+				turn = CLEAR;
  		}
 	}
 }

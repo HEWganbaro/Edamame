@@ -515,9 +515,6 @@ BOOL Game_Update()
 			//‚Ç‚¿‚ç‚Ìá‹Ê‚ª‘‚¢‚©
 			if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == false)
 				GoalFast_1 = true;
-			//ƒNƒŠƒA
-			if (gPlayer1.Goalfrg == true && gPlayer2.Goalfrg == true)
-				turn = CLEAR;
 			break;
 
 		case PENGUIN_ATTACK:
