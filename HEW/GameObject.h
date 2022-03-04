@@ -103,12 +103,7 @@ enum StageScore {
 	STAGE_CLEAR,	//クリアのみ
 
 	BALANCE_CLEAR,	//バランスのみ
-	FACE_CLEAR,		//顔アイテムのみ
-	ARM_CLEAR,		//腕アイテムのみ
-
-	BALA_FACE_CLEAR,//バランス顔のみ
-	FACE_ARM_CLEAR,	//顔腕のみ
-	ARM_BALA_CLEAR,	//腕バランスのみ
+	PARTS_CLEAR,		//パーツ
 
 	ALL_CLEAR,		//全て完璧
 };

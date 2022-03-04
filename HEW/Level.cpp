@@ -267,8 +267,8 @@ BOOL Level_Initialize(StageScore score)
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///デバック用で全部のステージ選べるようにしてる
-	for (int i = 0; i < 10; i++)
-		LevelScoreSheet[i] = STAGE_CLEAR;
+	//for (int i = 0; i < 10; i++)
+	//	LevelScoreSheet[i] = STAGE_CLEAR;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return TRUE;
@@ -369,32 +369,19 @@ BOOL Level_Update()
 			{
 			case TITLESCORE:
 			case ZERO:
-			case STAGE_CLEAR:
 				gstar[i].texture->SetPart(0, 0);
 				break;
 
-			case BALANCE_CLEAR:
+			case STAGE_CLEAR:
 				gstar[i].texture->SetPart(0, 1);
 				break;
 
-			case FACE_CLEAR:
-				gstar[i].texture->SetPart(0, 2);
-				break;
-
-			case ARM_CLEAR:
-				gstar[i].texture->SetPart(0, 4);
-				break;
-
-			case BALA_FACE_CLEAR:
-				gstar[i].texture->SetPart(0, 3);
-				break;
-
-			case FACE_ARM_CLEAR:
-				gstar[i].texture->SetPart(0, 6);
-				break;
-
-			case ARM_BALA_CLEAR:
+			case BALANCE_CLEAR:
 				gstar[i].texture->SetPart(0, 5);
+				break;
+
+			case PARTS_CLEAR:
+				gstar[i].texture->SetPart(0, 3);
 				break;
 
 			case ALL_CLEAR:

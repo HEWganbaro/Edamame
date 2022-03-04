@@ -299,8 +299,6 @@ BOOL Game_Initialize()
 	gGaugeframe.posX = 0.23f;
 	gGaugeframe.posY = -0.65f;
 
-
-
 	//フェード
 	gFade.texture = new Sprite("assets/TitleBG.png", 1, 1);
 	gFade.texture->SetSize(1280 * 2, 720 * 2);
@@ -601,8 +599,6 @@ BOOL Game_Update()
 				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
 			}
 
-
-
 			gTutorial.texture->SetPart(page, 0);
 			break;
 		}
@@ -666,15 +662,6 @@ BOOL Game_Update()
 		
 
 	}
-	
-
-	//if (gEnemy.enemyeye == ENEMYEYE_IN)
-	//{
-	//	//遮蔽でのヘイトそらし
-	//	for (int i = 0; i < StoneMap.size(); i++) {
-	//		Shield_Cancel(&StoneMap[i], &gPlayer1, &gPlayer2, &gEnemy);
-	//	}
-	//}
 
 	// オブジェクト配列のXY計算、UV計算、頂点配列への適用を一括処理
 	//GameObjectと画像の座標を合わせる
@@ -838,18 +825,19 @@ StageScore Game_Relese()
 		score = STAGE_CLEAR;
 	if (Balance == true && Face == false && Arm == false)
 		score = BALANCE_CLEAR;
-	if (Balance == false && Face == true && Arm == false)
-		score = FACE_CLEAR;
-	if (Balance == false && Face == false && Arm == true)
-		score = ARM_CLEAR;
-	if (Balance == true && Face == true && Arm == false)
-		score = BALA_FACE_CLEAR;
-	if (Balance == false && Face == true && Arm == true)
-		score = FACE_ARM_CLEAR;
-	if (Balance == true && Face == false && Arm == true)
-		score = ARM_BALA_CLEAR;
-	if (Balance == true && Face == true && Arm == true)
-		score = ALL_CLEAR;
+	if (gPlayer1.GoalFast == true && gPlayer1.Item_Arm == true ||
+		gPlayer1.GoalFast == false && gPlayer2.Item_Arm == true) {
+		if (Balance == false && Face == true && Arm == true)
+			score = PARTS_CLEAR;
+		if (Balance == true && Face == true && Arm == true)
+			score = ALL_CLEAR;
+	}
+	else {
+		if (Balance == false )
+			score = STAGE_CLEAR;
+		if (Balance == true )
+			score = BALANCE_CLEAR;
+	}
 
 	return score;
 }

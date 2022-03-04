@@ -379,7 +379,7 @@ void Enemy_Move_Chase(GameObject * Enemy, GameObject * Player, GameObject* Playe
 		const int Player_RightDown = -(Enemy->mappos.RightDown - Player->mappos.RightDown);
 
 		//“¯‚¶‚Å‚ ‚ê‚Î‚»‚Ì•ûŒü‚Ì‚Ç‚¿‚ç‚©‚Ì2•ûŒü‚ð‘I‚Ô
-		if (abs(Player_LeftDown) == abs(Player_RightDown)) {
+		if (abs(Player_LeftDown) == abs(Player_RightDown) && (Player_LeftDown != 0 && Player_RightDown != 0)) {
 			if (Player_LeftDown < 0 && Player_RightDown < 0) {
 				if (rand() % 2) {
 					Enemy->direction = RIGHT_UP;
