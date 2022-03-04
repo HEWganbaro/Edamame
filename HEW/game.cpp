@@ -189,7 +189,11 @@ BOOL Game_Initialize()
 		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 1, 5, 5);
 		gEnemyVector.emplace_back(gEnemy);
-		gPenUI.texture->SetPart(FOLLOW, 0);
+
+		Enemy_Initialize(&gEnemy, RANDOM);
+		Enemy_SetLocation(&gEnemy, gObjects, 1, 6, 6);
+		gEnemyVector.emplace_back(gEnemy);
+		gPenUI.texture->SetPart(BOTH, 0);
 		
 
 		//雪玉初期化
@@ -237,6 +241,7 @@ BOOL Game_Initialize()
 		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);//10x10
 		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 1);
 
+		//幽閉
 		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 4, 0);//違うステージ
 		gEnemyVector.emplace_back(gEnemy);
@@ -266,6 +271,22 @@ BOOL Game_Initialize()
 
 	case 9:
 		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 1, 6, 6);
+		gEnemyVector.emplace_back(gEnemy);
+		/*敵の初期化*/
+		Enemy_Initialize(&gEnemy, FOLLOWING);
+		Enemy_SetLocation(&gEnemy, gObjects, 2, 3, 3);
+		gEnemyVector.emplace_back(gEnemy);
+
+		//雪玉初期化
+		Player_SetLocation(&gPlayer1, gObjects, 0, 9, 0);
+		Player_SetLocation(&gPlayer2, gObjects, 0, 0, 9);
+		gBackGround.texture->SetPart(1, 0);
+		gPenUI.texture->SetPart(FOLLOW, 0);
+		break;
+
+	case 10:
+		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 0, 1, 1);
 		gEnemyVector.emplace_back(gEnemy);
 		/*敵の初期化*/
@@ -279,18 +300,16 @@ BOOL Game_Initialize()
 		gBackGround.texture->SetPart(1, 0);
 		gPenUI.texture->SetPart(FOLLOW, 0);
 		break;
+		//Enemy_Initialize(&gEnemy, RANDOM);
+		//Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 3);
+		//gEnemyVector.emplace_back(gEnemy);
+		//gPenUI.texture->SetPart(RAND, 0);
 
-	case 10:
-		Enemy_Initialize(&gEnemy, RANDOM);
-		Enemy_SetLocation(&gEnemy, gObjects, 0, 0, 3);
-		gEnemyVector.emplace_back(gEnemy);
-		gPenUI.texture->SetPart(RAND, 0);
-
-		//雪玉初期化
-		Player_SetLocation(&gPlayer1, gObjects, 0, 7, 0);
-		Player_SetLocation(&gPlayer2, gObjects, 0, 7, 7);
-		gBackGround.texture->SetPart(1, 0);
-		break;
+		////雪玉初期化
+		//Player_SetLocation(&gPlayer1, gObjects, 0, 7, 0);
+		//Player_SetLocation(&gPlayer2, gObjects, 0, 7, 7);
+		//gBackGround.texture->SetPart(1, 0);
+		//break;
 	}
 
 	//ゲージのフレーム

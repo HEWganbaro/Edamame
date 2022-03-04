@@ -24,6 +24,7 @@ void Player_Initialize(GameObject* Player) {
 	Player->Item_Arm = false;
 	Player->SoilFrg = false;
 	Player->EnemyAttak = false;
+	Player->FirstPlay = true;
 	Player->direction = NULL_WAY;
 }
 //ƒJ[ƒ\ƒ‹‚Ì‰Šú‰»
@@ -135,7 +136,13 @@ void Player_Update(GameObject * Player, GameObject* Map)
 
 void Goal_Update(GameObject * Player, GameObject* Player2, GameObject* Effect)
 { 
+	
 	if (Player->Goalfrg == true) {
+		if (Player->FirstPlay == true) {
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_TRANSNOW));
+			Player->FirstPlay = false;
+		}
+		
 		if (Player2->GoalFast == false)
 			Player->GoalFast = true;
 		Player->texture->SetSize(INIT_SNOW_SIZE*1.1f, INIT_SNOW_SIZE * 2);
@@ -204,6 +211,10 @@ void Goal_Update(GameObject * Player, GameObject* Player2, GameObject* Effect)
 	}
 
 	if (Player2->Goalfrg == true) {
+		if (Player2->FirstPlay == true) {
+			XA_Play(SOUND_LABEL(SOUND_LABEL_SE_TRANSNOW));
+			Player2->FirstPlay = false;
+		}
 		Player2->texture->SetSize(INIT_SNOW_SIZE*1.1f, INIT_SNOW_SIZE * 2);
 		if (Player->GoalFast == false)
 			Player2->GoalFast = true;

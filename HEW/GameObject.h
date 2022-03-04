@@ -148,6 +148,7 @@ struct GameObject {
 	bool Item_Arm = false;
 	bool dirtF = false;
 	bool stanF = false;
+	bool FirstPlay = true;
 
 	MapPos mappos;	//マップ単位でいる場所
 	MapPos tmp;	//一時保存場所
