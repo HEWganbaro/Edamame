@@ -190,10 +190,8 @@ BOOL Game_Initialize()
 		Enemy_SetLocation(&gEnemy, gObjects, 1, 5, 5);
 		gEnemyVector.emplace_back(gEnemy);
 
-		Enemy_Initialize(&gEnemy, RANDOM);
-		Enemy_SetLocation(&gEnemy, gObjects, 1, 6, 6);
-		gEnemyVector.emplace_back(gEnemy);
-		gPenUI.texture->SetPart(BOTH, 0);
+		
+		gPenUI.texture->SetPart(FOLLOW, 0);
 		
 
 		//á‹Ê‰Šú‰»
