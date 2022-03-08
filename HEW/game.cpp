@@ -189,8 +189,6 @@ BOOL Game_Initialize()
 		Enemy_Initialize(&gEnemy, FOLLOWING);
 		Enemy_SetLocation(&gEnemy, gObjects, 1, 5, 5);
 		gEnemyVector.emplace_back(gEnemy);
-
-		
 		gPenUI.texture->SetPart(FOLLOW, 0);
 		
 
@@ -607,10 +605,13 @@ BOOL Game_Update()
 			}
 
 			if (Input_GetKeyTrigger(VK_RETURN) || Input_GetControllerTrigger(XINPUT_GAMEPAD_B)) {
-				turn = PLAYER_TURN;
-				gTutorial.posX = -10;
-				gTutorial.posY = 10;
-				XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+				if (page == 3) {
+					turn = PLAYER_TURN;
+					gTutorial.posX = -10;
+					gTutorial.posY = 10;
+					XA_Play(SOUND_LABEL(SOUND_LABEL_SE_BUTTON));
+				}
+				
 			}
 
 			gTutorial.texture->SetPart(page, 0);
